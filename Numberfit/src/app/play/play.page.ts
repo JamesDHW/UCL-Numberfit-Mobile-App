@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-play',
+  templateUrl: 'play.page.html',
+  styleUrls: ['play.page.scss'],
 })
 export class HomePage {
 
