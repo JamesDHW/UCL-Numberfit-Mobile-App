@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'subject-select',
+    loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule)
   }
 ];
 
