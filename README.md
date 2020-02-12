@@ -1,2 +1,1 @@
-# Numberfit
-COMP0067 coursework
+# COMP0067 Design Coursework - Numberfit
