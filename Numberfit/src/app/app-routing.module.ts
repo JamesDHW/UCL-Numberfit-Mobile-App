@@ -30,6 +30,14 @@ const routes: Routes = [
   {
     path: 'play-multi',
     loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule)
+  },
+  {
+    path: 'sign-in',
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   }
 ];
 
