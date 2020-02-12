@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'sign-out',
     loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'play-single',
+    loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule)
+  },
+  {
+    path: 'play-multi',
+    loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule)
   }
 ];
 
