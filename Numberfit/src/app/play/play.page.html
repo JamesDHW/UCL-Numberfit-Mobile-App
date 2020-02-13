@@ -3,29 +3,50 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Numberfit
-    </ion-title>
+    <ion-title><img src="/assets/NumberfitLogo.png"/></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-content">
   <ion-card class="welcome-card">
-    <img src="/assets/shapes.svg" alt=""/>
     <ion-card-header>
       <ion-card-title>Play</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>
-        Play the game.
-      </p>
-      <ion-button routerLink="../play-single" routerDirection="forward">
-        Single PLayer
-      </ion-button>
-      <ion-button routerLink="../play-multi" routerDirection="forward">
-        Head-to-Head
-      </ion-button>
+      <div routerLink="../play-single/:gamemode=0" routerDirection="forward">
+        <img class="icon" src="/assets/icon/person-icon.png"/>
+        <br>
+        <ion-button expand="block" fill="clear">
+          Single Player
+        </ion-button>
+      </div>
+
+      <div routerLink="../play-multi/:gamemode=1" routerDirection="forward">
+        <img class="icon" src="/assets/icon/people-icon.png" />
+        <br>
+        <ion-button expand="block" fill="clear">
+          Head-to-Head
+        </ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>My Acheivements</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img class="icon" style="width: 20%" src="/assets/icon/trophy.svg" alt=""/>
+      <br><p> Get Playing to Earn Acheivements...</p>
+    </ion-card-content>
+  </ion-card>
+
+
+    <ion-card class="welcome-card">
+      <ion-card-content>
+        <ion-button expand="block" fill="clear" routerLink="../leaderboard" routerDirection="forward">
+          Leaderboard
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 </ion-content>

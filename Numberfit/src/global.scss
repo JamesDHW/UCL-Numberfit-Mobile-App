@@ -24,3 +24,15 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+/* NUMBERFIT GLOBAL STYLES */
+
+.ion-content{
+  --background: url('/assets/Background.png') no-repeat 100% 100%;
+}
+
+
+.welcome-card{
+  background: #fff
+}
