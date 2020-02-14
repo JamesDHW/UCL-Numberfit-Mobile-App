@@ -18,10 +18,10 @@ const routes: Routes = [
   { path: 'sign-out',
     loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule) },
 
-  { path: 'play-single',
+  { path: 'play-single/:subject',
     loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule) },
 
-  { path: 'play-multi',
+  { path: 'play-multi/:subject',
     loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule) },
 
   { path: 'sign-in',
@@ -29,9 +29,6 @@ const routes: Routes = [
 
   { path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule) },
-
-  { path: 'subject-select',
-    loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule) },
 
   { path: 'subject-select/:gamemode',
     loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule) }

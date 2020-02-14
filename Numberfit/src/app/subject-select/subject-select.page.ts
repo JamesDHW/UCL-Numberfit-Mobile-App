@@ -21,15 +21,20 @@ export class SubjectSelectPage implements OnInit {
     // Add subjects to the ion-radio-group
     for (var i = 0; i < subjects.length; i++) {
       radioGroup.innerHTML += "<ion-item> <ion-label>"+subjects[i]+"</ion-label>" +
-      "<ion-radio slot='end' value='"+subjects[i]+"'></ion-radio> </ion-item>";
+      "<ion-radio slot='end' (click) ='radioSelect("+subjects[i]+")'</ion-radio> </ion-item>";
     }
+
+    function radioSelect(subject){
+      radioGroup.setAttribute('value', subject);
+      console.log("subject");
+    };
 
     if(Number(gamemode) === 0){
       document.getElementById("title").textContent = "Single Player";
-      btnPlay.addEventListener('click', () => this.router.navigate(['/play-single']));
+      btnPlay.addEventListener('click', () => this.router.navigate(['/play-single', radioGroup.getAttribute("value")]));
     } else {
       document.getElementById("title").textContent = "Head-to-Head";
-      btnPlay.addEventListener('click', () => this.router.navigate(['/play-multi']));
+      btnPlay.addEventListener('click', () => this.router.navigate(['/play-multi', radioGroup.getAttribute("value")]));
     }
   }
 

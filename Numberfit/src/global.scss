@@ -29,10 +29,13 @@
 /* NUMBERFIT GLOBAL STYLES */
 
 .ion-content{
-  --background: url('/assets/Background.png') no-repeat 100% 100%;
+  --background: url('/assets/Background.png') 100% 100%;
 }
-
 
 .welcome-card{
   background: #fff
+}
+
+.welcome-card-title{
+  text-align: center;
 }
