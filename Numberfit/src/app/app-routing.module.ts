@@ -30,10 +30,10 @@ const routes: Routes = [
   { path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule) },
 
-  { path: 'subject-select/:gamemode',
+  { path: 'subject-select',
     loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule) },
 
-  { path: 'subject-select',
+  { path: 'subject-select/:gamemode',
     loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule) }
 ];
 
