@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>sign-in</ion-title>
+    <ion-title>Sign-in</ion-title>
   </ion-toolbar>
+  <style>
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </ion-header>
 
 <ion-content>
-
+  <section class=center>
+  <ion-item>
+    <ion-label position="floating">Username</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <br>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <br>
+  <ion-button size="medium" color="secondary"> Sign In </ion-button>
+  <br>
+  <ion-button style="border-width: 20px;" size="medium" color="secondary">Register</ion-button>
+</section>
 </ion-content>
