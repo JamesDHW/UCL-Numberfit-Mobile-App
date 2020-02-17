@@ -41,9 +41,26 @@
   </ion-item>
   <br>
   <br>
-  <ion-button expand="block" onclick="test()">Year Group</ion-button>
+  <!-- <ion-button expand="block" onclick="test()">Year Group</ion-button>
   <br>
-  <ion-button expand="block" onclick="openPicker(2, 6, multiColumnOptions)">School</ion-button>
+  <ion-button expand="block" onclick="openPicker(2, 6, multiColumnOptions)">School</ion-button> -->
+  <ion-list-header>
+    <ion-label>
+      Select a School
+    </ion-label>
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Year Group</ion-label>
+    <ion-select multiple="false" cancelText="Cancel" okText="Okay">
+      <ion-select-option value="Primrose Hill Primary">Year 1</ion-select-option>
+      <ion-select-option value="Haymoor Primary">Year 2</ion-select-option>
+      <ion-select-option value="Middlesworth Primary">Year 3</ion-select-option>
+      <ion-select-option value="Angleside Primary">Angleside Primary</ion-select-option>
+      <ion-select-option value="Treemore Primary">Treemore Primary</ion-select-option>
+      <ion-select-option value="Charleson Primary">Charleson Primary</ion-select-option>
+    </ion-select>
+  </ion-item>
   <br>
   <section style="text-align:center;">
   <ion-button size='large'>Register</ion-button>
