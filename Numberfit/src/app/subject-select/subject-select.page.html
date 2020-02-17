@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title><img src="/assets/NumberfitLogo.png"/></ion-title>
-    <ion-buttons>
+    <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -12,9 +12,9 @@
     <ion-card-header>
       <ion-card-title id="title" class="welcome-card-title">Subject Select</ion-card-title>
     </ion-card-header>
-    <ion-radio-group id="radio-group">
+      <ion-radio-group id="radio-group" allow-empty-selection=“true” (ionChange)=“radioGroupChange($event)">
 
-    </ion-radio-group>
+      </ion-radio-group>
     <ion-button id="btn-play" expand="block" fill="clear">
       Play Selected Subject
     </ion-button>

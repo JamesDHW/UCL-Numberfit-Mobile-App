@@ -28,6 +28,11 @@
 
 /* NUMBERFIT GLOBAL STYLES */
 
+.header-image img {
+  width: 75% !important;
+  align-items: center !important;
+}
+
 .ion-content{
   --background: url('/assets/Background.png') 100% 100%;
 }
