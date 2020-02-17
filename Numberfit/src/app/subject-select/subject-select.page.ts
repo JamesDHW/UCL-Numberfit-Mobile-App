@@ -14,7 +14,7 @@ export class SubjectSelectPage implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute) {
       this.subject = "Addition"
-     }
+    }
 
   onChange(event){
     // this.subject = event.target.value;
