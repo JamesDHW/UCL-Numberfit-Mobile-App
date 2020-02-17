@@ -1,20 +1,12 @@
 <ion-header>
   <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <ion-toolbar>
     <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css" />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/ionic.esm.js"></script>
-  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/ionic.js"></script>
-  <script type="module">
-    import { pickerController } from 'https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/index.esm.js';
-    window.pickerController = pickerController;
-  </script>
-  <style>
+  <!-- <style>
     :root {
       --ion-safe-area-top: 20px;
       --ion-safe-area-bottom: 22px;
@@ -23,12 +15,12 @@
       margin-left: auto;
       margin-right: auto;
     }
-  </style>
+  </style> -->
 </ion-header>
 
 <ion-content>
   
-  <ion-item>
+  <ion-item style="margin-top: 20px;">
     <ion-label position="floating">Username</ion-label>
     <ion-input></ion-input>
   </ion-item>
@@ -43,18 +35,20 @@
     <ion-input type='Password'></ion-input>
   </ion-item>
   <br>
-  <br>
-  <!-- <ion-button expand="block" onclick="test()">Year Group</ion-button>
-  <br>
-  <ion-button expand="block" onclick="openPicker(2, 6, multiColumnOptions)">School</ion-button> -->
-  <ion-list-header>
-    <ion-label>
-      Select a School
-    </ion-label>
-  </ion-list-header>
-
   <ion-item>
     <ion-label>Year Group</ion-label>
+    <ion-select multiple="false" cancelText="Cancel" okText="Okay">
+      <ion-select-option value="Primrose Hill Primary">Year 1</ion-select-option>
+      <ion-select-option value="Haymoor Primary">Year 2</ion-select-option>
+      <ion-select-option value="Middlesworth Primary">Year 3</ion-select-option>
+      <ion-select-option value="Angleside Primary">Year 4</ion-select-option>
+      <ion-select-option value="Treemore Primary">Year 5</ion-select-option>
+      <ion-select-option value="Charleson Primary">Year 6</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <br>
+  <ion-item>
+    <ion-label>School</ion-label>
     <ion-select multiple="false" cancelText="Cancel" okText="Okay">
       <ion-select-option value="Primrose Hill Primary">Year 1</ion-select-option>
       <ion-select-option value="Haymoor Primary">Year 2</ion-select-option>
@@ -66,83 +60,6 @@
   </ion-item>
   <br>
   <section style="text-align:center;">
-  <ion-button size='large'>Register</ion-button>
+  <ion-button size='medium'>Register</ion-button>
   </section>
-  <script>
-    function test(){
-      console.log('hello');
-    }
-    const pickerController = document.querySelector('ion-picker-controller');
-    const defaultColumnOptions = [
-      [
-        'Year 1',
-        'Year 2',
-        'Year 3',
-        'Year 4',
-        'Year 5',
-        'Year 6'
-      ]
-    ]
-
-    const multiColumnOptions = [
-      [
-        'Minified',
-        'Responsive',
-        'Full Stack',
-        'Mobile First',
-        'Serverless'
-      ],
-      [
-        'Tomato',
-        'Avocado',
-        'Onion',
-        'Potato',
-        'Artichoke'
-      ]
-    ] 
-
-    async function openPicker(numColumns = 1, numOptions = 6, columnOptions = defaultColumnOptions){
-      const picker = await pickerController.create({
-        columns: this.getColumns(numColumns, numOptions, columnOptions),
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel'
-          },
-          {
-            text: 'Confirm',
-            handler: (value) => {
-              console.log(`Got Value ${value}`);
-            }
-          }
-        ]
-      });
-
-      await picker.present();
-    }
-
-    function getColumns(numColumns, numOptions, columnOptions) {
-      let columns = [];
-      for (let i = 0; i < numColumns; i++) {
-        columns.push({
-          name: `col-${i}`,
-          options: this.getColumnOptions(i, numOptions, columnOptions)
-        });
-      }
-
-      return columns;
-    }
-
-    function getColumnOptions(columnIndex, numOptions, columnOptions) {
-      let options = [];
-      for (let i = 0; i < numOptions; i++) {
-        options.push({
-          text: columnOptions[columnIndex][i % numOptions],
-          value: i
-        })
-      }
-
-      return options;
-    }
-  </script>
 </ion-content> 

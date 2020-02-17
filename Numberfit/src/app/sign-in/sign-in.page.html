@@ -5,20 +5,10 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <style>
-    .center {
-      margin: 0;
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-  </style>
 </ion-header>
 
 <ion-content>
-  <section class=center>
+  <section style="text-align:center; margin-top: 40px;">
   <ion-item>
     <ion-label position="floating">Username</ion-label>
     <ion-input></ion-input>
@@ -26,19 +16,10 @@
   <br>
   <ion-item>
     <ion-label position="floating">Password</ion-label>
-    <ion-input></ion-input>
+    <ion-input type="Password"></ion-input>
   </ion-item>
+  <ion-button style="width: 100px; margin-top: 40px;" size="medium" color="secondary"> Sign In </ion-button>
   <br>
-  <!-- <ion-button expand="block" style="width: 100px;" size="medium" color="secondary"> Sign In </ion-button>
-  <br>
-  <ion-button style="width: 100px;" size="medium" color="secondary">Register</ion-button> -->
-  <ion-row> 
-    <ion-col width-50 style="text-align: right"> 
-      <ion-button size="small" style="width: 60px;" color="secondary">Sign In</ion-button>      
-</ion-col> 
-<ion-col width-50 style="text-align: left">  
-     <ion-button size="small" style="width: 60px;" color="secondary">Register</ion-button> 
-    </ion-col> 
-  </ion-row>
+  <ion-button style="width: 100px; margin-top: 15px;" size="medium" color="secondary">Register</ion-button>
 </section>
 </ion-content>
