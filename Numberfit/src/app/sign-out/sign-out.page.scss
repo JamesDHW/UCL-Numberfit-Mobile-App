@@ -2,3 +2,35 @@
   max-height: 35vh;
   overflow: hidden;
 }
+:root {
+  --ion-safe-area-top: 20px;
+  --ion-safe-area-bottom: 22px;
+}
+
+header {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+section {
+  /* margin-left:auto;
+  margin-right:auto; */
+  position: absolute;
+  top: 40%;
+  text-align: center;
+}
+
+/* section:not(.full-width),
+.full-width > header {
+  padding: 0 10px;
+} */
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
