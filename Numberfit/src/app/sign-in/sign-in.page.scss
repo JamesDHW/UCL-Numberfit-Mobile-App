@@ -1,9 +1,19 @@
 
   .center {
-    margin: 0;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    text-align:center; 
+    margin-top: 40px;
+  }
+
+  .button1 {
+    width: 100px; 
+    margin-top: 40px;
+    color: "secondary";
+    size: "medium"; 
+  }
+
+  .button2 {
+    width: 100px; 
+    margin-top: 15px;
+    color: "secondary";
+    size: "medium"; 
   }
