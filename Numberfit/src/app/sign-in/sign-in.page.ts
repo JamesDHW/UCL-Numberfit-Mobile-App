@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { Router, ActivatedRoute } from '@angular/router';
->>>>>>> master
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication';
 declare function require(name:string);
@@ -19,16 +16,6 @@ export class SignInPage implements OnInit {
   constructor(
     private firebase: Firebase,
     private firebaseAuth: FirebaseAuthentication
-<<<<<<< HEAD
-  ) { }
-
-  ngOnInit() {
-
-    // save the token server-side and use it to push notifications to this device
-    this.firebase.getToken()
-    .then(token => console.log(`The token is ${token}`))
-    .catch(error => console.error('Error getting token', error));
-=======
   ) {
       // this.username = document.getElementById("username").innerHTML
       // this.password = document.getElementById("password").innerHTML
@@ -48,7 +35,6 @@ export class SignInPage implements OnInit {
         // this.firebaseAuth.signInWithEmailAndPassword(email, password)
         // .then()
         // .catch();
->>>>>>> master
   }
 }
 
@@ -57,6 +43,6 @@ function test() {
       var password = document.getElementById("password").textContent;
       console.log(username, password);
 
-  
+
 
 }
