@@ -15,11 +15,11 @@
     <ion-card-content class="welcome-card">
       <ion-item>
         <ion-label position="floating">Username</ion-label>
-        <ion-input></ion-input>
+        <ion-input id="input_username" ></ion-input>
       </ion-item>
       <br>
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
+        <ion-label id="input_password" position="floating">Password</ion-label>
         <ion-input></ion-input>
       </ion-item>
       <br>
@@ -28,7 +28,7 @@
       <ion-button style="width: 100px;" size="medium" color="secondary">Register</ion-button> -->
       <ion-row>
         <ion-col width-50 style="text-align: right">
-          <ion-button expand="block" fill="clear">Sign In</ion-button>
+          <ion-button id="btn_sign-in" expand="block" fill="clear">Sign In</ion-button>
     </ion-col>
     <ion-col width-50 style="text-align: left">
          <ion-button expand="block" fill="clear" routerLink="../register" routerDirection="forward">Register</ion-button>

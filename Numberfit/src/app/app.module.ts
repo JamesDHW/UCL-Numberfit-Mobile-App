@@ -12,6 +12,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,6 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule
   ],
   providers: [
+    Firebase,
+    FirebaseAuthentication,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

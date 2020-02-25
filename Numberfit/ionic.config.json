@@ -1,5 +1,7 @@
 {
   "name": "NumberFit",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
