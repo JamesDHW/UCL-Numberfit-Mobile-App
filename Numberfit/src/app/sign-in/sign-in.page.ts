@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 declare function require(name:string);
 
 @Component({
