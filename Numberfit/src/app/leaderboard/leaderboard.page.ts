@@ -50,6 +50,7 @@ export class HomePage implements OnInit {
 
   searchSchool(){
     let leaderboard = document.getElementById("leaderboard");
+    leaderboard.innerHTML = ""
 
     this.angularFirestore.collection("Users").ref
     .where("school","==",this.selectSchoolGroup.value["school"]).orderBy("score").limit(10)
