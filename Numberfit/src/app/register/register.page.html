@@ -8,48 +8,57 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
-  <ion-item style="margin-top: 20px;">
-    <ion-label position="floating">Username</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <br>
-  <ion-item>
-    <ion-label position="floating">Password</ion-label>
-    <ion-input type='Password'></ion-input>
-  </ion-item>
-  <br>
-  <ion-item>
-    <ion-label position="floating">Comfirm Password</ion-label>
-    <ion-input type='Password'></ion-input>
-  </ion-item>
-  <br>
-  <ion-item>
-    <ion-label>Year Group</ion-label>
-    <ion-select multiple="false" cancelText="Cancel" okText="Okay">
-      <ion-select-option value="Primrose Hill Primary">Year 1</ion-select-option>
-      <ion-select-option value="Haymoor Primary">Year 2</ion-select-option>
-      <ion-select-option value="Middlesworth Primary">Year 3</ion-select-option>
-      <ion-select-option value="Angleside Primary">Year 4</ion-select-option>
-      <ion-select-option value="Treemore Primary">Year 5</ion-select-option>
-      <ion-select-option value="Charleson Primary">Year 6</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <br>
-  <ion-item>
-    <ion-label>School</ion-label>
-    <ion-select multiple="false" cancelText="Cancel" okText="Okay">
-      <ion-select-option value="Primrose Hill Primary">Year 1</ion-select-option>
-      <ion-select-option value="Haymoor Primary">Year 2</ion-select-option>
-      <ion-select-option value="Middlesworth Primary">Year 3</ion-select-option>
-      <ion-select-option value="Angleside Primary">Angleside Primary</ion-select-option>
-      <ion-select-option value="Treemore Primary">Treemore Primary</ion-select-option>
-      <ion-select-option value="Charleson Primary">Charleson Primary</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <br>
-  <section style="text-align:center;">
-  <ion-button size='medium' routerLink="../play">Register</ion-button>
-  </section>
-</ion-content> 
+<ion-content class="ion-content">
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-title class="welcome-card-title">Register New Account</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="registerFormGroup">
+        <ion-item style="margin-top: 20px;">
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password1" type='password'></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Comfirm Password</ion-label>
+          <ion-input formControlName="password2" type='password'></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Year Group</ion-label>
+          <ion-select
+            formControlName="year" multiple="false"
+            cancelText="Cancel" okText="Select">
+            <ion-select-option value="Year 1">Year 1</ion-select-option>
+            <ion-select-option value="Year 2">Year 2</ion-select-option>
+            <ion-select-option value="Year 3">Year 3</ion-select-option>
+            <ion-select-option value="Year 4">Year 4</ion-select-option>
+            <ion-select-option value="Year 5">Year 5</ion-select-option>
+            <ion-select-option value="Year 6">Year 6</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>School</ion-label>
+          <ion-select
+            formControlName="school" id="schoolSelect"
+            multiple="false" cancelText="Cancel" okText="Select">
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-button (click)="register()" expand='block' routerLink="../play">Register</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
