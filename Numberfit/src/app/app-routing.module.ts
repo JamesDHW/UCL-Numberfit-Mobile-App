@@ -9,40 +9,31 @@ const routes: Routes = [
     pathMatch: 'full' },
 
   { path: 'play',
-    loadChildren: () => import('./play/play.module').then(m => m.HomePageModule),
-    canActivate: [SignedInGuard] },
+    loadChildren: () => import('./play/play.module').then(m => m.HomePageModule) },
 
   { path: 'leaderboard',
-    loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.HomePageModule),
-    canActivate: [SignedInGuard] },
+    loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.HomePageModule) },
 
   { path: 'parents',
-    loadChildren: () => import('./parents/parents.module').then(m => m.HomePageModule),
-    canActivate: [SignedInGuard] },
+    loadChildren: () => import('./parents/parents.module').then(m => m.HomePageModule) },
 
   { path: 'sign-out',
-    loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule),
-    canActivate: [SignedInGuard] },
+    loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule) },
 
   { path: 'play-single/:subject',
-    loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule),
-    canActivate: [SignedInGuard] },
+    loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule) },
 
   { path: 'play-multi/:subject',
-    loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule),
-    canActivate: [SignedInGuard] },
+    loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule) },
 
   { path: 'sign-in',
-    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule),
-    canActivate: [SignedOutGuard] },
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule) },
 
   { path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
-    canActivate: [SignedOutGuard] },
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule) },
 
   { path: 'subject-select/:gamemode',
-    loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule),
-    canActivate: [SignedInGuard] }
+    loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule), }
 ];
 
 @NgModule({
