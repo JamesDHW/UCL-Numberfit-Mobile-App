@@ -10,95 +10,71 @@
 <ion-content class="ion-content" id='students'>
     <ion-card>
       <ion-card-header>
-        <ion-title class="welcome-card-title">Leaderboard</ion-title>
+        <ion-card-title class="welcome-card-title">Leaderboard</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <div align="center">
-          <h3>My Score: XXXX points</h3>
+          <h3 id="myScore">My Score: ... points</h3>
         </div>
-
-        <ion-item>
-          <ion-label>Select a School</ion-label>
-          <ion-select id="schoolSelect" multiple="false" cancelText="Cancel" okText="Select">
-          </ion-select>
-        </ion-item>
-
-        <ion-list>
+        <form [formGroup]="selectSchoolGroup">
           <ion-item>
-            <ion-label>Student1</ion-label>
+            <ion-label>Select a School</ion-label>
+            <ion-select
+              formControlName="school" id="schoolSelect" 
+              multiple="false" cancelText="Cancel" okText="Select">
+            </ion-select>
           </ion-item>
-          <ion-item>
-            <ion-label>Student2</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student3</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student4</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student5</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student6</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student8</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student9</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student10</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Student11</ion-label>
-          </ion-item>
+          <ion-button
+            (click)="searchSchool()" [disabled]="selectSchoolGroup.invalid"
+            expand="block" fill="clear" routerLink="../sign-in">
+            Search Selected School
+          </ion-button>
+        </form>
+        <ion-list id="leaderboard">
         </ion-list>
       </ion-card-content>
     </ion-card>
     <ion-card>
-            <ion-card-header>
-              <ion-card-title>My Badges</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-grid>
-                <ion-row>
-                  <ion-col>
-                    <div>
-                      Badge 1
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div>
-                      Badge 2
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div>
-                      Badge 3
-                    </div>
-                  </ion-col>
-                </ion-row>
-
-                <ion-row>
-                  <ion-col>
-                    <div>
-                      Badge 4
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div>
-                      Badge 5
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div>
-                      Badge 6
-                    </div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-content>
-          </ion-card>
+      <ion-card-header>
+        <ion-card-title class="welcome-card-title">My Badges</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div>
+                Badge 1
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                Badge 2
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                Badge 3
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div>
+                Badge 4
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                Badge 5
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                Badge 6
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
   </ion-content>
