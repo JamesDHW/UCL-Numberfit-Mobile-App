@@ -8,9 +8,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css"/>
 </ion-header>
 
-<ion-content>
-  <section class="center">
-    <p class="f1">Are You Sure You Want to Sign Out?</p>
-    <ion-button (click)="signOut()" size="medium" color="secondary" routerLink="../sign-in">Sign Out</ion-button>
-  </section>
+<ion-content class="ion-content">
+  <ion-card>
+    <ion-card-header>
+      <ion-title class="welcome-card-title">Sign Out</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <section class="center">
+        <p class="f1">Are You Sure You Want to Sign Out?</p>
+        <ion-button (click)="signOut()" style="margin: 30%;" size="medium" color="danger" routerLink="../sign-in">
+          Sign Out
+        </ion-button>
+      </section>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
