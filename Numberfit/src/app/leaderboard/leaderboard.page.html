@@ -7,66 +7,56 @@
   </ion-toolbar>
 </ion-header>
 
-  <div align="center">
-    <h1>Leaderboard</h1>
-      <h3>My Score: XXXX points</h3>
-  </div>
+<ion-content class="ion-content" id='students'>
+    <ion-card>
+      <ion-card-header>
+        <ion-title class="welcome-card-title">Leaderboard</ion-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div align="center">
+          <h3>My Score: XXXX points</h3>
+        </div>
 
-    <ion-list-header>
-      <ion-label>
-        Select a School
-      </ion-label>
-    </ion-list-header>
+        <ion-item>
+          <ion-label>Select a School</ion-label>
+          <ion-select id="schoolSelect" multiple="false" cancelText="Cancel" okText="Select">
+          </ion-select>
+        </ion-item>
 
-    <ion-item>
-      <ion-label>School</ion-label>
-      <ion-select multiple="false" cancelText="Cancel" okText="Okay">
-        <ion-select-option value="Primrose Hill Primary">Primrose Hill Primary</ion-select-option>
-        <ion-select-option value="Haymoor Primary">Haymoor Primary</ion-select-option>
-        <ion-select-option value="Middlesworth Primary">Middlesworth Primary</ion-select-option>
-        <ion-select-option value="Angleside Primary">Angleside Primary</ion-select-option>
-        <ion-select-option value="Treemore Primary">Treemore Primary</ion-select-option>
-        <ion-select-option value="Charleson Primary">Charleson Primary</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-
-    <ion-content id='students'>
-      <ion-list>
-        <ion-item>
-          <ion-label>Student1</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student2</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student3</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student4</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student5</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student6</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student8</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student9</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student10</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Student11</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-
-<ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Student1</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student2</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student3</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student4</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student5</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student6</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student8</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student9</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student10</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Student11</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
     <ion-card>
             <ion-card-header>
               <ion-card-title>My Badges</ion-card-title>
