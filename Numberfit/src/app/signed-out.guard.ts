@@ -21,7 +21,7 @@ export class SignedOutGuard implements CanActivate {
     return this.angularFireAuth.authState.pipe(
         map((auth)=>{
           if(auth){
-            this.router.navigate(["/sign-in"]);
+            this.router.navigate(["/play"]);
             return false;
           } else{
             return true;

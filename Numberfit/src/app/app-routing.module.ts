@@ -9,31 +9,43 @@ const routes: Routes = [
     pathMatch: 'full' },
 
   { path: 'play',
-    loadChildren: () => import('./play/play.module').then(m => m.HomePageModule) },
+    loadChildren: () => import('./play/play.module').then(m => m.HomePageModule),
+    canActivate: [SignedInGuard],
+  },
 
   { path: 'leaderboard',
-    loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.HomePageModule) },
+    loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.HomePageModule),
+    canActivate: [SignedInGuard],
+   },
 
   { path: 'parents',
-    loadChildren: () => import('./parents/parents.module').then(m => m.HomePageModule) },
+    loadChildren: () => import('./parents/parents.module').then(m => m.HomePageModule),
+    canActivate: [SignedInGuard],
+   },
 
   { path: 'sign-out',
-    loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule) },
+    loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule),
+    canActivate: [SignedInGuard], },
 
   { path: 'play-single/:subject',
-    loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule) },
+    loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule),
+    canActivate: [SignedInGuard], },
 
   { path: 'play-multi/:subject',
-    loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule) },
+    loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule),
+    canActivate: [SignedInGuard], },
 
   { path: 'sign-in',
-    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule) },
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule),
+    canActivate: [SignedOutGuard], },
 
   { path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule) },
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
+    canActivate: [SignedOutGuard], },
 
   { path: 'subject-select/:gamemode',
-    loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule), }
+    loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule),
+    canActivate: [SignedInGuard], }
 ];
 
 @NgModule({
