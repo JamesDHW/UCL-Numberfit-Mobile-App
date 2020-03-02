@@ -15,27 +15,28 @@
       <ion-card-title class="welcome-card-title">Sign In</ion-card-title>
     </ion-card-header>
     <ion-card-content class="welcome-card">
-      <ion-item>
-        <ion-label position="floating">Username</ion-label>
-        <ion-input id="input_username" ></ion-input>
-      </ion-item>
-      <br>
-      <ion-item>
-        <ion-label id="input_password" position="floating">Password</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <br>
-      <!-- <ion-button expand="block" style="width: 100px;" size="medium" color="secondary"> Sign In </ion-button>
-      <br>
-      <ion-button style="width: 100px;" size="medium" color="secondary">Register</ion-button> -->
-      <ion-row>
-        <ion-col width-50 style="text-align: right">
-          <ion-button id="btn_sign-in" expand="block" fill="clear">Sign In</ion-button>
-    </ion-col>
-    <ion-col width-50 style="text-align: left">
-         <ion-button expand="block" fill="clear" routerLink="../register" routerDirection="forward">Register</ion-button>
-        </ion-col>
-      </ion-row>
+      <form [formGroup]="signInFormGroup">
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button
+          (click)="signIn()" [disabled]="signInFormGroup.invalid"
+          expand="block" fill="clear">
+          Sign In
+        </ion-button>
+      </form>
+      <ion-button
+        expand="block" fill="clear" 
+        routerLink="../register" routerDirection="forward">
+        Register
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
