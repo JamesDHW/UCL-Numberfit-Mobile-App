@@ -17,7 +17,7 @@
 
   <ion-card class="card">
     <ion-card-title class="card-title">Progress</ion-card-title>
-    <img src="/assets/line.png" style="padding: 20px"/>
+    <img src="/assets/progress-singleplayer/{{pictureRef}}" style="padding: 10px"/>
   </ion-card>
 
   <ion-card class="card">
@@ -25,18 +25,18 @@
     <ion-card-content>
       <div class="row">
         <div class="col">
-          <ion-button expand="block" color="success">A</ion-button>
+          <ion-button expand="block" color="success" (click)="updateProgress()">A</ion-button>
         </div>
         <div class="col">
-          <ion-button expand="block" color="success">B</ion-button>
+          <ion-button expand="block" color="success" (click)="updateProgress()">B</ion-button>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <ion-button expand="block" color="success">C</ion-button>
+          <ion-button expand="block" color="success" (click)="updateProgress()">C</ion-button>
         </div>
         <div class="col">
-          <ion-button expand="block" color="success">D</ion-button>
+          <ion-button expand="block" color="success" (click)="updateProgress()">D</ion-button>
         </div>
       </div>
     </ion-card-content>

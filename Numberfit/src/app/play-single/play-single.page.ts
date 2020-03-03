@@ -7,9 +7,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaySinglePage implements OnInit {
 
-  constructor() { }
+  images: Array<string>;
+  imgState: number;
+  pictureRef: string;
+
+  constructor() { 
+    this.imgState = 0;
+
+    this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
+
+    this.pictureRef = this.images[this.imgState] + '.png';
+    
+  }
 
   ngOnInit() {
   }
 
+  updateProgress(){
+    this.imgState = ++this.imgState % this.images.length;
+    if (this.imgState == 8){
+      this.pictureRef = this.images[this.imgState] + '.gif';
+    }
+    else{
+      this.pictureRef = this.images[this.imgState] + '.png';
+    }
+  }
 }
