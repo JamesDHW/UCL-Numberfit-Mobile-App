@@ -7,8 +7,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<div style="text-align: center">
-    <h2>Student Progress: Name</h2>
-</div>
+<ion-content class="ion-content">
+
+<ion-card class="welcome-card">
+  <ion-card-header>
+    <ion-card-title class="welcome-card-title">Student Name: </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-header>
+    <ion-card-title>Student Progress</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #lineChart></canvas>
+  </ion-card-content>
+
+  <ion-card-header>
+    <ion-card-title>Playing Time</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #barChart></canvas>
+  </ion-card-content>
+</ion-card>
 </ion-content>
