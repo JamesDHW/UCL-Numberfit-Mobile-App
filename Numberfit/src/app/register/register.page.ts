@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
   ) {
     this.registerFormGroup = formBuilder.group({
       name: ["", [Validators.required]],
-      email: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
       password1: ["", [Validators.required]],
       password2: ["", [Validators.required]],
       year: ["", [Validators.required]],
@@ -38,10 +38,10 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
-    const name = this.registerFormGroup.value['name'];
-    const email = this.registerFormGroup.value['email'];
-    const password1 = this.registerFormGroup.value['password1'];
-    const password2 = this.registerFormGroup.value['password2'];
+    const name = this.registerFormGroup.value.name;
+    const email = this.registerFormGroup.value.email;
+    const password1 = this.registerFormGroup.value.password1;
+    const password2 = this.registerFormGroup.value.password2;
     const year = this.registerFormGroup.value['year'];
     const school = this.registerFormGroup.value['school'];
 

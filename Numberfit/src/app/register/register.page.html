@@ -57,7 +57,11 @@
           </ion-select>
         </ion-item>
         <br>
-        <ion-button (click)="register()" expand='block' routerLink="../play">Register</ion-button>
+        <ion-button
+          (click)="register()" [disabled]="registerFormGroup.invalid"
+          expand='block' routerLink="../play">
+          Register
+      </ion-button>
       </form>
     </ion-card-content>
   </ion-card>

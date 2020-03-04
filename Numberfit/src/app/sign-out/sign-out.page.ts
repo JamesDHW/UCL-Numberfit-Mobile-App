@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,13 +10,12 @@ export class HomePage {
 
   constructor(
     private router: Router,
-    private angularFireAuth: AngularFireAuth,
   ) {}
 
   signOut(){
-    this.angularFireAuth.auth.signOut().then(()=>{
-      this.router.navigate(['/sign-in']);
-    })
+    // sign-out then do this...
+    this.router.navigate(['/sign-in']);
+
   }
 
 }
