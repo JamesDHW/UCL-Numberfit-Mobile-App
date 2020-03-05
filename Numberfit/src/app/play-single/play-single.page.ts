@@ -26,6 +26,5 @@ export class PlaySinglePage implements OnInit {
   updateProgress(){
     this.imgState = ++this.imgState % this.images.length;
     this.pictureRef = this.images[this.imgState] + '.png';
-    }
   }
 }
