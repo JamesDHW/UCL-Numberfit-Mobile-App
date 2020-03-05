@@ -25,11 +25,7 @@ export class PlaySinglePage implements OnInit {
 
   updateProgress(){
     this.imgState = ++this.imgState % this.images.length;
-    if (this.imgState == 8){
-      this.pictureRef = this.images[this.imgState] + '.gif';
-    }
-    else{
-      this.pictureRef = this.images[this.imgState] + '.png';
+    this.pictureRef = this.images[this.imgState] + '.png';
     }
   }
 }
