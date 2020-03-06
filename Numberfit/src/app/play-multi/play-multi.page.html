@@ -1,19 +1,99 @@
 <ion-header>
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content class="ion-multi-content">
-  <ion-row size="8">
-    <ion-col size="6" offset="3">
-      ion-col [size="3"]
+  <ion-row>
+    <ion-col size="10">
+      <section>
+        <ion-row class="choice-row">
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+              <span class="font">5</span>
+            </ion-button>
+          </ion-col>
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+              <span class="font">8</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="choice-row">
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+              <span class="font">10</span>
+            </ion-button>
+          </ion-col>
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+              <span class="font">6</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </section>
+      <ion-card class="card-rotate">
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
     </ion-col>
-    <ion-col size="3" >
-      ion-col [size="3"] [offset="3"]
+    <ion-col size="2" class="top-right-progress-bar">
+      <img src="/assets/progress-multiplayer/top-right.png"/>
+    </ion-col>
+  </ion-row>
+  <ion-row class="middle-progress-section">
+    <ion-col size="5" class="middle-progress-bar-left">
+      <img src="/assets/progress-multiplayer/middle-left.png"/>
+    </ion-col>
+    <ion-col size="2">
+      <img src="/assets/progress-multiplayer/middle-center.png"/>
+    </ion-col>
+    <ion-col size="5" class="middle-progress-bar-right">
+      <img src="/assets/progress-multiplayer/middle-right.png"/>
+    </ion-col>
+  </ion-row>
+  <!-- <section class="section">
+    <img src="/assets/progress-multiplayer/Picture1.png"/>
+  </section> -->
+  <ion-row>
+    <ion-col size="2" class="bottom-left-progress-bar">
+      <img src="/assets/progress-multiplayer/bottom-left.png"/>
+    </ion-col>
+    <ion-col size="10" >
+      <ion-card class="card">
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+      <section>
+        <ion-row class="choice-row">
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+              <span class="font">5</span>
+            </ion-button>
+          </ion-col>
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+              <span class="font">8</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="choice-row">
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+              <span class="font">10</span>
+            </ion-button>
+          </ion-col>
+          <ion-col class="choice-section">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+              <span class="font">6</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </section>
     </ion-col>
   </ion-row>
 </ion-content>

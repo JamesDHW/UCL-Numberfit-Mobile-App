@@ -34,6 +34,10 @@
   // shape-outside: round;
   // opacity: 0%;
   --box-shadow: 2px 2px 2px black;
+  &:active {
+    margin-top: 3px;
+    --box-shadow: none;
+  }
 }
 
 .choice-button:hover{

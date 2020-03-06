@@ -18,4 +18,8 @@ export class PlayMultiPage implements OnInit {
 
   }
 
+  updateProgress(){
+    console.log(222);
+  }
+
 }
