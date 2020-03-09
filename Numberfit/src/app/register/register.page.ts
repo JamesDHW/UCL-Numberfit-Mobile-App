@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,11 +28,12 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     let schoolSelect = document.getElementById("schoolSelect");
-    this.angularFirestore.collection("Schools").ref.get().then((snapshot)=>{
-      snapshot.docs.forEach(doc=>{
-        schoolSelect.innerHTML += "<ion-select-option value="+doc.id+">"+doc.id+"</ion-select-option>";
-      })
-    });
+    // FIRESTORE
+    // this.angularFirestore.collection("Schools").ref.get().then((snapshot)=>{
+    //   snapshot.docs.forEach(doc=>{
+    //     schoolSelect.innerHTML += "<ion-select-option value="+doc.id+">"+doc.id+"</ion-select-option>";
+    //   })
+    // });
   }
 
   register(){
@@ -46,15 +45,16 @@ export class RegisterPage implements OnInit {
     const school = this.registerFormGroup.value['school'];
 
     if(password1==password2){
-      this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password1).then(()=>{
-        this.angularFireAuth.auth.signInWithEmailAndPassword(email, password1).then(()=>{
-          this.angularFirestore.collection('Users').doc(this.angularFireAuth.auth.currentUser.uid).ref.set({
-            name: name,
-            year: year,
-            school: school,
-          }).then(()=>{ this.router.navigate(["/play"]) })
-        })
-      })
+      // FIRESTORE
+      // this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password1).then(()=>{
+      //   this.angularFireAuth.auth.signInWithEmailAndPassword(email, password1).then(()=>{
+      //     this.angularFirestore.collection('Users').doc(this.angularFireAuth.auth.currentUser.uid).ref.set({
+      //       name: name,
+      //       year: year,
+      //       school: school,
+      //     }).then(()=>{ this.router.navigate(["/play"]) })
+      //   })
+      // })
     };
 
   }
