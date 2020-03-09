@@ -12,8 +12,6 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private router: Router,
-    private angularFirestore: AngularFirestore,
-    private angularFireAuth: AngularFireAuth,
     formBuilder: FormBuilder
   ) {
     this.registerFormGroup = formBuilder.group({
