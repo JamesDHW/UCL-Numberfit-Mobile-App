@@ -1,10 +1,4 @@
 <ion-header>
-  <!-- <ion-toolbar>
-    <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar> -->
 </ion-header>
 
 <ion-content class="ion-multi-content">
@@ -13,24 +7,24 @@
       <section>
         <ion-row class="choice-row">
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgressTop()">
               <span class="font">5</span>
             </ion-button>
           </ion-col>
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgressTop()">
               <span class="font">8</span>
             </ion-button>
           </ion-col>
         </ion-row>
         <ion-row class="choice-row">
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgressTop()">
               <span class="font">10</span>
             </ion-button>
           </ion-col>
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgressTop()">
               <span class="font">6</span>
             </ion-button>
           </ion-col>
@@ -42,18 +36,18 @@
       </ion-card>
     </ion-col>
     <ion-col size="2" class="top-right-progress-bar">
-      <img src="/assets/progress-multiplayer/top-right.png"/>
+      <img src="/assets/progress-multiplayer/{{top_right}}.png"/>
     </ion-col>
   </ion-row>
   <ion-row class="middle-progress-section">
     <ion-col size="5" class="middle-progress-bar-left">
-      <img src="/assets/progress-multiplayer/middle-left.png"/>
+      <img src="/assets/progress-multiplayer/{{middle_left}}.png"/>
     </ion-col>
-    <ion-col size="2">
-      <img src="/assets/progress-multiplayer/middle-center.png"/>
+    <ion-col size="2" class="middle-center">
+      <img src="/assets/progress-multiplayer/{{middle_center}}.png"/>
     </ion-col>
     <ion-col size="5" class="middle-progress-bar-right">
-      <img src="/assets/progress-multiplayer/middle-right.png"/>
+      <img src="/assets/progress-multiplayer/{{middle_right}}.png"/>
     </ion-col>
   </ion-row>
   <!-- <section class="section">
@@ -61,7 +55,7 @@
   </section> -->
   <ion-row>
     <ion-col size="2" class="bottom-left-progress-bar">
-      <img src="/assets/progress-multiplayer/bottom-left.png"/>
+      <img src="/assets/progress-multiplayer/{{bottom_left}}.png"/>
     </ion-col>
     <ion-col size="10" >
       <ion-card class="card">
@@ -71,24 +65,24 @@
       <section>
         <ion-row class="choice-row">
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgressBottom()">
               <span class="font">5</span>
             </ion-button>
           </ion-col>
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgressBottom()">
               <span class="font">8</span>
             </ion-button>
           </ion-col>
         </ion-row>
         <ion-row class="choice-row">
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgressBottom()">
               <span class="font">10</span>
             </ion-button>
           </ion-col>
           <ion-col class="choice-section">
-            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
+            <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgressBottom()">
               <span class="font">6</span>
             </ion-button>
           </ion-col>

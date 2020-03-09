@@ -37,7 +37,7 @@ ion-row {
 }
 
 .middle-progress-bar-left{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .middle-progress-bar-right{
@@ -107,4 +107,14 @@ ion-row {
     height: 150px;
     opacity: 30%;
     transform: rotate(180deg);
+}
+
+.middle-center{
+    animation-duration: 6s;
+    animation-name: example;
+    animation-iteration-count: infinite;
+}
+@keyframes example {
+    0%   {transform: rotate(0deg);}
+    100% {transform: rotate(360*5deg);}
 }
