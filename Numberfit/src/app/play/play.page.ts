@@ -18,4 +18,18 @@ export class HomePage implements OnInit {
     divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0]));
     divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1]));
   }
+
+  // function example of get request
+  getReq(){
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        alert(this.responseText);
+      }
+    };
+
+    xhttp.open("GET", "http://localhost:3000/test", true);
+    xhttp.send();
+  }
 }
