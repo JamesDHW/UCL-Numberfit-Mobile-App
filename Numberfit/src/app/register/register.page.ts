@@ -26,6 +26,18 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     let schoolSelect = document.getElementById("schoolSelect");
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        alert(this.responseText);
+      } else {
+        console.log(this.status)
+      }
+    };
+
+    xhttp.open("GET", "https://localhost:3000/schools", true);
+    xhttp.send();
     // FIRESTORE
     // this.angularFirestore.collection("Schools").ref.get().then((snapshot)=>{
     //   snapshot.docs.forEach(doc=>{

@@ -26,10 +26,12 @@ export class HomePage implements OnInit {
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         alert(this.responseText);
+      } else {
+        console.log(this.status)
       }
     };
 
-    xhttp.open("GET", "http://localhost:3000/test", true);
+    xhttp.open("GET", "https://numberfit.azurewebsites.net/test", true);
     xhttp.send();
   }
 }

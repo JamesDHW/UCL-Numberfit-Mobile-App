@@ -12,8 +12,14 @@
     <ion-card-header>
       <ion-card-title id="title" class="welcome-card-title">Subject Select</ion-card-title>
     </ion-card-header>
-      <ion-radio-group id="radio-group" allow-empty-selection=“false” [(ngModel)]="subject" (ionChange)="onChange()">
-        <!-- This will be filled programatically through the typescript -->
+      <ion-radio-group
+      id="radio-group"
+      allow-empty-selection=“false”
+      *ngFor="let sub of subjects.availableTopics">
+      <ion-item>
+        <ion-label>{{sub.Topic}}</ion-label>
+        <ion-radio slot='end' (click)=onSelect(sub.Topic)></ion-radio>
+      </ion-item>
       </ion-radio-group>
     <ion-button id="btn-play" expand="block" fill="clear">
       Play Selected Subject

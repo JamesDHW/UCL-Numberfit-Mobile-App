@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "192575223168",
+    "firebase_url": "https://numberfit.firebaseio.com",
+    "project_id": "numberfit",
+    "storage_bucket": "numberfit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192575223168:android:f04e28a7482b9a193cfd65",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192575223168-idf7l6cpdoqdls94e7lkf4v2u1l0261v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAgk2lqdO2YkSgubw-C516hK8hBKt0pUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192575223168-idf7l6cpdoqdls94e7lkf4v2u1l0261v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
