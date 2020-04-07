@@ -1,0 +1,54 @@
+{
+  "availableTopics": [
+    {
+      "Topic": "Addition",
+      "availableYears": [ 1, 2, 3, 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Subtraction",
+      "availableYears": [ 1, 2, 3, 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Multiplication",
+      "availableYears": [ 1, 2, 3, 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Division",
+      "availableYears": [ 1, 2, 3, 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "PlaceValue",
+      "availableYears": [ 1, 2, 3, 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Decimals",
+      "availableYears": [ 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Length",
+      "availableYears": [ 1, 2, 3, 4, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Time",
+      "availableYears": [ 1, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "Fractions",
+      "availableYears": [ 1,2, 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    },
+    {
+      "Topic": "FractionsOperations",
+      "availableYears": [ 5, 6 ],
+      "availableColours": [ "Red", "Blue", "Green" ]
+    }
+  ]
+}

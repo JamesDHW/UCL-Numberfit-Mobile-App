@@ -3,6 +3,7 @@ var url       =   require('url');
 var cors      =   require('cors');
 var mongoose  =   require('mongoose');
 
+var port = process.env.port || 3000;
 var app = express();
 app.use(cors());
 
@@ -58,6 +59,6 @@ app.get('/register', (getReq, getRes) => {
 //   }
 // })
 
-var server = app.listen(3000, () => {
+var server = app.listen(port, () => {
   console.log('server listening on port 3000', server.address().port)
 })
