@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
       }
     };
 
-    xhttp.open("GET", "http://localhost:3000/test", true);
+    xhttp.open("GET", "http://localhost:3000/test?fName=james", true);
     xhttp.send();
   }
 }

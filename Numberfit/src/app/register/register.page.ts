@@ -26,12 +26,6 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     let schoolSelect = document.getElementById("schoolSelect");
-    // FIRESTORE
-    // this.angularFirestore.collection("Schools").ref.get().then((snapshot)=>{
-    //   snapshot.docs.forEach(doc=>{
-    //     schoolSelect.innerHTML += "<ion-select-option value="+doc.id+">"+doc.id+"</ion-select-option>";
-    //   })
-    // });
   }
 
   register(){
@@ -42,18 +36,21 @@ export class RegisterPage implements OnInit {
     const year = this.registerFormGroup.value['year'];
     const school = this.registerFormGroup.value['school'];
 
-    if(password1==password2){
-      // FIRESTORE
-      // this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password1).then(()=>{
-      //   this.angularFireAuth.auth.signInWithEmailAndPassword(email, password1).then(()=>{
-      //     this.angularFirestore.collection('Users').doc(this.angularFireAuth.auth.currentUser.uid).ref.set({
-      //       name: name,
-      //       year: year,
-      //       school: school,
-      //     }).then(()=>{ this.router.navigate(["/play"]) })
-      //   })
-      // })
-    };
+    if(password1==password2 && password1.length > 7){
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert(this.responseText);
+        }
+      };
+
+      xhttp.open("GET", "http://localhost:3000/test", true);
+      xhttp.send();
+
+    } else{
+      alert("Please ensure your password is at least 8 characters and matches the confirmation field");
+    }
 
   }
 
