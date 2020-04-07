@@ -22,14 +22,15 @@ export class HomePage implements OnInit {
   // function example of get request
   getReq(){
     var xhttp = new XMLHttpRequest();
+    console.log("pressed");
 
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        alert(this.responseText);
+        console.log(this.responseText);
       }
     };
 
-    xhttp.open("GET", "http://localhost:3000/test?fName=james", true);
+    xhttp.open("GET", "http://localhost:3000/register?fName=jack", true);
     xhttp.send();
   }
 }
