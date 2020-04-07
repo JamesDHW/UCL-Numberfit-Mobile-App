@@ -14,7 +14,7 @@
       <ion-title class="welcome-card-title">Register New Account</ion-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="registerFormGroup">
+      <form [formGroup]="registerFormGroup" action = "http://localhost:3000/register" method = "GET">
         <ion-item style="margin-top: 20px;">
           <ion-label position="floating">Name</ion-label>
           <ion-input formControlName="name"></ion-input>
@@ -54,6 +54,8 @@
           <ion-select
             formControlName="school" id="schoolSelect"
             multiple="false" cancelText="Cancel" okText="Select">
+            <ion-select-option value="Year 6">Year 6</ion-select-option>
+
           </ion-select>
         </ion-item>
         <br>

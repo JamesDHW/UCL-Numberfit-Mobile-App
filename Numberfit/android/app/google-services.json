@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "115312519773",
+    "firebase_url": "https://conquertw-4aefc.firebaseio.com",
+    "project_id": "conquertw-4aefc",
+    "storage_bucket": "conquertw-4aefc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115312519773:android:5d2887a63a089f37d03bb4",
+        "android_client_info": {
+          "package_name": "com.numberfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115312519773-d3ja4osp5c63u0k3fv8hs313pooq8qjr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk_yZL-Oo23DJhUPPkymAoLqQXkp6fA04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115312519773-d3ja4osp5c63u0k3fv8hs313pooq8qjr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
