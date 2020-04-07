@@ -11,14 +11,17 @@ app.get('/test', (req, res) => {
   res.send("TEST MESSAGE")
 })
 
-mongoose.connect('mongodb://localhost:27017', (err) => {
-  if(err){
-    console.log('Error =>', err)
-  } else{
-    console.log('Connected to MongoDB')
-  }
-})
 
-var server = app.listen(3000, () => {
-  console.log('server listening on port 3000', server.address().port)
-})
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Numberfitmain:numberfit1234@comp0067g12-16fzq.azure.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  if(err) {
+    console.log(err)
+  } else{
+    console.log('CONNECTION TO MONGODB SUCCESSFUL')
+  }
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
