@@ -8,27 +8,27 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:115312519773:android:5d2887a63a089f37d03bb4",
+        "mobilesdk_app_id": "1:192575223168:android:f04e28a7482b9a193cfd65",
         "android_client_info": {
           "package_name": "com.numberfit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "115312519773-d3ja4osp5c63u0k3fv8hs313pooq8qjr.apps.googleusercontent.com",
+          "client_id": "192575223168-idf7l6cpdoqdls94e7lkf4v2u1l0261v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBk_yZL-Oo23DJhUPPkymAoLqQXkp6fA04"
+          "current_key": "AIzaSyDAgk2lqdO2YkSgubw-C516hK8hBKt0pUo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "115312519773-d3ja4osp5c63u0k3fv8hs313pooq8qjr.apps.googleusercontent.com",
+              "client_id": "192575223168-idf7l6cpdoqdls94e7lkf4v2u1l0261v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
