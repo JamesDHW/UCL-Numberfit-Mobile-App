@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
       }
     };
 
-    xhttp.open("GET", "http://localhost:3000/register?fName=jack", true);
+    xhttp.open("GET", "http://localhost:3000/register?email=jbreeze@hotmail.com&school=Primrose&year=6&teacher=Mrs-Wallace&fName=Jack&lName=Breeze", true);
     xhttp.send();
   }
 }

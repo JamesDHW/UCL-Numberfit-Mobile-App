@@ -29,23 +29,34 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
+    const DOM = this;
     const name = this.registerFormGroup.value.name;
     const email = this.registerFormGroup.value.email;
     const password1 = this.registerFormGroup.value.password1;
     const password2 = this.registerFormGroup.value.password2;
-    const year = this.registerFormGroup.value['year'];
-    const school = this.registerFormGroup.value['school'];
+    const year = this.registerFormGroup.value.year;
+    const school = this.registerFormGroup.value.school;
 
     if(password1==password2 && password1.length > 7){
       var xhttp = new XMLHttpRequest();
 
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          alert(this.responseText);
+          if(this.responseText == "OK"){
+            DOM.router.navigate(['/'])
+          } else{
+            // Already registered or error
+            alert(this.responseText);
+          }
+        } else {
+          console.log("Returned status " + this.status)
         }
       };
 
-      xhttp.open("GET", "http://localhost:3000/test", true);
+      xhttp.open("GET", "http://localhost:3000/register?email="+email+
+      "&school="+school+
+      "&year="+year+
+      "&teacher=Mrs-Wallace&fName="+name, true);
       xhttp.send();
 
     } else{
