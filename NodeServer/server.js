@@ -1,14 +1,58 @@
-var express   =   require('express');
-var url       =   require('url');
-var cors      =   require('cors');
-var mongoose  =   require('mongoose');
+const url = require('url');
 
-var port = process.env.port || 3000;
+// Create Express
+const express = require('express');
 var app = express();
-app.use(cors());
+
+// Allow croos origin requests
+const CORS = require('cors');
+// app.use(CORS());
+
+// Create and use body parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Create and use Express session
+const expressSession = require('express-session')({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false
+});
+app.use(expressSession);
+
+// Require and use passport
+const passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Define port and listen on it
+const port = process.env.port || 3000;
+var server = app.listen(port, () => {
+  console.log('server listening on port 3000', server.address().port)
+});
+
+// Require mongoose for work on mongoDB
+const mongoose  = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
+
+// Connect to mongoDB via mongoose
+var mongoUrl = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Get mongoose schema 'user' and create model
+const Schema = require("./schema")
+Schema.User.plugin(passportLocalMongoose)
+const Users = mongoose.model('users', Schema.User, 'users')
 
 var MongoClient = require('mongodb').MongoClient;
-var mongoUrl = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/test?retryWrites=true&w=majority";
+
+
+passport.use(Users.createStrategy());
+
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
+
 
 // GET request to call when registering
 app.get('/register', (getReq, getRes) => {
@@ -39,26 +83,4 @@ app.get('/register', (getReq, getRes) => {
       db.close();
     });
   });
-})
-
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   var dbo = db.db("mydb");
-//   dbo.createCollection("users", function(err, res) {
-//     if (err) throw err;
-//     console.log("Collection created!");
-//     db.close();
-//   });
-// });
-
-// mongoose.connect('mongodb://localhost:27017', (err) => {
-//   if(err){
-//     console.log('Error =>', err)
-//   } else{
-//     console.log('Connected to MongoDB')
-//   }
-// })
-
-var server = app.listen(port, () => {
-  console.log('server listening on port 3000', server.address().port)
 })
