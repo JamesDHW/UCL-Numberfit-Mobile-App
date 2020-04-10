@@ -1,0 +1,41 @@
+PODS:
+  - Capacitor (2.0.0):
+    - CapacitorCordova (= 2.0.0)
+  - CapacitorCordova (2.0.0)
+  - CordovaPlugins (2.0.0):
+    - CapacitorCordova
+  - CordovaPluginsStatic (2.0.0):
+    - CapacitorCordova
+    - XCDYouTubeKit (~> 2.7)
+  - XCDYouTubeKit (2.12.0)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
+  - CordovaPluginsStatic (from `../capacitor-cordova-ios-plugins`)
+
+SPEC REPOS:
+  trunk:
+    - XCDYouTubeKit
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  CordovaPlugins:
+    :path: "../capacitor-cordova-ios-plugins"
+  CordovaPluginsStatic:
+    :path: "../capacitor-cordova-ios-plugins"
+
+SPEC CHECKSUMS:
+  Capacitor: a816471ea1873a2ffdcda68c2c72e5e813b1e253
+  CapacitorCordova: f2073f677525a6d024b23a83961758ec368b3f39
+  CordovaPlugins: b885e5cc190b69cad754b23e84e89784105da54d
+  CordovaPluginsStatic: c64e6e1e4bc349ec5e5c89b0fee2880edc8586d4
+  XCDYouTubeKit: cdad9e696f991aac2739c5b25586c81f1301ba30
+
+PODFILE CHECKSUM: 7c3f8d0e2b8fd22de4de42a9f38c11471dd9c7e5
+
+COCOAPODS: 1.8.4
