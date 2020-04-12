@@ -1,4 +1,4 @@
-const url = require('url');
+const url = require('url'); //maybe won't need this
 
 // Create Express
 const express = require('express');
@@ -6,12 +6,12 @@ var app = express();
 
 // Allow croos origin requests
 const CORS = require('cors');
-// app.use(CORS());
+app.use(CORS());
 
-// Create and use body parser
+// Support parsing of json type post data
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); //maybe won't need this
 
 // Create and use Express session
 const expressSession = require('express-session')({
@@ -37,7 +37,7 @@ const mongoose  = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 // Connect to mongoDB via mongoose
-var mongoUrl = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/test?retryWrites=true&w=majority";
+const mongoUrl = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/test?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get mongoose schema 'user' and create model
@@ -52,6 +52,17 @@ passport.use(Users.createStrategy());
 
 passport.serializeUser(Users.serializeUser());
 passport.deserializeUser(Users.deserializeUser());
+
+app.get('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/users/' + user.username);
+    });
+  })(req, res, next);
+});
 
 
 // GET request to call when registering

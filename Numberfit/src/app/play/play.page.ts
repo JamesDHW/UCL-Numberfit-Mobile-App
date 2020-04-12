@@ -27,10 +27,16 @@ export class HomePage implements OnInit {
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         console.log(this.responseText);
+      } else{
+        console.log(this.responseText);
+
       }
     };
+    // xhttp.open("GET", "http://localhost:3000/login?username=James&password=James99", true);
+    xhttp.open("POST", "http://localhost:3000/login", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
 
-    xhttp.open("GET", "http://localhost:3000/register?email=jbreeze@hotmail.com&school=Primrose&year=6&teacher=Mrs-Wallace&fName=Jack&lName=Breeze", true);
-    xhttp.send();
+    // xhttp.open("GET", "http://localhost:3000/register?email=jbreeze@hotmail.com&school=Primrose&year=6&teacher=Mrs-Wallace&fName=Jack&lName=Breeze", true);
+    xhttp.send(JSON.stringify({'username':'jbreeze@hotmail.com', 'password':'password'}));
   }
 }

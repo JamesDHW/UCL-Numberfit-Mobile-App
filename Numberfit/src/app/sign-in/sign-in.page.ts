@@ -25,14 +25,7 @@ export class SignInPage {
     const email = this.signInFormGroup.value["email"]
     const password = this.signInFormGroup.value["password"]
 
-    // FIRESTORE
-    // this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
-    // .then((authData)=>{
-    //   console.log('signed-in')
-    //   this.router.navigate(['/play']);
-    // })
-    // .catch((authError)=>{
-    //   console.log('error =>', authError)
-    // });
+    
+
   }
 }
