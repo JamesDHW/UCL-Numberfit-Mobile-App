@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 // User schema
 const Users = new Schema({
   username: String,
-  password: String
+  password: String,
 });
 
 // Pupil schema
