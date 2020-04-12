@@ -22,7 +22,7 @@ const register = function (req, res) {
         pupil.save((err) => {
           if (err) throw err;
           // Login req
-          res.send(require('./login').login(req, res));
+          require('./login').login(req, res);
         })
       })
     } else {
