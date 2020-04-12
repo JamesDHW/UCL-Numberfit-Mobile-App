@@ -38,7 +38,7 @@ export class RegisterPage implements OnInit {
     const password2 = this.registerFormGroup.value.password2;
 
     const credentials = {
-      username : this.registerFormGroup.value.email,
+      username : this.registerFormGroup.value.email.toLowerCase(),
       password : Md5.hashStr(password1),
       name     : this.registerFormGroup.value.name,
       year     : this.registerFormGroup.value.year,

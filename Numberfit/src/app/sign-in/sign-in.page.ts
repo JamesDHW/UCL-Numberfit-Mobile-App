@@ -23,7 +23,7 @@ export class SignInPage {
 
   signIn(){
     const credentials = {
-      'username' : this.signInFormGroup.value.email,
+      'username' : this.signInFormGroup.value.email.toLowerCase(),
       'password' : Md5.hashStr(this.signInFormGroup.value.password)
     }
 
