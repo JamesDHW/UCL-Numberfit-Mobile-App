@@ -24,7 +24,7 @@ export class SubjectSelectPage implements OnInit {
         if (this.readyState == 4 && this.status == 200) {
           console.log("GET request succeeded")
           DOM.subjects = JSON.parse(this.responseText);
-        } else {
+        } else if(this.status != 200) {
           // Use default (offline) if get request fails
           console.log("GET request failed with satus " + this.status)
           DOM.subjects = require('./default_subjects.json');
