@@ -8,37 +8,53 @@
 </ion-header>
 
 <ion-content class="ion-content">
+  <section class="winning-container">
+    <img id="balloon-effect" src="/assets/Winning-decoration/balloon.png"/>
+  <img id="center-star" src="/assets/Winning-decoration/big_star.gif"/>
+  <p id="congrats-font">Good job!</p><br>
+  <section class="congrats-label"></section>
+  </section>
+  <section class="board">
+  <section>
+    <img id="star-animation" src="/assets/Winning-decoration/star_animation.gif"/>
+  </section>
+  <section class="balloon-background-board">
+    <img id="balloon-background-effect" src="/assets/Winning-decoration/balloon_background.png"/>
+  </section>
   <ion-card class="card">
-    <ion-card-content>
-    </ion-card-content>
+    <!-- <ion-card-content> -->
+      <img class="question-card" src="/assets/Question-card/{{questionCard}}.png"/>
+    <!-- </ion-card-content> -->
   </ion-card>
   <section>
-    <img src="/assets/progress-singleplayer/{{pictureRef}}" style="padding: 10px"/>
+    <img src="/assets/progress-singleplayer/{{pictureRef}}.png" style="padding: 10px"/>
   </section>
   <section>
     <ion-row class="choice-row">
       <ion-col class="choice-section">
-        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
-          <span class="font">5</span>
+        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(1)">
+          <span class="font">{{answerOptions[0]}}</span>
+          <!-- <img src="/assets/Answers/Answer1.png" style="filter: saturate();"/> -->
         </ion-button>
       </ion-col>
       <ion-col class="choice-section">
-        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
-          <span class="font">8</span>
+        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(2)">
+          <span class="font">{{answerOptions[1]}}</span>
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row class="choice-row">
       <ion-col class="choice-section">
-        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
-          <span class="font">10</span>
+        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(3)">
+          <span class="font">{{answerOptions[2]}}</span>
         </ion-button>
       </ion-col>
       <ion-col class="choice-section">
-        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress()">
-          <span class="font">6</span>
+        <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(4)">
+          <span class="font">{{answerOptions[3]}}</span>
         </ion-button>
       </ion-col>
     </ion-row>
   </section>
+</section>
 </ion-content>
