@@ -6,21 +6,22 @@ const Schema = mongoose.Schema;
 
 // User schema
 const Users = new Schema({
-  username: String,
-  password: String,
+  username : String,
+  password : String,
+  teacher  : Boolean,
 });
 
 // Pupil schema
 const Pupils = new Schema({
-  name:     String,
-  school:   String,
-  year:     String,
+  name     : String,
+  school   : String,
+  year     : String,
 });
 
 // Teacher schema
 const Teachers = new Schema({
-  name:     String,
-  school:   String,
+  name     : String,
+  school   : String,
 });
 
 const User    = mongoose.model('users', Users, 'users')

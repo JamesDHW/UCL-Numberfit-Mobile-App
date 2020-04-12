@@ -9,6 +9,7 @@ const register = function (req, res) {
       var user = new User({
         username : req.body.username,
         password : req.body.password,
+        teacher  : false,
       });
       var pupil = new Pupil({
         name   : req.body.name,
@@ -31,7 +32,6 @@ const register = function (req, res) {
     }
   })
 }
-
 
 module.exports = {
   register

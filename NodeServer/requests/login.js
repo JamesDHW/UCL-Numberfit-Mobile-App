@@ -16,7 +16,8 @@ const login = function (req, res, next) {
         console.log("err 3: ", err)
         return res.status(400).json({ errors : err });
       }
-      return res.status(200).json({ success : "logged in as " + user.id });
+      // user.id (cookie) is passed back on success
+      return res.status(200).json({ success : user.id });
     });
   })(req, res, next);
 }
