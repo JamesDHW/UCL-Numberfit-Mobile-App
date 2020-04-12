@@ -45,6 +45,9 @@ app.post('/login', require('./requests/login').login)
 // Register request
 app.post('/register', require('./requests/register').register)
 
+// Logout request
+app.get('/logout', function(req, res){ req.logout(); });
+
 // Listen on PORT
 app.listen(PORT, () => {
   console.log('server listening on port ', PORT)

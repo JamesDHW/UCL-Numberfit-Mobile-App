@@ -37,6 +37,6 @@ export class HomePage implements OnInit {
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // xhttp.open("GET", "http://localhost:3000/register?email=jbreeze@hotmail.com&school=Primrose&year=6&teacher=Mrs-Wallace&fName=Jack&lName=Breeze", true);
-    xhttp.send(JSON.stringify({'username':'jbreeze@hotmail.co', 'password':'password'}));
+    xhttp.send(JSON.stringify({'username':'james@hotmail.com', 'password':'password'}));
   }
 }
