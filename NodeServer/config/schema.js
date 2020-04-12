@@ -5,25 +5,31 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // User schema
-const User = new Schema({
+const Users = new Schema({
   username: String,
   password: String
 });
 
 // Pupil schema
-const Pupil = new Schema({
+const Pupils = new Schema({
   name:     String,
   school:   String,
   year:     String,
 });
 
 // Teacher schema
-const Teacher = new Schema({
+const Teachers = new Schema({
   name:     String,
   school:   String,
 });
 
-// Include all schema required to export here!!!
+const User    = mongoose.model('users', Users, 'users')
+const Pupil   = mongoose.model('pupils', Pupils, 'pupils')
+const Teacher = mongoose.model('teachers', Teachers, 'teachers')
+
+// Include all models required to export here!!!
 module.exports = {
-  User
+  User,
+  Pupil,
+  Teacher
 };

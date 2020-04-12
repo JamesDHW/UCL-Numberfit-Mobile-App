@@ -1,47 +1,35 @@
-const url = require('url'); //maybe won't need this
+const express               = require('express');
+const CORS                  = require('cors');
+const bodyParser            = require('body-parser');
+const expressSession        = require('express-session');
+const passport              = require('passport');
+const mongoose              = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-// Create Express
-const express = require('express');
 var app = express();
 
-// Allow croos origin requests
-const CORS = require('cors');
-app.use(CORS());
-
-// Support parsing of json type post data
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); //maybe won't need this
+app.use(CORS());// Allow croos origin requests
+app.use(bodyParser.json());// Support parsing of json type post data
+// app.use(bodyParser.urlencoded({ extended: true })); //maybe won't need this
 
 // Create and use Express session
-const expressSession = require('express-session')({
+app.use(expressSession({
   secret: 'secret',
   resave: false,
   saveUninitialized: false
-});
-app.use(expressSession);
+}));
 
-// Require and use passport
-const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Define port and listen on it
-const port = process.env.port || 3000;
-var server = app.listen(port, () => {
-  console.log('server listening on port 3000', server.address().port)
-});
-
-// Require mongoose for work on mongoDB
-const mongoose  = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
 
 // Connect to mongoDB via mongoose
 const mongoUrl = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/test?retryWrites=true&w=majority";
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get mongoose schema 'user' and create model
-const Schema = require("./schema")
+const Schema = require("./config/schema")
 Schema.User.plugin(passportLocalMongoose)
 const Users = mongoose.model('users', Schema.User, 'users')
 
@@ -95,3 +83,9 @@ app.get('/register', (getReq, getRes) => {
     });
   });
 })
+
+// Define port and listen on it
+const PORT = process.env.port || 3000;
+var server = app.listen(PORT, () => {
+  console.log('server listening on port ', server.address().port)
+});
