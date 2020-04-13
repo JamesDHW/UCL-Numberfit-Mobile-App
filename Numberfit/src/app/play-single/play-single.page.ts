@@ -18,9 +18,9 @@ export class PlaySinglePage implements OnInit {
   correctAnswer: number; // button number
   answerOptions: Array<number>;
   color: string;
-  
 
-  constructor(private router: Router) { 
+
+  constructor(private router: Router) {
     this.imgState = 0;
 
     this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
@@ -30,7 +30,7 @@ export class PlaySinglePage implements OnInit {
     // this.readFile();
 
     this.prepareQuestions();
-    
+
   }
 
   prepareQuestions(){
@@ -102,7 +102,7 @@ export class PlaySinglePage implements OnInit {
         let ele3 = <HTMLElement>document.querySelector('.winning-container');
         let ele4 = <HTMLElement>document.querySelector('.congrats-label');
         let ele5 = <HTMLElement>document.querySelector('#star-animation');
-        
+
         // star rain appears first
         ele5.style.visibility = "visible";
         this.sleep(2000).then(() => {
@@ -113,6 +113,7 @@ export class PlaySinglePage implements OnInit {
         })
         // redirect to play page after congrats
         this.sleep(8000).then(() => {
+          ele5.style.visibility = "hidden";
           this.router.navigateByUrl('/play');
         })
       }
@@ -126,7 +127,7 @@ export class PlaySinglePage implements OnInit {
     // this.correctAnswer = Math.ceil(Math.random() * 4);
     // assume answerOptions has been read from database
     var correctAnswerNumber = this.answerOptions[0];
-    this.answerOptions = this.shuffleAnswerOptions(this.answerOptions); 
+    this.answerOptions = this.shuffleAnswerOptions(this.answerOptions);
     this.correctAnswer = this.answerOptions.indexOf(correctAnswerNumber)+1;
     console.log("correct answer is: "+this.correctAnswer);
   }

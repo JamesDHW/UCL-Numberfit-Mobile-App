@@ -40,10 +40,13 @@ export class SubjectSelectPage implements OnInit {
           console.log("GET details request succeeded")
           // Remove elements not available to that year
           // By now availableTopics is an attribute of DOM.subjects
-          for(var i=0; i<DOM.subjects["availableTopics"].length; i++){
-            if(DOM.subjects["availableTopics"][i].availableYears.includes(
+          let repeats = DOM.subjects["availableTopics"].length;
+          let deletes = 0;
+          for(var i=0; i<repeats; i++){
+            if(!DOM.subjects["availableTopics"][i-deletes].availableYears.includes(
               parseInt(JSON.parse(this.responseText).year))){
-              DOM.subjects["availableTopics"].splice(i, 1)
+                DOM.subjects["availableTopics"].splice(i-deletes, 1)
+                deletes += 1;
             }
           }
 
@@ -78,12 +81,6 @@ export class SubjectSelectPage implements OnInit {
     } else {
       document.getElementById("title").textContent = "Head-to-Head";
     }
-    //
-    // // Add subjects to the ion-radio-group
-    // for (var i = 0; i < this.subjects.length; i++) {
-    //   document.getElementById("radio-group").innerHTML += "<ion-item><ion-label>"+subjects[i]+
-    //   "</ion-label><ion-radio slot='end' value="+subjects[i]+"></ion-radio></ion-item>";
-    // }
 
     // Add eventListener for form submission
     document.getElementById("btn-play").addEventListener("click", function(){

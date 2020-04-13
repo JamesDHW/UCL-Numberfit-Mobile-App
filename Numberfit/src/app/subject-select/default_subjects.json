@@ -42,7 +42,7 @@
     },
     {
       "Topic": "Fractions",
-      "availableYears": [ 1,2, 5, 6 ],
+      "availableYears": [ 1, 2, 5, 6 ],
       "availableColours": [ "Red", "Blue", "Green" ]
     },
     {
