@@ -13,28 +13,48 @@ export class SubjectSelectPage implements OnInit {
 
   constructor(
     public router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
   ) {
+
       // GET all subjects from Numberfit
-      var xhttp = new XMLHttpRequest();
+      var xhttpSubjects = new XMLHttpRequest();
+      var xhttpDetails = new XMLHttpRequest();
       let DOM = this;
 
+      DOM.subjects = require('./default_subjects.json');
+
       // Define the listener function for the GET request
-      xhttp.onreadystatechange = function() {
+      xhttpSubjects.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          DOM.subjects = JSON.parse(this.responseText);
-          console.log("GET request succeeded: ", DOM.subjects)
+          // Subjects GOT now get details to check year group
+          DOM.subjects = JSON.parse(this.responseText)
+          xhttpDetails.send();
         } else if(this.status != 200) {
-          // Use default (offline) if get request fails
           console.log("GET request failed with satus " + this.status)
-          DOM.subjects = require('./default_subjects.json');
-          console.log(DOM.subjects)
+        }
+      };
+
+      // Define the listener function for the GET request
+      xhttpDetails.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log("GET request succeeded: ", JSON.parse(this.responseText).year)
+          // Remove elements not available to that year
+          // By now availableTopics is an attribute of DOM.subjects
+          for(var i=0; i<DOM.subjects.availableTopics.length; i++){
+            if(DOM.subjects.availableTopics[i].availableYears.includes(parseInt(JSON.parse(this.responseText).year))){
+              DOM.subjects.availableTopics.splice(i, 1)
+            }
+          }
+
+        } else if(this.status != 200) {
+          console.log("GET request failed with satus " + this.status)
         }
       };
 
       // Define and send the GET request
-      xhttp.open("GET", "http://api.numberfit.com:8081/getAvailableTopics");
-      xhttp.send();
+      xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
+      xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=5e9445193c9c966ce1dcbac6", true);
+      xhttpSubjects.send();
 
     }
 
