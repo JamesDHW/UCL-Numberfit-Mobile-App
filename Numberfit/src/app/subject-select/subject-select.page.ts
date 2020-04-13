@@ -22,8 +22,8 @@ export class SubjectSelectPage implements OnInit {
       // Define the listener function for the GET request
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          console.log("GET request succeeded")
           DOM.subjects = JSON.parse(this.responseText);
+          console.log("GET request succeeded: ", DOM.subjects)
         } else if(this.status != 200) {
           // Use default (offline) if get request fails
           console.log("GET request failed with satus " + this.status)
@@ -40,6 +40,10 @@ export class SubjectSelectPage implements OnInit {
 
   // Function called when radio button clicked
   onSelect(topic){
+    // TODO:
+    // Deselct current one on click - stopped working when I
+    // changed it to programmatically fill the list.
+    const radio = document.getElementById(topic);
     this.subject = topic;
   };
 

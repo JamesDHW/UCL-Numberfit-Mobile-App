@@ -13,6 +13,7 @@ const Users = new Schema({
 
 // Pupil schema
 const Pupils = new Schema({
+  username : String,
   name     : String,
   school   : String,
   year     : String,
@@ -20,6 +21,7 @@ const Pupils = new Schema({
 
 // Teacher schema
 const Teachers = new Schema({
+  username : String,
   name     : String,
   school   : String,
 });

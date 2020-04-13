@@ -1,7 +1,7 @@
 const User  = require('../config/schema').User; // Mongoose model
 const Pupil = require('../config/schema').Pupil; // Mongoose model
 
-const register = function (req, res) {
+module.exports.register = function (req, res) {
   User.find({ username : req.body.username }, function(err, users){
     if (err) throw err;
     if(users.length == 0){
@@ -12,9 +12,10 @@ const register = function (req, res) {
         teacher  : false,
       });
       var pupil = new Pupil({
-        name   : req.body.name,
-        school : req.body.school,
-        year   : req.body.year,
+        username : req.body.username,
+        name     : req.body.name,
+        school   : req.body.school,
+        year     : req.body.year,
       });
 
       // Save user and pupil objects
@@ -31,8 +32,4 @@ const register = function (req, res) {
       res.send('User already exists.')
     }
   })
-}
-
-module.exports = {
-  register
-}
+};

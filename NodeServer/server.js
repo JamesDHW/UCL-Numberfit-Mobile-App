@@ -38,6 +38,13 @@ app.use(require('express-session')({
   store: new MongoStore({ mongooseConnection : mongoose.connection})
 }));
 
+// app.use(passport.session({
+//   secret: 'tifrebmuN',
+//   resave: false,
+//   saveUninitialized: false,
+//   store: new MongoStore({ mongooseConnection : mongoose.connection})
+// }));
+
 // REQUESTS HERE
 // Login request
 app.post('/login', require('./requests/login').login)
@@ -46,7 +53,13 @@ app.post('/login', require('./requests/login').login)
 app.post('/register', require('./requests/register').register)
 
 // Logout request
-app.get('/logout', function(req, res){ req.logout(); });
+app.get('/logout', function(req, res){
+  req.logout();
+  req.session.destroy();
+});
+
+// Get user's details
+app.get('/myDetails', require('./requests/myDetails').myDetails);
 
 // Listen on PORT
 app.listen(PORT, () => {

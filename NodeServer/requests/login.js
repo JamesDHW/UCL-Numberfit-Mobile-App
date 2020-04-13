@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const login = function (req, res, next) {
+module.exports.login = function (req, res, next) {
   passport.authenticate('local', function(err, user, info){
     if(err){
       console.log("err 1: ", err)
@@ -20,8 +20,4 @@ const login = function (req, res, next) {
       return res.status(200).json({ success : user.id });
     });
   })(req, res, next);
-}
-
-module.exports = {
-  login
 };
