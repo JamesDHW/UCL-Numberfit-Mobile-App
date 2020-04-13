@@ -37,12 +37,13 @@ export class SubjectSelectPage implements OnInit {
       // Define the listener function for the GET request
       xhttpDetails.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          console.log("GET request succeeded: ", JSON.parse(this.responseText).year)
+          console.log("GET details request succeeded")
           // Remove elements not available to that year
           // By now availableTopics is an attribute of DOM.subjects
-          for(var i=0; i<DOM.subjects.availableTopics.length; i++){
-            if(DOM.subjects.availableTopics[i].availableYears.includes(parseInt(JSON.parse(this.responseText).year))){
-              DOM.subjects.availableTopics.splice(i, 1)
+          for(var i=0; i<DOM.subjects["availableTopics"].length; i++){
+            if(DOM.subjects["availableTopics"][i].availableYears.includes(
+              parseInt(JSON.parse(this.responseText).year))){
+              DOM.subjects["availableTopics"].splice(i, 1)
             }
           }
 
