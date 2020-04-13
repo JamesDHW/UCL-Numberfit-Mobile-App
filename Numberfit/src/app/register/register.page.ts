@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Md5 } from 'ts-md5/dist/md5';
+
 
 @Component({
   selector: 'app-register',
@@ -25,41 +27,44 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
+    // get the schools from the DB
     let schoolSelect = document.getElementById("schoolSelect");
   }
 
   register(){
     const DOM = this;
-    const name = this.registerFormGroup.value.name;
-    const email = this.registerFormGroup.value.email;
+
     const password1 = this.registerFormGroup.value.password1;
     const password2 = this.registerFormGroup.value.password2;
-    const year = this.registerFormGroup.value.year;
-    const school = this.registerFormGroup.value.school;
+
+    const credentials = {
+      username : this.registerFormGroup.value.email.toLowerCase(),
+      password : Md5.hashStr(password1),
+      name     : this.registerFormGroup.value.name,
+      year     : this.registerFormGroup.value.year,
+      school   : this.registerFormGroup.value.school
+    };
 
     if(password1==password2 && password1.length > 7){
       var xhttp = new XMLHttpRequest();
 
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          if(this.responseText == "OK"){
-            DOM.router.navigate(['/'])
-          } else{
-            // Already registered or error
-            alert(this.responseText);
-          }
-        } else {
-          console.log("Returned status " + this.status)
+          const cookie = JSON.parse(this.responseText).success
+          console.log(cookie);
+          DOM.router.navigate(['/play'], cookie)
+        } else if(this.status != 200) {
+          console.log(this.responseText);
+
         }
       };
 
-      xhttp.open("GET", "http://localhost:3000/register?email="+email+
-      "&school="+school+
-      "&year="+year+
-      "&teacher=Mrs-Wallace&fName="+name, true);
-      xhttp.send();
+      xhttp.open('POST', 'http://localhost:3000/register?', true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify(credentials));
 
     } else{
+      // error!!!
       alert("Please ensure your password is at least 8 characters and matches the confirmation field");
     }
 

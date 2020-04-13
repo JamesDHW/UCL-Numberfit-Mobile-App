@@ -10,13 +10,12 @@
 
 <ion-content class="ion-content">
   <ion-card class="welcome-card">
-    <ion-card-header>
-      <ion-title class="welcome-card-title">Sign Out</ion-title>
-    </ion-card-header>
     <ion-card-content>
       <section class="center">
-        <p class="f1">Are You Sure You Want to Sign Out?</p>
-        <ion-button (click)="signOut()" style="margin: 30%;" size="medium" color="danger" routerLink="../sign-in">
+        <h2>Are You Sure You Want to Sign Out?</h2>
+        <ion-button
+        (click)="signOut()" style="margin: 10%;" expand="block" fill="clear"
+        size="medium" color="danger" routerLink="../sign-in">
           Sign Out
         </ion-button>
       </section>

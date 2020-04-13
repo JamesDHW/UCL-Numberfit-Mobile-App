@@ -13,9 +13,20 @@ export class HomePage {
   ) {}
 
   signOut(){
-    // sign-out then do this...
-    this.router.navigate(['/sign-in']);
 
+    var DOM = this;
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log('Logged Out!');
+        DOM.router.navigate(['/sign-in', ])
+      } else{
+        // Error
+        console.log(this.responseText);
+      }
+    };
+    xhttp.open("GET", "http://localhost:3000/logout", true);
   }
 
 }
