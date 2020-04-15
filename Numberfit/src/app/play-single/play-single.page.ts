@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// // import * as Tesseract from 'tesseract.js';
+// import { createWorker } from 'tesseract.js';
 
 @Component({
   selector: 'app-play-single',
@@ -14,23 +16,65 @@ export class PlaySinglePage implements OnInit {
   questionArray: Array<string>;
   questionCard: string;
   questionState: number;
-  userAnswer: number; // button number
   correctAnswer: number; // button number
   answerOptions: Array<number>;
   color: string;
+  correctCounter: number;
+  incorrectCounter: number;
+  questionCardEle: HTMLElement;
+  videoEle: HTMLElement;
+  // ans1: number;
 
 
   constructor(private router: Router) {
+
+    this.prepareProgressBar();
+
+    this.prepareQuestions();
+
+    this.prepareCounter();
+
+    // this.convertPNG();
+
+  }
+
+  // main operating function for the whole process
+  updateProgress(userAnswer:number){
+    // check if the answer is correct
+    if (userAnswer==this.correctAnswer){ 
+      // play video when needed
+      this.playAudio(true);
+      this.updateProgressBar();
+      if(this.checkWin()){
+        return;
+      }
+      this.updateQuestionCard();
+      this.correctCounter += 1;
+      if (this.correctCounter%3==0){
+        if(this.correctCounter==3){
+          this.prepareElement();
+        }
+        this.switchVideoQuestions(true);
+      }
+    }
+    else {
+      this.playAudio(false);
+      this.updateQuestionCard();
+      this.incorrectCounter += 1;
+    }
+  }
+
+  prepareCounter(){
+    this.correctCounter = 0;
+    this.incorrectCounter = 0;
+  }
+
+  prepareProgressBar(){
     this.imgState = 0;
 
     this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
 
     this.pictureRef = this.images[this.imgState];
-
-    // this.readFile();
-
-    this.prepareQuestions();
-
   }
 
   prepareQuestions(){
@@ -45,6 +89,11 @@ export class PlaySinglePage implements OnInit {
     this.correctAnswer = 1;//Math.ceil(Math.random() * 4); // read from database
   }
 
+  prepareElement(){
+    this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
+    this.videoEle = document.querySelector('.video-container');
+  }
+
   shuffleAnswerOptions(array:Array<number>) {
     array.sort(() => Math.random() - 0.5);
     return array;
@@ -57,19 +106,6 @@ export class PlaySinglePage implements OnInit {
   ngOnInit() {
   }
 
-
-  updateProgress(buttonClicked:number){
-    this.userAnswer = buttonClicked;
-    if (this.userAnswer==this.correctAnswer){ // check if the answer is correct
-      this.playAudio(true);
-      this.updateProgressBar();
-      this.updateQuestionCard();
-    }
-    else {
-      this.playAudio(false);
-      this.updateQuestionCard();
-    }
-  }
   // sound effect at button click
   playAudio(correctness:boolean){
     let audio = new Audio();
@@ -82,53 +118,95 @@ export class PlaySinglePage implements OnInit {
     audio.play();
   }
 
-  disableButtons() {
+  enableButtons(enable: boolean) {
     let choiceButtons = document.querySelectorAll(".choice-button");
     for(var i=0; i<choiceButtons.length; i++){
       let button = <HTMLInputElement>choiceButtons[i];
-      button.disabled = true;
+      button.disabled = !enable;
     }
   }
+
+  enableVideoOrQuestions(toVideo: boolean) {
+    if (toVideo){
+      this.questionCardEle.style.visibility = "hidden";
+      this.videoEle.style.visibility = "visible";
+    } else {
+      this.questionCardEle.style.visibility = "visible";
+      this.videoEle.style.visibility = "hidden";
+    }
+  }
+
+  switchVideoQuestions(toVideo: boolean){
+    this.enableVideoOrQuestions(toVideo);
+    this.enableButtons(!toVideo);
+    let backToGameButton = <HTMLElement>document.querySelector("#video-done-button");
+    backToGameButton.style.visibility = toVideo? "visible":"hidden";
+  }
+
 
   // the progress bar move one step forward with correct answer
   updateProgressBar(){
     this.imgState = ++this.imgState; //% this.images.length;
     this.pictureRef = this.images[this.imgState];
-    if (this.imgState>=8){
-      // this.sleep(3000).then(() => {
-        this.disableButtons();
-        let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
-        let ele2 = <HTMLElement>document.querySelector('.board');
-        let ele3 = <HTMLElement>document.querySelector('.winning-container');
-        let ele4 = <HTMLElement>document.querySelector('.congrats-label');
-        let ele5 = <HTMLElement>document.querySelector('#star-animation');
+  }
 
-        // star rain appears first
-        ele5.style.visibility = "visible";
-        this.sleep(2000).then(() => {
-          ele1.style.animationPlayState = "running";
-          ele2.style.visibility = "hidden";
-          ele3.style.visibility = "visible";
-          ele4.style.width = "100%";
-        })
-        // redirect to play page after congrats
-        this.sleep(8000).then(() => {
-          ele5.style.visibility = "hidden";
-          this.router.navigateByUrl('/play');
-        })
-      }
-    // )}
+  checkWin(): boolean {
+    if (this.imgState>=8){
+      this.enableButtons(false);
+      let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
+      let ele2 = <HTMLElement>document.querySelector('.board');
+      let ele3 = <HTMLElement>document.querySelector('.winning-container');
+      let ele4 = <HTMLElement>document.querySelector('.congrats-label');
+      let ele5 = <HTMLElement>document.querySelector('#star-animation');
+
+      // star rain appears first
+      ele5.style.visibility = "visible";
+      this.questionCardEle.style.visibility = "hidden";
+      this.videoEle.style.visibility = "hidden";
+
+      this.sleep(2000).then(() => {
+        ele1.style.animationPlayState = "running";
+        ele2.style.visibility = "hidden";
+        ele3.style.visibility = "visible";
+        ele4.style.width = "100%";
+      })
+      // redirect to play page after congrats
+      this.sleep(8000).then(() => {
+        ele5.style.visibility = "hidden";
+        this.router.navigateByUrl('/play');
+        return true;
+      })
+    }
+    return false;
   }
 
   // the question card changes regardless of correctness
   updateQuestionCard(){
     this.questionState = ++this.questionState % this.questionArray.length;
     this.questionCard = this.questionArray[this.questionState];
-    // this.correctAnswer = Math.ceil(Math.random() * 4);
     // assume answerOptions has been read from database
     var correctAnswerNumber = this.answerOptions[0];
     this.answerOptions = this.shuffleAnswerOptions(this.answerOptions);
     this.correctAnswer = this.answerOptions.indexOf(correctAnswerNumber)+1;
     console.log("correct answer is: "+this.correctAnswer);
   }
+  
+  // convertPNG() {
+  //   const worker = createWorker({
+  //     logger: m => console.log(m)
+  //   });
+    
+  //   (async () => {
+  //     await worker.load();
+  //     await worker.loadLanguage('eng');
+  //     await worker.initialize('eng');
+  //     await worker.setParameters({
+  //       tessedit_char_whitelist: '0123456789',
+  //     })
+  //     const { data: { text } } = await worker.recognize('/assets/Answers/Answer1.png');
+  //     console.log(text);
+  //     this.ans1 = Number(text);
+  //     await worker.terminate();
+  //   })();
+  // }
 }

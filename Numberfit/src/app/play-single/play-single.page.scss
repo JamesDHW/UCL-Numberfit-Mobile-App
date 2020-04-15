@@ -1,18 +1,34 @@
 @import url(https://fonts.googleapis.com/css?family=Bevan);
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900');
 .card{
-  background: rgba(255, 255, 255, 0.342);
+  background: rgba(255, 255, 255, 0.62);
   margin-top: 5%;
   margin-bottom: 5%;
   padding-left: 5%;
   padding-right: 5%;
+  // width: 90%;
+  height: 40%;
+  overflow: hidden;
   // padding-bottom: 20%;
   // opacity: 30%;
 }
 
 .question-card{
+  // position: absolute;
   height: 200px;
   width: 300px;
-  padding-bottom: 5px;
+  // top: 5%;
+  // padding-bottom: 5px;
+  visibility: visible;
+}
+
+.video-container{
+  position: absolute;
+  height: 95%;
+  width: 90%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  visibility: hidden;
 }
 
 .card-title{
@@ -23,7 +39,7 @@
 }
 
 .ion-content{
-  --background: url('/assets/progress-singleplayer/background_image.jpg') 100% 100%;
+  --background: url('/assets/progress-singleplayer/background3.png') 100% 100%;
 }
 
 .board {
@@ -40,12 +56,17 @@
 .choice-button{
   // size: large;
   width: 120px;
-  height: 70px;
-  // border-color: white;
-  --border-color:white;
-  // shape-outside: round;
-  // opacity: 0%;
-  --box-shadow: 3px 3px 3px black;
+  height: 60px;
+  // --ion-tab-bar-color:white;
+  // --ion-background-color: rgba(193, 243, 191, 0.74);
+  --background: rgba(233, 250, 233, 0.712);
+  --border-color:rgb(76, 167, 73);
+  --border-style: dashed;
+  --border-width: 5px;
+  border-spacing: 5px;
+  shape-outside: round;
+  // opacity: 40%;
+  --box-shadow: 0px 2px 0px black;
   &:active {
     margin-top: 3px;
     --box-shadow: none;
@@ -54,6 +75,11 @@
 
 .choice-button:hover{
   color: black; 
+}
+
+.answer-card{
+  // width: 1500px;
+  height: 100%;
 }
 
 .choice-row{
@@ -176,4 +202,35 @@
   top: 5%;
   text-align: center;
   z-index: 3;
+}
+
+.done-button-section{
+  position: absolute;
+  width: 100%;
+  top: 45%;
+  text-align: center;
+}
+
+#video-done-button{
+  height: 50px;
+  width: 300px;
+  text-align: center;
+  --background: url('/assets/progress-singleplayer/button_background1.png') 300px 50px; 
+  --border-color:rgb(111, 182, 111);
+  --border-width:5px;
+  --border-style: solid;
+  --box-shadow: 4px 3px 3px rgb(48, 45, 45);
+  z-index: 4;
+  visibility: hidden;
+}
+
+#video-done-button:hover{
+  color: rgb(23, 78, 35);
+}
+
+#done-font {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: rgb(111, 182, 111);
 }

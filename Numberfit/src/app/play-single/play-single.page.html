@@ -24,34 +24,44 @@
   <ion-card class="card">
     <!-- <ion-card-content> -->
       <img class="question-card" src="/assets/Question-card/{{questionCard}}.png"/>
+      <!-- <div  style="width:100%; height:100%;" > -->
+      <iframe class="video-container" src="https://www.youtube.com/embed/BYkwtaJgW5g?autoplay=1&rel=0" allow='autoplay'></iframe>
     <!-- </ion-card-content> -->
   </ion-card>
   <section>
     <img src="/assets/progress-singleplayer/{{pictureRef}}.png" style="padding: 10px"/>
   </section>
+  <section class="done-button-section">
+  <ion-button shape="round" id="video-done-button" (click)="switchVideoQuestions(false)">
+    <span id="done-font">Go!</span>
+  </ion-button>
+</section>
   <section>
     <ion-row class="choice-row">
       <ion-col class="choice-section">
         <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(1)">
-          <span class="font">{{answerOptions[0]}}</span>
-          <!-- <img src="/assets/Answers/Answer1.png" style="filter: saturate();"/> -->
+          <!-- <span class="font">{{ans1}}</span> -->
+          <img id="answer-card" src="/assets/Answers/Answer1.png"/>
         </ion-button>
       </ion-col>
       <ion-col class="choice-section">
         <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(2)">
-          <span class="font">{{answerOptions[1]}}</span>
+          <!-- <span class="font">{{answerOptions[1]}}</span> -->
+          <img id="answer-card" src="/assets/Answers/Answer1.png"/>
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row class="choice-row">
       <ion-col class="choice-section">
         <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(3)">
-          <span class="font">{{answerOptions[2]}}</span>
+          <!-- <span class="font">{{answerOptions[2]}}</span> -->
+          <img id="answer-card" src="/assets/Answers/Answer1.png"/>
         </ion-button>
       </ion-col>
       <ion-col class="choice-section">
         <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(4)">
-          <span class="font">{{answerOptions[3]}}</span>
+          <!-- <span class="font">{{answerOptions[3]}}</span> -->
+          <img id="answer-card" src="/assets/Answers/Answer1.png"/>
         </ion-button>
       </ion-col>
     </ion-row>
