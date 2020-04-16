@@ -38,6 +38,11 @@ export class PlaySinglePage implements OnInit {
 
   }
 
+  ngOnInit() {
+    this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
+    this.videoEle = document.querySelector('.video-container');
+  }
+
   // main operating function for the whole process
   updateProgress(userAnswer:number){
     // check if the answer is correct
@@ -51,9 +56,6 @@ export class PlaySinglePage implements OnInit {
       this.updateQuestionCard();
       this.correctCounter += 1;
       if (this.correctCounter%3==0){
-        if(this.correctCounter==3){
-          this.prepareElement();
-        }
         this.switchVideoQuestions(true);
       }
     }
@@ -89,11 +91,6 @@ export class PlaySinglePage implements OnInit {
     this.correctAnswer = 1;//Math.ceil(Math.random() * 4); // read from database
   }
 
-  prepareElement(){
-    this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
-    this.videoEle = document.querySelector('.video-container');
-  }
-
   shuffleAnswerOptions(array:Array<number>) {
     array.sort(() => Math.random() - 0.5);
     return array;
@@ -101,9 +98,6 @@ export class PlaySinglePage implements OnInit {
 
   sleep(ms:number) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  ngOnInit() {
   }
 
   // sound effect at button click

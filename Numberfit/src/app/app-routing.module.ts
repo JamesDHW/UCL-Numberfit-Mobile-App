@@ -45,7 +45,11 @@ const routes: Routes = [
 
   { path: 'subject-select/:gamemode',
     loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule),
-    canActivate: [SignedInGuard], }
+    canActivate: [SignedInGuard], },
+  {
+    path: 'student-list',
+    loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule)
+  }
 ];
 
 @NgModule({
