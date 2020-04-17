@@ -17,6 +17,7 @@ module.exports.myDetails = function(req, res){
           name     : details.name,
           school   : details.school,
           year     : details.year,
+          teacher  : false,
         });
 
       })
@@ -28,6 +29,7 @@ module.exports.myDetails = function(req, res){
           username : details.username,
           name     : details.name,
           school   : details.school,
+          teacher  : true,
         });
       })
     }
