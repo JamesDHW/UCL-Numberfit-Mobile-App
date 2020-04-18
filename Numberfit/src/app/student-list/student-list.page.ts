@@ -11,10 +11,31 @@ export class StudentListPage implements OnInit {
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
-    let gamemode = this.activatedRoute.snapshot.paramMap.get("gamemode");
+  ) { 
+    this.requestStudentList();
   }
 
+  ngOnInit() {
+  }
+
+  requestStudentList(){
+
+    var DOM = this;
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        const cookie = JSON.parse(this.responseText).success
+        console.log(cookie);
+        DOM.router.navigate(['/leaderboard'], cookie)
+      } else if(this.status != 200) {
+        console.log(this.responseText);
+
+      }
+    };
+
+    xhttp.open("POST", "http://localhost:3000/myDetails", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+  }
 }
