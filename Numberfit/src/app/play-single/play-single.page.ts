@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-// // import * as Tesseract from 'tesseract.js';
-// import { createWorker } from 'tesseract.js';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-play-single',
@@ -23,16 +21,20 @@ export class PlaySinglePage implements OnInit {
   incorrectCounter: number;
   questionCardEle: HTMLElement;
   videoEle: HTMLElement;
+  cookie: string;
   // ans1: number;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
 
     this.prepareProgressBar();
 
     this.prepareQuestions();
 
     this.prepareCounter();
+
+    this.cookie = this.route.snapshot.paramMap.get('cookie');
+    console.log(this.cookie);
 
     // this.convertPNG();
 
@@ -167,7 +169,7 @@ export class PlaySinglePage implements OnInit {
       // redirect to play page after congrats
       this.sleep(8000).then(() => {
         ele5.style.visibility = "hidden";
-        this.router.navigateByUrl('/play');
+        this.router.navigateByUrl('/play/' + this.cookie);
         return true;
       })
     }

@@ -32,9 +32,9 @@ export class SignInPage {
 
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        const cookie = JSON.parse(this.responseText).success
+        const cookie = JSON.parse(this.responseText).success;
         console.log(cookie);
-        DOM.router.navigate(['/play'], cookie)
+        DOM.router.navigate(['/play', cookie]);
       } else if(this.status != 200) {
         console.log(this.responseText);
 

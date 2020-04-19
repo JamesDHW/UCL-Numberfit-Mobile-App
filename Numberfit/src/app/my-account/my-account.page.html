@@ -1,0 +1,63 @@
+<ion-header>
+  <meta charset="UTF-8">
+  <ion-toolbar>
+    <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+<ion-card>
+  <ion-card-header>
+    <ion-title class="welcome-card-title">My Account</ion-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="modifyDetailsFormGroup">
+    <ion-item style="margin-top: 20px;">
+      <ion-label>Name</ion-label>
+      <ion-input value={{name}} readonly style="text-align: right;"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input value={{email}} readonly type="email" style="text-align: right;"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Year Group</ion-label>
+      <ion-select
+            formControlName="year" multiple="false"
+            cancelText="Cancel" okText="Select">
+            <ion-select-option *ngFor="let year of yearGroups" value={{year}}>
+              {{year}}
+            </ion-select-option>
+          </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>School</ion-label>
+      <ion-select
+            formControlName="school" id="schoolSelect"
+            multiple="false" cancelText="Cancel" okText="Select">
+            <ion-select-option *ngFor="let school of schoolList" value={{school}}>
+              {{school}}
+            </ion-select-option>
+          </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Change Password</ion-label>
+      <ion-input formControlName="password1" type='password'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Comfirm Password</ion-label>
+      <ion-input formControlName="password2" type='password'></ion-input>
+    </ion-item>
+    <br>
+    <ion-button
+          (click)="modifyDetails()"
+          expand='block'>
+          Confirm Changes
+    </ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+</ion-content>

@@ -39,13 +39,10 @@
           <ion-label>Year Group</ion-label>
           <ion-select
             formControlName="year" multiple="false"
-            cancelText="Cancel" okText="Select">
-            <ion-select-option value="Year 1">Year 1</ion-select-option>
-            <ion-select-option value="Year 2">Year 2</ion-select-option>
-            <ion-select-option value="Year 3">Year 3</ion-select-option>
-            <ion-select-option value="Year 4">Year 4</ion-select-option>
-            <ion-select-option value="Year 5">Year 5</ion-select-option>
-            <ion-select-option value="Year 6">Year 6</ion-select-option>
+            cancelText="Cancel" okText="Select" >
+            <ion-select-option *ngFor="let year of yearGroups" value={{year}}>
+              {{year}}
+            </ion-select-option>
           </ion-select>
         </ion-item>
         <br>
@@ -54,14 +51,16 @@
           <ion-select
             formControlName="school" id="schoolSelect"
             multiple="false" cancelText="Cancel" okText="Select">
-            <ion-select-option value="Year 6">Year 6</ion-select-option>
+            <ion-select-option *ngFor="let school of schoolList" value={{school}}>
+              {{school}}
+            </ion-select-option>
 
           </ion-select>
         </ion-item>
         <br>
         <ion-button
           (click)="register()" [disabled]="registerFormGroup.invalid"
-          expand='block' routerLink="../play">
+          expand='block'>
           Register
       </ion-button>
       </form>

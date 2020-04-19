@@ -11,6 +11,8 @@ import { Md5 } from 'ts-md5/dist/md5';
 })
 export class RegisterPage implements OnInit {
   registerFormGroup: FormGroup;
+  yearGroups: Array<string>;
+  schoolList: Array<string>;
 
   constructor(
     private router: Router,
@@ -24,6 +26,8 @@ export class RegisterPage implements OnInit {
       year: ["", [Validators.required]],
       school: ["", [Validators.required]],
     });
+    this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
+    this.schoolList = ['UCL', 'LSE', 'Imperial'];
   }
 
   ngOnInit() {
@@ -44,6 +48,8 @@ export class RegisterPage implements OnInit {
       year     : this.registerFormGroup.value.year,
       school   : this.registerFormGroup.value.school
     };
+    
+    console.log(credentials);
 
     if(password1==password2 && password1.length > 7){
       var xhttp = new XMLHttpRequest();
@@ -52,7 +58,7 @@ export class RegisterPage implements OnInit {
         if (this.readyState == 4 && this.status == 200) {
           const cookie = JSON.parse(this.responseText).success
           console.log(cookie);
-          DOM.router.navigate(['/play'], cookie)
+          DOM.router.navigate(['/play', cookie]);
         } else if(this.status != 200) {
           console.log(this.responseText);
 
