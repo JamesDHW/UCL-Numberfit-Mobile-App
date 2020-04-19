@@ -10,11 +10,15 @@ export class SubjectSelectPage implements OnInit {
 
   public subject: string = "Addition";
   public subjects: [];
+  cookie: string;
 
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
   ) {
+
+      this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+      console.log(this.cookie);
 
       // GET all subjects from Numberfit
       var xhttpSubjects = new XMLHttpRequest();
@@ -57,7 +61,7 @@ export class SubjectSelectPage implements OnInit {
 
       // Define and send the GET request
       xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
-      xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=5e9445193c9c966ce1dcbac6", true);
+      xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=" + this.cookie, true);
       xhttpSubjects.send();
 
     }
@@ -86,9 +90,9 @@ export class SubjectSelectPage implements OnInit {
     document.getElementById("btn-play").addEventListener("click", function(){
       // Navigate to the respective page
       if(Number(gamemode) === 0){
-        DOM.router.navigate(['/play-single', DOM.subject]);
+        DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
       } else {
-        DOM.router.navigate(['/play-multi', DOM.subject]);
+        DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
       }
     });
 
