@@ -25,6 +25,7 @@ export class RegisterPage implements OnInit {
       password2: ["", [Validators.required]],
       year: ["", [Validators.required]],
       school: ["", [Validators.required]],
+      isTeacher: ["", [Validators.required]],
     });
     this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
     this.schoolList = ['UCL', 'LSE', 'Imperial'];
@@ -46,7 +47,8 @@ export class RegisterPage implements OnInit {
       password : Md5.hashStr(password1),
       name     : this.registerFormGroup.value.name,
       year     : this.registerFormGroup.value.year,
-      school   : this.registerFormGroup.value.school
+      school   : this.registerFormGroup.value.school,
+      // isTeacher: this.registerFormGroup.value.isTeacher
     };
     
     console.log(credentials);

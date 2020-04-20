@@ -36,6 +36,14 @@
         </ion-item>
         <br>
         <ion-item>
+          <ion-label>User Type</ion-label>
+            <ion-select formControlName="isTeacher" cancelText="Cancel" okText="Select">
+              <ion-select-option value=1>Teacher</ion-select-option>
+              <ion-select-option value=0>Stduent</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <br>
+        <ion-item>
           <ion-label>Year Group</ion-label>
           <ion-select
             formControlName="year" multiple="false"
