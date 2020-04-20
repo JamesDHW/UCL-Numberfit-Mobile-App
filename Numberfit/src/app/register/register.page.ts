@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Md5 } from 'ts-md5/dist/md5';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class RegisterPage implements OnInit {
   schoolList: Array<string>;
 
   constructor(
+    private nativeStorage: NativeStorage,
     private router: Router,
     formBuilder: FormBuilder
   ) {
@@ -48,7 +50,7 @@ export class RegisterPage implements OnInit {
       year     : this.registerFormGroup.value.year,
       school   : this.registerFormGroup.value.school
     };
-    
+
     console.log(credentials);
 
     if(password1==password2 && password1.length > 7){
@@ -58,7 +60,11 @@ export class RegisterPage implements OnInit {
         if (this.readyState == 4 && this.status == 200) {
           const cookie = JSON.parse(this.responseText).success
           console.log(cookie);
-          DOM.router.navigate(['/play', cookie]);
+          DOM.nativeStorage.setItem('cookie', {cookie: cookie})
+          .then(
+            () => DOM.router.navigate(['/play']),
+            error => console.error('Error storing item', error)
+          );
         } else if(this.status != 200) {
           console.log(this.responseText);
 

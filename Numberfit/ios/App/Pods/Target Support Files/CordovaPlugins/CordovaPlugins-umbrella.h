@@ -11,6 +11,7 @@
 #endif
 
 #import "CDVDevice.h"
+#import "NativeStorage.h"
 
 FOUNDATION_EXPORT double CordovaPluginsVersionNumber;
 FOUNDATION_EXPORT const unsigned char CordovaPluginsVersionString[];

@@ -19,7 +19,7 @@ export class MyAccountPage implements OnInit {
   name: string;
   email: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { 
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
     this.schoolList = ['UCL', 'LSE', 'Imperial'];
     this.name = "Loading..";
@@ -98,8 +98,8 @@ export class MyAccountPage implements OnInit {
   }
 
   ngOnInit() {
-    this.cookie = this.route.snapshot.paramMap.get('cookie');
-    console.log(this.cookie);
+    // this.cookie = this.route.snapshot.paramMap.get('cookie');
+    // console.log(this.cookie);
     this.getUserDetails();
     // this.modifyDetailsFormGroup.reset({name: this.userObj.name});
     // this.modifyDetailsFormGroup.get('name').setValue(this.userObj.name);

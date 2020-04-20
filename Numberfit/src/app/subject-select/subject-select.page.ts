@@ -17,8 +17,8 @@ export class SubjectSelectPage implements OnInit {
     public activatedRoute: ActivatedRoute,
   ) {
 
-      this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
-      console.log(this.cookie);
+      // this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+      // console.log(this.cookie);
 
       // GET all subjects from Numberfit
       var xhttpSubjects = new XMLHttpRequest();
@@ -90,9 +90,9 @@ export class SubjectSelectPage implements OnInit {
     document.getElementById("btn-play").addEventListener("click", function(){
       // Navigate to the respective page
       if(Number(gamemode) === 0){
-        DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
+        DOM.router.navigate(['/play-single', DOM.subject]);
       } else {
-        DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
+        DOM.router.navigate(['/play-multi', DOM.subject]);
       }
     });
 

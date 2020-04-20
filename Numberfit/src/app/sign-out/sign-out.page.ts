@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-sign-out',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class HomePage {
 
   constructor(
+    private nativeStorage: NativeStorage,
     private router: Router,
   ) {}
 
@@ -19,8 +21,11 @@ export class HomePage {
 
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log('Logged Out!');
-        DOM.router.navigate(['/sign-in', ])
+        DOM.nativeStorage.setItem('cookie', {cookie: "-"})
+        .then(
+          () => DOM.router.navigate(['/sign-in']),
+          error => console.error('Error storing item', error)
+        );
       } else{
         // Error
         console.log(this.responseText);
