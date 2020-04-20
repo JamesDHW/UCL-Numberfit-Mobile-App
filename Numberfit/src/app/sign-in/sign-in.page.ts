@@ -22,6 +22,12 @@ export class SignInPage {
       email: ["", [Validators.required]],
       password: ["", [Validators.required]],
     });
+
+    this.nativeStorage.setItem('cookie', {cookie: "-"})
+    .then(() => console.log("Reset cookie!"),
+      error => console.error('Error storing item', error)
+    );
+
   }
 
   signIn(){
@@ -32,24 +38,24 @@ export class SignInPage {
 
     var DOM = this;
     var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        const cookie = JSON.parse(this.responseText).success;
-        console.log(cookie);
-        DOM.nativeStorage.setItem('cookie', {cookie: cookie})
-        .then(
-          () => DOM.router.navigate(['/play']),
-          error => console.error('Error storing item', error)
-        );
-      } else if(this.status != 200) {
-        console.log(this.responseText);
-
-      }
-    };
-    xhttp.open("POST", "http://localhost:3000/login", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(credentials));
+    DOM.router.navigate(['/play']);
+    // xhttp.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     const cookie = JSON.parse(this.responseText).success;
+    //     console.log(cookie);
+    //     DOM.nativeStorage.setItem('cookie', {cookie: cookie})
+    //     .then(
+    //       () => DOM.router.navigate(['/play']),
+    //       error => console.error('Error storing item', error)
+    //     );
+    //   } else if(this.status != 200) {
+    //     console.log(this.responseText);
+    //
+    //   }
+    // };
+    // xhttp.open("POST", "http://localhost:3000/login", true);
+    // xhttp.setRequestHeader("Content-type", "application/json");
+    // xhttp.send(JSON.stringify(credentials));
 
   }
 }

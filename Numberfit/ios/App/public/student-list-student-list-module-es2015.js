@@ -158,7 +158,7 @@ let StudentListPage = class StudentListPage {
             if (this.readyState == 4 && this.status == 200) {
                 const cookie = JSON.parse(this.responseText).success;
                 console.log(cookie);
-                DOM.router.navigate(['/leaderboard'], cookie);
+                DOM.router.navigate(['/leaderboard']);
             }
             else if (this.status != 200) {
                 console.log(this.responseText);

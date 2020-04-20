@@ -48,11 +48,13 @@ const routes: Routes = [
     canActivate: [SignedInGuard], },
   {
     path: 'student-list',
-    loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule)
+    loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule),
+    canActivate: [SignedInGuard],
   },
   {
     path: 'my-account',
-    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule)
+    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule),
+    canActivate: [SignedInGuard],
   }
 ];
 

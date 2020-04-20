@@ -6,107 +6,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["sign-in-sign-in-module"], {
   /***/
-  "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js":
-  /*!*****************************************************************************!*\
-    !*** ./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js ***!
-    \*****************************************************************************/
-
-  /*! exports provided: NativeStorage */
-
-  /***/
-  function node_modulesIonicNativeNativeStorage__ivy_ngcc__NgxIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "NativeStorage", function () {
-      return NativeStorage;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _ionic_native_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @ionic-native/core */
-    "./node_modules/@ionic-native/core/__ivy_ngcc__/index.js");
-
-    var NativeStorage =
-    /** @class */
-    function (_super) {
-      Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(NativeStorage, _super);
-
-      function NativeStorage() {
-        return _super !== null && _super.apply(this, arguments) || this;
-      }
-
-      NativeStorage.prototype.setItem = function (reference, value) {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "setItem", {}, arguments);
-      };
-
-      NativeStorage.prototype.getItem = function (reference) {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "getItem", {}, arguments);
-      };
-
-      NativeStorage.prototype.keys = function () {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "keys", {}, arguments);
-      };
-
-      NativeStorage.prototype.remove = function (reference) {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "remove", {}, arguments);
-      };
-
-      NativeStorage.prototype.clear = function () {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "clear", {}, arguments);
-      };
-
-      NativeStorage.pluginName = "NativeStorage";
-      NativeStorage.plugin = "cordova-plugin-nativestorage";
-      NativeStorage.pluginRef = "NativeStorage";
-      NativeStorage.repo = "https://github.com/TheCocoaProject/cordova-plugin-nativestorage";
-      NativeStorage.platforms = ["Android", "Browser", "iOS", "macOS", "Windows"];
-
-      NativeStorage.ɵfac = function NativeStorage_Factory(t) {
-        return ɵNativeStorage_BaseFactory(t || NativeStorage);
-      };
-
-      NativeStorage.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
-        token: NativeStorage,
-        factory: function factory(t) {
-          return NativeStorage.ɵfac(t);
-        }
-      });
-
-      var ɵNativeStorage_BaseFactory = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetInheritedFactory"](NativeStorage);
-      /*@__PURE__*/
-
-
-      (function () {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](NativeStorage, [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"]
-        }], null, null);
-      })();
-
-      return NativeStorage;
-    }(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["IonicNativePlugin"]); //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9qYW1lcy9naXRodWIvTnVtYmVyZml0L051bWJlcmZpdC9ub2RlX21vZHVsZXMvQGlvbmljLW5hdGl2ZS9uYXRpdmUtc3RvcmFnZS9uZ3gvaW5kZXguanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7QUFHQTs7Ozs7Ozs7Ozs7Ozs7Z0ZBY2dGOzs7Ozs7MEJBRzFEIiwiZmlsZSI6ImluZGV4LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgX19kZWNvcmF0ZSwgX19leHRlbmRzIH0gZnJvbSBcInRzbGliXCI7XG5pbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBJb25pY05hdGl2ZVBsdWdpbiwgY29yZG92YSB9IGZyb20gJ0Bpb25pYy1uYXRpdmUvY29yZSc7XG52YXIgTmF0aXZlU3RvcmFnZSA9IC8qKiBAY2xhc3MgKi8gKGZ1bmN0aW9uIChfc3VwZXIpIHtcbiAgICBfX2V4dGVuZHMoTmF0aXZlU3RvcmFnZSwgX3N1cGVyKTtcbiAgICBmdW5jdGlvbiBOYXRpdmVTdG9yYWdlKCkge1xuICAgICAgICByZXR1cm4gX3N1cGVyICE9PSBudWxsICYmIF9zdXBlci5hcHBseSh0aGlzLCBhcmd1bWVudHMpIHx8IHRoaXM7XG4gICAgfVxuICAgIE5hdGl2ZVN0b3JhZ2UucHJvdG90eXBlLnNldEl0ZW0gPSBmdW5jdGlvbiAocmVmZXJlbmNlLCB2YWx1ZSkgeyByZXR1cm4gY29yZG92YSh0aGlzLCBcInNldEl0ZW1cIiwge30sIGFyZ3VtZW50cyk7IH07XG4gICAgTmF0aXZlU3RvcmFnZS5wcm90b3R5cGUuZ2V0SXRlbSA9IGZ1bmN0aW9uIChyZWZlcmVuY2UpIHsgcmV0dXJuIGNvcmRvdmEodGhpcywgXCJnZXRJdGVtXCIsIHt9LCBhcmd1bWVudHMpOyB9O1xuICAgIE5hdGl2ZVN0b3JhZ2UucHJvdG90eXBlLmtleXMgPSBmdW5jdGlvbiAoKSB7IHJldHVybiBjb3Jkb3ZhKHRoaXMsIFwia2V5c1wiLCB7fSwgYXJndW1lbnRzKTsgfTtcbiAgICBOYXRpdmVTdG9yYWdlLnByb3RvdHlwZS5yZW1vdmUgPSBmdW5jdGlvbiAocmVmZXJlbmNlKSB7IHJldHVybiBjb3Jkb3ZhKHRoaXMsIFwicmVtb3ZlXCIsIHt9LCBhcmd1bWVudHMpOyB9O1xuICAgIE5hdGl2ZVN0b3JhZ2UucHJvdG90eXBlLmNsZWFyID0gZnVuY3Rpb24gKCkgeyByZXR1cm4gY29yZG92YSh0aGlzLCBcImNsZWFyXCIsIHt9LCBhcmd1bWVudHMpOyB9O1xuICAgIE5hdGl2ZVN0b3JhZ2UucGx1Z2luTmFtZSA9IFwiTmF0aXZlU3RvcmFnZVwiO1xuICAgIE5hdGl2ZVN0b3JhZ2UucGx1Z2luID0gXCJjb3Jkb3ZhLXBsdWdpbi1uYXRpdmVzdG9yYWdlXCI7XG4gICAgTmF0aXZlU3RvcmFnZS5wbHVnaW5SZWYgPSBcIk5hdGl2ZVN0b3JhZ2VcIjtcbiAgICBOYXRpdmVTdG9yYWdlLnJlcG8gPSBcImh0dHBzOi8vZ2l0aHViLmNvbS9UaGVDb2NvYVByb2plY3QvY29yZG92YS1wbHVnaW4tbmF0aXZlc3RvcmFnZVwiO1xuICAgIE5hdGl2ZVN0b3JhZ2UucGxhdGZvcm1zID0gW1wiQW5kcm9pZFwiLCBcIkJyb3dzZXJcIiwgXCJpT1NcIiwgXCJtYWNPU1wiLCBcIldpbmRvd3NcIl07XG4gICAgTmF0aXZlU3RvcmFnZSA9IF9fZGVjb3JhdGUoW1xuICAgICAgICBJbmplY3RhYmxlKClcbiAgICBdLCBOYXRpdmVTdG9yYWdlKTtcbiAgICByZXR1cm4gTmF0aXZlU3RvcmFnZTtcbn0oSW9uaWNOYXRpdmVQbHVnaW4pKTtcbmV4cG9ydCB7IE5hdGl2ZVN0b3JhZ2UgfTtcbiJdfQ==
-
-    /***/
-
-  },
-
-  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-in/sign-in.page.html":
   /*!*********************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/sign-in/sign-in.page.html ***!
@@ -353,6 +252,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           email: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
           password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]]
         });
+        this.nativeStorage.setItem('cookie', {
+          cookie: "-"
+        }).then(function () {
+          return console.log("Reset cookie!");
+        }, function (error) {
+          return console.error('Error storing item', error);
+        });
       }
 
       _createClass(SignInPage, [{
@@ -364,26 +270,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
           var DOM = this;
           var xhttp = new XMLHttpRequest();
-
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              var cookie = JSON.parse(this.responseText).success;
-              console.log(cookie);
-              DOM.nativeStorage.setItem('cookie', {
-                cookie: cookie
-              }).then(function () {
-                return DOM.router.navigate(['/play', cookie]);
-              }, function (error) {
-                return console.error('Error storing item', error);
-              });
-            } else if (this.status != 200) {
-              console.log(this.responseText);
-            }
-          };
-
-          xhttp.open("POST", "http://localhost:3000/login", true);
-          xhttp.setRequestHeader("Content-type", "application/json");
-          xhttp.send(JSON.stringify(credentials));
+          DOM.router.navigate(['/play']); // xhttp.onreadystatechange = function() {
+          //   if (this.readyState == 4 && this.status == 200) {
+          //     const cookie = JSON.parse(this.responseText).success;
+          //     console.log(cookie);
+          //     DOM.nativeStorage.setItem('cookie', {cookie: cookie})
+          //     .then(
+          //       () => DOM.router.navigate(['/play']),
+          //       error => console.error('Error storing item', error)
+          //     );
+          //   } else if(this.status != 200) {
+          //     console.log(this.responseText);
+          //
+          //   }
+          // };
+          // xhttp.open("POST", "http://localhost:3000/login", true);
+          // xhttp.setRequestHeader("Content-type", "application/json");
+          // xhttp.send(JSON.stringify(credentials));
         }
       }]);
 

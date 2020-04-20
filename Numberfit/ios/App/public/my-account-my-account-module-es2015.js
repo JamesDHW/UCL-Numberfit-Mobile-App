@@ -200,8 +200,8 @@ let MyAccountPage = class MyAccountPage {
         this.email = this.userObj.username;
     }
     ngOnInit() {
-        this.cookie = this.route.snapshot.paramMap.get('cookie');
-        console.log(this.cookie);
+        // this.cookie = this.route.snapshot.paramMap.get('cookie');
+        // console.log(this.cookie);
         this.getUserDetails();
         // this.modifyDetailsFormGroup.reset({name: this.userObj.name});
         // this.modifyDetailsFormGroup.get('name').setValue(this.userObj.name);

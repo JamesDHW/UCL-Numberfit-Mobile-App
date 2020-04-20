@@ -134,11 +134,11 @@ __webpack_require__.r(__webpack_exports__);
 
 let SubjectSelectPage = class SubjectSelectPage {
     constructor(router, activatedRoute) {
+        // this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+        // console.log(this.cookie);
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.subject = "Addition";
-        this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
-        console.log(this.cookie);
         // GET all subjects from Numberfit
         var xhttpSubjects = new XMLHttpRequest();
         var xhttpDetails = new XMLHttpRequest();
@@ -202,10 +202,10 @@ let SubjectSelectPage = class SubjectSelectPage {
         document.getElementById("btn-play").addEventListener("click", function () {
             // Navigate to the respective page
             if (Number(gamemode) === 0) {
-                DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
+                DOM.router.navigate(['/play-single', DOM.subject]);
             }
             else {
-                DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
+                DOM.router.navigate(['/play-multi', DOM.subject]);
             }
         });
     }

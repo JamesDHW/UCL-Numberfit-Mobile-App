@@ -236,11 +236,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function SubjectSelectPage(router, activatedRoute) {
         _classCallCheck(this, SubjectSelectPage);
 
+        // this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+        // console.log(this.cookie);
         this.router = router;
         this.activatedRoute = activatedRoute;
-        this.subject = "Addition";
-        this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
-        console.log(this.cookie); // GET all subjects from Numberfit
+        this.subject = "Addition"; // GET all subjects from Numberfit
 
         var xhttpSubjects = new XMLHttpRequest();
         var xhttpDetails = new XMLHttpRequest();
@@ -311,9 +311,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           document.getElementById("btn-play").addEventListener("click", function () {
             // Navigate to the respective page
             if (Number(gamemode) === 0) {
-              DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
+              DOM.router.navigate(['/play-single', DOM.subject]);
             } else {
-              DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
+              DOM.router.navigate(['/play-multi', DOM.subject]);
             }
           });
         }

@@ -22,8 +22,13 @@ export class AppComponent {
       icon: 'list'
     },
     {
-      title: 'Parents',
+      title: 'Progress',
       url: '/parents',
+      icon: 'analytics'
+    },
+    {
+      title: 'My Account',
+      url: '/my-account',
       icon: 'person'
     },
     {
