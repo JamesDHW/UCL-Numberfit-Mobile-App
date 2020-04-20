@@ -179,18 +179,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var divSingle = document.getElementById("play-single");
           var divMulti = document.getElementById("play-multi");
           divSingle.addEventListener('click', function () {
-            return _this.router.navigate(['/subject-select', 0, _this.cookie]);
+            return _this.router.navigate(['/subject-select', 0]);
           });
           divMulti.addEventListener('click', function () {
-            return _this.router.navigate(['/subject-select', 1, _this.cookie]);
-          });
-          this.cookie = this.route.snapshot.paramMap.get('cookie');
-          console.log(this.cookie);
+            return _this.router.navigate(['/subject-select', 1]);
+          }); // this.cookie = this.route.snapshot.paramMap.get('cookie');
+          // console.log(this.cookie);
         }
       }, {
         key: "navigate",
         value: function navigate() {
-          this.router.navigateByUrl('my-account/' + this.cookie);
+          this.router.navigateByUrl('my-account');
         }
       }]);
 

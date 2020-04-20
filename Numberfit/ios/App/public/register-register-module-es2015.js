@@ -122,13 +122,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ts-md5/dist/md5 */ "./node_modules/ts-md5/dist/md5.js");
 /* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+
 
 
 
 
 
 let RegisterPage = class RegisterPage {
-    constructor(router, formBuilder) {
+    constructor(nativeStorage, router, formBuilder) {
+        this.nativeStorage = nativeStorage;
         this.router = router;
         this.registerFormGroup = formBuilder.group({
             name: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
@@ -163,7 +166,8 @@ let RegisterPage = class RegisterPage {
                 if (this.readyState == 4 && this.status == 200) {
                     const cookie = JSON.parse(this.responseText).success;
                     console.log(cookie);
-                    DOM.router.navigate(['/play', cookie]);
+                    DOM.nativeStorage.setItem('cookie', { cookie: cookie })
+                        .then(() => DOM.router.navigate(['/play']), error => console.error('Error storing item', error));
                 }
                 else if (this.status != 200) {
                     console.log(this.responseText);
@@ -180,6 +184,7 @@ let RegisterPage = class RegisterPage {
     }
 };
 RegisterPage.ctorParameters = () => [
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] }
 ];
@@ -189,7 +194,8 @@ RegisterPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./register.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.page.html")).default,
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./register.page.scss */ "./src/app/register/register.page.scss")).default]
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])
 ], RegisterPage);
 

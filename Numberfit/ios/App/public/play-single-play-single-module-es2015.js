@@ -129,8 +129,8 @@ let PlaySinglePage = class PlaySinglePage {
         this.prepareProgressBar();
         this.prepareQuestions();
         this.prepareCounter();
-        this.cookie = this.route.snapshot.paramMap.get('cookie');
-        console.log(this.cookie);
+        // this.cookie = this.route.snapshot.paramMap.get('cookie');
+        // console.log(this.cookie);
         // this.convertPNG();
     }
     ngOnInit() {
@@ -243,7 +243,7 @@ let PlaySinglePage = class PlaySinglePage {
             // redirect to play page after congrats
             this.sleep(8000).then(() => {
                 ele5.style.visibility = "hidden";
-                this.router.navigateByUrl('/play/' + this.cookie);
+                this.router.navigateByUrl('/play');
                 return true;
             });
         }

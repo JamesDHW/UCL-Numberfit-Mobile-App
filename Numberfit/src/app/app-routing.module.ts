@@ -8,7 +8,7 @@ const routes: Routes = [
     redirectTo: 'play',
     pathMatch: 'full' },
 
-  { path: 'play/:cookie',
+  { path: 'play',
     loadChildren: () => import('./play/play.module').then(m => m.HomePageModule),
     canActivate: [SignedInGuard],
   },
@@ -27,11 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./sign-out/sign-out.module').then(m => m.HomePageModule),
     canActivate: [SignedInGuard], },
 
-  { path: 'play-single/:subject/:cookie',
+  { path: 'play-single/:subject',
     loadChildren: () => import('./play-single/play-single.module').then( m => m.PlaySinglePageModule),
     canActivate: [SignedInGuard], },
 
-  { path: 'play-multi/:subject/:cookie',
+  { path: 'play-multi/:subject',
     loadChildren: () => import('./play-multi/play-multi.module').then( m => m.PlayMultiPageModule),
     canActivate: [SignedInGuard], },
 
@@ -43,16 +43,18 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
     canActivate: [SignedOutGuard], },
 
-  { path: 'subject-select/:gamemode/:cookie',
+  { path: 'subject-select/:gamemode',
     loadChildren: () => import('./subject-select/subject-select.module').then( m => m.SubjectSelectPageModule),
     canActivate: [SignedInGuard], },
   {
     path: 'student-list',
-    loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule)
+    loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule),
+    canActivate: [SignedInGuard],
   },
   {
-    path: 'my-account/:cookie',
-    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule)
+    path: 'my-account',
+    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule),
+    canActivate: [SignedInGuard],
   }
 ];
 

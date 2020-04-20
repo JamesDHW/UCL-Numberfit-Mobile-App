@@ -818,7 +818,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       redirectTo: 'play',
       pathMatch: 'full'
     }, {
-      path: 'play/:cookie',
+      path: 'play',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | play-play-module */
@@ -866,7 +866,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
-      path: 'play-single/:subject/:cookie',
+      path: 'play-single/:subject',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | play-single-play-single-module */
@@ -878,7 +878,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
-      path: 'play-multi/:subject/:cookie',
+      path: 'play-multi/:subject',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | play-multi-play-multi-module */
@@ -914,7 +914,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_out_guard__WEBPACK_IMPORTED_MODULE_4__["SignedOutGuard"]]
     }, {
-      path: 'subject-select/:gamemode/:cookie',
+      path: 'subject-select/:gamemode',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | subject-select-subject-select-module */
@@ -935,9 +935,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         "./src/app/student-list/student-list.module.ts")).then(function (m) {
           return m.StudentListPageModule;
         });
-      }
+      },
+      canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
-      path: 'my-account/:cookie',
+      path: 'my-account',
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | my-account-my-account-module */
@@ -946,7 +947,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         "./src/app/my-account/my-account.module.ts")).then(function (m) {
           return m.MyAccountPageModule;
         });
-      }
+      },
+      canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -1050,8 +1052,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           url: '/leaderboard',
           icon: 'list'
         }, {
-          title: 'Parents',
+          title: 'Progress',
           url: '/parents',
+          icon: 'analytics'
+        }, {
+          title: 'My Account',
+          url: '/my-account',
           icon: 'person'
         }, {
           title: 'Sign-Out',
@@ -1172,6 +1178,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./app-routing.module */
     "./src/app/app-routing.module.ts");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1181,7 +1193,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
       entryComponents: [],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"]],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], {
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__["NativeStorage"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
       }],
@@ -1227,20 +1239,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
 
     var SignedInGuard =
     /*#__PURE__*/
     function () {
-      function SignedInGuard(router) {
+      function SignedInGuard(nativeStorage, router) {
         _classCallCheck(this, SignedInGuard);
 
+        this.nativeStorage = nativeStorage;
         this.router = router;
       }
 
       _createClass(SignedInGuard, [{
         key: "canActivate",
         value: function canActivate(next, state) {
-          return true;
+          var _this2 = this;
+
+          console.log("Sign In Guard");
+          return this.nativeStorage.getItem('cookie').then(function (data) {
+            console.log("Signed In Cookie: ", data);
+
+            if (data.cookie && data.cookie != "-") {
+              return true;
+            } else {
+              _this2.router.navigate(['/sign-in']);
+
+              return false;
+            }
+          }, function (error) {
+            console.log("err: ", error);
+
+            _this2.router.navigate(['/sign-in']);
+
+            return false;
+          });
         }
       }]);
 
@@ -1249,13 +1287,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     SignedInGuard.ctorParameters = function () {
       return [{
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+      }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
       }];
     };
 
     SignedInGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], SignedInGuard);
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], SignedInGuard);
     /***/
   },
 
@@ -1296,20 +1336,60 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
 
     var SignedOutGuard =
     /*#__PURE__*/
     function () {
-      function SignedOutGuard(router) {
+      function SignedOutGuard(nativeStorage, router) {
         _classCallCheck(this, SignedOutGuard);
 
+        this.nativeStorage = nativeStorage;
         this.router = router;
       }
 
       _createClass(SignedOutGuard, [{
         key: "canActivate",
         value: function canActivate(next, state) {
-          return true;
+          var _this3 = this;
+
+          console.log("Sign Out Guard");
+          return this.nativeStorage.getItem('cookie').then(function (data) {
+            console.log("Signed Out Cookie: ", data);
+
+            if (!data.cookie || data.cookie == "-") {
+              return true;
+            } else {
+              console.log("values: ", data.cookie);
+
+              _this3.router.navigate(['/play']);
+
+              return false;
+            }
+          }, function (error) {
+            console.log("err: ", error);
+
+            if (error.code == 2) {
+              _this3.nativeStorage.setItem('cookie', {
+                cookie: "-"
+              }).then(function () {
+                console.log("Reset cookie!");
+
+                _this3.router.navigate(['/sign-in']);
+
+                return true;
+              }, function (error) {
+                return console.error('Error storing item', error);
+              });
+            } else {
+              return false;
+            }
+          }); // return true;
         }
       }]);
 
@@ -1318,13 +1398,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     SignedOutGuard.ctorParameters = function () {
       return [{
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+      }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
       }];
     };
 
     SignedOutGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], SignedOutGuard);
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], SignedOutGuard);
     /***/
   },
 

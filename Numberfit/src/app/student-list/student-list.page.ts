@@ -14,7 +14,7 @@ export class StudentListPage implements OnInit {
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute
-  ) { 
+  ) {
     this.requestStudentList();
   }
 
@@ -54,7 +54,7 @@ export class StudentListPage implements OnInit {
       if (this.readyState == 4 && this.status == 200) {
         const cookie = JSON.parse(this.responseText).success
         console.log(cookie);
-        DOM.router.navigate(['/leaderboard'], cookie)
+        DOM.router.navigate(['/leaderboard'])
       } else if(this.status != 200) {
         console.log(this.responseText);
 

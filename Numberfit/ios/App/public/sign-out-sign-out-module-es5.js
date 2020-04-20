@@ -158,13 +158,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
 
     var HomePage =
     /*#__PURE__*/
     function () {
-      function HomePage(router) {
+      function HomePage(nativeStorage, router) {
         _classCallCheck(this, HomePage);
 
+        this.nativeStorage = nativeStorage;
         this.router = router;
       }
 
@@ -172,19 +179,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "signOut",
         value: function signOut() {
           var DOM = this;
-          var xhttp = new XMLHttpRequest();
-
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              console.log('Logged Out!');
-              DOM.router.navigate(['/sign-in']);
-            } else {
-              // Error
-              console.log(this.responseText);
-            }
-          };
-
-          xhttp.open("GET", "http://localhost:3000/logout", true);
+          var xhttp = new XMLHttpRequest(); // xhttp.onreadystatechange = function() {
+          //   if (this.readyState == 4 && this.status == 200) {
+          //     DOM.nativeStorage.setItem('cookie', {cookie: "-"})
+          //     .then(() => {
+          //       console.log("cookie removed")
+          //       DOM.router.navigate(['/sign-in'])
+          //     },
+          //       error => console.error('Error storing item', error)
+          //     );
+          //   } else{
+          //     // Error
+          //     console.log("error", this.responseText);
+          //   }
+          // };
+          // xhttp.open("GET", "http://localhost:3000/logout", true);
         }
       }]);
 
@@ -193,6 +202,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     HomePage.ctorParameters = function () {
       return [{
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+      }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
       }];
     };
@@ -205,7 +216,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./sign-out.page.scss */
       "./src/app/sign-out/sign-out.page.scss")).default]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], HomePage);
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], HomePage);
     /***/
   }
 }]);

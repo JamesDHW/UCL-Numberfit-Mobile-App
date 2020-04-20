@@ -33,8 +33,8 @@ export class PlaySinglePage implements OnInit {
 
     this.prepareCounter();
 
-    this.cookie = this.route.snapshot.paramMap.get('cookie');
-    console.log(this.cookie);
+    // this.cookie = this.route.snapshot.paramMap.get('cookie');
+    // console.log(this.cookie);
 
     // this.convertPNG();
 
@@ -48,7 +48,7 @@ export class PlaySinglePage implements OnInit {
   // main operating function for the whole process
   updateProgress(userAnswer:number){
     // check if the answer is correct
-    if (userAnswer==this.correctAnswer){ 
+    if (userAnswer==this.correctAnswer){
       // play video when needed
       this.playAudio(true);
       this.updateProgressBar();
@@ -169,7 +169,7 @@ export class PlaySinglePage implements OnInit {
       // redirect to play page after congrats
       this.sleep(8000).then(() => {
         ele5.style.visibility = "hidden";
-        this.router.navigateByUrl('/play/' + this.cookie);
+        this.router.navigateByUrl('/play');
         return true;
       })
     }
@@ -186,12 +186,12 @@ export class PlaySinglePage implements OnInit {
     this.correctAnswer = this.answerOptions.indexOf(correctAnswerNumber)+1;
     console.log("correct answer is: "+this.correctAnswer);
   }
-  
+
   // convertPNG() {
   //   const worker = createWorker({
   //     logger: m => console.log(m)
   //   });
-    
+
   //   (async () => {
   //     await worker.load();
   //     await worker.loadLanguage('eng');

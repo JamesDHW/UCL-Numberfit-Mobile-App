@@ -264,7 +264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (this.readyState == 4 && this.status == 200) {
               var cookie = JSON.parse(this.responseText).success;
               console.log(cookie);
-              DOM.router.navigate(['/leaderboard'], cookie);
+              DOM.router.navigate(['/leaderboard']);
             } else if (this.status != 200) {
               console.log(this.responseText);
             }
