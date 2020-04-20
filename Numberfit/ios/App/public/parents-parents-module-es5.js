@@ -870,8 +870,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var colorString = match[0];
 
           if (match[0].length === 3) {
-            colorString = colorString.split('').map(function (_char) {
-              return _char + _char;
+            colorString = colorString.split('').map(function (char) {
+              return char + char;
             }).join('');
           }
 
@@ -6494,7 +6494,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
       function getRelativePosition(e, chart) {
-        if (e["native"]) {
+        if (e.native) {
           return {
             x: e.x,
             y: e.y
@@ -7180,7 +7180,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       };
       var platform_dom = "/*\n * DOM element rendering detection\n * https://davidwalsh.name/detect-node-insertion\n */\n@keyframes chartjs-render-animation {\n\tfrom { opacity: 0.99; }\n\tto { opacity: 1; }\n}\n\n.chartjs-render-monitor {\n\tanimation: chartjs-render-animation 0.001s;\n}\n\n/*\n * DOM element resizing detection\n * https://github.com/marcj/css-element-queries\n */\n.chartjs-size-monitor,\n.chartjs-size-monitor-expand,\n.chartjs-size-monitor-shrink {\n\tposition: absolute;\n\tdirection: ltr;\n\tleft: 0;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\toverflow: hidden;\n\tpointer-events: none;\n\tvisibility: hidden;\n\tz-index: -1;\n}\n\n.chartjs-size-monitor-expand > div {\n\tposition: absolute;\n\twidth: 1000000px;\n\theight: 1000000px;\n\tleft: 0;\n\ttop: 0;\n}\n\n.chartjs-size-monitor-shrink > div {\n\tposition: absolute;\n\twidth: 200%;\n\theight: 200%;\n\tleft: 0;\n\ttop: 0;\n}\n";
-      var platform_dom$1 = /*#__PURE__*/Object.freeze({
+      var platform_dom$1 =
+      /*#__PURE__*/
+      Object.freeze({
         __proto__: null,
         'default': platform_dom
       });
@@ -7320,7 +7322,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return {
           type: type,
           chart: chart,
-          "native": nativeEvent || null,
+          native: nativeEvent || null,
           x: x !== undefined ? x : null,
           y: y !== undefined ? y : null
         };
@@ -9900,12 +9902,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // Need to call with native event here to not break backwards compatibility
 
 
-          helpers$1.callback(options.onHover || options.hover.onHover, [e["native"], me.active], me);
+          helpers$1.callback(options.onHover || options.hover.onHover, [e.native, me.active], me);
 
           if (e.type === 'mouseup' || e.type === 'click') {
             if (options.onClick) {
               // Use e.native here for backwards compatibility
-              options.onClick.call(me, e["native"], me.active);
+              options.onClick.call(me, e.native, me.active);
             }
           } // Remove styling for last active (even if it may still be active)
 
@@ -10628,7 +10630,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
       };
 
-      function _abstract() {
+      function abstract() {
         throw new Error('This method is not implemented: either no adapter can ' + 'be found or an incomplete integration was provided.');
       }
       /**
@@ -10662,7 +10664,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * in Unit as well as 'datetime' representing a detailed date/time string.
          * @returns {{string: string}}
          */
-        formats: _abstract,
+        formats: abstract,
 
         /**
          * Parses the given `value` and return the associated timestamp.
@@ -10671,7 +10673,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @returns {(number|null)}
          * @function
          */
-        parse: _abstract,
+        parse: abstract,
 
         /**
          * Returns the formatted date in the specified `format` for a given `timestamp`.
@@ -10680,7 +10682,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @return {string}
          * @function
          */
-        format: _abstract,
+        format: abstract,
 
         /**
          * Adds the specified `amount` of `unit` to the given `timestamp`.
@@ -10690,7 +10692,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @return {number}
          * @function
          */
-        add: _abstract,
+        add: abstract,
 
         /**
          * Returns the number of `unit` between the given timestamps.
@@ -10700,7 +10702,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @return {number}
          * @function
          */
-        diff: _abstract,
+        diff: abstract,
 
         /**
          * Returns start of `unit` for the given `timestamp`.
@@ -10710,7 +10712,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * and 7 being Sunday (only needed if param *unit* is `isoWeek`).
          * @function
          */
-        startOf: _abstract,
+        startOf: abstract,
 
         /**
          * Returns end of `unit` for the given `timestamp`.
@@ -10718,7 +10720,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @param {Unit} unit - the unit as string
          * @function
          */
-        endOf: _abstract,
+        endOf: abstract,
         // DEPRECATIONS
 
         /**
@@ -15227,12 +15229,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (type === 'click') {
             if (hoveredItem && opts.onClick) {
               // use e.native for backwards compatibility
-              opts.onClick.call(me, e["native"], hoveredItem);
+              opts.onClick.call(me, e.native, hoveredItem);
             }
           } else {
             if (opts.onLeave && hoveredItem !== me._hoveredItem) {
               if (me._hoveredItem) {
-                opts.onLeave.call(me, e["native"], me._hoveredItem);
+                opts.onLeave.call(me, e.native, me._hoveredItem);
               }
 
               me._hoveredItem = hoveredItem;
@@ -15240,7 +15242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (opts.onHover && hoveredItem) {
               // use e.native for backwards compatibility
-              opts.onHover.call(me, e["native"], hoveredItem);
+              opts.onHover.call(me, e.native, hoveredItem);
             }
           }
         }
@@ -34263,9 +34265,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var chart_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
+    var chart_js__WEBPACK_IMPORTED_MODULE_2___default =
+    /*#__PURE__*/
+    __webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
 
-    var HomePage = /*#__PURE__*/function () {
+    var HomePage =
+    /*#__PURE__*/
+    function () {
       function HomePage() {
         _classCallCheck(this, HomePage);
       }
@@ -34343,10 +34349,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selector: 'app-parents',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./parents.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/parents/parents.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/parents/parents.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./parents.page.scss */
-      "./src/app/parents/parents.page.scss"))["default"]]
+      "./src/app/parents/parents.page.scss")).default]
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], HomePage);
     /***/
   }

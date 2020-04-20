@@ -10,19 +10,29 @@
         ]
         },
       {
-          "id": "cordova-plugin-youtube-video-player.YoutubeVideoPlayer",
-          "file": "plugins/cordova-plugin-youtube-video-player/plugins/com.bunkerpalace.cordova.YoutubeVideoPlayer/www/YoutubeVideoPlayer.js",
-          "pluginId": "cordova-plugin-youtube-video-player",
+          "id": "cordova-plugin-nativestorage.mainHandle",
+          "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
+          "pluginId": "cordova-plugin-nativestorage",
         "clobbers": [
-          "YoutubeVideoPlayer"
+          "NativeStorage"
         ]
+        },
+      {
+          "id": "cordova-plugin-nativestorage.LocalStorageHandle",
+          "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
+          "pluginId": "cordova-plugin-nativestorage"
+        },
+      {
+          "id": "cordova-plugin-nativestorage.NativeStorageError",
+          "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
+          "pluginId": "cordova-plugin-nativestorage"
         }
     ];
     module.exports.metadata =
     // TOP OF METADATA
     {
-      "cordova-plugin-youtube-video-player": "2.4.0",
-      "cordova-plugin-device": "2.0.3"
+      "cordova-plugin-nativestorage": "2.3.2",
+      "cordova-plugin-device": "2.0.2"
     };
     // BOTTOM OF METADATA
     });

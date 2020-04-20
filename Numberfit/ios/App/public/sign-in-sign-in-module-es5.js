@@ -221,8 +221,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
 
-    var SignInPage = /*#__PURE__*/function () {
+
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ts-md5/dist/md5 */
+    "./node_modules/ts-md5/dist/md5.js");
+    /* harmony import */
+
+
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
+    /*#__PURE__*/
+    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+
+    var SignInPage =
+    /*#__PURE__*/
+    function () {
       function SignInPage(router, formBuilder) {
         _classCallCheck(this, SignInPage);
 
@@ -236,16 +250,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(SignInPage, [{
         key: "signIn",
         value: function signIn() {
-          var email = this.signInFormGroup.value["email"];
-          var password = this.signInFormGroup.value["password"]; // FIRESTORE
-          // this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
-          // .then((authData)=>{
-          //   console.log('signed-in')
-          //   this.router.navigate(['/play']);
-          // })
-          // .catch((authError)=>{
-          //   console.log('error =>', authError)
-          // });
+          var credentials = {
+            'username': this.signInFormGroup.value.email.toLowerCase(),
+            'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
+          };
+          var DOM = this;
+          var xhttp = new XMLHttpRequest();
+
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              var cookie = JSON.parse(this.responseText).success;
+              console.log(cookie);
+              DOM.router.navigate(['/play', cookie]);
+            } else if (this.status != 200) {
+              console.log(this.responseText);
+            }
+          };
+
+          xhttp.open("POST", "http://localhost:3000/login", true);
+          xhttp.setRequestHeader("Content-type", "application/json");
+          xhttp.send(JSON.stringify(credentials));
         }
       }]);
 
@@ -264,10 +288,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selector: 'app-sign-in',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./sign-in.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-in/sign-in.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-in/sign-in.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./sign-in.page.scss */
-      "./src/app/sign-in/sign-in.page.scss"))["default"]]
+      "./src/app/sign-in/sign-in.page.scss")).default]
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])], SignInPage);
     /***/
   }

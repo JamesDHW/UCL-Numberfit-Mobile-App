@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-title class=\"welcome-card-title\">Sign Out</ion-title>\n    </ion-card-header>\n    <ion-card-content>\n      <section class=\"center\">\n        <p class=\"f1\">Are You Sure You Want to Sign Out?</p>\n        <ion-button (click)=\"signOut()\" style=\"margin: 30%;\" size=\"medium\" color=\"danger\" routerLink=\"../sign-in\">\n          Sign Out\n        </ion-button>\n      </section>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <section class=\"center\">\n        <h2>Are You Sure You Want to Sign Out?</h2>\n        <ion-button\n        (click)=\"signOut()\" style=\"margin: 10%;\" expand=\"block\" fill=\"clear\"\n        size=\"medium\" color=\"danger\" routerLink=\"../sign-in\">\n          Sign Out\n        </ion-button>\n      </section>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -159,7 +159,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
-    var HomePage = /*#__PURE__*/function () {
+    var HomePage =
+    /*#__PURE__*/
+    function () {
       function HomePage(router) {
         _classCallCheck(this, HomePage);
 
@@ -169,8 +171,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(HomePage, [{
         key: "signOut",
         value: function signOut() {
-          // sign-out then do this...
-          this.router.navigate(['/sign-in']);
+          var DOM = this;
+          var xhttp = new XMLHttpRequest();
+
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log('Logged Out!');
+              DOM.router.navigate(['/sign-in']);
+            } else {
+              // Error
+              console.log(this.responseText);
+            }
+          };
+
+          xhttp.open("GET", "http://localhost:3000/logout", true);
         }
       }]);
 
@@ -187,10 +201,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selector: 'app-sign-out',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./sign-out.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-out/sign-out.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-out/sign-out.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./sign-out.page.scss */
-      "./src/app/sign-out/sign-out.page.scss"))["default"]]
+      "./src/app/sign-out/sign-out.page.scss")).default]
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], HomePage);
     /***/
   }

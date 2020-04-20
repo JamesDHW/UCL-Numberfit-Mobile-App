@@ -120,6 +120,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ts-md5/dist/md5 */ "./node_modules/ts-md5/dist/md5.js");
+/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -133,17 +136,25 @@ let SignInPage = class SignInPage {
         });
     }
     signIn() {
-        const email = this.signInFormGroup.value["email"];
-        const password = this.signInFormGroup.value["password"];
-        // FIRESTORE
-        // this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
-        // .then((authData)=>{
-        //   console.log('signed-in')
-        //   this.router.navigate(['/play']);
-        // })
-        // .catch((authError)=>{
-        //   console.log('error =>', authError)
-        // });
+        const credentials = {
+            'username': this.signInFormGroup.value.email.toLowerCase(),
+            'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
+        };
+        var DOM = this;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const cookie = JSON.parse(this.responseText).success;
+                console.log(cookie);
+                DOM.router.navigate(['/play', cookie]);
+            }
+            else if (this.status != 200) {
+                console.log(this.responseText);
+            }
+        };
+        xhttp.open("POST", "http://localhost:3000/login", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify(credentials));
     }
 };
 SignInPage.ctorParameters = () => [

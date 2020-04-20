@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">Play</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div id=\"play-single\">\n        <img class=\"icon\" src=\"/assets/icon/person-icon.svg\"/>\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Single Player\n        </ion-button>\n      </div>\n\n      <div id=\"play-multi\">\n        <img class=\"icon\" src=\"/assets/icon/people-icon.svg\" />\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Head-to-Head\n        </ion-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">My Acheivements</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <img class=\"icon\" style=\"width: 20%\" src=\"/assets/icon/trophy.svg\" alt=\"\"/>\n      <br><p> Get Playing to Earn Acheivements...</p>\n    </ion-card-content>\n  </ion-card>\n\n\n  <!-- routerLink=\"../leaderboard\"\n  routerDirection=\"forward\" -->\n\n    <ion-card class=\"welcome-card\">\n      <ion-card-content>\n        <ion-button\n        expand=\"block\"\n        fill=\"clear\"\n        (click)=\"getReq()\"\n        >\n          Leaderboard\n        </ion-button>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">Play</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div id=\"play-single\">\n        <img class=\"icon\" src=\"/assets/icon/person-icon.svg\"/>\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Single Player\n        </ion-button>\n      </div>\n\n      <div id=\"play-multi\">\n        <img class=\"icon\" src=\"/assets/icon/people-icon.svg\" />\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Head-to-Head\n        </ion-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n\n  <!-- routerLink=\"../leaderboard\"\n  routerDirection=\"forward\" -->\n\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">My Acheivements</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <img class=\"icon\" style=\"width: 20%\" src=\"/assets/icon/trophy.svg\" alt=\"\"/>\n      <br><p> Get Playing to Earn Acheivements...</p>\n    </ion-card-content>\n  </ion-card>\n    <ion-card class=\"welcome-card\">\n      <ion-card-content>\n        <ion-button\n        expand=\"block\"\n        fill=\"clear\"\n        (click)=\"navigate()\">\n          My Account\n        </ion-button>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -159,11 +159,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
-    var HomePage = /*#__PURE__*/function () {
-      function HomePage(router) {
+    var HomePage =
+    /*#__PURE__*/
+    function () {
+      function HomePage(router, route) {
         _classCallCheck(this, HomePage);
 
         this.router = router;
+        this.route = route;
+        this.messageFromChild = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // this.messageFromChild.emit('Message from child');
       }
 
       _createClass(HomePage, [{
@@ -175,27 +179,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var divSingle = document.getElementById("play-single");
           var divMulti = document.getElementById("play-multi");
           divSingle.addEventListener('click', function () {
-            return _this.router.navigate(['/subject-select', 0]);
+            return _this.router.navigate(['/subject-select', 0, _this.cookie]);
           });
           divMulti.addEventListener('click', function () {
-            return _this.router.navigate(['/subject-select', 1]);
+            return _this.router.navigate(['/subject-select', 1, _this.cookie]);
           });
-        } // function example of get request
-
+          this.cookie = this.route.snapshot.paramMap.get('cookie');
+          console.log(this.cookie);
+        }
       }, {
-        key: "getReq",
-        value: function getReq() {
-          var xhttp = new XMLHttpRequest();
-          console.log("pressed");
-
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
-            }
-          };
-
-          xhttp.open("GET", "http://localhost:3000/register?email=jbreeze@hotmail.com&school=Primrose&year=6&teacher=Mrs-Wallace&fName=Jack&lName=Breeze", true);
-          xhttp.send();
+        key: "navigate",
+        value: function navigate() {
+          this.router.navigateByUrl('my-account/' + this.cookie);
         }
       }]);
 
@@ -205,18 +200,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     HomePage.ctorParameters = function () {
       return [{
         type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
       }];
     };
 
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", Object)], HomePage.prototype, "messageFromChild", void 0);
     HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-play',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./play.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/play/play.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/play/play.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./play.page.scss */
-      "./src/app/play/play.page.scss"))["default"]]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], HomePage);
+      "./src/app/play/play.page.scss")).default]
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])], HomePage);
     /***/
   }
 }]);

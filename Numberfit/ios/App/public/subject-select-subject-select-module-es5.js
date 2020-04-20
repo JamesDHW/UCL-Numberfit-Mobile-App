@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Subject Select</ion-card-title>\n    </ion-card-header>\n      <ion-radio-group\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let sub of subjects.availableTopics\">\n      <ion-item>\n        <ion-label>{{sub.Topic}}</ion-label>\n        <ion-radio slot='end' (click)=onSelect(sub.Topic)></ion-radio>\n      </ion-item>\n      </ion-radio-group>\n    <ion-button id=\"btn-play\" expand=\"block\" fill=\"clear\">\n      Play Selected Subject\n    </ion-button>\n  </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Subject Select</ion-card-title>\n    </ion-card-header>\n      <ion-radio-group\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let sub of subjects.availableTopics\">\n      <ion-item>\n        <ion-label>{{sub.Topic}}</ion-label>\n        <ion-radio id={{sub.Topic}} slot=\"end\" (click)=onSelect(sub.Topic)></ion-radio>\n      </ion-item>\n      </ion-radio-group>\n    <ion-button id=\"btn-play\" expand=\"block\" fill=\"clear\">\n      Play Selected Subject\n    </ion-button>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -35,7 +35,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /***/
   function srcAppSubjectSelectDefault_subjectsJson(module) {
-    module.exports = JSON.parse("{\"availableTopics\":[{\"Topic\":\"Addition\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Subtraction\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Multiplication\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Division\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"PlaceValue\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Decimals\",\"availableYears\":[4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Length\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Time\",\"availableYears\":[1,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Fractions\",\"availableYears\":[1,2,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"FractionsOperations\",\"availableYears\":[5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]}]}");
+    module.exports = JSON.parse("{\"availableTopics\":[{\"Topic\":\"Addition\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Subtraction\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Multiplication\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Division\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"PlaceValue\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Decimals\",\"availableYears\":[4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Length\",\"availableYears\":[1,2,3,4,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Time\",\"availableYears\":[1,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Fractions\",\"availableYears\":[1,2,5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]},{\"Topic\":\"Operations\",\"availableYears\":[5,6],\"availableColours\":[\"Red\",\"Blue\",\"Green\"]}]}");
     /***/
   },
 
@@ -230,40 +230,69 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
-    var SubjectSelectPage = /*#__PURE__*/function () {
+    var SubjectSelectPage =
+    /*#__PURE__*/
+    function () {
       function SubjectSelectPage(router, activatedRoute) {
         _classCallCheck(this, SubjectSelectPage);
 
         this.router = router;
         this.activatedRoute = activatedRoute;
-        this.subject = "Addition"; // GET all subjects from Numberfit
+        this.subject = "Addition";
+        this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+        console.log(this.cookie); // GET all subjects from Numberfit
 
-        var xhttp = new XMLHttpRequest();
-        var DOM = this; // Define the listener function for the GET request
+        var xhttpSubjects = new XMLHttpRequest();
+        var xhttpDetails = new XMLHttpRequest();
+        var DOM = this;
+        DOM.subjects = __webpack_require__(
+        /*! ./default_subjects.json */
+        "./src/app/subject-select/default_subjects.json"); // Define the listener function for the GET request
 
-        xhttp.onreadystatechange = function () {
+        xhttpSubjects.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
-            console.log("GET request succeeded");
+            // Subjects GOT now get details to check year group
             DOM.subjects = JSON.parse(this.responseText);
-          } else {
-            // Use default (offline) if get request fails
+            xhttpDetails.send();
+          } else if (this.status != 200) {
             console.log("GET request failed with satus " + this.status);
-            DOM.subjects = __webpack_require__(
-            /*! ./default_subjects.json */
-            "./src/app/subject-select/default_subjects.json");
-            console.log(DOM.subjects);
+          }
+        }; // Define the listener function for the GET request
+
+
+        xhttpDetails.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log("GET details request succeeded"); // Remove elements not available to that year
+            // By now availableTopics is an attribute of DOM.subjects
+
+            var repeats = DOM.subjects["availableTopics"].length;
+            var deletes = 0;
+
+            for (var i = 0; i < repeats; i++) {
+              if (!DOM.subjects["availableTopics"][i - deletes].availableYears.includes(parseInt(JSON.parse(this.responseText).year))) {
+                DOM.subjects["availableTopics"].splice(i - deletes, 1);
+                deletes += 1;
+              }
+            }
+          } else if (this.status != 200) {
+            console.log("GET request failed with satus " + this.status);
           }
         }; // Define and send the GET request
 
 
-        xhttp.open("GET", "http://api.numberfit.com:8081/getAvailableTopics");
-        xhttp.send();
+        xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
+        xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=" + this.cookie, true);
+        xhttpSubjects.send();
       } // Function called when radio button clicked
 
 
       _createClass(SubjectSelectPage, [{
         key: "onSelect",
         value: function onSelect(topic) {
+          // TODO:
+          // Deselct current one on click - stopped working when I
+          // changed it to programmatically fill the list.
+          var radio = document.getElementById(topic);
           this.subject = topic;
         }
       }, {
@@ -276,21 +305,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             document.getElementById("title").textContent = "Single Player";
           } else {
             document.getElementById("title").textContent = "Head-to-Head";
-          } //
-          // // Add subjects to the ion-radio-group
-          // for (var i = 0; i < this.subjects.length; i++) {
-          //   document.getElementById("radio-group").innerHTML += "<ion-item><ion-label>"+subjects[i]+
-          //   "</ion-label><ion-radio slot='end' value="+subjects[i]+"></ion-radio></ion-item>";
-          // }
-          // Add eventListener for form submission
+          } // Add eventListener for form submission
 
 
           document.getElementById("btn-play").addEventListener("click", function () {
             // Navigate to the respective page
             if (Number(gamemode) === 0) {
-              DOM.router.navigate(['/play-single', DOM.subject]);
+              DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
             } else {
-              DOM.router.navigate(['/play-multi', DOM.subject]);
+              DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
             }
           });
         }
@@ -311,10 +334,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selector: 'app-subject-select',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./subject-select.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/subject-select/subject-select.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/subject-select/subject-select.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./subject-select.page.scss */
-      "./src/app/subject-select/subject-select.page.scss"))["default"]]
+      "./src/app/subject-select/subject-select.page.scss")).default]
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])], SubjectSelectPage);
     /***/
   }
