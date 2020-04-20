@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-button (click)=\"watch('BYkwtaJgW5g')\" expand=\"full\" color=\"dark\">Play Video</ion-button>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" id='students'>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">Leaderboard</ion-card-title>\n      </ion-card-header>\n      <ion-card-content>\n        <div align=\"center\">\n          <h3 id=\"myScore\">My Score: ... points</h3>\n        </div>\n        <form [formGroup]=\"selectSchoolGroup\">\n          <ion-item>\n            <ion-label>Select a School</ion-label>\n            <ion-select\n              formControlName=\"school\" id=\"schoolSelect\" \n              multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            </ion-select>\n          </ion-item>\n          <ion-button\n            (click)=\"searchSchool()\" [disabled]=\"selectSchoolGroup.invalid\"\n            expand=\"block\" fill=\"clear\" routerLink=\"../sign-in\">\n            Search Selected School\n          </ion-button>\n        </form>\n        <ion-list id=\"leaderboard\">\n        </ion-list>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">My Badges</ion-card-title>\n      </ion-card-header>\n      <ion-card-content>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <div>\n                Badge 1\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 2\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 3\n              </div>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col>\n              <div>\n                Badge 4\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 5\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 6\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-content>\n    </ion-card>\n  </ion-content>\n";
     /***/
   },
 
@@ -158,29 +158,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-    /* harmony import */
 
-
-    var _ionic_native_youtube_video_player_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! @ionic-native/youtube-video-player/ngx */
-    "./node_modules/@ionic-native/youtube-video-player/__ivy_ngcc__/ngx/index.js");
-
-    var HomePage = /*#__PURE__*/function () {
-      function HomePage(formBuilder, youtube) {
+    var HomePage =
+    /*#__PURE__*/
+    function () {
+      function HomePage(formBuilder) {
         _classCallCheck(this, HomePage);
 
-        this.youtube = youtube;
         this.selectSchoolGroup = formBuilder.group({
           school: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]]
         });
       }
 
       _createClass(HomePage, [{
-        key: "watch",
-        value: function watch(_watch) {
-          this.youtube.openVideo(_watch);
-        }
-      }, {
         key: "ngOnInit",
         value: function ngOnInit() {
           var schoolSelect = document.getElementById('schoolSelect');
@@ -201,8 +191,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     HomePage.ctorParameters = function () {
       return [{
         type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
-      }, {
-        type: _ionic_native_youtube_video_player_ngx__WEBPACK_IMPORTED_MODULE_3__["YoutubeVideoPlayer"]
       }];
     };
 
@@ -210,11 +198,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selector: 'app-leaderboard',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./leaderboard.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/leaderboard/leaderboard.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/leaderboard/leaderboard.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./leaderboard.page.scss */
-      "./src/app/leaderboard/leaderboard.page.scss"))["default"]]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _ionic_native_youtube_video_player_ngx__WEBPACK_IMPORTED_MODULE_3__["YoutubeVideoPlayer"]])], HomePage);
+      "./src/app/leaderboard/leaderboard.page.scss")).default]
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])], HomePage);
     /***/
   }
 }]);

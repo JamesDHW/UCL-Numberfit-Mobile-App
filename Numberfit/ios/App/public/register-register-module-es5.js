@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-title class=\"welcome-card-title\">Register New Account</ion-title>\n    </ion-card-header>\n    <ion-card-content>\n      <form [formGroup]=\"registerFormGroup\" action = \"http://localhost:3000/register\" method = \"GET\">\n        <ion-item style=\"margin-top: 20px;\">\n          <ion-label position=\"floating\">Name</ion-label>\n          <ion-input formControlName=\"name\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input formControlName=\"email\" type=\"email\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Password</ion-label>\n          <ion-input formControlName=\"password1\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Comfirm Password</ion-label>\n          <ion-input formControlName=\"password2\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>Year Group</ion-label>\n          <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option value=\"Year 1\">Year 1</ion-select-option>\n            <ion-select-option value=\"Year 2\">Year 2</ion-select-option>\n            <ion-select-option value=\"Year 3\">Year 3</ion-select-option>\n            <ion-select-option value=\"Year 4\">Year 4</ion-select-option>\n            <ion-select-option value=\"Year 5\">Year 5</ion-select-option>\n            <ion-select-option value=\"Year 6\">Year 6</ion-select-option>\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>School</ion-label>\n          <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option value=\"Year 6\">Year 6</ion-select-option>\n\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-button\n          (click)=\"register()\" [disabled]=\"registerFormGroup.invalid\"\n          expand='block' routerLink=\"../play\">\n          Register\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-title class=\"welcome-card-title\">Register New Account</ion-title>\n    </ion-card-header>\n    <ion-card-content>\n      <form [formGroup]=\"registerFormGroup\" action = \"http://localhost:3000/register\" method = \"GET\">\n        <ion-item style=\"margin-top: 20px;\">\n          <ion-label position=\"floating\">Name</ion-label>\n          <ion-input formControlName=\"name\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input formControlName=\"email\" type=\"email\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Password</ion-label>\n          <ion-input formControlName=\"password1\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Comfirm Password</ion-label>\n          <ion-input formControlName=\"password2\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>Year Group</ion-label>\n          <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\" >\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>School</ion-label>\n          <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school}}>\n              {{school}}\n            </ion-select-option>\n\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-button\n          (click)=\"register()\" [disabled]=\"registerFormGroup.invalid\"\n          expand='block'>\n          Register\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -221,8 +221,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
 
-    var RegisterPage = /*#__PURE__*/function () {
+
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ts-md5/dist/md5 */
+    "./node_modules/ts-md5/dist/md5.js");
+    /* harmony import */
+
+
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
+    /*#__PURE__*/
+    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+
+    var RegisterPage =
+    /*#__PURE__*/
+    function () {
       function RegisterPage(router, formBuilder) {
         _classCallCheck(this, RegisterPage);
 
@@ -235,43 +249,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           year: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
           school: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]]
         });
+        this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
+        this.schoolList = ['UCL', 'LSE', 'Imperial'];
       }
 
       _createClass(RegisterPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          // get the schools from the DB
           var schoolSelect = document.getElementById("schoolSelect");
         }
       }, {
         key: "register",
         value: function register() {
           var DOM = this;
-          var name = this.registerFormGroup.value.name;
-          var email = this.registerFormGroup.value.email;
           var password1 = this.registerFormGroup.value.password1;
           var password2 = this.registerFormGroup.value.password2;
-          var year = this.registerFormGroup.value.year;
-          var school = this.registerFormGroup.value.school;
+          var credentials = {
+            username: this.registerFormGroup.value.email.toLowerCase(),
+            password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(password1),
+            name: this.registerFormGroup.value.name,
+            year: this.registerFormGroup.value.year,
+            school: this.registerFormGroup.value.school
+          };
+          console.log(credentials);
 
           if (password1 == password2 && password1.length > 7) {
             var xhttp = new XMLHttpRequest();
 
             xhttp.onreadystatechange = function () {
               if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "OK") {
-                  DOM.router.navigate(['/']);
-                } else {
-                  // Already registered or error
-                  alert(this.responseText);
-                }
-              } else {
-                console.log("Returned status " + this.status);
+                var cookie = JSON.parse(this.responseText).success;
+                console.log(cookie);
+                DOM.router.navigate(['/play', cookie]);
+              } else if (this.status != 200) {
+                console.log(this.responseText);
               }
             };
 
-            xhttp.open("GET", "http://localhost:3000/register?email=" + email + "&school=" + school + "&year=" + year + "&teacher=Mrs-Wallace&fName=" + name, true);
-            xhttp.send();
+            xhttp.open('POST', 'http://localhost:3000/register?', true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify(credentials));
           } else {
+            // error!!!
             alert("Please ensure your password is at least 8 characters and matches the confirmation field");
           }
         }
@@ -292,10 +312,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selector: 'app-register',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./register.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.page.html"))["default"],
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.page.html")).default,
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./register.page.scss */
-      "./src/app/register/register.page.scss"))["default"]]
+      "./src/app/register/register.page.scss")).default]
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])], RegisterPage);
     /***/
   }
