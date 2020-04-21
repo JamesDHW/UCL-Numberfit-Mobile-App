@@ -24,5 +24,8 @@
     "passport-local-mongoose": "^6.0.1",
     "pdf-image": "^2.0.0",
     "request": "^2.88.2"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
