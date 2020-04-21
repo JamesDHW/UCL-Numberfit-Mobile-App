@@ -139,6 +139,8 @@ let SubjectSelectPage = class SubjectSelectPage {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.subject = "Addition";
+        this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+        console.log(this.cookie);
         // GET all subjects from Numberfit
         var xhttpSubjects = new XMLHttpRequest();
         var xhttpDetails = new XMLHttpRequest();
@@ -152,7 +154,11 @@ let SubjectSelectPage = class SubjectSelectPage {
                 xhttpDetails.send();
             }
             else if (this.status != 200) {
+<<<<<<< HEAD
                 console.log("GET request failed with satus " + this.status);
+=======
+                console.log("GET subjects request failed with satus " + this.status);
+>>>>>>> save-cookie
             }
         };
         // Define the listener function for the GET request
@@ -161,6 +167,10 @@ let SubjectSelectPage = class SubjectSelectPage {
                 console.log("GET details request succeeded");
                 // Remove elements not available to that year
                 // By now availableTopics is an attribute of DOM.subjects
+<<<<<<< HEAD
+=======
+                console.log(JSON.parse(this.responseText));
+>>>>>>> save-cookie
                 let repeats = DOM.subjects["availableTopics"].length;
                 let deletes = 0;
                 for (var i = 0; i < repeats; i++) {
@@ -171,7 +181,11 @@ let SubjectSelectPage = class SubjectSelectPage {
                 }
             }
             else if (this.status != 200) {
+<<<<<<< HEAD
                 console.log("GET request failed with satus " + this.status);
+=======
+                console.log("GET details request failed with satus " + this.status);
+>>>>>>> save-cookie
             }
         };
         // Define and send the GET request
@@ -202,10 +216,10 @@ let SubjectSelectPage = class SubjectSelectPage {
         document.getElementById("btn-play").addEventListener("click", function () {
             // Navigate to the respective page
             if (Number(gamemode) === 0) {
-                DOM.router.navigate(['/play-single', DOM.subject]);
+                DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
             }
             else {
-                DOM.router.navigate(['/play-multi', DOM.subject]);
+                DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
             }
         });
     }

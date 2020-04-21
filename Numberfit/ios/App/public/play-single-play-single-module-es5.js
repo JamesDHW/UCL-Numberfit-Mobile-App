@@ -227,9 +227,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.route = route;
         this.prepareProgressBar();
         this.prepareQuestions();
+<<<<<<< HEAD
         this.prepareCounter(); // this.cookie = this.route.snapshot.paramMap.get('cookie');
         // console.log(this.cookie);
         // this.convertPNG();
+=======
+        this.prepareCounter();
+        this.cookie = this.route.snapshot.paramMap.get('cookie');
+        console.log(this.cookie); // this.convertPNG();
+>>>>>>> save-cookie
       }
 
       _createClass(PlaySinglePage, [{
@@ -381,7 +387,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.sleep(8000).then(function () {
               ele5.style.visibility = "hidden";
 
+<<<<<<< HEAD
               _this.router.navigateByUrl('/play');
+=======
+              _this.router.navigateByUrl('/play/' + _this.cookie);
+>>>>>>> save-cookie
 
               return true;
             });

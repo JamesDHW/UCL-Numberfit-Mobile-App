@@ -229,6 +229,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/ts-md5/dist/md5.js");
     /* harmony import */
 
+<<<<<<< HEAD
 
     var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
     /*#__PURE__*/
@@ -244,6 +245,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*#__PURE__*/
     function () {
       function RegisterPage(nativeStorage, router, formBuilder) {
+=======
+
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
+    /*#__PURE__*/
+    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+
+    var RegisterPage =
+    /*#__PURE__*/
+    function () {
+      function RegisterPage(router, formBuilder) {
+>>>>>>> save-cookie
         _classCallCheck(this, RegisterPage);
 
         this.nativeStorage = nativeStorage;
@@ -288,6 +300,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (this.readyState == 4 && this.status == 200) {
                 var cookie = JSON.parse(this.responseText).success;
                 console.log(cookie);
+<<<<<<< HEAD
                 DOM.nativeStorage.setItem('cookie', {
                   cookie: cookie
                 }).then(function () {
@@ -295,6 +308,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }, function (error) {
                   return console.error('Error storing item', error);
                 });
+=======
+                DOM.router.navigate(['/play', cookie]);
+>>>>>>> save-cookie
               } else if (this.status != 200) {
                 console.log(this.responseText);
               }
@@ -331,7 +347,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./register.page.scss */
       "./src/app/register/register.page.scss")).default]
+<<<<<<< HEAD
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])], RegisterPage);
+=======
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])], RegisterPage);
+>>>>>>> save-cookie
     /***/
   }
 }]);

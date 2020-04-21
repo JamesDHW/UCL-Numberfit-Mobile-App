@@ -101,6 +101,7 @@ let HomePage = class HomePage {
         // Navigate to subject-select page and pass gamemode information base on which div pressed
         var divSingle = document.getElementById("play-single");
         var divMulti = document.getElementById("play-multi");
+<<<<<<< HEAD
         divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0]));
         divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1]));
         // this.cookie = this.route.snapshot.paramMap.get('cookie');
@@ -108,6 +109,15 @@ let HomePage = class HomePage {
     }
     navigate() {
         this.router.navigateByUrl('my-account');
+=======
+        divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0, this.cookie]));
+        divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1, this.cookie]));
+        this.cookie = this.route.snapshot.paramMap.get('cookie');
+        console.log(this.cookie);
+    }
+    navigate() {
+        this.router.navigateByUrl('my-account/' + this.cookie);
+>>>>>>> save-cookie
     }
 };
 HomePage.ctorParameters = () => [
@@ -124,8 +134,12 @@ HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./play.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/play/play.page.html")).default,
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./play.page.scss */ "./src/app/play/play.page.scss")).default]
     }),
+<<<<<<< HEAD
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+=======
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+>>>>>>> save-cookie
 ], HomePage);
 
 

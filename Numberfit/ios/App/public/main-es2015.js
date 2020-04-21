@@ -714,7 +714,7 @@ const routes = [
     { path: '',
         redirectTo: 'play',
         pathMatch: 'full' },
-    { path: 'play',
+    { path: 'play/:cookie',
         loadChildren: () => __webpack_require__.e(/*! import() | play-play-module */ "play-play-module").then(__webpack_require__.bind(null, /*! ./play/play.module */ "./src/app/play/play.module.ts")).then(m => m.HomePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
     },
@@ -729,10 +729,10 @@ const routes = [
     { path: 'sign-out',
         loadChildren: () => __webpack_require__.e(/*! import() | sign-out-sign-out-module */ "sign-out-sign-out-module").then(__webpack_require__.bind(null, /*! ./sign-out/sign-out.module */ "./src/app/sign-out/sign-out.module.ts")).then(m => m.HomePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
-    { path: 'play-single/:subject',
+    { path: 'play-single/:subject/:cookie',
         loadChildren: () => __webpack_require__.e(/*! import() | play-single-play-single-module */ "play-single-play-single-module").then(__webpack_require__.bind(null, /*! ./play-single/play-single.module */ "./src/app/play-single/play-single.module.ts")).then(m => m.PlaySinglePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
-    { path: 'play-multi/:subject',
+    { path: 'play-multi/:subject/:cookie',
         loadChildren: () => __webpack_require__.e(/*! import() | play-multi-play-multi-module */ "play-multi-play-multi-module").then(__webpack_require__.bind(null, /*! ./play-multi/play-multi.module */ "./src/app/play-multi/play-multi.module.ts")).then(m => m.PlayMultiPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
     { path: 'sign-in',
@@ -741,11 +741,12 @@ const routes = [
     { path: 'register',
         loadChildren: () => Promise.all(/*! import() | register-register-module */[__webpack_require__.e("default~my-account-my-account-module~register-register-module~sign-in-sign-in-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null, /*! ./register/register.module */ "./src/app/register/register.module.ts")).then(m => m.RegisterPageModule),
         canActivate: [_signed_out_guard__WEBPACK_IMPORTED_MODULE_4__["SignedOutGuard"]], },
-    { path: 'subject-select/:gamemode',
+    { path: 'subject-select/:gamemode/:cookie',
         loadChildren: () => __webpack_require__.e(/*! import() | subject-select-subject-select-module */ "subject-select-subject-select-module").then(__webpack_require__.bind(null, /*! ./subject-select/subject-select.module */ "./src/app/subject-select/subject-select.module.ts")).then(m => m.SubjectSelectPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
     {
         path: 'student-list',
+<<<<<<< HEAD
         loadChildren: () => __webpack_require__.e(/*! import() | student-list-student-list-module */ "student-list-student-list-module").then(__webpack_require__.bind(null, /*! ./student-list/student-list.module */ "./src/app/student-list/student-list.module.ts")).then(m => m.StudentListPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
     },
@@ -753,6 +754,13 @@ const routes = [
         path: 'my-account',
         loadChildren: () => Promise.all(/*! import() | my-account-my-account-module */[__webpack_require__.e("default~my-account-my-account-module~register-register-module~sign-in-sign-in-module"), __webpack_require__.e("my-account-my-account-module")]).then(__webpack_require__.bind(null, /*! ./my-account/my-account.module */ "./src/app/my-account/my-account.module.ts")).then(m => m.MyAccountPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
+=======
+        loadChildren: () => __webpack_require__.e(/*! import() | student-list-student-list-module */ "student-list-student-list-module").then(__webpack_require__.bind(null, /*! ./student-list/student-list.module */ "./src/app/student-list/student-list.module.ts")).then(m => m.StudentListPageModule)
+    },
+    {
+        path: 'my-account/:cookie',
+        loadChildren: () => Promise.all(/*! import() | my-account-my-account-module */[__webpack_require__.e("default~my-account-my-account-module~register-register-module~sign-in-sign-in-module"), __webpack_require__.e("my-account-my-account-module")]).then(__webpack_require__.bind(null, /*! ./my-account/my-account.module */ "./src/app/my-account/my-account.module.ts")).then(m => m.MyAccountPageModule)
+>>>>>>> save-cookie
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -881,8 +889,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+<<<<<<< HEAD
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
 
+=======
+>>>>>>> save-cookie
 
 
 
@@ -906,7 +917,10 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
+<<<<<<< HEAD
             _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__["NativeStorage"],
+=======
+>>>>>>> save-cookie
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]

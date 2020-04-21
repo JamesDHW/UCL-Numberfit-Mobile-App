@@ -240,8 +240,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // console.log(this.cookie);
         this.router = router;
         this.activatedRoute = activatedRoute;
-        this.subject = "Addition"; // GET all subjects from Numberfit
+        this.subject = "Addition";
+        this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
+        console.log(this.cookie); // GET all subjects from Numberfit
 
+        var xhttpSubjects = new XMLHttpRequest();
+        var xhttpDetails = new XMLHttpRequest();
+        var DOM = this;
+        DOM.subjects = __webpack_require__(
+        /*! ./default_subjects.json */
+        "./src/app/subject-select/default_subjects.json"); // Define the listener function for the GET request
+
+        xhttpSubjects.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            // Subjects GOT now get details to check year group
+            DOM.subjects = JSON.parse(this.responseText);
+            xhttpDetails.send();
+          } else if (this.status != 200) {
+            console.log("GET subjects request failed with satus " + this.status);
+          }
+        }; // Define the listener function for the GET request
+
+<<<<<<< HEAD
         var xhttpSubjects = new XMLHttpRequest();
         var xhttpDetails = new XMLHttpRequest();
         var DOM = this;
@@ -265,6 +285,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log("GET details request succeeded"); // Remove elements not available to that year
             // By now availableTopics is an attribute of DOM.subjects
 
+=======
+
+        xhttpDetails.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log("GET details request succeeded"); // Remove elements not available to that year
+            // By now availableTopics is an attribute of DOM.subjects
+
+            console.log(JSON.parse(this.responseText));
+>>>>>>> save-cookie
             var repeats = DOM.subjects["availableTopics"].length;
             var deletes = 0;
 
@@ -275,7 +304,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             }
           } else if (this.status != 200) {
+<<<<<<< HEAD
             console.log("GET request failed with satus " + this.status);
+=======
+            console.log("GET details request failed with satus " + this.status);
+>>>>>>> save-cookie
           }
         }; // Define and send the GET request
 
@@ -311,9 +344,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           document.getElementById("btn-play").addEventListener("click", function () {
             // Navigate to the respective page
             if (Number(gamemode) === 0) {
-              DOM.router.navigate(['/play-single', DOM.subject]);
+              DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
             } else {
-              DOM.router.navigate(['/play-multi', DOM.subject]);
+              DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
             }
           });
         }

@@ -818,7 +818,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       redirectTo: 'play',
       pathMatch: 'full'
     }, {
-      path: 'play',
+      path: 'play/:cookie',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | play-play-module */
@@ -866,7 +866,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
-      path: 'play-single/:subject',
+      path: 'play-single/:subject/:cookie',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | play-single-play-single-module */
@@ -878,7 +878,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
-      path: 'play-multi/:subject',
+      path: 'play-multi/:subject/:cookie',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | play-multi-play-multi-module */
@@ -914,7 +914,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_out_guard__WEBPACK_IMPORTED_MODULE_4__["SignedOutGuard"]]
     }, {
-      path: 'subject-select/:gamemode',
+      path: 'subject-select/:gamemode/:cookie',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | subject-select-subject-select-module */
@@ -935,10 +935,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         "./src/app/student-list/student-list.module.ts")).then(function (m) {
           return m.StudentListPageModule;
         });
+<<<<<<< HEAD
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
       path: 'my-account',
+=======
+      }
+    }, {
+      path: 'my-account/:cookie',
+>>>>>>> save-cookie
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | my-account-my-account-module */
@@ -947,8 +953,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         "./src/app/my-account/my-account.module.ts")).then(function (m) {
           return m.MyAccountPageModule;
         });
+<<<<<<< HEAD
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
+=======
+      }
+>>>>>>> save-cookie
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -1178,12 +1188,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./app-routing.module */
     "./src/app/app-routing.module.ts");
+<<<<<<< HEAD
     /* harmony import */
 
 
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+=======
+>>>>>>> save-cookie
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1242,6 +1255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
+<<<<<<< HEAD
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
@@ -1250,6 +1264,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*#__PURE__*/
     function () {
       function SignedInGuard(nativeStorage, router) {
+=======
+    var SignedInGuard =
+    /*#__PURE__*/
+    function () {
+      function SignedInGuard(router) {
+>>>>>>> save-cookie
         _classCallCheck(this, SignedInGuard);
 
         this.nativeStorage = nativeStorage;
@@ -1339,6 +1359,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
+<<<<<<< HEAD
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
@@ -1347,6 +1368,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*#__PURE__*/
     function () {
       function SignedOutGuard(nativeStorage, router) {
+=======
+    var SignedOutGuard =
+    /*#__PURE__*/
+    function () {
+      function SignedOutGuard(router) {
+>>>>>>> save-cookie
         _classCallCheck(this, SignedOutGuard);
 
         this.nativeStorage = nativeStorage;

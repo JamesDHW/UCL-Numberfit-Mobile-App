@@ -6,6 +6,13 @@
     <param name="ios-package" value="NativeStorage"/>
   </feature>
 
+<<<<<<< HEAD
+=======
+  <feature name="Device">
+    <param name="ios-package" value="CDVDevice"/>
+  </feature>
+
+>>>>>>> save-cookie
   
   <preference name="ScrollEnabled" value="false" />
   <preference name="android-minSdkVersion" value="19" />

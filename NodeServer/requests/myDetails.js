@@ -7,7 +7,7 @@ module.exports.myDetails = function(req, res){
   const cookie = req.query.cookie
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
-    console.log(user);
+    console.log("User: ", user);
     if(!user.Teacher){
       Pupil.findOne({ username : user.username }, (err, details) => {
         if(err) throw err;

@@ -99,6 +99,7 @@ let HomePage = class HomePage {
     signOut() {
         var DOM = this;
         var xhttp = new XMLHttpRequest();
+<<<<<<< HEAD
         // xhttp.onreadystatechange = function() {
         //   if (this.readyState == 4 && this.status == 200) {
         //     DOM.nativeStorage.setItem('cookie', {cookie: "-"})
@@ -114,6 +115,19 @@ let HomePage = class HomePage {
         //   }
         // };
         // xhttp.open("GET", "http://localhost:3000/logout", true);
+=======
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log('Logged Out!');
+                DOM.router.navigate(['/sign-in',]);
+            }
+            else {
+                // Error
+                console.log(this.responseText);
+            }
+        };
+        xhttp.open("GET", "http://localhost:3000/logout", true);
+>>>>>>> save-cookie
     }
 };
 HomePage.ctorParameters = () => [

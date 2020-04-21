@@ -6,11 +6,15 @@ const MongoStore    = require('connect-mongo')(session);
 const bodyParser    = require('body-parser');
 
 const app = express();
+<<<<<<< HEAD
 const PORT = process.env.PORT || 3000;
+=======
+const PORT = process.env.port || 3000;
+>>>>>>> save-cookie
 const mongoURI = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/NumberfitDB?retryWrites=true&w=majority";
 
-// const CORS = require('cors');
-// app.use(CORS());
+const CORS = require('cors');
+app.use(CORS());
 
 // Use body parser
 app.use(bodyParser.json());

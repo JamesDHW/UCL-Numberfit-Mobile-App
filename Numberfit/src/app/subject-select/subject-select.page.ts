@@ -34,7 +34,7 @@ export class SubjectSelectPage implements OnInit {
           DOM.subjects = JSON.parse(this.responseText)
           xhttpDetails.send();
         } else if(this.status != 200) {
-          console.log("GET request failed with satus " + this.status)
+          console.log("GET subjects request failed with satus " + this.status)
         }
       };
 
@@ -44,6 +44,7 @@ export class SubjectSelectPage implements OnInit {
           console.log("GET details request succeeded")
           // Remove elements not available to that year
           // By now availableTopics is an attribute of DOM.subjects
+          console.log(JSON.parse(this.responseText));
           let repeats = DOM.subjects["availableTopics"].length;
           let deletes = 0;
           for(var i=0; i<repeats; i++){
@@ -55,7 +56,7 @@ export class SubjectSelectPage implements OnInit {
           }
 
         } else if(this.status != 200) {
-          console.log("GET request failed with satus " + this.status)
+          console.log("GET details request failed with satus " + this.status)
         }
       };
 

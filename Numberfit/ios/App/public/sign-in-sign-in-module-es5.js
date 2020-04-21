@@ -229,6 +229,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/ts-md5/dist/md5.js");
     /* harmony import */
 
+<<<<<<< HEAD
 
     var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
     /*#__PURE__*/
@@ -244,6 +245,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*#__PURE__*/
     function () {
       function SignInPage(nativeStorage, router, formBuilder) {
+=======
+
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
+    /*#__PURE__*/
+    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+
+    var SignInPage =
+    /*#__PURE__*/
+    function () {
+      function SignInPage(router, formBuilder) {
+>>>>>>> save-cookie
         _classCallCheck(this, SignInPage);
 
         this.nativeStorage = nativeStorage;
@@ -270,6 +282,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
           var DOM = this;
           var xhttp = new XMLHttpRequest();
+<<<<<<< HEAD
           DOM.router.navigate(['/play']); // xhttp.onreadystatechange = function() {
           //   if (this.readyState == 4 && this.status == 200) {
           //     const cookie = JSON.parse(this.responseText).success;
@@ -287,6 +300,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // xhttp.open("POST", "http://localhost:3000/login", true);
           // xhttp.setRequestHeader("Content-type", "application/json");
           // xhttp.send(JSON.stringify(credentials));
+=======
+
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              var cookie = JSON.parse(this.responseText).success;
+              console.log(cookie);
+              DOM.router.navigate(['/play', cookie]);
+            } else if (this.status != 200) {
+              console.log(this.responseText);
+            }
+          };
+
+          xhttp.open("POST", "http://localhost:3000/login", true);
+          xhttp.setRequestHeader("Content-type", "application/json");
+          xhttp.send(JSON.stringify(credentials));
+>>>>>>> save-cookie
         }
       }]);
 
@@ -311,7 +340,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./sign-in.page.scss */
       "./src/app/sign-in/sign-in.page.scss")).default]
+<<<<<<< HEAD
     }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])], SignInPage);
+=======
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])], SignInPage);
+>>>>>>> save-cookie
     /***/
   }
 }]);

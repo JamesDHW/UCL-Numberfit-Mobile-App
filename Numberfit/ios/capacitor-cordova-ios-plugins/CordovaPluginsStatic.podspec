@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
   Pod::Spec.new do |s|
     s.name = 'CordovaPluginsStatic'
@@ -13,3 +14,5 @@
     s.swift_version  = '5.0'
     s.static_framework = true
   end
+=======
+>>>>>>> save-cookie

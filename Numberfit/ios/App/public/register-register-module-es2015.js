@@ -122,8 +122,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ts-md5/dist/md5 */ "./node_modules/ts-md5/dist/md5.js");
 /* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+<<<<<<< HEAD
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
 
+=======
+>>>>>>> save-cookie
 
 
 
@@ -166,8 +169,12 @@ let RegisterPage = class RegisterPage {
                 if (this.readyState == 4 && this.status == 200) {
                     const cookie = JSON.parse(this.responseText).success;
                     console.log(cookie);
+<<<<<<< HEAD
                     DOM.nativeStorage.setItem('cookie', { cookie: cookie })
                         .then(() => DOM.router.navigate(['/play']), error => console.error('Error storing item', error));
+=======
+                    DOM.router.navigate(['/play', cookie]);
+>>>>>>> save-cookie
                 }
                 else if (this.status != 200) {
                     console.log(this.responseText);
