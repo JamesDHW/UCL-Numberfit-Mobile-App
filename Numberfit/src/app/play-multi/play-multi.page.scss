@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bevan);
 
 .ion-multi-content{
-    --background: url('/assets/progress-singleplayer/background_image.jpg') 100% 100%;
+    --background: url('/assets/progress-multiplayer/background.jpg') 100% 100%;
   }
 
 //   .row-structure{
@@ -13,22 +13,16 @@ ion-row {
 }
 
 .card{
-  background: #fff;
-//   margin-top: 5%;
-//   margin-bottom: 5%;
-  width: 90%;
-  height: 150px;
-//   padding-left: 5%;
-//   padding-right: 5%;
-//   padding-bottom: 50%;
-  opacity: 30%;
+    background: rgba(255, 255, 255, 0.62);
+    width: 92%;
+    height: 150px;
+    text-align: center;
 }
 
-// .section{
-//     height: 7%;
-//     margin-left: 5%;
-//     margin-right: 5%;
-// }
+.question-card{
+    height: 130px;
+    // visibility: visible;
+}
 
 .middle-progress-section{
     height: 7%;
@@ -37,11 +31,11 @@ ion-row {
 }
 
 .middle-progress-bar-left{
-    margin-top: 5px;
+    margin-top: 1%;
 }
 
 .middle-progress-bar-right{
-    margin-bottom: 6px;
+    margin-bottom: 2%;
     transform: rotate(180deg)
 }
 
@@ -52,12 +46,13 @@ ion-row {
 
 .choice-button{
     // size: large;
-    width: 100px;
-    height: 30px;
-    // border-color: white;
+    width: 80%;;//100px;
+    height: 90%; //30px;
     --border-color:white;
-    // shape-outside: round;
-    // opacity: 0%;
+    --background: rgba(233, 250, 233, 0.712);
+    --border-color:rgb(76, 167, 73);
+    --border-style: dashed;
+    --border-width: 5px;
     --box-shadow: 2px 2px 2px black;
     &:active {
         margin-top: 3px;
@@ -68,8 +63,6 @@ ion-row {
 .font{
     font-family: "Bevan";
     font-size: 20px;
-    // font-weight: 400;
-    // line-height: 130px;
     color: rgb(247, 226, 38);
     text-align: center;
     // width: 260px;
@@ -90,22 +83,26 @@ ion-row {
 }
 
 .choice-button-rotate{
-    width: 100px;
-    height: 30px;
+    width: 80%;;//100px;
+    height: 90%; //30px;
     --border-color:white;
+    --background: rgba(233, 250, 233, 0.712);
+    --border-color:rgb(76, 167, 73);
+    --border-style: dashed;
+    --border-width: 5px;
     --box-shadow: 2px 2px 2px black;
+    transform: rotate(180deg);
     &:active {
         margin-top: 3px;
         --box-shadow: none;
     }
-    transform: rotate(180deg);
 }
 
 .card-rotate{
-    background: #fff;
-    width: 90%;
+    background: rgba(255, 255, 255, 0.62);
+    width: 92%;
     height: 150px;
-    opacity: 30%;
+    text-align: center;
     transform: rotate(180deg);
 }
 
