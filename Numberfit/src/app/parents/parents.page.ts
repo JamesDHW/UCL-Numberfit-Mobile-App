@@ -8,8 +8,8 @@ import { Chart } from 'chart.js';
 })
 
 export class HomePage {
-  @ViewChild('barChart') barChart;
-  @ViewChild('lineChart') lineChart;
+  @ViewChild('barChart', {static: false}) barChart;
+  @ViewChild('lineChart', {static: false}) lineChart;
 
     lines: any;
 
