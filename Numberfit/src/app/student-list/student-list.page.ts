@@ -1,20 +1,30 @@
-import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit }      from '@angular/core';
+import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 
 @Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.page.html',
-  styleUrls: ['./student-list.page.scss'],
+  selector    : 'app-student-list',
+  templateUrl : './student-list.page.html',
+  styleUrls   : ['./student-list.page.scss'],
 })
 export class StudentListPage implements OnInit {
 
-  studentList: Array<string>;
-  studentID: number;
+  server      : string;
+  cookie      : string;
+  studentList : Array<string>;
+  studentID   : number;
 
   constructor(
-    public router: Router,
-    public activatedRoute: ActivatedRoute
+    private nativeStorage : NativeStorage,
+    public activatedRoute : ActivatedRoute,
+    public router         : Router,
+
   ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
     this.requestStudentList();
   }
 
@@ -34,7 +44,7 @@ export class StudentListPage implements OnInit {
     };
 
     // Define and send the GET request
-    xhttpDetails.open("GET", "http://localhost:3000/studentList?cookie=5e9445193c9c966ce1dcbac6", true);
+    xhttpDetails.open("GET", this.server+"/studentList?cookie=5e9445193c9c966ce1dcbac6", true);
     xhttpDetails.send();
   }
 
@@ -61,7 +71,7 @@ export class StudentListPage implements OnInit {
       }
     };
 
-    xhttp.open("POST", "http://localhost:3000/myDetails", true);
+    xhttp.open("POST", this.server+"/myDetails", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
   }

@@ -1,35 +1,44 @@
-import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Md5 } from 'ts-md5/dist/md5';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
+import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
+import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { Md5 }               from 'ts-md5/dist/md5';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector    : 'app-register',
+  templateUrl : './register.page.html',
+  styleUrls   : ['./register.page.scss'],
 })
+
 export class RegisterPage implements OnInit {
-  registerFormGroup: FormGroup;
-  yearGroups: Array<string>;
-  schoolList: Array<string>;
+
+  registerFormGroup : FormGroup;
+  server     : string;
+  cookie     : string;
+  yearGroups : Array<number>;
+  schoolList : Array<string>;
 
   constructor(
     private nativeStorage: NativeStorage,
     private router: Router,
     formBuilder: FormBuilder
   ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
+
     this.registerFormGroup = formBuilder.group({
-      name: ["", [Validators.required]],
-      email: ["", [Validators.required, Validators.email]],
-      password1: ["", [Validators.required]],
-      password2: ["", [Validators.required]],
-      year: ["", [Validators.required]],
-      school: ["", [Validators.required]],
+      name      : ["", [Validators.required]],
+      email     : ["", [Validators.required, Validators.email]],
+      password1 : ["", [Validators.required]],
+      password2 : ["", [Validators.required]],
+      year      : ["", [Validators.required]],
+      school    : ["", [Validators.required]],
     });
-    this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
-    this.schoolList = ['UCL', 'LSE', 'Imperial'];
+    this.yearGroups = [1, 2, 3, 4, 5, 6];
+    this.schoolList = ['Loading...'];
   }
 
   ngOnInit() {
@@ -53,14 +62,14 @@ export class RegisterPage implements OnInit {
 
     console.log(credentials);
 
-    if(password1==password2 && password1.length > 7){
+    if(password1 == password2 && password1.length > 7){
       var xhttp = new XMLHttpRequest();
 
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          const cookie = JSON.parse(this.responseText).success
-          console.log(cookie);
-          DOM.nativeStorage.setItem('cookie', {cookie: cookie})
+          DOM.cookie = JSON.parse(this.responseText).success
+          console.log(DOM.cookie);
+          DOM.nativeStorage.setItem('cookie', {cookie: DOM.cookie})
           .then(
             () => DOM.router.navigate(['/play']),
             error => console.error('Error storing item', error)
@@ -71,7 +80,7 @@ export class RegisterPage implements OnInit {
         }
       };
 
-      xhttp.open('POST', 'http://localhost:3000/register?', true);
+      xhttp.open('POST', this.server+'/register?', true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(JSON.stringify(credentials));
 

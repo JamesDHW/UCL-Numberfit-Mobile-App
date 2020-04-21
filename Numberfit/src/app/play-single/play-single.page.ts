@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-play-single',
@@ -8,33 +9,40 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PlaySinglePage implements OnInit {
 
-  images: Array<string>;
-  imgState: number;
-  pictureRef: string;
-  questionArray: Array<string>;
-  questionCard: string;
-  questionState: number;
-  correctAnswer: number; // button number
-  answerOptions: Array<number>;
-  color: string;
-  correctCounter: number;
-  incorrectCounter: number;
-  questionCardEle: HTMLElement;
-  videoEle: HTMLElement;
-  cookie: string;
+  server           : string;
+  cookie           : string;
+  images           : Array<string>;
+  imgState         : number;
+  pictureRef       : string;
+  questionArray    : Array<string>;
+  questionCard     : string;
+  questionState    : number;
+  correctAnswer    : number; // button number
+  answerOptions    : Array<number>;
+  color            : string;
+  correctCounter   : number;
+  incorrectCounter : number;
+  questionCardEle  : HTMLElement;
+  videoEle         : HTMLElement;
   // ans1: number;
 
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private nativeStorage : NativeStorage,
+  ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
 
     this.prepareProgressBar();
 
     this.prepareQuestions();
 
     this.prepareCounter();
-
-    // this.cookie = this.route.snapshot.paramMap.get('cookie');
-    // console.log(this.cookie);
 
     // this.convertPNG();
 
@@ -187,22 +195,4 @@ export class PlaySinglePage implements OnInit {
     console.log("correct answer is: "+this.correctAnswer);
   }
 
-  // convertPNG() {
-  //   const worker = createWorker({
-  //     logger: m => console.log(m)
-  //   });
-
-  //   (async () => {
-  //     await worker.load();
-  //     await worker.loadLanguage('eng');
-  //     await worker.initialize('eng');
-  //     await worker.setParameters({
-  //       tessedit_char_whitelist: '0123456789',
-  //     })
-  //     const { data: { text } } = await worker.recognize('/assets/Answers/Answer1.png');
-  //     console.log(text);
-  //     this.ans1 = Number(text);
-  //     await worker.terminate();
-  //   })();
-  // }
 }

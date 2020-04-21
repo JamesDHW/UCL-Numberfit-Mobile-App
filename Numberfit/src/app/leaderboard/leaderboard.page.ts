@@ -1,18 +1,29 @@
-import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { Component, OnInit }                  from '@angular/core';
+import { NativeStorage }                      from '@ionic-native/native-storage/ngx';
 
 @Component({
-  selector: 'app-leaderboard',
-  templateUrl: 'leaderboard.page.html',
-  styleUrls: ['leaderboard.page.scss'],
+  selector    : 'app-leaderboard',
+  templateUrl : 'leaderboard.page.html',
+  styleUrls   : ['leaderboard.page.scss'],
 })
+
 export class HomePage implements OnInit {
-  selectSchoolGroup: FormGroup;
+  server : string;
+  cookie : string;
+  selectSchoolGroup : FormGroup;
 
   constructor(
-    formBuilder: FormBuilder,
+    private nativeStorage : NativeStorage,
+    private formBuilder   : FormBuilder,
   ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
+
+    // Initilaise school for group
     this.selectSchoolGroup = formBuilder.group({
       school: ['', [Validators.required]],
     });

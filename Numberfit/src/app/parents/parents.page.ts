@@ -1,27 +1,36 @@
 import { Component, ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart }                from 'chart.js';
+import { NativeStorage }        from '@ionic-native/native-storage/ngx';
 
 @Component({
-  selector: 'app-parents',
-  templateUrl: 'parents.page.html',
-  styleUrls: ['parents.page.scss'],
+  selector    : 'app-parents',
+  templateUrl : 'parents.page.html',
+  styleUrls   : ['parents.page.scss'],
 })
 
 export class HomePage {
   @ViewChild('barChart', {static: false}) barChart;
   @ViewChild('lineChart', {static: false}) lineChart;
 
-    lines: any;
+  server     : string;
+  cookie     : string;
+  lines      : any;
+  bars       : any;
+  colorArray : any;
 
-    bars: any;
-    colorArray: any;
-
-  constructor() {}
+  constructor(
+    private nativeStorage : NativeStorage,
+  ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
+  }
 
   ionViewDidEnter() {
    this.createBarChart();
    this.createLineChart();
-
  }
 
 

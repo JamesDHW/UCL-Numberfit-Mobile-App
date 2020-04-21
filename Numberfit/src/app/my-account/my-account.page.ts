@@ -1,36 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, ControlContainer } from '@angular/forms';
-import { Md5 } from 'ts-md5/dist/md5';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Md5 }                    from 'ts-md5/dist/md5';
+import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 
 @Component({
-  selector: 'app-my-account',
-  templateUrl: './my-account.page.html',
-  styleUrls: ['./my-account.page.scss'],
+  selector    : 'app-my-account',
+  templateUrl : './my-account.page.html',
+  styleUrls   : ['./my-account.page.scss'],
 })
 export class MyAccountPage implements OnInit {
 
-  cookie: string;
-  userObj: any;
+  server     : string;
+  cookie     : string;
+  userObj    : any;
   modifyDetailsFormGroup: FormGroup;
   // formBuilder: FormBuilder;
-  yearGroups: Array<string>;
-  schoolList: Array<string>;
-  name: string;
-  email: string;
+  yearGroups : Array<string>;
+  schoolList : Array<string>;
+  name       : string;
+  email      : string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(
+    private nativeStorage : NativeStorage,
+    private router        : Router,
+    private route         : ActivatedRoute,
+    private formBuilder   : FormBuilder
+  ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
+
     this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
     this.schoolList = ['UCL', 'LSE', 'Imperial'];
-    this.name = "Loading..";
-    this.email = "Loading..";
+    this.name       = "Loading..";
+    this.email      = "Loading..";
     this.modifyDetailsFormGroup = formBuilder.group({
       // name: ["", [Validators.required]],
       // email: ["", [Validators.required, Validators.email]],
-      password1: ["", [Validators.required]],
-      password2: ["", [Validators.required]],
-      year: ["", [Validators.required]],
-      school: ["", [Validators.required]],
+      password1 : ["", [Validators.required]],
+      password2 : ["", [Validators.required]],
+      year      : ["", [Validators.required]],
+      school    : ["", [Validators.required]],
     });
   }
 
@@ -49,7 +62,7 @@ export class MyAccountPage implements OnInit {
     };
 
     // Define and send the GET request
-    xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=" + this.cookie, true);
+    xhttpDetails.open("GET", this.server+"/myDetails?cookie="+this.cookie, true);
     xhttpDetails.send();
   }
 
@@ -80,7 +93,7 @@ export class MyAccountPage implements OnInit {
         }
       };
       console.log(credentials);
-      xhttp.open('POST', 'http://localhost:3000/modifyDetails', true);
+      xhttp.open('POST', this.server+'/modifyDetails', true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(JSON.stringify(credentials));
 
@@ -93,7 +106,7 @@ export class MyAccountPage implements OnInit {
 
   changeToLoadedData(){
     this.modifyDetailsFormGroup.reset({school: this.userObj.school, year: "Year " + this.userObj.year});
-    this.name = this.userObj.name;
+    this.name  = this.userObj.name;
     this.email = this.userObj.username;
   }
 

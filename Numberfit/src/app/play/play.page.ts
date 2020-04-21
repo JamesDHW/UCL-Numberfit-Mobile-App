@@ -1,21 +1,31 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router }         from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { NativeStorage }  from '@ionic-native/native-storage/ngx';
 
 @Component({
-  selector: 'app-play',
-  templateUrl: 'play.page.html',
-  styleUrls: ['play.page.scss'],
+  selector    : 'app-play',
+  templateUrl : 'play.page.html',
+  styleUrls   : ['play.page.scss'],
 })
 export class HomePage implements OnInit {
 
-  cookie: string;
+  server : string;
+  cookie : string;
   @Output() messageFromChild = new EventEmitter();
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute) {
+    private router        : Router,
+    private route         : ActivatedRoute,
+    private nativeStorage : NativeStorage,
+  ) {
+    // Get server from config file
+    this.server = require('../config.json').server;
+    // Get cookie from storage
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {this.cookie = data.cookie});
     // this.messageFromChild.emit('Message from child');
+
   }
 
   ngOnInit(){
