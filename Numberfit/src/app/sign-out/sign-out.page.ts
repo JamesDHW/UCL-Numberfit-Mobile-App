@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+// import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-sign-out',
@@ -10,7 +10,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 export class HomePage {
 
   constructor(
-    private nativeStorage: NativeStorage,
+    // private nativeStorage: NativeStorage,
     private router: Router,
   ) {}
 

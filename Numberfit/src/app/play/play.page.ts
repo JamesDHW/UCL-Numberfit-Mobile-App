@@ -32,6 +32,20 @@ export class HomePage implements OnInit {
   }
 
   navigate(){
-    this.router.navigateByUrl('my-account');
+    const DOM = this;
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+
+      } else if(this.status != 200) {
+        console.log(this.responseText);
+
+      }
+    };
+    xhttp.open("GET", "http://numberfit-env.eba-hrxr3amd.us-west-2.elasticbeanstalk.com/myDetails?cookie=5e937d5c8f20116a06468da9", true);
+    xhttp.send();
+    // this.router.navigateByUrl('my-account');
   }
 }
