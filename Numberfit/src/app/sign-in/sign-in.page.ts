@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Md5 } from 'ts-md5/dist/md5';
+import { AlertController } from '@ionic/angular';
 // import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 
@@ -12,11 +13,13 @@ import { Md5 } from 'ts-md5/dist/md5';
 })
 export class SignInPage {
   signInFormGroup: FormGroup;
+  // alertController: AlertController;
 
   constructor(
     // private nativeStorage: NativeStorage,
     private router: Router,
     formBuilder: FormBuilder,
+    public alertController: AlertController,
   ) {
     this.signInFormGroup = formBuilder.group({
       email: ["", [Validators.required]],
@@ -51,12 +54,24 @@ export class SignInPage {
         // );
       } else if(this.status != 200) {
         console.log(this.responseText);
+        DOM.presentAlert();
 
       }
     };
-    xhttp.open("POST", "http://localhost:3000/login", true);
+
+    xhttp.open("POST", "http://localhost:3000/login", false);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(credentials));
 
+  }
+
+  presentAlert() {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Error';
+    alert.message = 'Please check your internet connection.';
+    alert.buttons = ['OK'];
+  
+    document.body.appendChild(alert);
+    return alert.present();
   }
 }
