@@ -48,7 +48,8 @@ export class RegisterPage implements OnInit {
       password : Md5.hashStr(password1),
       name     : this.registerFormGroup.value.name,
       year     : this.registerFormGroup.value.year,
-      school   : this.registerFormGroup.value.school
+      school   : this.registerFormGroup.value.school,
+      teacher  : false,
     };
 
     console.log(credentials);

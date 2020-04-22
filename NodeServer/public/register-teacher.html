@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div class="login-page">
+    <div class="form">
+      <img src="./NumberfitLogo.png" style="width: 75%">
+      <br><br>
+      <form class="register-form" action="http://localhost:3000/register" method="post">
+        <label>Register Teacher App Account</label>
+        <br><br>
+        <input type="text" placeholder="name" name="name">
+        <input type="email" placeholder="email" name="username">
+        <input type="password" placeholder="password" name="password1">
+        <input type="password" placeholder="confirm password" name="password2">
+        <select name="school">
+            <option value="" disabled selected hidden>Select A School</option>
+            <option value="volvo">Numberfit</option>
+            <option value="saab">School1</option>
+            <option value="opel">School2</option>
+            <option value="audi">School3</option>
+          </select>
+        <button type="submit">Create an account</button>
+      </form>
+      <br>
+      <button onclick="goBack()">Cancel.</button>
+    </div>
+  </div>
+</body>
+
+<script>
+function goBack() { window.history.back(); }
+</script>
