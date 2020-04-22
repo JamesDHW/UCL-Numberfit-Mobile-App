@@ -156,6 +156,24 @@ export class PlaySinglePage implements OnInit {
 
   checkWin(): boolean {
     if (this.imgState>=8){
+
+      var DOM = this;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText)
+        } else if(this.status != 200) {
+          console.log(this.responseText);
+        }
+      };
+      xhttp.open("POST", this.server+"/save-game", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({
+        cookie    : this.cookie,
+        correct   : this.correctCounter,
+        incorrect : this.incorrectCounter,
+      }));
+      
       this.enableButtons(false);
       let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
       let ele2 = <HTMLElement>document.querySelector('.board');
