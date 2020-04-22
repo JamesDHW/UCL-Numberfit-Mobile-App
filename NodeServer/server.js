@@ -38,15 +38,18 @@ app.use(require('express-session')({
   store: new MongoStore({ mongooseConnection : mongoose.connection})
 }));
 
-// app.use(passport.session({
-//   secret: 'tifrebmuN',
-//   resave: false,
-//   saveUninitialized: false,
-//   store: new MongoStore({ mongooseConnection : mongoose.connection})
-// }));
+app.use(passport.session({
+  secret: 'tifrebmuN',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection : mongoose.connection})
+}));
 
 app.use(express.static(__dirname + '/public'));
 
+app.get('/test', function(req, res){
+  res.send('Test Success');
+});
 
 // REQUESTS HERE
 // Login request
@@ -54,10 +57,6 @@ app.post('/login', require('./requests/login').login)
 
 // Register request
 app.post('/register', require('./requests/register').register)
-
-app.get('/test', function(req, res){
-  res.send('Test Success');
-});
 
 // Logout request
 app.get('/logout', function(req, res){
@@ -67,6 +66,9 @@ app.get('/logout', function(req, res){
 
 // Get user's details
 app.get('/myDetails', require('./requests/myDetails').myDetails);
+
+// Add new School - done via web page
+app.get('/add-school', require('./requests/add-school').add_school)
 
 // Listen on PORT
 app.listen(PORT, () => {
