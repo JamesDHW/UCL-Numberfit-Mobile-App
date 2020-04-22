@@ -45,6 +45,9 @@ app.use(require('express-session')({
 //   store: new MongoStore({ mongooseConnection : mongoose.connection})
 // }));
 
+app.use(express.static(__dirname + '/public'));
+
+
 // REQUESTS HERE
 // Login request
 app.post('/login', require('./requests/login').login)
