@@ -17,8 +17,7 @@ module.exports.register = function (req, res) {
           name     : req.body.name,
           school   : req.body.school,
         });
-      }
-      else {
+      } else {
         var pupil = new Pupil({
           username : req.body.username,
           name     : req.body.name,
@@ -30,19 +29,18 @@ module.exports.register = function (req, res) {
       user.save((err) => {
         if (err) throw err;
 
-        if(!req.body.teacher) {
+        if(req.body.teacher) {
+          teacher.save((err) => {
+            if (err) throw err;
+            require('./login').login(req, res);
+          });
+        } else {
           pupil.save((err) => {
             if (err) throw err;
             require('./login').login(req, res);
-        })
-      }
-      else {
-        teacher.save((err) => {
-          if (err) throw err;
-          require('./login').login(req, res);
-        })
-      }
-      })
+          });
+        };
+      });
     } else {
       // User already exists
       res.send('User already exists.')
