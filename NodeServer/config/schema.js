@@ -47,7 +47,7 @@ const GameHistory = new Schema({
 const User    = mongoose.model('users', Users, 'users')
 const Pupil   = mongoose.model('pupils', Pupils, 'pupils')
 const Teacher = mongoose.model('teachers', Teachers, 'teachers')
-const Game = mongoose.model('game', Games, 'game')
+const Game    = mongoose.model('game', Games, 'game')
 
 
 // Include all models required to export here!!!

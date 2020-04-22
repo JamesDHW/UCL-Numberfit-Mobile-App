@@ -52,6 +52,10 @@ app.post('/login', require('./requests/login').login)
 // Register request
 app.post('/register', require('./requests/register').register)
 
+app.get('/test', function(req, res){
+  res.send('Test Success');
+});
+
 // Logout request
 app.get('/logout', function(req, res){
   req.logout();
