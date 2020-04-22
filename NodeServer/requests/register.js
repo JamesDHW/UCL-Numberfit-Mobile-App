@@ -9,23 +9,39 @@ module.exports.register = function (req, res) {
       var user = new User({
         username : req.body.username,
         password : req.body.password,
-        teacher  : false,
+        teacher  : req.body.teacher,
       });
-      var pupil = new Pupil({
-        username : req.body.username,
-        name     : req.body.name,
-        school   : req.body.school,
-        year     : req.body.year,
-      });
-
+      if(req.body.teacher) {
+        var teacher = new Teacher({
+          username : req.body.username,
+          name     : req.body.name,
+          school   : req.body.school,
+        });
+      }
+      else {
+        var pupil = new Pupil({
+          username : req.body.username,
+          name     : req.body.name,
+          school   : req.body.school,
+          year     : req.body.year,
+        });
+      }
       // Save user and pupil objects
       user.save((err) => {
         if (err) throw err;
-        pupil.save((err) => {
+
+        if(!req.body.teacher) {
+          pupil.save((err) => {
+            if (err) throw err;
+            require('./login').login(req, res);
+        })
+      }
+      else {
+        teacher.save((err) => {
           if (err) throw err;
-          // Login req
           require('./login').login(req, res);
         })
+      }
       })
     } else {
       // User already exists
