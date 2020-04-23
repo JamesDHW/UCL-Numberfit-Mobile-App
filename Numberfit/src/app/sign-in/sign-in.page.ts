@@ -3,6 +3,8 @@ import { Component }     from '@angular/core';
 import { Router }        from '@angular/router';
 import { Md5 }           from 'ts-md5/dist/md5';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { AlertController } from '@ionic/angular';
+
 
 
 @Component({
@@ -18,9 +20,10 @@ export class SignInPage {
   cookie          : string;
 
   constructor(
-    private nativeStorage : NativeStorage,
-    private router        : Router,
-    formBuilder           : FormBuilder,
+    private nativeStorage   : NativeStorage,
+    private alertController : AlertController,
+    private router          : Router,
+    formBuilder             : FormBuilder,
   ) {
     // Get server from config file
     this.server = require('../config.json').server;
@@ -56,12 +59,22 @@ export class SignInPage {
         );
       } else if(this.status != 200) {
         console.log(this.responseText);
-
+        DOM.presentAlert();
       }
     };
     xhttp.open("POST", this.server + "/login", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(credentials));
 
+  }
+
+  presentAlert() {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Error';
+    alert.message = 'Please check your internet connection.';
+    alert.buttons = ['OK'];
+
+    document.body.appendChild(alert);
+    return alert.present();
   }
 }

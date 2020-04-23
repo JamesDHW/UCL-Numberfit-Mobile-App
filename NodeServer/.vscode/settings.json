@@ -1,9 +1,0 @@
-{
-    "git.ignoreLimitWarning": true,
-    "appService.defaultWebAppToDeploy": "/subscriptions/1f6c7375-3eb9-4294-86c9-f588da690c25/resourceGroups/0067Team12/providers/Microsoft.Web/sites/Numberfit",
-    "appService.deploySubpath": "",
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ]
-}
