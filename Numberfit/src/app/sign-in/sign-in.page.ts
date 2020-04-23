@@ -1,8 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component }     from '@angular/core';
-import { Router }        from '@angular/router';
-import { Md5 }           from 'ts-md5/dist/md5';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Component }       from '@angular/core';
+import { Router }          from '@angular/router';
+import { Md5 }             from 'ts-md5/dist/md5';
+import { NativeStorage }   from '@ionic-native/native-storage/ngx';
 import { AlertController } from '@ionic/angular';
 
 
@@ -16,7 +16,7 @@ import { AlertController } from '@ionic/angular';
 export class SignInPage {
 
   signInFormGroup : FormGroup;
-  server          : string;
+  server          : string = require('../config.json').server;
   cookie          : string;
 
   constructor(
@@ -26,7 +26,7 @@ export class SignInPage {
     formBuilder             : FormBuilder,
   ) {
     // Get server from config file
-    this.server = require('../config.json').server;
+    // this.server = require('../config.json').server;
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
@@ -48,15 +48,23 @@ export class SignInPage {
     var DOM = this;
     var xhttp = new XMLHttpRequest();
 
+    // Login request response handler
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        DOM.cookie = JSON.parse(this.responseText).success;
-        console.log(DOM.cookie);
-        DOM.nativeStorage.setItem('cookie', {cookie: DOM.cookie})
-        .then(
-          () => DOM.router.navigate(['/play']),
-          error => console.error('Error storing item', error)
-        );
+        var user = JSON.parse(this.responseText);
+        DOM.nativeStorage.setItem('cookie', {cookie: user.cookie})
+        .then(() => {
+          DOM.nativeStorage.setItem('user', {
+            username : user.username,
+            name     : user.name,
+            school   : user.school,
+            year     : user.year,
+            teacher  : user.teacher,
+          })
+          .then(() => {
+            DOM.router.navigate(['/play'])
+          }, error => console.error('Error storing user', error));
+        }, error => console.error('Error storing cookie', error));
       } else if(this.status != 200) {
         console.log(this.responseText);
         DOM.presentAlert();

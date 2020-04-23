@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Component, OnInit }      from '@angular/core';
+import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 
 @Component({
-  selector: 'app-play-single',
-  templateUrl: './play-single.page.html',
-  styleUrls: ['./play-single.page.scss'],
+  selector    : 'app-play-single',
+  templateUrl : './play-single.page.html',
+  styleUrls   : ['./play-single.page.scss'],
 })
 export class PlaySinglePage implements OnInit {
 
   server           : string = require('../config.json').server;
-  bucket           : string = "https://primary-app-resources.s3.eu-west-2.amazonaws.com";
+  bucket           : string = require('../config.json').bucket;
   cookie           : string;
+  user             : any;
   images           : Array<string>;
   imgState         : number;
   pictureRef       : string;
@@ -21,17 +22,17 @@ export class PlaySinglePage implements OnInit {
   correctAnswer    : number; // button number
   answerOptions    : Array<number>;
   color            : string;
-  correctCounter   : number;
-  incorrectCounter : number;
+  correctCounter   : number = 0;
+  incorrectCounter : number = 0;
   questionCardEle  : HTMLElement;
   videoEle         : HTMLElement;
   // ans1: number;
 
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private nativeStorage : NativeStorage,
+    private router          : Router,
+    private activatedRoute  : ActivatedRoute,
+    private nativeStorage   : NativeStorage,
   ) {
     // Get server from config file
     // this.server = require('../config.json').server;
@@ -39,18 +40,44 @@ export class PlaySinglePage implements OnInit {
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
 
+    this.user = this.nativeStorage.getItem('user');
+
     this.prepareProgressBar();
 
     this.prepareQuestions();
 
-    this.prepareCounter();
+    this.getQuestionCards();
 
-    
   }
 
   ngOnInit() {
     this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
     this.videoEle = document.querySelector('.video-container');
+  }
+
+  getQuestionCards(){
+    let subject = this.activatedRoute.snapshot.paramMap.get("subject");
+    let qSetNumber =  18; // Number of question sets
+    console.log("year returns as", typeof this.user.year)
+    if(this.user.year == 1 && subject != "Time"){
+      qSetNumber = 6; // For some reason year one have fewer resources on all but time
+    }
+    var questionSet = [];
+    var checkList = [];
+    while(questionSet.length!=12){
+      let page = 4*Math.floor(Math.random() * qSetNumber);
+      let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
+      let questRef = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
+      let answRef = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+card+".png"
+      if(!checkList.includes(questRef)){
+        console.log(questRef)
+        checkList.push(questRef);
+        questionSet.push({
+          question : questRef,
+          answer   : answRef,
+        })
+      }
+    }
   }
 
   // main operating function for the whole process
@@ -76,11 +103,6 @@ export class PlaySinglePage implements OnInit {
     }
   }
 
-  prepareCounter(){
-    this.correctCounter = 0;
-    this.incorrectCounter = 0;
-  }
-
   prepareProgressBar(){
     this.imgState = 0;
 
@@ -90,11 +112,12 @@ export class PlaySinglePage implements OnInit {
   }
 
   prepareQuestions(){
+
     this.questionState = 0;
 
     this.questionArray = ['Question1', 'Question2', 'Question3','Question4', 'Question5']; //read from database
 
-    this.questionCard = this.questionArray[this.questionState];
+    this.questionCard  = this.questionArray[this.questionState];
 
     this.answerOptions = [123,456,789,112]; // read from database
 
@@ -155,7 +178,7 @@ export class PlaySinglePage implements OnInit {
   }
 
   checkWin(): boolean {
-    if (this.imgState>=8){
+    if (this.imgState>=12){
 
       var DOM = this;
       var xhttp = new XMLHttpRequest();

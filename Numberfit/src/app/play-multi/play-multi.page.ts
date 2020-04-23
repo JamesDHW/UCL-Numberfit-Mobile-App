@@ -1,7 +1,7 @@
+import { NativeStorage }         from '@ionic-native/native-storage/ngx';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Component, OnInit }     from '@angular/core';
 import { ElementFinder }         from 'protractor';
-import { NativeStorage }         from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector    : 'app-play-multi',
