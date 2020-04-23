@@ -9,7 +9,8 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 })
 export class PlaySinglePage implements OnInit {
 
-  server           : string;
+  server           : string = require('../config.json').server;
+  bucket           : string = "https://primary-app-resources.s3.eu-west-2.amazonaws.com";
   cookie           : string;
   images           : Array<string>;
   imgState         : number;
@@ -33,7 +34,7 @@ export class PlaySinglePage implements OnInit {
     private nativeStorage : NativeStorage,
   ) {
     // Get server from config file
-    this.server = require('../config.json').server;
+    // this.server = require('../config.json').server;
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
@@ -44,8 +45,7 @@ export class PlaySinglePage implements OnInit {
 
     this.prepareCounter();
 
-    // this.convertPNG();
-
+    
   }
 
   ngOnInit() {
@@ -173,7 +173,7 @@ export class PlaySinglePage implements OnInit {
         correct   : this.correctCounter,
         incorrect : this.incorrectCounter,
       }));
-      
+
       this.enableButtons(false);
       let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
       let ele2 = <HTMLElement>document.querySelector('.board');

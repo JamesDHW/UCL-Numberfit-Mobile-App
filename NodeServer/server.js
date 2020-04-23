@@ -9,9 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const mongoURI = "mongodb+srv://Numberfitmain:numberfit1234@COMP0067G12-16fzq.azure.mongodb.net/NumberfitDB?retryWrites=true&w=majority";
 
-const CORS = require('cors');
-app.use(CORS());
-
 // Use body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
