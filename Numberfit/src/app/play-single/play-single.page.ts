@@ -10,6 +10,8 @@ export class PlaySinglePage implements OnInit {
 
   images: Array<string>;
   imgState: number;
+  bucket:string = "https://primary-app-resources.s3.eu-west-2.amazonaws.com";
+  user:any = {year:1};
   pictureRef: string;
   questionArray: Array<string>;
   questionCard: string;
@@ -22,10 +24,13 @@ export class PlaySinglePage implements OnInit {
   questionCardEle: HTMLElement;
   videoEle: HTMLElement;
   cookie: string;
-  // ans1: number;
+  question: string;
+  answer: Array<object>;
+  checkList: Array<string>;
 
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
     this.prepareProgressBar();
 
@@ -33,12 +38,32 @@ export class PlaySinglePage implements OnInit {
 
     this.prepareCounter();
 
-    // this.cookie = this.route.snapshot.paramMap.get('cookie');
-    // console.log(this.cookie);
-
-    // this.convertPNG();
+    this.play();
 
   }
+
+  play(){
+    let subject = this.activatedRoute.snapshot.paramMap.get("subject");
+    let qSetNumber =  18; // Number of question sets
+    if(this.user.year == 1 && subject != "Time"){
+      qSetNumber = 6; // For some reason year one have fewer resources on all but Time
+    }
+    this.checkList = [];
+    this.answer = [];
+    while(this.answer.length!=4){
+      let page = 4*Math.floor(Math.random() * qSetNumber);
+      let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
+      let ques = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
+      let ans = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      if(!this.checkList.includes(this.question)){
+        this.question = ques
+        this.answer.push({question:this.question, answer:ans})
+      }
+    }
+    this.shuffleAnswerOptions(this.answer)
+    console.log(this.answer)
+    console.log(this.question)
+  };
 
   ngOnInit() {
     this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
@@ -46,10 +71,11 @@ export class PlaySinglePage implements OnInit {
   }
 
   // main operating function for the whole process
-  updateProgress(userAnswer:number){
+  updateProgress(i:number){
     // check if the answer is correct
-    if (userAnswer==this.correctAnswer){
+    if (this.answer[i]["question"]==this.question){
       // play video when needed
+      this.checkList.push(this.question)
       this.playAudio(true);
       this.updateProgressBar();
       if(this.checkWin()){
@@ -66,6 +92,7 @@ export class PlaySinglePage implements OnInit {
       this.updateQuestionCard();
       this.incorrectCounter += 1;
     }
+    this.play()
   }
 
   prepareCounter(){
@@ -93,7 +120,7 @@ export class PlaySinglePage implements OnInit {
     this.correctAnswer = 1;//Math.ceil(Math.random() * 4); // read from database
   }
 
-  shuffleAnswerOptions(array:Array<number>) {
+  shuffleAnswerOptions(array:Array<object>) {
     array.sort(() => Math.random() - 0.5);
     return array;
   }
@@ -187,22 +214,4 @@ export class PlaySinglePage implements OnInit {
     console.log("correct answer is: "+this.correctAnswer);
   }
 
-  // convertPNG() {
-  //   const worker = createWorker({
-  //     logger: m => console.log(m)
-  //   });
-
-  //   (async () => {
-  //     await worker.load();
-  //     await worker.loadLanguage('eng');
-  //     await worker.initialize('eng');
-  //     await worker.setParameters({
-  //       tessedit_char_whitelist: '0123456789',
-  //     })
-  //     const { data: { text } } = await worker.recognize('/assets/Answers/Answer1.png');
-  //     console.log(text);
-  //     this.ans1 = Number(text);
-  //     await worker.terminate();
-  //   })();
-  // }
 }
