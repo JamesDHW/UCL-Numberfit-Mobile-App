@@ -9,21 +9,21 @@ glob(__dirname + '/resources/*/*/*/PDF.pdf', {}, (err, generatedFiles)=>{
   generatedFiles.forEach(function(filepath, index){
     console.log(filepath)
 
-    // var pdfImage = new PDFImage(filepath, {
-    //     convertOptions: {
-    //         "-crop": "298x281"
-    //     }
-    // });
-    //
-    // getPageCount(filepath).then(pageNum => {
-    //   for (var i = 0; i < pageNum; i+=2) {
-    //       pdfImage.convertPage(i).then(function (imagePath) {
-    //         console.log("converted: ", filepath, "page: ", pageNume);
-    //       });
-    //   }
-    // })
-    // .catch((err) => {
-    //     console.log("error: ", err);
-    // });
+    var pdfImage = new PDFImage(filepath, {
+        convertOptions: {
+            "-crop": "298x281"
+        }
+    });
+
+    getPageCount(filepath).then(pageNum => {
+      for (var i = 0; i < pageNum; i+=2) {
+          pdfImage.convertPage(i).then(function (imagePath) {
+            console.log("converted: ", filepath, "page: ", pageNume);
+          });
+      }
+    })
+    .catch((err) => {
+        console.log("error: ", err);
+    });
   });
 })
