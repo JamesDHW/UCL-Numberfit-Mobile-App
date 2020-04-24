@@ -22,12 +22,13 @@ module.exports.progress = function(req, res){
       var corr = [];
       var wron = [];
       var date = [];
+      var out = {};
 
       console.log(history)
 
       history.forEach((item, i) => {
-        console.log(user.username)
 
+        out[item.topic] = out[item.topic] + 1;
         if(i+1 < LIMIT){
           if(date.includes(item._id.getTimestamp().toString().slice(4,15))){
             corr[date.indexOf(item._id.getTimestamp().toString().slice(4,15))] += item.correct;
@@ -43,14 +44,13 @@ module.exports.progress = function(req, res){
         // console.log(item.incorrect)
 
       });
+      out["date"] = date;
+      out["data"] = data;
 
       var data = [];
       date.forEach((item, i) => { data.push(10*(corr[i]/wron[i])+(0.1*i)) });
 
-      res.send(JSON.stringify({
-        date : date,
-        data : data,
-      }));
+      res.send(JSON.stringify(out));
 
     });
     }
