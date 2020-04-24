@@ -13,7 +13,7 @@ const Users = new Schema({
 
 // Pupil schema
 const Pupils = new Schema({
-  username : String,
+  username : Number,
   name     : String,
   school   : String,
   year     : String,
