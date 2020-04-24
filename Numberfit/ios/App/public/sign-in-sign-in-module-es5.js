@@ -55,13 +55,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -78,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, SignInPageRoutingModule);
     };
 
-    SignInPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    SignInPageRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
       exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })], SignInPageRoutingModule);
@@ -115,25 +115,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
@@ -151,7 +151,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, SignInPageModule);
     };
 
-    SignInPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    SignInPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _sign_in_routing_module__WEBPACK_IMPORTED_MODULE_5__["SignInPageRoutingModule"]],
       declarations: [_sign_in_page__WEBPACK_IMPORTED_MODULE_6__["SignInPage"]]
     })], SignInPageModule);
@@ -206,21 +206,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-    /* harmony import */
-
-
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -229,47 +229,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/ts-md5/dist/md5.js");
     /* harmony import */
 
-<<<<<<< HEAD
 
-    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
-    /*#__PURE__*/
-    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
     /* harmony import */
 
 
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
-    "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
 
-    var SignInPage =
-    /*#__PURE__*/
-    function () {
-      function SignInPage(nativeStorage, router, formBuilder) {
-=======
 
-    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
-    /*#__PURE__*/
-    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 
-    var SignInPage =
-    /*#__PURE__*/
-    function () {
-      function SignInPage(router, formBuilder) {
->>>>>>> save-cookie
+    var SignInPage = /*#__PURE__*/function () {
+      function SignInPage(nativeStorage, alertController, router, formBuilder) {
         _classCallCheck(this, SignInPage);
 
         this.nativeStorage = nativeStorage;
+        this.alertController = alertController;
         this.router = router;
+        this.server = __webpack_require__(
+        /*! ../config.json */
+        "./src/app/config.json").server; // Get cookie from storage
+
+        this.cookie = this.nativeStorage.getItem('cookie'); // Initialise sign in form group
+
         this.signInFormGroup = formBuilder.group({
-          email: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-          password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]]
-        });
-        this.nativeStorage.setItem('cookie', {
-          cookie: "-"
-        }).then(function () {
-          return console.log("Reset cookie!");
-        }, function (error) {
-          return console.error('Error storing item', error);
+          email: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+          password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]]
         });
       }
 
@@ -282,40 +272,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
           var DOM = this;
           var xhttp = new XMLHttpRequest();
-<<<<<<< HEAD
-          DOM.router.navigate(['/play']); // xhttp.onreadystatechange = function() {
-          //   if (this.readyState == 4 && this.status == 200) {
-          //     const cookie = JSON.parse(this.responseText).success;
-          //     console.log(cookie);
-          //     DOM.nativeStorage.setItem('cookie', {cookie: cookie})
-          //     .then(
-          //       () => DOM.router.navigate(['/play']),
-          //       error => console.error('Error storing item', error)
-          //     );
-          //   } else if(this.status != 200) {
-          //     console.log(this.responseText);
-          //
-          //   }
-          // };
-          // xhttp.open("POST", "http://localhost:3000/login", true);
-          // xhttp.setRequestHeader("Content-type", "application/json");
-          // xhttp.send(JSON.stringify(credentials));
-=======
+          console.log(this.server); // Login request response handler
 
           xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-              var cookie = JSON.parse(this.responseText).success;
-              console.log(cookie);
-              DOM.router.navigate(['/play', cookie]);
+              var user = JSON.parse(this.responseText);
+              console.log("user: ", user);
+              console.log("response: ", this.responseText);
+              DOM.nativeStorage.setItem('cookie', {
+                cookie: user.cookie
+              }).then(function () {
+                DOM.nativeStorage.setItem('user', {
+                  username: user.username,
+                  name: user.name,
+                  school: user.school,
+                  year: user.year,
+                  teacher: user.teacher
+                }).then(function () {
+                  console.log("got to play"); // DOM.router.navigate(['/play'])
+                }, function (error) {
+                  return console.error('Error storing user', error);
+                });
+              }, function (error) {
+                return console.error('Error storing cookie', error);
+              });
             } else if (this.status != 200) {
-              console.log(this.responseText);
+              console.log("error occured:", this.responseText);
+              DOM.presentAlert();
             }
           };
 
-          xhttp.open("POST", "http://localhost:3000/login", true);
+          xhttp.open("POST", this.server + "/login", true);
           xhttp.setRequestHeader("Content-type", "application/json");
           xhttp.send(JSON.stringify(credentials));
->>>>>>> save-cookie
+        }
+      }, {
+        key: "presentAlert",
+        value: function presentAlert() {
+          var alert = document.createElement('ion-alert');
+          alert.header = 'Error';
+          alert.message = 'Please check your internet connection.';
+          alert.buttons = ['OK'];
+          document.body.appendChild(alert);
+          return alert.present();
         }
       }]);
 
@@ -326,25 +325,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return [{
         type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"]
       }, {
-        type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
+        type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]
       }];
     };
 
-    SignInPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    SignInPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'app-sign-in',
-      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./sign-in.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-in/sign-in.page.html")).default,
-      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-in/sign-in.page.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./sign-in.page.scss */
-      "./src/app/sign-in/sign-in.page.scss")).default]
-<<<<<<< HEAD
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])], SignInPage);
-=======
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])], SignInPage);
->>>>>>> save-cookie
+      "./src/app/sign-in/sign-in.page.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])], SignInPage);
     /***/
   }
 }]);

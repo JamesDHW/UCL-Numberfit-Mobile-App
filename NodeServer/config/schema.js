@@ -26,18 +26,6 @@ const Teachers = new Schema({
   school   : String,
 });
 
-// Game schema
-const Games = new Schema({
-  topic     : String,
-  year      : Number,
-  played    : Number,
-  questions : [],
-  answers   : [],
-});
-
-
-// *** read the played value to establish the difficulty level of the game
-// val < 9 = beg, 9 < val < 18 = beg, 18 < val < 27 = adv
 const GameHistories = new Schema({
   played    : Number,
   correct   : Number,
@@ -46,16 +34,21 @@ const GameHistories = new Schema({
 
 // Game schema
 const Schools = new Schema({
-  name     : String,
+  name : String,
+});
+
+// Game schema
+const Videos = new Schema({
+  url : String,
 });
 
 // Declaring each Schema
 const User    = mongoose.model('users', Users, 'users')
 const Pupil   = mongoose.model('pupils', Pupils, 'pupils')
 const Teacher = mongoose.model('teachers', Teachers, 'teachers')
-const Game    = mongoose.model('games', Games, 'games')
 const GameHistory = mongoose.model('GameHistories', GameHistories, 'GameHistories')
 const School  = mongoose.model('schools', Schools, 'schools')
+const Video  = mongoose.model('videos', Videos, 'videos')
 
 
 // Include all models required to export here!!!
@@ -63,7 +56,7 @@ module.exports = {
   User,
   Pupil,
   Teacher,
-  Game,
   GameHistory,
   School,
+  Video,
 };

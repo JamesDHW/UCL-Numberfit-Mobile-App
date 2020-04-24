@@ -411,6 +411,17 @@ if (Md5.hashStr('hello') !== '5d41402abc4b2a76b9719d911017c592') {
 }
 //# sourceMappingURL=md5.js.map
 
+/***/ }),
+
+/***/ "./src/app/config.json":
+/*!*****************************!*\
+  !*** ./src/app/config.json ***!
+  \*****************************/
+/*! exports provided: server, bucket, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+
 /***/ })
 
 }]);

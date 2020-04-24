@@ -34,377 +34,377 @@ var map = {
 	"./ion-action-sheet-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-action-sheet-ios.entry.js",
 		"common",
-		0
+		"stencil-ion-action-sheet-ios-entry-js"
 	],
 	"./ion-action-sheet-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-action-sheet-md.entry.js",
 		"common",
-		1
+		"stencil-ion-action-sheet-md-entry-js"
 	],
 	"./ion-alert-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-alert-ios.entry.js",
 		"common",
-		2
+		"stencil-ion-alert-ios-entry-js"
 	],
 	"./ion-alert-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-alert-md.entry.js",
 		"common",
-		3
+		"stencil-ion-alert-md-entry-js"
 	],
 	"./ion-app_8-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-app_8-ios.entry.js",
 		"common",
-		4
+		"stencil-ion-app_8-ios-entry-js"
 	],
 	"./ion-app_8-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-app_8-md.entry.js",
 		"common",
-		5
+		"stencil-ion-app_8-md-entry-js"
 	],
 	"./ion-avatar_3-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-avatar_3-ios.entry.js",
 		"common",
-		6
+		"stencil-ion-avatar_3-ios-entry-js"
 	],
 	"./ion-avatar_3-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-avatar_3-md.entry.js",
 		"common",
-		7
+		"stencil-ion-avatar_3-md-entry-js"
 	],
 	"./ion-back-button-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-back-button-ios.entry.js",
 		"common",
-		8
+		"stencil-ion-back-button-ios-entry-js"
 	],
 	"./ion-back-button-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-back-button-md.entry.js",
 		"common",
-		9
+		"stencil-ion-back-button-md-entry-js"
 	],
 	"./ion-backdrop-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-backdrop-ios.entry.js",
-		10
+		"stencil-ion-backdrop-ios-entry-js"
 	],
 	"./ion-backdrop-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-backdrop-md.entry.js",
-		11
+		"stencil-ion-backdrop-md-entry-js"
 	],
 	"./ion-button_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-button_2-ios.entry.js",
 		"common",
-		12
+		"stencil-ion-button_2-ios-entry-js"
 	],
 	"./ion-button_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-button_2-md.entry.js",
 		"common",
-		13
+		"stencil-ion-button_2-md-entry-js"
 	],
 	"./ion-card_5-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-card_5-ios.entry.js",
 		"common",
-		14
+		"stencil-ion-card_5-ios-entry-js"
 	],
 	"./ion-card_5-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-card_5-md.entry.js",
 		"common",
-		15
+		"stencil-ion-card_5-md-entry-js"
 	],
 	"./ion-checkbox-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-checkbox-ios.entry.js",
 		"common",
-		16
+		"stencil-ion-checkbox-ios-entry-js"
 	],
 	"./ion-checkbox-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-checkbox-md.entry.js",
 		"common",
-		17
+		"stencil-ion-checkbox-md-entry-js"
 	],
 	"./ion-chip-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-chip-ios.entry.js",
 		"common",
-		18
+		"stencil-ion-chip-ios-entry-js"
 	],
 	"./ion-chip-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-chip-md.entry.js",
 		"common",
-		19
+		"stencil-ion-chip-md-entry-js"
 	],
 	"./ion-col_3.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-col_3.entry.js",
-		20
+		"stencil-ion-col_3-entry-js"
 	],
 	"./ion-datetime_3-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-datetime_3-ios.entry.js",
 		"common",
-		21
+		"stencil-ion-datetime_3-ios-entry-js"
 	],
 	"./ion-datetime_3-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-datetime_3-md.entry.js",
 		"common",
-		22
+		"stencil-ion-datetime_3-md-entry-js"
 	],
 	"./ion-fab_3-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-fab_3-ios.entry.js",
 		"common",
-		23
+		"stencil-ion-fab_3-ios-entry-js"
 	],
 	"./ion-fab_3-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-fab_3-md.entry.js",
 		"common",
-		24
+		"stencil-ion-fab_3-md-entry-js"
 	],
 	"./ion-img.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-img.entry.js",
-		25
+		"stencil-ion-img-entry-js"
 	],
 	"./ion-infinite-scroll_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-infinite-scroll_2-ios.entry.js",
 		"common",
-		26
+		"stencil-ion-infinite-scroll_2-ios-entry-js"
 	],
 	"./ion-infinite-scroll_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-infinite-scroll_2-md.entry.js",
 		"common",
-		27
+		"stencil-ion-infinite-scroll_2-md-entry-js"
 	],
 	"./ion-input-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-input-ios.entry.js",
 		"common",
-		28
+		"stencil-ion-input-ios-entry-js"
 	],
 	"./ion-input-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-input-md.entry.js",
 		"common",
-		29
+		"stencil-ion-input-md-entry-js"
 	],
 	"./ion-item-option_3-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-item-option_3-ios.entry.js",
 		"common",
-		30
+		"stencil-ion-item-option_3-ios-entry-js"
 	],
 	"./ion-item-option_3-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-item-option_3-md.entry.js",
 		"common",
-		31
+		"stencil-ion-item-option_3-md-entry-js"
 	],
 	"./ion-item_8-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-item_8-ios.entry.js",
 		"common",
-		32
+		"stencil-ion-item_8-ios-entry-js"
 	],
 	"./ion-item_8-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-item_8-md.entry.js",
 		"common",
-		33
+		"stencil-ion-item_8-md-entry-js"
 	],
 	"./ion-loading-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-loading-ios.entry.js",
 		"common",
-		34
+		"stencil-ion-loading-ios-entry-js"
 	],
 	"./ion-loading-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-loading-md.entry.js",
 		"common",
-		35
+		"stencil-ion-loading-md-entry-js"
 	],
 	"./ion-menu_3-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-menu_3-ios.entry.js",
 		"common",
-		36
+		"stencil-ion-menu_3-ios-entry-js"
 	],
 	"./ion-menu_3-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-menu_3-md.entry.js",
 		"common",
-		37
+		"stencil-ion-menu_3-md-entry-js"
 	],
 	"./ion-modal-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-modal-ios.entry.js",
 		"common",
-		38
+		"stencil-ion-modal-ios-entry-js"
 	],
 	"./ion-modal-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-modal-md.entry.js",
 		"common",
-		39
+		"stencil-ion-modal-md-entry-js"
 	],
 	"./ion-nav_2.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-nav_2.entry.js",
 		"common",
-		40
+		"stencil-ion-nav_2-entry-js"
 	],
 	"./ion-popover-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-popover-ios.entry.js",
 		"common",
-		41
+		"stencil-ion-popover-ios-entry-js"
 	],
 	"./ion-popover-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-popover-md.entry.js",
 		"common",
-		42
+		"stencil-ion-popover-md-entry-js"
 	],
 	"./ion-progress-bar-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-progress-bar-ios.entry.js",
 		"common",
-		43
+		"stencil-ion-progress-bar-ios-entry-js"
 	],
 	"./ion-progress-bar-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-progress-bar-md.entry.js",
 		"common",
-		44
+		"stencil-ion-progress-bar-md-entry-js"
 	],
 	"./ion-radio_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-radio_2-ios.entry.js",
 		"common",
-		45
+		"stencil-ion-radio_2-ios-entry-js"
 	],
 	"./ion-radio_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-radio_2-md.entry.js",
 		"common",
-		46
+		"stencil-ion-radio_2-md-entry-js"
 	],
 	"./ion-range-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-range-ios.entry.js",
 		"common",
-		47
+		"stencil-ion-range-ios-entry-js"
 	],
 	"./ion-range-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-range-md.entry.js",
 		"common",
-		48
+		"stencil-ion-range-md-entry-js"
 	],
 	"./ion-refresher_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-refresher_2-ios.entry.js",
 		"common",
-		49
+		"stencil-ion-refresher_2-ios-entry-js"
 	],
 	"./ion-refresher_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-refresher_2-md.entry.js",
 		"common",
-		50
+		"stencil-ion-refresher_2-md-entry-js"
 	],
 	"./ion-reorder_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-reorder_2-ios.entry.js",
 		"common",
-		51
+		"stencil-ion-reorder_2-ios-entry-js"
 	],
 	"./ion-reorder_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-reorder_2-md.entry.js",
 		"common",
-		52
+		"stencil-ion-reorder_2-md-entry-js"
 	],
 	"./ion-ripple-effect.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-ripple-effect.entry.js",
-		53
+		"stencil-ion-ripple-effect-entry-js"
 	],
 	"./ion-route_4.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-route_4.entry.js",
 		"common",
-		54
+		"stencil-ion-route_4-entry-js"
 	],
 	"./ion-searchbar-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-searchbar-ios.entry.js",
 		"common",
-		55
+		"stencil-ion-searchbar-ios-entry-js"
 	],
 	"./ion-searchbar-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-searchbar-md.entry.js",
 		"common",
-		56
+		"stencil-ion-searchbar-md-entry-js"
 	],
 	"./ion-segment_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-segment_2-ios.entry.js",
 		"common",
-		57
+		"stencil-ion-segment_2-ios-entry-js"
 	],
 	"./ion-segment_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-segment_2-md.entry.js",
 		"common",
-		58
+		"stencil-ion-segment_2-md-entry-js"
 	],
 	"./ion-select_3-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-select_3-ios.entry.js",
 		"common",
-		59
+		"stencil-ion-select_3-ios-entry-js"
 	],
 	"./ion-select_3-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-select_3-md.entry.js",
 		"common",
-		60
+		"stencil-ion-select_3-md-entry-js"
 	],
 	"./ion-slide_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-slide_2-ios.entry.js",
-		61
+		"stencil-ion-slide_2-ios-entry-js"
 	],
 	"./ion-slide_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-slide_2-md.entry.js",
-		62
+		"stencil-ion-slide_2-md-entry-js"
 	],
 	"./ion-spinner.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-spinner.entry.js",
 		"common",
-		63
+		"stencil-ion-spinner-entry-js"
 	],
 	"./ion-split-pane-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-split-pane-ios.entry.js",
-		64
+		"stencil-ion-split-pane-ios-entry-js"
 	],
 	"./ion-split-pane-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-split-pane-md.entry.js",
-		65
+		"stencil-ion-split-pane-md-entry-js"
 	],
 	"./ion-tab-bar_2-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-tab-bar_2-ios.entry.js",
 		"common",
-		66
+		"stencil-ion-tab-bar_2-ios-entry-js"
 	],
 	"./ion-tab-bar_2-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-tab-bar_2-md.entry.js",
 		"common",
-		67
+		"stencil-ion-tab-bar_2-md-entry-js"
 	],
 	"./ion-tab_2.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-tab_2.entry.js",
 		"common",
-		68
+		"stencil-ion-tab_2-entry-js"
 	],
 	"./ion-text.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-text.entry.js",
 		"common",
-		69
+		"stencil-ion-text-entry-js"
 	],
 	"./ion-textarea-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-textarea-ios.entry.js",
 		"common",
-		70
+		"stencil-ion-textarea-ios-entry-js"
 	],
 	"./ion-textarea-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-textarea-md.entry.js",
 		"common",
-		71
+		"stencil-ion-textarea-md-entry-js"
 	],
 	"./ion-toast-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-toast-ios.entry.js",
 		"common",
-		72
+		"stencil-ion-toast-ios-entry-js"
 	],
 	"./ion-toast-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-toast-md.entry.js",
 		"common",
-		73
+		"stencil-ion-toast-md-entry-js"
 	],
 	"./ion-toggle-ios.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-toggle-ios.entry.js",
 		"common",
-		74
+		"stencil-ion-toggle-ios-entry-js"
 	],
 	"./ion-toggle-md.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-toggle-md.entry.js",
 		"common",
-		75
+		"stencil-ion-toggle-md-entry-js"
 	],
 	"./ion-virtual-scroll.entry.js": [
 		"./node_modules/@ionic/core/dist/esm/ion-virtual-scroll.entry.js",
-		76
+		"stencil-ion-virtual-scroll-entry-js"
 	]
 };
 function webpackAsyncContext(req) {
@@ -701,8 +701,8 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _signed_in_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./signed-in.guard */ "./src/app/signed-in.guard.ts");
 /* harmony import */ var _signed_out_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./signed-out.guard */ "./src/app/signed-out.guard.ts");
 
@@ -714,7 +714,7 @@ const routes = [
     { path: '',
         redirectTo: 'play',
         pathMatch: 'full' },
-    { path: 'play/:cookie',
+    { path: 'play',
         loadChildren: () => __webpack_require__.e(/*! import() | play-play-module */ "play-play-module").then(__webpack_require__.bind(null, /*! ./play/play.module */ "./src/app/play/play.module.ts")).then(m => m.HomePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
     },
@@ -729,10 +729,10 @@ const routes = [
     { path: 'sign-out',
         loadChildren: () => __webpack_require__.e(/*! import() | sign-out-sign-out-module */ "sign-out-sign-out-module").then(__webpack_require__.bind(null, /*! ./sign-out/sign-out.module */ "./src/app/sign-out/sign-out.module.ts")).then(m => m.HomePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
-    { path: 'play-single/:subject/:cookie',
+    { path: 'play-single/:subject',
         loadChildren: () => __webpack_require__.e(/*! import() | play-single-play-single-module */ "play-single-play-single-module").then(__webpack_require__.bind(null, /*! ./play-single/play-single.module */ "./src/app/play-single/play-single.module.ts")).then(m => m.PlaySinglePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
-    { path: 'play-multi/:subject/:cookie',
+    { path: 'play-multi/:subject',
         loadChildren: () => __webpack_require__.e(/*! import() | play-multi-play-multi-module */ "play-multi-play-multi-module").then(__webpack_require__.bind(null, /*! ./play-multi/play-multi.module */ "./src/app/play-multi/play-multi.module.ts")).then(m => m.PlayMultiPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
     { path: 'sign-in',
@@ -741,12 +741,11 @@ const routes = [
     { path: 'register',
         loadChildren: () => Promise.all(/*! import() | register-register-module */[__webpack_require__.e("default~my-account-my-account-module~register-register-module~sign-in-sign-in-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null, /*! ./register/register.module */ "./src/app/register/register.module.ts")).then(m => m.RegisterPageModule),
         canActivate: [_signed_out_guard__WEBPACK_IMPORTED_MODULE_4__["SignedOutGuard"]], },
-    { path: 'subject-select/:gamemode/:cookie',
+    { path: 'subject-select/:gamemode',
         loadChildren: () => __webpack_require__.e(/*! import() | subject-select-subject-select-module */ "subject-select-subject-select-module").then(__webpack_require__.bind(null, /*! ./subject-select/subject-select.module */ "./src/app/subject-select/subject-select.module.ts")).then(m => m.SubjectSelectPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]], },
     {
         path: 'student-list',
-<<<<<<< HEAD
         loadChildren: () => __webpack_require__.e(/*! import() | student-list-student-list-module */ "student-list-student-list-module").then(__webpack_require__.bind(null, /*! ./student-list/student-list.module */ "./src/app/student-list/student-list.module.ts")).then(m => m.StudentListPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
     },
@@ -754,18 +753,11 @@ const routes = [
         path: 'my-account',
         loadChildren: () => Promise.all(/*! import() | my-account-my-account-module */[__webpack_require__.e("default~my-account-my-account-module~register-register-module~sign-in-sign-in-module"), __webpack_require__.e("my-account-my-account-module")]).then(__webpack_require__.bind(null, /*! ./my-account/my-account.module */ "./src/app/my-account/my-account.module.ts")).then(m => m.MyAccountPageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
-=======
-        loadChildren: () => __webpack_require__.e(/*! import() | student-list-student-list-module */ "student-list-student-list-module").then(__webpack_require__.bind(null, /*! ./student-list/student-list.module */ "./src/app/student-list/student-list.module.ts")).then(m => m.StudentListPageModule)
-    },
-    {
-        path: 'my-account/:cookie',
-        loadChildren: () => Promise.all(/*! import() | my-account-my-account-module */[__webpack_require__.e("default~my-account-my-account-module~register-register-module~sign-in-sign-in-module"), __webpack_require__.e("my-account-my-account-module")]).then(__webpack_require__.bind(null, /*! ./my-account/my-account.module */ "./src/app/my-account/my-account.module.ts")).then(m => m.MyAccountPageModule)
->>>>>>> save-cookie
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
-AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"] })],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
@@ -800,10 +792,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 
 
 
@@ -855,13 +847,13 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
 ];
-AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
-        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default,
-        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")).default]
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")).default]
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
 ], AppComponent);
@@ -881,19 +873,18 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-<<<<<<< HEAD
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
 
-=======
->>>>>>> save-cookie
+
 
 
 
@@ -905,7 +896,7 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
         entryComponents: [],
@@ -917,10 +908,8 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
-<<<<<<< HEAD
             _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_9__["NativeStorage"],
-=======
->>>>>>> save-cookie
+            _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
@@ -942,9 +931,9 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignedInGuard", function() { return SignedInGuard; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
 
 
 
@@ -956,6 +945,7 @@ let SignedInGuard = class SignedInGuard {
     }
     canActivate(next, state) {
         console.log("Sign In Guard");
+        return true;
         return this.nativeStorage.getItem('cookie')
             .then((data) => {
             console.log("Signed In Cookie: ", data);
@@ -977,11 +967,11 @@ SignedInGuard.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
-SignedInGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+SignedInGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
 ], SignedInGuard);
 
@@ -1000,9 +990,9 @@ SignedInGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignedOutGuard", function() { return SignedOutGuard; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
 
 
 
@@ -1021,12 +1011,11 @@ let SignedOutGuard = class SignedOutGuard {
                 return true;
             }
             else {
-                console.log("values: ", data.cookie);
                 this.router.navigate(['/play']);
                 return false;
             }
         }, (error) => {
-            console.log("err: ", error);
+            console.log("error: ", error);
             if (error.code == 2) {
                 this.nativeStorage.setItem('cookie', { cookie: "-" })
                     .then(() => {
@@ -1046,11 +1035,11 @@ SignedOutGuard.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
-SignedOutGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+SignedOutGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
 ], SignedOutGuard);
 
@@ -1108,8 +1097,8 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/__ivy_ngcc__/fesm2015/platform-browser-dynamic.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
 /* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
 

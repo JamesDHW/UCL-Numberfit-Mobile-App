@@ -13,6 +13,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/app/config.json":
+/*!*****************************!*\
+  !*** ./src/app/config.json ***!
+  \*****************************/
+/*! exports provided: server, bucket, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+
+/***/ }),
+
 /***/ "./src/app/play/play.module.ts":
 /*!*************************************!*\
   !*** ./src/app/play/play.module.ts ***!
@@ -24,11 +35,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _play_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./play.page */ "./src/app/play/play.page.ts");
 
 
@@ -39,7 +50,7 @@ __webpack_require__.r(__webpack_exports__);
 
 let HomePageModule = class HomePageModule {
 };
-HomePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+HomePageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -84,62 +95,70 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+
 
 
 
 
 let HomePage = class HomePage {
-    constructor(router, route) {
+    constructor(router, route, nativeStorage) {
         this.router = router;
         this.route = route;
+        this.nativeStorage = nativeStorage;
         this.messageFromChild = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        // Get server from config file
+        this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
+        // Get cookie from storage
+        this.nativeStorage.getItem('cookie')
+            .then((data) => { this.cookie = data.cookie; });
         // this.messageFromChild.emit('Message from child');
     }
     ngOnInit() {
         // Navigate to subject-select page and pass gamemode information base on which div pressed
         var divSingle = document.getElementById("play-single");
         var divMulti = document.getElementById("play-multi");
-<<<<<<< HEAD
         divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0]));
         divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1]));
         // this.cookie = this.route.snapshot.paramMap.get('cookie');
         // console.log(this.cookie);
     }
     navigate() {
-        this.router.navigateByUrl('my-account');
-=======
-        divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0, this.cookie]));
-        divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1, this.cookie]));
-        this.cookie = this.route.snapshot.paramMap.get('cookie');
-        console.log(this.cookie);
-    }
-    navigate() {
-        this.router.navigateByUrl('my-account/' + this.cookie);
->>>>>>> save-cookie
+        const DOM = this;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+            else if (this.status != 200) {
+                console.log(this.responseText);
+            }
+        };
+        xhttp.open("GET", "http://numberfit-env.eba-hrxr3amd.us-west-2.elasticbeanstalk.com/myDetails?cookie=5e937d5c8f20116a06468da9", true);
+        xhttp.send();
+        // this.router.navigateByUrl('my-account');
     }
 };
 HomePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] }
 ];
-Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", Object)
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
 ], HomePage.prototype, "messageFromChild", void 0);
-HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-play',
-        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./play.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/play/play.page.html")).default,
-        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./play.page.scss */ "./src/app/play/play.page.scss")).default]
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./play.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/play/play.page.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./play.page.scss */ "./src/app/play/play.page.scss")).default]
     }),
-<<<<<<< HEAD
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
-=======
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
->>>>>>> save-cookie
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+        _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])
 ], HomePage);
 
 

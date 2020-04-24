@@ -870,8 +870,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var colorString = match[0];
 
           if (match[0].length === 3) {
-            colorString = colorString.split('').map(function (char) {
-              return char + char;
+            colorString = colorString.split('').map(function (_char) {
+              return _char + _char;
             }).join('');
           }
 
@@ -6494,7 +6494,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
       function getRelativePosition(e, chart) {
-        if (e.native) {
+        if (e["native"]) {
           return {
             x: e.x,
             y: e.y
@@ -7180,9 +7180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       };
       var platform_dom = "/*\n * DOM element rendering detection\n * https://davidwalsh.name/detect-node-insertion\n */\n@keyframes chartjs-render-animation {\n\tfrom { opacity: 0.99; }\n\tto { opacity: 1; }\n}\n\n.chartjs-render-monitor {\n\tanimation: chartjs-render-animation 0.001s;\n}\n\n/*\n * DOM element resizing detection\n * https://github.com/marcj/css-element-queries\n */\n.chartjs-size-monitor,\n.chartjs-size-monitor-expand,\n.chartjs-size-monitor-shrink {\n\tposition: absolute;\n\tdirection: ltr;\n\tleft: 0;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\toverflow: hidden;\n\tpointer-events: none;\n\tvisibility: hidden;\n\tz-index: -1;\n}\n\n.chartjs-size-monitor-expand > div {\n\tposition: absolute;\n\twidth: 1000000px;\n\theight: 1000000px;\n\tleft: 0;\n\ttop: 0;\n}\n\n.chartjs-size-monitor-shrink > div {\n\tposition: absolute;\n\twidth: 200%;\n\theight: 200%;\n\tleft: 0;\n\ttop: 0;\n}\n";
-      var platform_dom$1 =
-      /*#__PURE__*/
-      Object.freeze({
+      var platform_dom$1 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         'default': platform_dom
       });
@@ -7322,7 +7320,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return {
           type: type,
           chart: chart,
-          native: nativeEvent || null,
+          "native": nativeEvent || null,
           x: x !== undefined ? x : null,
           y: y !== undefined ? y : null
         };
@@ -9902,12 +9900,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // Need to call with native event here to not break backwards compatibility
 
 
-          helpers$1.callback(options.onHover || options.hover.onHover, [e.native, me.active], me);
+          helpers$1.callback(options.onHover || options.hover.onHover, [e["native"], me.active], me);
 
           if (e.type === 'mouseup' || e.type === 'click') {
             if (options.onClick) {
               // Use e.native here for backwards compatibility
-              options.onClick.call(me, e.native, me.active);
+              options.onClick.call(me, e["native"], me.active);
             }
           } // Remove styling for last active (even if it may still be active)
 
@@ -10630,7 +10628,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
       };
 
-      function abstract() {
+      function _abstract() {
         throw new Error('This method is not implemented: either no adapter can ' + 'be found or an incomplete integration was provided.');
       }
       /**
@@ -10664,7 +10662,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * in Unit as well as 'datetime' representing a detailed date/time string.
          * @returns {{string: string}}
          */
-        formats: abstract,
+        formats: _abstract,
 
         /**
          * Parses the given `value` and return the associated timestamp.
@@ -10673,7 +10671,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @returns {(number|null)}
          * @function
          */
-        parse: abstract,
+        parse: _abstract,
 
         /**
          * Returns the formatted date in the specified `format` for a given `timestamp`.
@@ -10682,7 +10680,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @return {string}
          * @function
          */
-        format: abstract,
+        format: _abstract,
 
         /**
          * Adds the specified `amount` of `unit` to the given `timestamp`.
@@ -10692,7 +10690,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @return {number}
          * @function
          */
-        add: abstract,
+        add: _abstract,
 
         /**
          * Returns the number of `unit` between the given timestamps.
@@ -10702,7 +10700,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @return {number}
          * @function
          */
-        diff: abstract,
+        diff: _abstract,
 
         /**
          * Returns start of `unit` for the given `timestamp`.
@@ -10712,7 +10710,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * and 7 being Sunday (only needed if param *unit* is `isoWeek`).
          * @function
          */
-        startOf: abstract,
+        startOf: _abstract,
 
         /**
          * Returns end of `unit` for the given `timestamp`.
@@ -10720,7 +10718,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @param {Unit} unit - the unit as string
          * @function
          */
-        endOf: abstract,
+        endOf: _abstract,
         // DEPRECATIONS
 
         /**
@@ -15229,12 +15227,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (type === 'click') {
             if (hoveredItem && opts.onClick) {
               // use e.native for backwards compatibility
-              opts.onClick.call(me, e.native, hoveredItem);
+              opts.onClick.call(me, e["native"], hoveredItem);
             }
           } else {
             if (opts.onLeave && hoveredItem !== me._hoveredItem) {
               if (me._hoveredItem) {
-                opts.onLeave.call(me, e.native, me._hoveredItem);
+                opts.onLeave.call(me, e["native"], me._hoveredItem);
               }
 
               me._hoveredItem = hoveredItem;
@@ -15242,7 +15240,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (opts.onHover && hoveredItem) {
               // use e.native for backwards compatibility
-              opts.onHover.call(me, e.native, hoveredItem);
+              opts.onHover.call(me, e["native"], hoveredItem);
             }
           }
         }
@@ -34130,6 +34128,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/config.json":
+  /*!*****************************!*\
+    !*** ./src/app/config.json ***!
+    \*****************************/
+
+  /*! exports provided: server, bucket, default */
+
+  /***/
+  function srcAppConfigJson(module) {
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    /***/
+  },
+
+  /***/
   "./src/app/parents/parents.module.ts":
   /*!*******************************************!*\
     !*** ./src/app/parents/parents.module.ts ***!
@@ -34159,31 +34171,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -34195,7 +34207,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, HomePageModule);
     };
 
-    HomePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    HomePageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _parents_page__WEBPACK_IMPORTED_MODULE_6__["HomePage"]
@@ -34255,7 +34267,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
@@ -34265,15 +34277,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var chart_js__WEBPACK_IMPORTED_MODULE_2___default =
-    /*#__PURE__*/
-    __webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
+    var chart_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
 
-    var HomePage =
-    /*#__PURE__*/
-    function () {
-      function HomePage() {
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+
+    var HomePage = /*#__PURE__*/function () {
+      function HomePage(nativeStorage) {
+        var _this = this;
+
         _classCallCheck(this, HomePage);
+
+        this.nativeStorage = nativeStorage; // Get server from config file
+
+        this.server = __webpack_require__(
+        /*! ../config.json */
+        "./src/app/config.json").server; // Get cookie from storage
+
+        this.nativeStorage.getItem('cookie').then(function (data) {
+          _this.cookie = data.cookie;
+        });
       }
 
       _createClass(HomePage, [{
@@ -34343,17 +34369,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return HomePage;
     }();
 
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('barChart'), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", Object)], HomePage.prototype, "barChart", void 0);
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('lineChart'), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:type", Object)], HomePage.prototype, "lineChart", void 0);
-    HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    HomePage.ctorParameters = function () {
+      return [{
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+      }];
+    };
+
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('barChart', {
+      "static": false
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)], HomePage.prototype, "barChart", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('lineChart', {
+      "static": false
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)], HomePage.prototype, "lineChart", void 0);
+    HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-parents',
-      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./parents.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/parents/parents.page.html")).default,
-      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/parents/parents.page.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./parents.page.scss */
-      "./src/app/parents/parents.page.scss")).default]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], HomePage);
+      "./src/app/parents/parents.page.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])], HomePage);
     /***/
   }
 }]);

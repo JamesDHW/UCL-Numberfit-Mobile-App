@@ -468,6 +468,20 @@
 
     /***/
 
+  },
+
+  /***/
+  "./src/app/config.json":
+  /*!*****************************!*\
+    !*** ./src/app/config.json ***!
+    \*****************************/
+
+  /*! exports provided: server, bucket, default */
+
+  /***/
+  function srcAppConfigJson(module) {
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    /***/
   }
 }]);
 //# sourceMappingURL=default~my-account-my-account-module~register-register-module~sign-in-sign-in-module-es5.js.map

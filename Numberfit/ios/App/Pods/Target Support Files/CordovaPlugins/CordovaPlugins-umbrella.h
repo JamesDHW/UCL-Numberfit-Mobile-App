@@ -10,7 +10,22 @@
 #endif
 #endif
 
-#import "CDVDevice.h"
+#import "AFHTTPSessionManager.h"
+#import "AFNetworking.h"
+#import "AFNetworkReachabilityManager.h"
+#import "AFSecurityPolicy.h"
+#import "AFURLRequestSerialization.h"
+#import "AFURLResponseSerialization.h"
+#import "AFURLSessionManager.h"
+#import "BinaryRequestSerializer.h"
+#import "BinaryResponseSerializer.h"
+#import "CordovaHttpPlugin.h"
+#import "SDNetworkActivityIndicator.h"
+#import "TextRequestSerializer.h"
+#import "TextResponseSerializer.h"
+#import "CDVAssetLibraryFilesystem.h"
+#import "CDVFile.h"
+#import "CDVLocalFilesystem.h"
 #import "NativeStorage.h"
 
 FOUNDATION_EXPORT double CordovaPluginsVersionNumber;

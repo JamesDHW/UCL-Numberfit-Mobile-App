@@ -10,17 +10,19 @@ import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 export class PlaySinglePage implements OnInit {
 
   server           : string = require('../config.json').server;
+  // server           : string = "http://localhost:3000";
   bucket           : string = require('../config.json').bucket;
   cookie           : string;
-  user             : any = {year:5}
-  images           : Array<string>;
-  imgState         : number;
-  pictureRef       : string;
+  user             : any;
   question         : string;
   checkList        : Array<string>;
   answer           : Array<Object>;
+  videos           : Array<string>;
   correctCounter   : number = 0;
   incorrectCounter : number = 0;
+  images           : Array<string>;
+  imgState         : number;
+  pictureRef       : string;
   questionCardEle  : HTMLElement;
   videoEle         : HTMLElement;
 
@@ -36,6 +38,24 @@ export class PlaySinglePage implements OnInit {
     .then((data) => {this.cookie = data.cookie});
     // Get user
     this.user = this.nativeStorage.getItem('user');
+
+    var DOM = this;
+    var xhttp = new XMLHttpRequest();
+
+    // Get videos from DB request response handler
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var videos = JSON.parse(this.responseText);
+        DOM.videos.push(videos["video1"])
+        DOM.videos.push(videos["video2"])
+        DOM.videos.push(videos["video3"])
+      } else if(this.status != 200) {
+        console.log(this.responseText);
+        // DOM.presentAlert();
+      }
+    };
+    xhttp.open("GET", this.server + "/getVideo", true);
+    xhttp.send();
 
     this.prepareProgressBar();
 

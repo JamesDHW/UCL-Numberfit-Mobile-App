@@ -21,11 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-<<<<<<< HEAD
-    __webpack_exports__["default"] = "<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen>\n<ion-card>\n  <ion-card-header>\n    <ion-title class=\"welcome-card-title\">My Account</ion-title>\n  </ion-card-header>\n  <ion-card-content>\n    <form [formGroup]=\"modifyDetailsFormGroup\">\n    <ion-item style=\"margin-top: 20px;\">\n      <ion-label>Name</ion-label>\n      <ion-input value={{name}} readonly style=\"text-align: right;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input value={{email}} readonly type=\"email\" style=\"text-align: right;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Year Group</ion-label>\n      <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>School</ion-label>\n      <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school}}>\n              {{school}}\n            </ion-select-option>\n          </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Change Password</ion-label>\n      <ion-input formControlName=\"password1\" type='password'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Comfirm Password</ion-label>\n      <ion-input formControlName=\"password2\" type='password'></ion-input>\n    </ion-item>\n    <br>\n    <ion-button\n          (click)=\"modifyDetails()\"\n          expand='block'>\n          Confirm Changes\n    </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n";
-=======
     __webpack_exports__["default"] = "<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" fullscreen>\n<ion-card>\n  <ion-card-header>\n    <ion-title class=\"welcome-card-title\">My Account</ion-title>\n  </ion-card-header>\n  <ion-card-content>\n    <form [formGroup]=\"modifyDetailsFormGroup\">\n    <ion-item style=\"margin-top: 20px;\">\n      <ion-label>Name</ion-label>\n      <ion-input value={{name}} readonly style=\"text-align: right;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input value={{email}} readonly type=\"email\" style=\"text-align: right;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Year Group</ion-label>\n      <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>School</ion-label>\n      <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school}}>\n              {{school}}\n            </ion-select-option>\n          </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Change Password</ion-label>\n      <ion-input formControlName=\"password1\" type='password'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Comfirm Password</ion-label>\n      <ion-input formControlName=\"password2\" type='password'></ion-input>\n    </ion-item>\n    <br>\n    <ion-button\n          (click)=\"modifyDetails()\"\n          expand='block'>\n          Confirm Changes\n    </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n";
->>>>>>> save-cookie
     /***/
   },
 
@@ -59,13 +55,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -82,7 +78,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, MyAccountPageRoutingModule);
     };
 
-    MyAccountPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    MyAccountPageRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
       exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })], MyAccountPageRoutingModule);
@@ -119,25 +115,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
@@ -155,7 +151,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, MyAccountPageModule);
     };
 
-    MyAccountPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    MyAccountPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _my_account_routing_module__WEBPACK_IMPORTED_MODULE_5__["MyAccountPageRoutingModule"]],
       declarations: [_my_account_page__WEBPACK_IMPORTED_MODULE_6__["MyAccountPage"]]
     })], MyAccountPageModule);
@@ -210,21 +206,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-    /* harmony import */
-
-
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -234,19 +230,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default =
-    /*#__PURE__*/
-    __webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+    var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__);
+    /* harmony import */
 
-    var MyAccountPage =
-    /*#__PURE__*/
-    function () {
-      function MyAccountPage(router, route, formBuilder) {
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+
+    var MyAccountPage = /*#__PURE__*/function () {
+      function MyAccountPage(nativeStorage, router, route, formBuilder) {
+        var _this = this;
+
         _classCallCheck(this, MyAccountPage);
 
+        this.nativeStorage = nativeStorage;
         this.router = router;
         this.route = route;
-        this.formBuilder = formBuilder;
+        this.formBuilder = formBuilder; // Get server from config file
+
+        this.server = __webpack_require__(
+        /*! ../config.json */
+        "./src/app/config.json").server; // Get cookie from storage
+
+        this.nativeStorage.getItem('cookie').then(function (data) {
+          _this.cookie = data.cookie;
+        });
         this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
         this.schoolList = ['UCL', 'LSE', 'Imperial'];
         this.name = "Loading..";
@@ -254,10 +263,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.modifyDetailsFormGroup = formBuilder.group({
           // name: ["", [Validators.required]],
           // email: ["", [Validators.required, Validators.email]],
-          password1: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-          password2: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-          year: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-          school: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]]
+          password1: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+          password2: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+          year: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+          school: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]]
         });
       }
 
@@ -278,7 +287,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }; // Define and send the GET request
 
 
-          xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=" + this.cookie, true);
+          xhttpDetails.open("GET", this.server + "/myDetails?cookie=" + this.cookie, true);
           xhttpDetails.send();
         }
       }, {
@@ -308,7 +317,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             };
 
             console.log(credentials);
-            xhttp.open('POST', 'http://localhost:3000/modifyDetails', true);
+            xhttp.open('POST', this.server + '/modifyDetails', true);
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify(credentials));
           } else {
@@ -329,13 +338,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-<<<<<<< HEAD
           // this.cookie = this.route.snapshot.paramMap.get('cookie');
           // console.log(this.cookie);
-=======
-          this.cookie = this.route.snapshot.paramMap.get('cookie');
-          console.log(this.cookie);
->>>>>>> save-cookie
           this.getUserDetails(); // this.modifyDetailsFormGroup.reset({name: this.userObj.name});
           // this.modifyDetailsFormGroup.get('name').setValue(this.userObj.name);
         }
@@ -346,23 +350,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     MyAccountPage.ctorParameters = function () {
       return [{
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }, {
-        type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]
       }];
     };
 
-    MyAccountPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    MyAccountPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'app-my-account',
-      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./my-account.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/my-account/my-account.page.html")).default,
-      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/my-account/my-account.page.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./my-account.page.scss */
-      "./src/app/my-account/my-account.page.scss")).default]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])], MyAccountPage);
+      "./src/app/my-account/my-account.page.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])], MyAccountPage);
     /***/
   }
 }]);

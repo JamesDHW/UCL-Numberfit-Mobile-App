@@ -26,6 +26,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/config.json":
+  /*!*****************************!*\
+    !*** ./src/app/config.json ***!
+    \*****************************/
+
+  /*! exports provided: server, bucket, default */
+
+  /***/
+  function srcAppConfigJson(module) {
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    /***/
+  },
+
+  /***/
   "./src/app/subject-select/default_subjects.json":
   /*!******************************************************!*\
     !*** ./src/app/subject-select/default_subjects.json ***!
@@ -69,13 +83,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -92,7 +106,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, SubjectSelectPageRoutingModule);
     };
 
-    SubjectSelectPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    SubjectSelectPageRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
       exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })], SubjectSelectPageRoutingModule);
@@ -129,25 +143,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
@@ -165,7 +179,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, SubjectSelectPageModule);
     };
 
-    SubjectSelectPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    SubjectSelectPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _subject_select_routing_module__WEBPACK_IMPORTED_MODULE_5__["SubjectSelectPageRoutingModule"]],
       declarations: [_subject_select_page__WEBPACK_IMPORTED_MODULE_6__["SubjectSelectPage"]]
     })], SubjectSelectPageModule);
@@ -220,29 +234,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
 
-    var SubjectSelectPage =
-    /*#__PURE__*/
-    function () {
-      function SubjectSelectPage(router, activatedRoute) {
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+
+    var SubjectSelectPage = /*#__PURE__*/function () {
+      function SubjectSelectPage(router, activatedRoute, nativeStorage) {
+        var _this = this;
+
         _classCallCheck(this, SubjectSelectPage);
 
-        // this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
-        // console.log(this.cookie);
         this.router = router;
         this.activatedRoute = activatedRoute;
-        this.subject = "Addition";
-        this.cookie = this.activatedRoute.snapshot.paramMap.get('cookie');
-        console.log(this.cookie); // GET all subjects from Numberfit
+        this.nativeStorage = nativeStorage;
+        this.subject = "Addition"; // Default to Addition
+        // Get server from config file
+
+        this.server = __webpack_require__(
+        /*! ../config.json */
+        "./src/app/config.json").server; // Get cookie from storage
+
+        this.nativeStorage.getItem('cookie').then(function (data) {
+          _this.cookie = data.cookie;
+        }); // GET all subjects from Numberfit
 
         var xhttpSubjects = new XMLHttpRequest();
         var xhttpDetails = new XMLHttpRequest();
@@ -261,31 +287,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }; // Define the listener function for the GET request
 
-<<<<<<< HEAD
-        var xhttpSubjects = new XMLHttpRequest();
-        var xhttpDetails = new XMLHttpRequest();
-        var DOM = this;
-        DOM.subjects = __webpack_require__(
-        /*! ./default_subjects.json */
-        "./src/app/subject-select/default_subjects.json"); // Define the listener function for the GET request
-
-        xhttpSubjects.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            // Subjects GOT now get details to check year group
-            DOM.subjects = JSON.parse(this.responseText);
-            xhttpDetails.send();
-          } else if (this.status != 200) {
-            console.log("GET request failed with satus " + this.status);
-          }
-        }; // Define the listener function for the GET request
-
-
-        xhttpDetails.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            console.log("GET details request succeeded"); // Remove elements not available to that year
-            // By now availableTopics is an attribute of DOM.subjects
-
-=======
 
         xhttpDetails.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
@@ -293,7 +294,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             // By now availableTopics is an attribute of DOM.subjects
 
             console.log(JSON.parse(this.responseText));
->>>>>>> save-cookie
             var repeats = DOM.subjects["availableTopics"].length;
             var deletes = 0;
 
@@ -304,17 +304,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             }
           } else if (this.status != 200) {
-<<<<<<< HEAD
-            console.log("GET request failed with satus " + this.status);
-=======
             console.log("GET details request failed with satus " + this.status);
->>>>>>> save-cookie
           }
         }; // Define and send the GET request
 
 
         xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
-        xhttpDetails.open("GET", "http://localhost:3000/myDetails?cookie=" + this.cookie, true);
+        xhttpDetails.open("GET", this.server + "/myDetails?cookie=" + this.cookie, true);
         xhttpSubjects.send();
       } // Function called when radio button clicked
 
@@ -344,9 +340,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           document.getElementById("btn-play").addEventListener("click", function () {
             // Navigate to the respective page
             if (Number(gamemode) === 0) {
-              DOM.router.navigate(['/play-single', DOM.subject, DOM.cookie]);
+              DOM.router.navigate(['/play-single', DOM.subject]);
             } else {
-              DOM.router.navigate(['/play-multi', DOM.subject, DOM.cookie]);
+              DOM.router.navigate(['/play-multi', DOM.subject]);
             }
           });
         }
@@ -357,21 +353,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     SubjectSelectPage.ctorParameters = function () {
       return [{
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]
+      }, {
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
       }];
     };
 
-    SubjectSelectPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    SubjectSelectPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'app-subject-select',
-      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./subject-select.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/subject-select/subject-select.page.html")).default,
-      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/subject-select/subject-select.page.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./subject-select.page.scss */
-      "./src/app/subject-select/subject-select.page.scss")).default]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])], SubjectSelectPage);
+      "./src/app/subject-select/subject-select.page.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])], SubjectSelectPage);
     /***/
   }
 }]);

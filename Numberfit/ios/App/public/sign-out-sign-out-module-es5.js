@@ -26,6 +26,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/config.json":
+  /*!*****************************!*\
+    !*** ./src/app/config.json ***!
+    \*****************************/
+
+  /*! exports provided: server, bucket, default */
+
+  /***/
+  function srcAppConfigJson(module) {
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    /***/
+  },
+
+  /***/
   "./src/app/sign-out/sign-out.module.ts":
   /*!*********************************************!*\
     !*** ./src/app/sign-out/sign-out.module.ts ***!
@@ -55,31 +69,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -91,7 +105,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, HomePageModule);
     };
 
-    HomePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    HomePageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _sign_out_page__WEBPACK_IMPORTED_MODULE_6__["HomePage"]
@@ -149,71 +163,68 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-    /* harmony import */
-
-
-    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
-    "./node_modules/@ionic-native/native-storage/__ivy_ngcc__/ngx/index.js");
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
 
-    var HomePage =
-    /*#__PURE__*/
-    function () {
-<<<<<<< HEAD
-      function HomePage(nativeStorage, router) {
-=======
-      function HomePage(router) {
->>>>>>> save-cookie
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
+
+    var HomePage = /*#__PURE__*/function () {
+      function HomePage(nativeStorage, router, http) {
         _classCallCheck(this, HomePage);
 
         this.nativeStorage = nativeStorage;
         this.router = router;
+        this.http = http; // server : string = "http://localhost:3000";
+
+        this.server = __webpack_require__(
+        /*! ../config.json */
+        "./src/app/config.json").server; // Get cookie from storage
+
+        this.cookie = this.nativeStorage.getItem('cookie');
       }
 
       _createClass(HomePage, [{
         key: "signOut",
         value: function signOut() {
           var DOM = this;
-<<<<<<< HEAD
-          var xhttp = new XMLHttpRequest(); // xhttp.onreadystatechange = function() {
-          //   if (this.readyState == 4 && this.status == 200) {
-          //     DOM.nativeStorage.setItem('cookie', {cookie: "-"})
-          //     .then(() => {
-          //       console.log("cookie removed")
-          //       DOM.router.navigate(['/sign-in'])
-          //     },
-          //       error => console.error('Error storing item', error)
-          //     );
-          //   } else{
-          //     // Error
-          //     console.log("error", this.responseText);
-          //   }
-          // };
-          // xhttp.open("GET", "http://localhost:3000/logout", true);
-=======
-          var xhttp = new XMLHttpRequest();
-
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              console.log('Logged Out!');
+          console.log("send to", this.server + "/test");
+          this.http.get(this.server + "/test", {}, {}).then(function (data) {
+            DOM.nativeStorage.setItem('cookie', {
+              cookie: "-"
+            }).then(function () {
+              console.log("Cookie removed!");
               DOM.router.navigate(['/sign-in']);
-            } else {
-              // Error
-              console.log(this.responseText);
-            }
-          };
+            }, function (error) {
+              return console.error('Error storing item', error);
+            });
+            console.log(data.status);
+            console.log(data.data); // data received by server
 
-          xhttp.open("GET", "http://localhost:3000/logout", true);
->>>>>>> save-cookie
+            console.log(data.headers);
+          })["catch"](function (error) {
+            console.log("ERRORS FOUND");
+            console.log(error.status);
+            console.log(error.error); // error message as string
+
+            console.log(error);
+          });
         }
       }]);
 
@@ -222,25 +233,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     HomePage.ctorParameters = function () {
       return [{
-        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
       }];
     };
 
-    HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'app-sign-out',
-      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./sign-out.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-out/sign-out.page.html")).default,
-      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/sign-out/sign-out.page.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./sign-out.page.scss */
-      "./src/app/sign-out/sign-out.page.scss")).default]
-<<<<<<< HEAD
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], HomePage);
-=======
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], HomePage);
->>>>>>> save-cookie
+      "./src/app/sign-out/sign-out.page.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], HomePage);
     /***/
   }
 }]);

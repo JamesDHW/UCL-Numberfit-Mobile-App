@@ -2,7 +2,7 @@ PODS:
   - Capacitor (2.0.1):
     - CapacitorCordova (= 2.0.1)
   - CapacitorCordova (2.0.1)
-  - CordovaPlugins (2.0.0):
+  - CordovaPlugins (2.0.1):
     - CapacitorCordova
 
 DEPENDENCIES:
@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 893baa42b33635ddf23d29d23d2a7f33f7c08bc7
   CapacitorCordova: 9fee2eb6780331b6ff09710d6a7d1f2e4707f1b9
-  CordovaPlugins: b885e5cc190b69cad754b23e84e89784105da54d
+  CordovaPlugins: 7a905a0c54cf48d71b09911af750932416257580
 
 PODFILE CHECKSUM: ff24dfb46c2fa7275b23e15258afa59a2a37a315
 

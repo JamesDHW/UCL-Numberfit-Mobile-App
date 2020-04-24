@@ -17,7 +17,8 @@ export class SignInPage {
 
   signInFormGroup : FormGroup;
   server          : string = require('../config.json').server;
-  cookie          : string;
+  // server          : string = "http://localhost:3000";
+  cookie          : any;
 
   constructor(
     private nativeStorage   : NativeStorage,
@@ -25,11 +26,8 @@ export class SignInPage {
     private router          : Router,
     formBuilder             : FormBuilder,
   ) {
-    // Get server from config file
-    // this.server = require('../config.json').server;
     // Get cookie from storage
-    this.nativeStorage.getItem('cookie')
-    .then((data) => {this.cookie = data.cookie});
+    this.cookie = this.nativeStorage.getItem('cookie');
 
     // Initialise sign in form group
     this.signInFormGroup = formBuilder.group({
@@ -47,11 +45,13 @@ export class SignInPage {
 
     var DOM = this;
     var xhttp = new XMLHttpRequest();
-
+    console.log(this.server)
     // Login request response handler
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         var user = JSON.parse(this.responseText);
+        console.log("user: ", user)
+        console.log("response: ", this.responseText)
         DOM.nativeStorage.setItem('cookie', {cookie: user.cookie})
         .then(() => {
           DOM.nativeStorage.setItem('user', {
@@ -62,11 +62,12 @@ export class SignInPage {
             teacher  : user.teacher,
           })
           .then(() => {
-            DOM.router.navigate(['/play'])
+            console.log("got to play")
+            // DOM.router.navigate(['/play'])
           }, error => console.error('Error storing user', error));
         }, error => console.error('Error storing cookie', error));
       } else if(this.status != 200) {
-        console.log(this.responseText);
+        console.log("error occured:",this.responseText);
         DOM.presentAlert();
       }
     };

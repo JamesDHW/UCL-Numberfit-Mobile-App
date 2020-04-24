@@ -57,15 +57,20 @@ app.post('/register', require('./requests/register').register)
 
 // Logout request
 app.get('/logout', function(req, res){
-  req.logout();
-  req.session.destroy();
+  // req.logout();
+  // req.session.destroy();
+  console.log("recieved")
+  res.send("OK");
 });
 
 // Get user's details
 app.get('/myDetails', require('./requests/myDetails').myDetails);
 
 // Add new School - done via web page
-app.get('/add-school', require('./requests/add-school').add_school)
+app.get('/addSchool', require('./requests/addSchool').addSchool)
+
+// Add new School - done via web page
+app.get('/getVideo', require('./requests/getVideo').getVideo)
 
 // Listen on PORT
 app.listen(PORT, () => {
