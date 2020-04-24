@@ -11,16 +11,10 @@ export class PlaySinglePage implements OnInit {
   images: Array<string>;
   imgState: number;
   bucket:string = "https://primary-app-resources.s3.eu-west-2.amazonaws.com";
-  user:any = {year:1};
+  user:any = {year:5};
   pictureRef: string;
-  questionArray: Array<string>;
-  questionCard: string;
-  questionState: number;
-  correctAnswer: number; // button number
-  answerOptions: Array<number>;
-  color: string;
-  correctCounter: number;
-  incorrectCounter: number;
+  correctCounter: number = 0;
+  incorrectCounter: number = 0;
   questionCardEle: HTMLElement;
   videoEle: HTMLElement;
   cookie: string;
@@ -30,13 +24,12 @@ export class PlaySinglePage implements OnInit {
 
 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
 
     this.prepareProgressBar();
-
-    this.prepareQuestions();
-
-    this.prepareCounter();
 
     this.play();
 
@@ -81,24 +74,19 @@ export class PlaySinglePage implements OnInit {
       if(this.checkWin()){
         return;
       }
-      this.updateQuestionCard();
       this.correctCounter += 1;
+      //every 3 questions
       if (this.correctCounter%3==0){
         this.switchVideoQuestions(true);
       }
     }
     else {
       this.playAudio(false);
-      this.updateQuestionCard();
       this.incorrectCounter += 1;
     }
     this.play()
   }
 
-  prepareCounter(){
-    this.correctCounter = 0;
-    this.incorrectCounter = 0;
-  }
 
   prepareProgressBar(){
     this.imgState = 0;
@@ -106,18 +94,6 @@ export class PlaySinglePage implements OnInit {
     this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
 
     this.pictureRef = this.images[this.imgState];
-  }
-
-  prepareQuestions(){
-    this.questionState = 0;
-
-    this.questionArray = ['Question1', 'Question2', 'Question3','Question4', 'Question5']; //read from database
-
-    this.questionCard = this.questionArray[this.questionState];
-
-    this.answerOptions = [123,456,789,112]; // read from database
-
-    this.correctAnswer = 1;//Math.ceil(Math.random() * 4); // read from database
   }
 
   shuffleAnswerOptions(array:Array<object>) {
@@ -201,17 +177,6 @@ export class PlaySinglePage implements OnInit {
       })
     }
     return false;
-  }
-
-  // the question card changes regardless of correctness
-  updateQuestionCard(){
-    this.questionState = ++this.questionState % this.questionArray.length;
-    this.questionCard = this.questionArray[this.questionState];
-    // assume answerOptions has been read from database
-    var correctAnswerNumber = this.answerOptions[0];
-    this.answerOptions = this.shuffleAnswerOptions(this.answerOptions);
-    this.correctAnswer = this.answerOptions.indexOf(correctAnswerNumber)+1;
-    console.log("correct answer is: "+this.correctAnswer);
   }
 
 }
