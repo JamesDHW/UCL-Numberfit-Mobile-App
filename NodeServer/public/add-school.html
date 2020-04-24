@@ -9,11 +9,12 @@
     <div class="form">
       <img src="./NumberfitLogo.png" style="width: 75%">
       <br><br>
-      <form class="register-form" action="#" method="post">
+      <form class="register-form" action="http://localhost:3000/add-school" method="get" id="form1">
         <label>Add a School</label>
         <br><br>
-        <input type="text" placeholder="School name" name="school">
-        <button>Submit.</button>
+        <input type="text" placeholder="Verify code" name="code">
+        <input type="text" placeholder="School name" name="name">
+        <button type="submit" form="form1" value="Submit">Submit.</button>
       </form>
       <br>
       <button onclick="goBack()">Cancel.</button>

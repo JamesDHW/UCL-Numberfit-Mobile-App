@@ -1,5 +1,6 @@
 const User  = require('../config/schema').User; // Mongoose model
 const Pupil = require('../config/schema').Pupil; // Mongoose model
+const Teacher = require('../config/schema').Teacher; // Mongoose model
 
 module.exports.register = function (req, res) {
   User.find({ username : req.body.username }, function(err, users){
