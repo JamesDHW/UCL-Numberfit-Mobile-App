@@ -20,8 +20,8 @@ export class HomePage {
   lines      : any;
   bars       : any;
   colorArray : any;
-  results: [];
-  dates: [];
+  games      : any;
+  badges     : any = [];
 
   constructor(
     private nativeStorage : NativeStorage,
@@ -39,21 +39,18 @@ export class HomePage {
     this.http.get(this.server+"/progress?cookie="+this.cookie,{},{})
 
     .then(data => {
-      data = JSON.parse(data.data)
-      DOM.results = data.data;
-      DOM.dates = data["dates"]      
+      this.games = JSON.parse(data.data)
+
       console.log(data.status);
       console.log(data.data); // data received by server
       console.log(data.headers);
 
     })
     .catch(error => {
-
       console.log("ERRORS FOUND")
       console.log(error.status);
       console.log(error.error); // error message as string
       console.log(error);
-
     });
 
   };
@@ -69,10 +66,10 @@ export class HomePage {
   this.lines = new Chart(this.lineChart.nativeElement, {
     type: 'line',
     data: {
-      labels: this.dates,
+      labels: this.games["date"],
       datasets: [{
         label: 'Score',
-        data: this.results,
+        data: this.games["data"],
         borderColor: 'rgb(10, 10, 220)',// array should have same number of elements as number of dataset
         borderWidth: 1
       },
@@ -92,29 +89,61 @@ export class HomePage {
  }
 
  createBarChart() {
-  this.bars = new Chart(this.barChart.nativeElement, {
-    type: 'bar',
-    data: {
-      labels: this.dates,
-      datasets: [{
-        label: 'Minutes',
-        data: this.results,
-        backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-        borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
+   this.bars = new Chart(this.barChart.nativeElement, {
+     type: 'bar',
+     data: {
+       labels: this.games["date"],
+       datasets: [{
+         label: 'Games',
+         data: this.games["data"],
+         backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
+         borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+         borderWidth: 1
+       }]
+     },
+     options: {
+       scales: {
+         yAxes: [{
+           ticks: {
+             beginAtZero: true
+           }
+         }]
+       }
+     }
+   });
+  }
+
+  drawBadges(){
+    var topics = this.games
+    delete topics["data"];
+    delete topics["date"];
+    for(var key of Object.keys(topics)){
+      if(topics[key] > 50){
+        this.badges.push({
+          topic : key,
+          rank  : "Master",
+          image : "../../assets/badges/master.png"
+        })
+      } else if(topics[key] > 35){
+        this.badges.push({
+          topic : key,
+          rank  : "Expert",
+          image : "../../assets/badges/expert.png"
+        })
+      } else if(topics[key] > 20){
+        this.badges.push({
+          topic : key,
+          rank  : "Advanced",
+          image : "../../assets/badges/advanced.png"
+        })
+      } else if(topics[key] > 5){
+        this.badges.push({
+          topic : key,
+          rank  : "Novice",
+          image : "../../assets/badges/novice.png"
+        })
       }
     }
-  });
-}
-
+  }
 
 }
