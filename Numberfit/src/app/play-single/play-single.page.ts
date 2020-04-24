@@ -12,43 +12,59 @@ export class PlaySinglePage implements OnInit {
   server           : string = require('../config.json').server;
   bucket           : string = require('../config.json').bucket;
   cookie           : string;
-  user             : any;
+  user             : any = {year:5}
   images           : Array<string>;
   imgState         : number;
   pictureRef       : string;
-  questionArray    : Array<string>;
-  questionCard     : string;
-  questionState    : number;
-  correctAnswer    : number; // button number
-  answerOptions    : Array<number>;
-  color            : string;
+  question         : string;
+  checkList        : Array<string>;
+  answer           : Array<Object>;
   correctCounter   : number = 0;
   incorrectCounter : number = 0;
   questionCardEle  : HTMLElement;
   videoEle         : HTMLElement;
-  // ans1: number;
+
 
 
   constructor(
-    private router          : Router,
-    private activatedRoute  : ActivatedRoute,
-    private nativeStorage   : NativeStorage,
+    private activatedRoute : ActivatedRoute,
+    private nativeStorage  : NativeStorage,
+    private router         : Router,
   ) {
-    // Get server from config file
-    // this.server = require('../config.json').server;
-    // Get cookie from storage
+    // Get cookie
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
-
+    // Get user
     this.user = this.nativeStorage.getItem('user');
 
     this.prepareProgressBar();
 
-    this.prepareQuestions();
-
-    this.getQuestionCards();
+    this.play();
 
   }
+
+  play(){
+    let subject = this.activatedRoute.snapshot.paramMap.get("subject");
+    let qSetNumber =  18; // Number of question sets
+    if(this.user.year == 1 && subject != "Time"){
+      qSetNumber = 6; // For some reason year one have fewer resources on all but Time
+    }
+    this.checkList = [];
+    this.answer = [];
+    while(this.answer.length!=4){
+      let page = 4*Math.floor(Math.random() * qSetNumber);
+      let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
+      let ques = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
+      let ans = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      if(!this.checkList.includes(this.question)){
+        this.question = ques
+        this.answer.push({question:this.question, answer:ans})
+      }
+    }
+    this.shuffleAnswerOptions(this.answer)
+    console.log(this.answer)
+    console.log(this.question)
+  };
 
   ngOnInit() {
     this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
@@ -81,26 +97,27 @@ export class PlaySinglePage implements OnInit {
   }
 
   // main operating function for the whole process
-  updateProgress(userAnswer:number){
+  updateProgress(i:number){
     // check if the answer is correct
-    if (userAnswer==this.correctAnswer){
+    if (this.answer[i]["question"]==this.question){
       // play video when needed
+      this.checkList.push(this.question)
       this.playAudio(true);
       this.updateProgressBar();
       if(this.checkWin()){
         return;
       }
-      this.updateQuestionCard();
       this.correctCounter += 1;
+      //every 3 questions
       if (this.correctCounter%3==0){
         this.switchVideoQuestions(true);
       }
     }
     else {
       this.playAudio(false);
-      this.updateQuestionCard();
       this.incorrectCounter += 1;
     }
+    this.play()
   }
 
   prepareProgressBar(){
@@ -111,20 +128,7 @@ export class PlaySinglePage implements OnInit {
     this.pictureRef = this.images[this.imgState];
   }
 
-  prepareQuestions(){
-
-    this.questionState = 0;
-
-    this.questionArray = ['Question1', 'Question2', 'Question3','Question4', 'Question5']; //read from database
-
-    this.questionCard  = this.questionArray[this.questionState];
-
-    this.answerOptions = [123,456,789,112]; // read from database
-
-    this.correctAnswer = 1;//Math.ceil(Math.random() * 4); // read from database
-  }
-
-  shuffleAnswerOptions(array:Array<number>) {
+  shuffleAnswerOptions(array:Array<object>) {
     array.sort(() => Math.random() - 0.5);
     return array;
   }
@@ -223,17 +227,6 @@ export class PlaySinglePage implements OnInit {
       })
     }
     return false;
-  }
-
-  // the question card changes regardless of correctness
-  updateQuestionCard(){
-    this.questionState = ++this.questionState % this.questionArray.length;
-    this.questionCard = this.questionArray[this.questionState];
-    // assume answerOptions has been read from database
-    var correctAnswerNumber = this.answerOptions[0];
-    this.answerOptions = this.shuffleAnswerOptions(this.answerOptions);
-    this.correctAnswer = this.answerOptions.indexOf(correctAnswerNumber)+1;
-    console.log("correct answer is: "+this.correctAnswer);
   }
 
 }
