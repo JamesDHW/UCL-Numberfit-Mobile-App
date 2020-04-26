@@ -74,6 +74,7 @@ export class PlayMultiPage implements OnInit {
         this.topUserObj.updateStatus(true);
         this.topUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
         if(this.checkWin(this.top_progress)){
+          this.winningEffect(true);
           return;
         }
       } else {
@@ -91,6 +92,7 @@ export class PlayMultiPage implements OnInit {
         this.bottomUserObj.updateStatus(true);
         this.bottomUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
         if(this.checkWin(this.bottom_progress)){
+          this.winningEffect(true);
           return;
         }
       } else {
@@ -100,6 +102,65 @@ export class PlayMultiPage implements OnInit {
       }
     }
     
+  }
+
+  displayEnd(){
+    let endSection = <HTMLElement>document.querySelector(".end-section");
+    let overlaySection = <HTMLElement>document.querySelector(".overlay-section");
+    overlaySection.style.opacity = "30%";
+    endSection.style.visibility = "visible";
+  }
+
+  enableButtons(enable: boolean) {
+    let choiceButtons = document.querySelectorAll(".choice-button");
+    let choiceButtonsRotate = document.querySelectorAll(".choice-button-rotate");
+    for(var i=0; i<choiceButtons.length; i++){
+      let button = <HTMLInputElement>choiceButtons[i];
+      let buttonRotate = <HTMLInputElement>choiceButtonsRotate[i];
+      button.disabled = !enable;
+      buttonRotate.disabled = !enable;
+    }
+  }
+
+  sleep(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  winningEffect(topWin:boolean){
+    this.enableButtons(false);
+    let gameSection1 = <HTMLElement>document.querySelector('.game-section1');
+    let progressBar = <HTMLElement>document.querySelector('.middle-progress-section');
+    let gameSection2 = <HTMLElement>document.querySelector('.game-section2');
+
+    let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
+    let ele2 = <HTMLElement>document.querySelector('.board');
+    let ele3 = <HTMLElement>document.querySelector('.winning-container');
+    let ele4 = <HTMLElement>document.querySelector('.congrats-label');
+    let ele5 = <HTMLElement>document.querySelector('#star-animation');
+
+    //rotate if top user wins
+    if(topWin){
+      ele2.style.transform = "rotate(180deg)";
+      ele3.style.transform = "rotate(180deg)";
+    }
+
+    // star rain appears first
+    ele5.style.visibility = "visible";
+
+    this.sleep(2000).then(() => {
+      gameSection1.style.visibility = "hidden";
+      progressBar.style.visibility = "hidden";
+      gameSection2.style.visibility = "hidden";
+      ele1.style.animationPlayState = "running";
+      ele2.style.visibility = "hidden";
+      ele3.style.visibility = "visible";
+      ele4.style.width = "100%";
+    })
+    // redirect to play page after congrats
+    this.sleep(8000).then(() => {
+      ele5.style.visibility = "hidden";
+      this.displayEnd();
+    })
   }
 
   playAudio(correctness:boolean){
@@ -114,7 +175,7 @@ export class PlayMultiPage implements OnInit {
   }
 
   updateProgressTop(){
-    this.top_progress = ++this.top_progress%this.images.length;
+    this.top_progress = ++this.top_progress;//%this.images.length;
     if(this.top_progress<=5){ 
       this.top_right = 'tiger' + this.images[this.top_progress];
       this.middle_right = 'tiger' + this.images[9];
@@ -126,7 +187,7 @@ export class PlayMultiPage implements OnInit {
   }
 
   updateProgressBottom(){
-    this.bottom_progress = ++this.bottom_progress%this.images.length;
+    this.bottom_progress = ++this.bottom_progress;//%this.images.length;
     if(this.bottom_progress<=5){
       this.bottom_left = 'lion' + this.images[this.bottom_progress];
       this.middle_left = 'lion' + this.images[9];
@@ -139,7 +200,7 @@ export class PlayMultiPage implements OnInit {
   }
 
   checkWin(progress: number): boolean {
-    if (progress >= 8) {
+    if (progress >= 9) {
       return true;
     } else {
       return false;
@@ -170,7 +231,7 @@ class onePlayerWrapper{
   }
 
   updateQuestionCard(questionArray: Array<string>, answerOptions:Array<number>){
-    this.questionState = ++this.questionState % questionArray.length;
+    this.questionState = ++this.questionState;// % questionArray.length;
     this.questionCard = questionArray[this.questionState];
     // assume answerOptions has been read from database
     var correctAnswerNumber = answerOptions[0];

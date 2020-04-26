@@ -21,7 +21,7 @@ export class PlaySinglePage implements OnInit {
   question: string;
   answer: Array<object>;
   checkList: Array<string>;
-
+  subject: any;
 
 
   constructor(
@@ -36,9 +36,9 @@ export class PlaySinglePage implements OnInit {
   }
 
   play(){
-    let subject = this.activatedRoute.snapshot.paramMap.get("subject");
+    // let subject = this.activatedRoute.snapshot.paramMap.get("subject");
     let qSetNumber =  18; // Number of question sets
-    if(this.user.year == 1 && subject != "Time"){
+    if(this.user.year == 1 && this.subject != "Time"){
       qSetNumber = 6; // For some reason year one have fewer resources on all but Time
     }
     this.checkList = [];
@@ -46,8 +46,8 @@ export class PlaySinglePage implements OnInit {
     while(this.answer.length!=4){
       let page = 4*Math.floor(Math.random() * qSetNumber);
       let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
-      let ques = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
-      let ans = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
+      let ans = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
       if(!this.checkList.includes(this.question)){
         this.question = ques
         this.answer.push({question:this.question, answer:ans})
@@ -61,6 +61,7 @@ export class PlaySinglePage implements OnInit {
   ngOnInit() {
     this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
     this.videoEle = document.querySelector('.video-container');
+    this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
   }
 
   // main operating function for the whole process
@@ -85,6 +86,13 @@ export class PlaySinglePage implements OnInit {
       this.incorrectCounter += 1;
     }
     this.play()
+  }
+
+  displayEnd(){
+    let endSection = <HTMLElement>document.querySelector(".end-section");
+    let overlaySection = <HTMLElement>document.querySelector(".overlay-section");
+    overlaySection.style.opacity = "30%";
+    endSection.style.visibility = "visible";
   }
 
 
@@ -172,7 +180,7 @@ export class PlaySinglePage implements OnInit {
       // redirect to play page after congrats
       this.sleep(8000).then(() => {
         ele5.style.visibility = "hidden";
-        this.router.navigateByUrl('/play');
+        this.displayEnd();
         return true;
       })
     }

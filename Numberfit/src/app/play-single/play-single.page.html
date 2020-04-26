@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-content">
+  <section class="overlay-section">
   <section class="winning-container">
     <img id="balloon-effect" src="/assets/Winning-decoration/balloon.png"/>
   <img id="center-star" src="/assets/Winning-decoration/big_star.gif"/>
@@ -67,4 +68,13 @@
     </ion-row>
   </section>
 </section>
+</section>
+<ion-fab class="end-section" vertical="center" horizontal="center" slot="fixed">
+  <ion-fab-button id="replay-button" [routerLink]="['/subject-select/0']">
+    <ion-icon name="refresh-outline"></ion-icon>
+  </ion-fab-button>
+<ion-fab-button id="exit-button" [routerLink]="['/play']">
+    <ion-icon name="exit-outline"></ion-icon>
+</ion-fab-button>
+</ion-fab>
 </ion-content>

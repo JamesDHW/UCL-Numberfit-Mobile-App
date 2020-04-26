@@ -2,7 +2,18 @@
 </ion-header>
 
 <ion-content class="ion-multi-content">
-  <ion-row>
+  <section class="overlay-section">
+    <section class="winning-container">
+      <img id="balloon-effect" src="/assets/Winning-decoration/balloon.png"/>
+    <img id="center-star" src="/assets/Winning-decoration/big_star.gif"/>
+    <p id="congrats-font">Congratulations!</p><br>
+    <section class="congrats-label"></section>
+    </section>
+    <section class="board">
+      <section>
+        <img id="star-animation" src="/assets/Winning-decoration/star_animation.gif"/>
+      </section>
+  <ion-row class="game-section1">
     <ion-col size="10">
       <section>
         <ion-row class="choice-row">
@@ -58,7 +69,7 @@
   <!-- <section class="section">
     <img src="/assets/progress-multiplayer/Picture1.png"/>
   </section> -->
-  <ion-row>
+  <ion-row class="game-section2">
     <ion-col size="2" class="bottom-left-progress-bar">
       <img src="/assets/progress-multiplayer/{{bottom_left}}.png"/>
     </ion-col>
@@ -100,4 +111,14 @@
       </section>
     </ion-col>
   </ion-row>
+</section>
+</section>
+  <ion-fab class="end-section" vertical="center" horizontal="center" slot="fixed">
+    <ion-fab-button id="replay-button" [routerLink]="['/subject-select/1']">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-fab-button>
+  <ion-fab-button id="exit-button" [routerLink]="['/play']">
+      <ion-icon name="exit-outline"></ion-icon>
+  </ion-fab-button>
+  </ion-fab>
 </ion-content>
