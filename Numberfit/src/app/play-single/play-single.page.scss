@@ -42,6 +42,10 @@
   --background: url('/assets/progress-singleplayer/background3.png') 100% 100%;
 }
 
+.overlay-section {
+  opacity: 100%;
+}
+
 .board {
   visibility: visible;
   overflow: hidden;
@@ -224,4 +228,17 @@
   font-weight: 600;
   font-size: 30px;
   color: rgb(111, 182, 111);
+}
+
+#replay-button {
+  --background: rgba(39, 201, 139, 0.897);
+  margin-bottom: 20%;
+}
+
+#exit-button {
+  --background: rgba(190, 41, 15, 0.897);
+}
+
+.end-section {
+  visibility: hidden;
 }

@@ -12,7 +12,6 @@ import { HTTP }          from '@ionic-native/http/ngx';
 })
 
 export class HomePage {
-  @ViewChild('barChart', {static: false}) barChart;
   @ViewChild('lineChart', {static: false}) lineChart;
 
   server     : string = require('../config.json').server;
@@ -57,7 +56,6 @@ export class HomePage {
 
 
   ionViewDidEnter() {
-   this.createBarChart();
    this.createLineChart();
  }
 
@@ -88,30 +86,6 @@ export class HomePage {
   });
  }
 
- createBarChart() {
-   this.bars = new Chart(this.barChart.nativeElement, {
-     type: 'bar',
-     data: {
-       labels: this.games["date"],
-       datasets: [{
-         label: 'Games',
-         data: this.games["data"],
-         backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-         borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-         borderWidth: 1
-       }]
-     },
-     options: {
-       scales: {
-         yAxes: [{
-           ticks: {
-             beginAtZero: true
-           }
-         }]
-       }
-     }
-   });
-  }
 
   drawBadges(){
     for(var key of Object.keys(this.games)){

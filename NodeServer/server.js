@@ -66,6 +66,8 @@ app.get('/logout', function(req, res){
 // Get user's details
 app.get('/myDetails', require('./requests/myDetails').myDetails);
 
+app.get('/getVideo', require('./requests/getVideo').getVideo);
+
 // Add new School - done via web page
 app.get('/addSchool', require('./requests/addSchool').addSchool)
 

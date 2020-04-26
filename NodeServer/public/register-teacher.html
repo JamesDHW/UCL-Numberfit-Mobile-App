@@ -2,6 +2,8 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 </head>
 
 <body>
@@ -9,7 +11,7 @@
     <div class="form">
       <img src="./NumberfitLogo.png" style="width: 75%">
       <br><br>
-      <form class="register-form" action="http://localhost:3000/register" method="post">
+      <form class="register-form" id="myForm">
         <label>Register Teacher App Account</label>
         <br><br>
         <input type="text" placeholder="name" name="name">
@@ -18,12 +20,12 @@
         <input type="password" placeholder="confirm password" name="password2">
         <select name="school">
             <option value="" disabled selected hidden>Select A School</option>
-            <option value="volvo">Numberfit</option>
-            <option value="saab">School1</option>
-            <option value="opel">School2</option>
-            <option value="audi">School3</option>
+            <option value="Numberfit">Numberfit</option>
+            <option value="School1">School1</option>
+            <option value="School2">School2</option>
+            <option value="School3">School3</option>
           </select>
-        <button type="submit">Create an account</button>
+        <button onclick="register()" type="submit">Create an account</button>
       </form>
       <br>
       <button onclick="goBack()">Cancel.</button>
@@ -32,5 +34,40 @@
 </body>
 
 <script>
-function goBack() { window.history.back(); }
+  function register(){
+    let elemments = document.getElementById("myForm").elements;
+    
+    const password1 = elemments.namedItem("password1").value;
+    const password2 = elemments.namedItem("password2").value;
+    
+    const credentials = {
+      username : elemments.namedItem("username").value,
+      name     : elemments.namedItem("name").value,
+      school   : elemments.namedItem("school").value,
+      password : CryptoJS.MD5(password1).toString(),
+      teacher  : true
+    };
+
+    if (password1==password2 && password1.length>7){
+      httpRequest(credentials);
+    } else {
+      alert("Please ensure your password is at least 8 characters and matches the confirmation field");
+    }
+
+  }
+  function httpRequest(credentials){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      } else if(this.status != 200) {
+        console.log(this.responseText);
+      }
+    };
+
+    xhttp.open('POST', 'http://localhost:3000/register', true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(credentials));
+  }
+  function goBack() { window.history.back(); }
 </script>
