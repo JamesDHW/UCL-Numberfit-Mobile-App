@@ -33775,7 +33775,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">Student Name: </ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n  <ion-card-header>\n    <ion-card-title>Playing Time</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #barChart></canvas>\n  </ion-card-content>\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <div style=\"margin-left: 25%; margin-right: 25%\" *ngFor=\"let badge of badges\">\n    <img style=\"width: 50% !important\" src=\"{{badge.image}}\">\n    <br>\n    <h3>{{badge.topic}}</h3>\n    <h4>{{badge.rank}}</h4>\n  </div>\n</ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">Student Name: </ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <div style=\"margin-left: 25%; margin-right: 25%\" *ngFor=\"let badge of badges\">\n    <img style=\"width: 50% !important\" src=\"{{badge.image}}\">\n    <br>\n    <h3>{{badge.topic}}</h3>\n    <h4>{{badge.rank}}</h4>\n  </div>\n</ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -33935,7 +33935,6 @@ let HomePage = class HomePage {
     }
     ;
     ionViewDidEnter() {
-        this.createBarChart();
         this.createLineChart();
     }
     createLineChart() {
@@ -33950,30 +33949,6 @@ let HomePage = class HomePage {
                         borderWidth: 1
                     },
                 ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                }
-            }
-        });
-    }
-    createBarChart() {
-        this.bars = new chart_js__WEBPACK_IMPORTED_MODULE_2__["Chart"](this.barChart.nativeElement, {
-            type: 'bar',
-            data: {
-                labels: this.games["date"],
-                datasets: [{
-                        label: 'Games',
-                        data: this.games["data"],
-                        backgroundColor: 'rgb(38, 194, 129)',
-                        borderColor: 'rgb(38, 194, 129)',
-                        borderWidth: 1
-                    }]
             },
             options: {
                 scales: {
@@ -34029,10 +34004,6 @@ HomePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] }
 ];
-tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('barChart', { static: false }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
-], HomePage.prototype, "barChart", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('lineChart', { static: false }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)

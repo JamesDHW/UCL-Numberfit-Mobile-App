@@ -945,7 +945,7 @@ let SignedInGuard = class SignedInGuard {
     }
     canActivate(next, state) {
         console.log("Sign In Guard");
-        return true;
+        // return true;
         return this.nativeStorage.getItem('cookie')
             .then((data) => {
             console.log("Signed In Cookie: ", data);

@@ -9,23 +9,24 @@ import { ElementFinder }         from 'protractor';
   styleUrls   : ['./play-multi.page.scss'],
 })
 export class PlayMultiPage implements OnInit {
-  server         : string;
-  cookie         : string;
-  images         : Array<number>;
-  imgState       : number;
-  top_right      : string;
-  bottom_left    : string;
-  middle_right   : string;
-  middle_left    : string;
-  middle_center  : string;
-  top_progress  : number;
+  server          : string = require('../config.json').server;
+  bucket          : string = require('../config.json').bucket;
+  cookie          : string;
+  images          : Array<number>;
+  imgState        : number;
+  top_right       : string;
+  bottom_left     : string;
+  middle_right    : string;
+  middle_left     : string;
+  middle_center   : string;
+  top_progress    : number;
   bottom_progress : number;
-  topUserObj     : onePlayerWrapper;
-  bottomUserObj  : onePlayerWrapper;
-  pictureRef     : string;
-  questionArray  : Array<string>;
-  answerOptions  : Array<number>;
-  color          : string;
+  topUserObj      : onePlayerWrapper;
+  bottomUserObj   : onePlayerWrapper;
+  pictureRef      : string;
+  questionArray   : Array<string>;
+  answerOptions   : Array<number>;
+  color           : string;
   // questionCardEle: HTMLElement;
   // videoEle: HTMLElement;
 
@@ -34,8 +35,6 @@ export class PlayMultiPage implements OnInit {
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,
   ) {
-    // Get server from config file
-    this.server = require('../config.json').server;
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});

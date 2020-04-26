@@ -1,6 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit }      from '@angular/core';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
+import { HTTP }                   from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-play-single',
@@ -32,6 +33,8 @@ export class PlaySinglePage implements OnInit {
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,
     private router         : Router,
+    private http           : HTTP,
+
   ) {
     // Get cookie
     this.nativeStorage.getItem('cookie')
@@ -39,23 +42,37 @@ export class PlaySinglePage implements OnInit {
     // Get user
     this.user = this.nativeStorage.getItem('user');
 
-    var DOM = this;
-    var xhttp = new XMLHttpRequest();
+    this.http.get(this.server + "/getVideo",{},{})
+    .then(data => {
+      var videos = JSON.parse(data.data);
+      this.videos.push(videos["video1"])
+      this.videos.push(videos["video2"])
+      this.videos.push(videos["video3"])
 
-    // Get videos from DB request response handler
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var videos = JSON.parse(this.responseText);
-        DOM.videos.push(videos["video1"])
-        DOM.videos.push(videos["video2"])
-        DOM.videos.push(videos["video3"])
-      } else if(this.status != 200) {
-        console.log(this.responseText);
-        // DOM.presentAlert();
-      }
-    };
-    xhttp.open("GET", this.server + "/getVideo", true);
-    xhttp.send();
+    })
+    .catch(error => {
+      console.log("status", error.status);
+      console.log("error", error.error);
+
+    });
+
+    // var DOM = this;
+    // var xhttp = new XMLHttpRequest();
+    //
+    // // Get videos from DB request response handler
+    // xhttp.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     var videos = JSON.parse(this.responseText);
+    //     DOM.videos.push(videos["video1"])
+    //     DOM.videos.push(videos["video2"])
+    //     DOM.videos.push(videos["video3"])
+    //   } else if(this.status != 200) {
+    //     console.log(this.responseText);
+    //     // DOM.presentAlert();
+    //   }
+    // };
+    // xhttp.open("GET", this.server + "/getVideo", true);
+    // xhttp.send();
 
     this.prepareProgressBar();
 

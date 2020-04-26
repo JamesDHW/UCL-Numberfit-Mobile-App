@@ -243,14 +243,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @ionic/angular */
     "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var SignInPage = /*#__PURE__*/function () {
-      function SignInPage(nativeStorage, alertController, router, formBuilder) {
+      function SignInPage(nativeStorage, alertController, router, http, formBuilder) {
         _classCallCheck(this, SignInPage);
 
         this.nativeStorage = nativeStorage;
         this.alertController = alertController;
         this.router = router;
+        this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server; // Get cookie from storage
@@ -266,45 +273,50 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(SignInPage, [{
         key: "signIn",
         value: function signIn() {
+          var _this = this;
+
           var credentials = {
             'username': this.signInFormGroup.value.email.toLowerCase(),
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
           };
-          var DOM = this;
-          var xhttp = new XMLHttpRequest();
-          console.log(this.server); // Login request response handler
+          this.http.post(this.server + "/login", credentials, {}).then(function (data) {
+            console.log("data:", data.data); // var user = JSON.parse(data.data);
+            // var user = data.data;
+            // console.log("user: ", user)
+            // console.log("response: ", data)
+            // this.nativeStorage.setItem('cookie', {cookie: user.cookie})
+            // .then(() => {
+            //   this.nativeStorage.setItem('user', {
+            //     username : user.username,
+            //     name     : user.name,
+            //     school   : user.school,
+            //     year     : user.year,
+            //     teacher  : user.teacher,
+            //   })
+            //   .then(() => {
+            //     // console.log("got to play")
+            //     this.router.navigate(['/play'])
+            //   }, error => console.error('Error storing user', error));
+            // }, error => console.error('Error storing cookie', error));
+          })["catch"](function (error) {
+            console.log("error here", error.error);
 
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              var user = JSON.parse(this.responseText);
-              console.log("user: ", user);
-              console.log("response: ", this.responseText);
-              DOM.nativeStorage.setItem('cookie', {
-                cookie: user.cookie
-              }).then(function () {
-                DOM.nativeStorage.setItem('user', {
-                  username: user.username,
-                  name: user.name,
-                  school: user.school,
-                  year: user.year,
-                  teacher: user.teacher
-                }).then(function () {
-                  console.log("got to play"); // DOM.router.navigate(['/play'])
-                }, function (error) {
-                  return console.error('Error storing user', error);
-                });
-              }, function (error) {
-                return console.error('Error storing cookie', error);
-              });
-            } else if (this.status != 200) {
-              console.log("error occured:", this.responseText);
-              DOM.presentAlert();
-            }
-          };
-
-          xhttp.open("POST", this.server + "/login", true);
-          xhttp.setRequestHeader("Content-type", "application/json");
-          xhttp.send(JSON.stringify(credentials));
+            _this.presentAlert();
+          }); // var DOM = this;
+          // var xhttp = new XMLHttpRequest();
+          // console.log(this.server)
+          // // Login request response handler
+          // xhttp.onreadystatechange = function() {
+          //   if (this.readyState == 4 && this.status == 200) {
+          //
+          //   } else if(this.status != 200) {
+          //     console.log("error occured:",this.responseText);
+          //     DOM.presentAlert();
+          //   }
+          // };
+          // xhttp.open("POST", this.server + "/login", true);
+          // xhttp.setRequestHeader("Content-type", "application/json");
+          // xhttp.send(JSON.stringify(credentials));
         }
       }, {
         key: "presentAlert",
@@ -329,6 +341,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_7__["HTTP"]
+      }, {
         type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]
       }];
     };
@@ -341,7 +355,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./sign-in.page.scss */
       "./src/app/sign-in/sign-in.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])], SignInPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_7__["HTTP"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])], SignInPage);
     /***/
   }
 }]);

@@ -203,27 +203,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(HomePage, [{
         key: "signOut",
         value: function signOut() {
-          var DOM = this;
+          var _this = this;
+
           console.log("send to", this.server + "/test");
           this.http.get(this.server + "/test", {}, {}).then(function (data) {
-            DOM.nativeStorage.setItem('cookie', {
+            _this.nativeStorage.setItem('cookie', {
               cookie: "-"
             }).then(function () {
               console.log("Cookie removed!");
-              DOM.router.navigate(['/sign-in']);
+
+              _this.router.navigate(['/sign-in']);
             }, function (error) {
               return console.error('Error storing item', error);
             });
-            console.log(data.status);
-            console.log(data.data); // data received by server
-
-            console.log(data.headers);
           })["catch"](function (error) {
-            console.log("ERRORS FOUND");
-            console.log(error.status);
-            console.log(error.error); // error message as string
-
-            console.log(error);
+            console.log("status", error.status);
+            console.log("error", error.error);
           });
         }
       }]);

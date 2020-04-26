@@ -27,28 +27,19 @@ export class HomePage {
 
   signOut(){
 
-    var DOM   = this;
     console.log("send to", this.server+"/test")
     this.http.get(this.server+"/test",{},{})
     .then(data => {
-
-      DOM.nativeStorage.setItem('cookie', {cookie: "-"})
+      this.nativeStorage.setItem('cookie', {cookie: "-"})
       .then(() => {
         console.log("Cookie removed!")
-        DOM.router.navigate(['/sign-in'])
+        this.router.navigate(['/sign-in'])
       }, error => console.error('Error storing item', error));
-
-      console.log(data.status);
-      console.log(data.data); // data received by server
-      console.log(data.headers);
 
     })
     .catch(error => {
-
-      console.log("ERRORS FOUND")
-      console.log(error.status);
-      console.log(error.error); // error message as string
-      console.log(error);
+      console.log("status", error.status);
+      console.log("error", error.error);
 
     });
 

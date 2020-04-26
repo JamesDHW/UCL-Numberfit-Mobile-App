@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart }                from 'chart.js';
 import { NativeStorage }        from '@ionic-native/native-storage/ngx';
-import { Router }        from '@angular/router';
-import { HTTP }          from '@ionic-native/http/ngx';
+import { Router }               from '@angular/router';
+import { HTTP }                 from '@ionic-native/http/ngx';
 
 
 @Component({
@@ -28,37 +28,25 @@ export class HomePage {
     private http          : HTTP,
   ) {
 
-    this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
-    this.drawBadges()
+    // this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
 
     this.http.get(this.server+"/progress?cookie="+this.cookie,{},{})
-
     .then(data => {
       this.games = JSON.parse(data.data)
       this.drawBadges()
-
-      console.log(data.status);
-      console.log(data.data); // data received by server
-      console.log(data.headers);
+      this.createLineChart();
 
     })
     .catch(error => {
       console.log("ERRORS FOUND")
-      console.log(error.status);
-      console.log(error.error); // error message as string
-      console.log(error);
+      console.log("status:", error.status);
+      console.log("error:", error.error); // error message as string
     });
 
   };
-
-
-  ionViewDidEnter() {
-   this.createLineChart();
- }
-
 
  createLineChart() {
   this.lines = new Chart(this.lineChart.nativeElement, {

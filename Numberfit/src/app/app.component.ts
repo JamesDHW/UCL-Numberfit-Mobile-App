@@ -23,7 +23,7 @@ export class AppComponent {
     },
     {
       title: 'Progress',
-      url: '/parents',
+      url: '/student-list',
       icon: 'analytics'
     },
     {

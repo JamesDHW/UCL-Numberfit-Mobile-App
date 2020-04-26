@@ -4,6 +4,7 @@ import { Router }          from '@angular/router';
 import { Md5 }             from 'ts-md5/dist/md5';
 import { NativeStorage }   from '@ionic-native/native-storage/ngx';
 import { AlertController } from '@ionic/angular';
+import { HTTP }            from '@ionic-native/http/ngx';
 
 
 
@@ -24,6 +25,7 @@ export class SignInPage {
     private nativeStorage   : NativeStorage,
     private alertController : AlertController,
     private router          : Router,
+    private http            : HTTP,
     formBuilder             : FormBuilder,
   ) {
     // Get cookie from storage
@@ -43,37 +45,52 @@ export class SignInPage {
       'password' : Md5.hashStr(this.signInFormGroup.value.password)
     }
 
-    var DOM = this;
-    var xhttp = new XMLHttpRequest();
-    console.log(this.server)
-    // Login request response handler
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var user = JSON.parse(this.responseText);
-        console.log("user: ", user)
-        console.log("response: ", this.responseText)
-        DOM.nativeStorage.setItem('cookie', {cookie: user.cookie})
+    this.http.post(this.server + "/login",credentials,{})
+    .then(data => {
+      var user = JSON.parse(data.data);
+      // console.log("user: ", user)
+      // console.log("response: ", data)
+      this.nativeStorage.setItem('cookie', {cookie: user.cookie})
+      .then(() => {
+        var savedUser = {
+          username : user.username,
+          name     : user.name,
+          school   : user.school,
+          teacher  : user.teacher,
+        }
+        if(!user.teacher){
+          savedUser["year"] = user.year
+        }
+        //save info
+        this.nativeStorage.setItem('user', savedUser)
         .then(() => {
-          DOM.nativeStorage.setItem('user', {
-            username : user.username,
-            name     : user.name,
-            school   : user.school,
-            year     : user.year,
-            teacher  : user.teacher,
-          })
-          .then(() => {
-            console.log("got to play")
-            // DOM.router.navigate(['/play'])
-          }, error => console.error('Error storing user', error));
-        }, error => console.error('Error storing cookie', error));
-      } else if(this.status != 200) {
-        console.log("error occured:",this.responseText);
-        DOM.presentAlert();
-      }
-    };
-    xhttp.open("POST", this.server + "/login", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(credentials));
+          // console.log("got to play")
+          this.router.navigate(['/play'])
+        }, error => console.error('Error storing user', error));
+      }, error => console.error('Error storing cookie', error));
+
+    })
+    .catch(error => {
+      console.log("error here", error.error)
+      this.presentAlert();
+
+    });
+
+    // var DOM = this;
+    // var xhttp = new XMLHttpRequest();
+    // console.log(this.server)
+    // // Login request response handler
+    // xhttp.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //
+    //   } else if(this.status != 200) {
+    //     console.log("error occured:",this.responseText);
+    //     DOM.presentAlert();
+    //   }
+    // };
+    // xhttp.open("POST", this.server + "/login", true);
+    // xhttp.setRequestHeader("Content-type", "application/json");
+    // xhttp.send(JSON.stringify(credentials));
 
   }
 

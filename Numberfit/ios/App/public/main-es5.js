@@ -1263,8 +1263,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function canActivate(next, state) {
           var _this2 = this;
 
-          console.log("Sign In Guard");
-          return true;
+          console.log("Sign In Guard"); // return true;
+
           return this.nativeStorage.getItem('cookie').then(function (data) {
             console.log("Signed In Cookie: ", data);
 

@@ -9,7 +9,7 @@ import { NativeStorage }                      from '@ionic-native/native-storage
 })
 
 export class HomePage implements OnInit {
-  server : string;
+  server : string = require('../config.json').server;
   cookie : string;
   selectSchoolGroup : FormGroup;
 
@@ -17,8 +17,6 @@ export class HomePage implements OnInit {
     private nativeStorage : NativeStorage,
     private formBuilder   : FormBuilder,
   ) {
-    // Get server from config file
-    this.server = require('../config.json').server;
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});

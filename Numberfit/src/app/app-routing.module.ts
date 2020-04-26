@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { SignedInGuard } from './signed-in.guard';
 import { SignedOutGuard } from './signed-out.guard';
+import { StudentListGuard } from './student-list.guard';
 
 const routes: Routes = [
   { path: '',
@@ -49,7 +50,7 @@ const routes: Routes = [
   {
     path: 'student-list',
     loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule),
-    canActivate: [SignedInGuard],
+    canActivate: [SignedInGuard, StudentListGuard],
   },
   {
     path: 'my-account',

@@ -1,15 +1,16 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit }      from '@angular/core';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
+import { HTTP }                   from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-student-list',
   templateUrl : './student-list.page.html',
   styleUrls   : ['./student-list.page.scss'],
 })
-export class StudentListPage implements OnInit {
+export class StudentListPage {
 
-  server      : string;
+  server      : string = require('../config.json').server;
   cookie      : string;
   studentList : Array<string>;
   studentID   : number;
@@ -18,34 +19,23 @@ export class StudentListPage implements OnInit {
     private nativeStorage : NativeStorage,
     public activatedRoute : ActivatedRoute,
     public router         : Router,
-
+    private http          : HTTP,
   ) {
-    // Get server from config file
-    this.server = require('../config.json').server;
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
-    this.requestStudentList();
-  }
+    // this.requestStudentList();
 
-  ngOnInit() {
+    this.http.get(this.server+"/studentList?cookie="+this.cookie,{},{})
+    .then(data => {
+      this.studentList = JSON.parse(data.data);
 
-    var xhttpDetails = new XMLHttpRequest();
-    let DOM = this;
+    })
+    .catch(error => {
+      console.log("status", error.status);
+      console.log("error", error.error);
 
-    xhttpDetails.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log("GET details request succeeded");
-        DOM.studentList = JSON.parse(this.responseText);
-      } else if(this.status != 200) {
-        console.log("GET request failed with satus " + this.status);
-        DOM.studentList = ["Amy","Bobbi","Candy","David"];
-      }
-    };
-
-    // Define and send the GET request
-    xhttpDetails.open("GET", this.server+"/studentList?cookie=5e9445193c9c966ce1dcbac6", true);
-    xhttpDetails.send();
+    });
   }
 
   onSelect(student: string){

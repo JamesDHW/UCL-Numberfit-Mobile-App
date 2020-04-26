@@ -1,7 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
 import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { Router }            from '@angular/router';
+import { HTTP }              from '@ionic-native/http/ngx';
 import { Md5 }               from 'ts-md5/dist/md5';
 
 @Component({
@@ -19,8 +20,9 @@ export class RegisterPage implements OnInit {
   schoolList : Array<string>;
 
   constructor(
-    private nativeStorage: NativeStorage,
-    private router: Router,
+    private nativeStorage : NativeStorage,
+    private http          : HTTP,
+    private router        : Router,
     formBuilder: FormBuilder
   ) {
     // Get server from config file
@@ -64,32 +66,73 @@ export class RegisterPage implements OnInit {
     console.log(credentials);
 
     if(password1 == password2 && password1.length > 7){
-      var xhttp = new XMLHttpRequest();
 
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          DOM.cookie = JSON.parse(this.responseText).success
-          console.log(DOM.cookie);
-          DOM.nativeStorage.setItem('cookie', {cookie: DOM.cookie})
-          .then(
-            () => DOM.router.navigate(['/play']),
-            error => console.error('Error storing item', error)
-          );
-        } else if(this.status != 200) {
-          console.log(this.responseText);
+      this.http.post(this.server + "/modifyDetails", credentials, {})
+      .then(data => {
+        var user = JSON.parse(data.data);
+        // console.log("user: ", user)
+        // console.log("response: ", data)
+        this.nativeStorage.setItem('cookie', {cookie: user.cookie})
+        .then(() => {
+          var savedUser = {
+            username : user.username,
+            name     : user.name,
+            school   : user.school,
+            teacher  : user.teacher,
+          }
+          if(!user.teacher){
+            savedUser["year"] = user.year
+          }
+          //save info
+          this.nativeStorage.setItem('user', savedUser)
+          .then(() => {
+            // console.log("got to play")
+            this.router.navigate(['/play'])
+          }, error => console.error('Error storing user', error));
+        }, error => console.error('Error storing cookie', error));
 
-        }
-      };
+      })
+      .catch(error => {
+        console.log("error here",error.error)
+        this.presentAlert();
 
-      xhttp.open('POST', this.server+'/register?', true);
-      xhttp.setRequestHeader("Content-type", "application/json");
-      xhttp.send(JSON.stringify(credentials));
+      });
+
+      // var xhttp = new XMLHttpRequest();
+      //
+      // xhttp.onreadystatechange = function() {
+      //   if (this.readyState == 4 && this.status == 200) {
+      //     DOM.cookie = JSON.parse(this.responseText).success
+      //     console.log(DOM.cookie);
+      //     DOM.nativeStorage.setItem('cookie', {cookie: DOM.cookie})
+      //     .then(
+      //       () => DOM.router.navigate(['/play']),
+      //       error => console.error('Error storing item', error)
+      //     );
+      //   } else if(this.status != 200) {
+      //     console.log(this.responseText);
+      //
+      //   }
+      // };
+      //
+      // xhttp.open('POST', this.server+'/register?', true);
+      // xhttp.setRequestHeader("Content-type", "application/json");
+      // xhttp.send(JSON.stringify(credentials));
 
     } else{
       // error!!!
       alert("Please ensure your password is at least 8 characters and matches the confirmation field");
     }
+  }
 
+  presentAlert() {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Error';
+    alert.message = 'Please check your internet connection.';
+    alert.buttons = ['OK'];
+
+    document.body.appendChild(alert);
+    return alert.present();
   }
 
 }
