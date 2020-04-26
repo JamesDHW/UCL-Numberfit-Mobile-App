@@ -33,10 +33,11 @@
   <ion-card-header>
     <ion-card-title>Badges</ion-card-title>
   </ion-card-header>
-  <ion-card-content *ngFor="let badge of badges">
-    <img src="{{badge.image}}">
-    <lalabel>{{badge.topic}}</lalabel>
-    <p>{{badge.rank}}</p>
-  </ion-card-content>
+  <div style="margin-left: 25%; margin-right: 25%" *ngFor="let badge of badges">
+    <img style="width: 50% !important" src="{{badge.image}}">
+    <br>
+    <h3>{{badge.topic}}</h3>
+    <h4>{{badge.rank}}</h4>
+  </div>
 </ion-card>
 </ion-content>

@@ -34085,7 +34085,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">Student Name: </ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n  <ion-card-header>\n    <ion-card-title>Playing Time</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #barChart></canvas>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">Student Name: </ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n  <ion-card-header>\n    <ion-card-title>Playing Time</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #barChart></canvas>\n  </ion-card-content>\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <div style=\"margin-left: 25%; margin-right: 25%\" *ngFor=\"let badge of badges\">\n    <img style=\"width: 50% !important\" src=\"{{badge.image}}\">\n    <br>\n    <h3>{{badge.topic}}</h3>\n    <h4>{{badge.rank}}</h4>\n  </div>\n</ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -34284,21 +34284,58 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(nativeStorage) {
+      function HomePage(nativeStorage, router, http) {
         var _this = this;
 
         _classCallCheck(this, HomePage);
 
-        this.nativeStorage = nativeStorage; // Get server from config file
-
+        this.nativeStorage = nativeStorage;
+        this.router = router;
+        this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
-        "./src/app/config.json").server; // Get cookie from storage
+        "./src/app/config.json").server;
+        this.badges = [];
+        this.games = {
+          data: [2, 3, 4, 5],
+          date: ["jan", "feb", "march", "april"],
+          Addition: 6,
+          Subtraction: 51
+        };
+        this.drawBadges(); // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
+        });
+        this.http.get(this.server + "/progress?cookie=" + this.cookie, {}, {}).then(function (data) {
+          _this.games = JSON.parse(data.data);
+
+          _this.drawBadges();
+
+          console.log(data.status);
+          console.log(data.data); // data received by server
+
+          console.log(data.headers);
+        })["catch"](function (error) {
+          console.log("ERRORS FOUND");
+          console.log(error.status);
+          console.log(error.error); // error message as string
+
+          console.log(error);
         });
       }
 
@@ -34314,16 +34351,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.lines = new chart_js__WEBPACK_IMPORTED_MODULE_2__["Chart"](this.lineChart.nativeElement, {
             type: 'line',
             data: {
-              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              labels: this.games["date"],
               datasets: [{
-                label: '% Correct',
-                data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17, 20, 22, 25, 23],
-                borderColor: 'rgb(38, 194, 129)',
-                borderWidth: 1
-              }, {
-                label: '% Incorrect',
-                data: [20, 17, 18, 14, 13, 15, 11, 10, 8, 6, 4, 3],
-                borderColor: 'rgb(255, 0, 0)',
+                label: 'Score',
+                data: this.games["data"],
+                borderColor: 'rgb(10, 10, 220)',
                 borderWidth: 1
               }]
             },
@@ -34344,10 +34376,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.bars = new chart_js__WEBPACK_IMPORTED_MODULE_2__["Chart"](this.barChart.nativeElement, {
             type: 'bar',
             data: {
-              labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+              labels: this.games["date"],
               datasets: [{
-                label: 'Minutes',
-                data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
+                label: 'Games',
+                data: this.games["data"],
                 backgroundColor: 'rgb(38, 194, 129)',
                 borderColor: 'rgb(38, 194, 129)',
                 borderWidth: 1
@@ -34364,6 +34396,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           });
         }
+      }, {
+        key: "drawBadges",
+        value: function drawBadges() {
+          for (var _i = 0, _Object$keys = Object.keys(this.games); _i < _Object$keys.length; _i++) {
+            var key = _Object$keys[_i];
+
+            if (this.games[key] > 50 && key != "data" && key != "date") {
+              console.log(key);
+              this.badges.push({
+                topic: key,
+                rank: "Master",
+                image: "../../assets/badges/master.png"
+              });
+            } else if (this.games[key] > 35 && key != "data" && key != "date") {
+              console.log(key);
+              this.badges.push({
+                topic: key,
+                rank: "Expert",
+                image: "../../assets/badges/expert.png"
+              });
+            } else if (this.games[key] > 20 && key != "data" && key != "date") {
+              console.log(key);
+              this.badges.push({
+                topic: key,
+                rank: "Advanced",
+                image: "../../assets/badges/advanced.png"
+              });
+            } else if (this.games[key] > 5 && key != "data" && key != "date") {
+              console.log(key);
+              this.badges.push({
+                topic: key,
+                rank: "Novice",
+                image: "../../assets/badges/novice.png"
+              });
+            }
+          }
+
+          console.log(this.badges);
+        }
       }]);
 
       return HomePage;
@@ -34372,6 +34443,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     HomePage.ctorParameters = function () {
       return [{
         type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
       }];
     };
 
@@ -34389,7 +34464,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./parents.page.scss */
       "./src/app/parents/parents.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])], HomePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]])], HomePage);
     /***/
   }
 }]);

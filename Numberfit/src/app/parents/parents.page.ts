@@ -15,7 +15,7 @@ export class HomePage {
   @ViewChild('barChart', {static: false}) barChart;
   @ViewChild('lineChart', {static: false}) lineChart;
 
-  server     : string;
+  server     : string = require('../config.json').server;
   cookie     : string;
   lines      : any;
   bars       : any;
@@ -28,18 +28,18 @@ export class HomePage {
     private router        : Router,
     private http          : HTTP,
   ) {
-    // Get server from config file
-    this.server = require('../config.json').server;
+
+    this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
+    this.drawBadges()
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
 
-    var DOM   = this;
-    console.log("send to", this.server+"/test")
     this.http.get(this.server+"/progress?cookie="+this.cookie,{},{})
 
     .then(data => {
       this.games = JSON.parse(data.data)
+      this.drawBadges()
 
       console.log(data.status);
       console.log(data.data); // data received by server
@@ -114,29 +114,30 @@ export class HomePage {
   }
 
   drawBadges(){
-    var topics = this.games
-    delete topics["data"];
-    delete topics["date"];
-    for(var key of Object.keys(topics)){
-      if(topics[key] > 50){
+    for(var key of Object.keys(this.games)){
+      if(this.games[key] > 50 && key != "data" && key != "date"){
+        console.log(key)
         this.badges.push({
           topic : key,
           rank  : "Master",
           image : "../../assets/badges/master.png"
         })
-      } else if(topics[key] > 35){
+      } else if(this.games[key] > 35 && key != "data" && key != "date"){
+        console.log(key)
         this.badges.push({
           topic : key,
           rank  : "Expert",
           image : "../../assets/badges/expert.png"
         })
-      } else if(topics[key] > 20){
+      } else if(this.games[key] > 20 && key != "data" && key != "date"){
+        console.log(key)
         this.badges.push({
           topic : key,
           rank  : "Advanced",
           image : "../../assets/badges/advanced.png"
         })
-      } else if(topics[key] > 5){
+      } else if(this.games[key] > 5 && key != "data" && key != "date"){
+        console.log(key)
         this.badges.push({
           topic : key,
           rank  : "Novice",
@@ -144,6 +145,7 @@ export class HomePage {
         })
       }
     }
+    console.log(this.badges)
   }
 
 }

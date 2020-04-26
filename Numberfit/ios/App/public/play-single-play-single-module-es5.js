@@ -244,9 +244,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
-        this.router = router; // server           : string = require('../config.json').server;
+        this.router = router;
+        this.server = __webpack_require__(
+        /*! ../config.json */
+        "./src/app/config.json").server; // server           : string = "http://localhost:3000";
 
-        this.server = "http://localhost:3000";
         this.bucket = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").bucket;
