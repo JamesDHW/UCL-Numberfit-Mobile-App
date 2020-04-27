@@ -8,7 +8,6 @@ import { Chart } from 'chart.js';
 })
 
 export class HomePage {
-  @ViewChild('barChart', {static: false}) barChart;
   @ViewChild('lineChart', {static: false}) lineChart;
 
     lines: any;
@@ -19,7 +18,6 @@ export class HomePage {
   constructor() {}
 
   ionViewDidEnter() {
-   this.createBarChart();
    this.createLineChart();
 
  }
@@ -61,31 +59,4 @@ export class HomePage {
     }
   });
  }
-
- createBarChart() {
-  this.bars = new Chart(this.barChart.nativeElement, {
-    type: 'bar',
-    data: {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      datasets: [{
-        label: 'Minutes',
-        data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
-        backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-        borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
-}
-
-
 }

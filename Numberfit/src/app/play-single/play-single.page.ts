@@ -31,7 +31,6 @@ export class PlaySinglePage implements OnInit {
 
     this.prepareProgressBar();
 
-    this.play();
 
   }
 
@@ -62,6 +61,8 @@ export class PlaySinglePage implements OnInit {
     this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
     this.videoEle = document.querySelector('.video-container');
     this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
+    this.play();
+
   }
 
   // main operating function for the whole process
