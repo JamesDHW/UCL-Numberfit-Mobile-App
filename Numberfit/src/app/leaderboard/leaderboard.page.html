@@ -12,69 +12,29 @@
       <ion-card-header>
         <ion-card-title class="welcome-card-title">Leaderboard</ion-card-title>
       </ion-card-header>
+
       <ion-card-content>
         <div align="center">
-          <h3 id="myScore">My Score: ... points</h3>
+          <h3 id="myScore">My Score: {{points}} points</h3>
         </div>
-        <form [formGroup]="selectSchoolGroup">
+        <ion-list *ngFor="let user of users; index as i">
           <ion-item>
-            <ion-label>Select a School</ion-label>
-            <ion-select
-              formControlName="school" id="schoolSelect" 
-              multiple="false" cancelText="Cancel" okText="Select">
-            </ion-select>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="auto">
+                  <ion-label slot="start">{{index}}</ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label>{{user.name}}</ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label slot="end">{{user.score}} points</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
-          <ion-button
-            (click)="searchSchool()" [disabled]="selectSchoolGroup.invalid"
-            expand="block" fill="clear" routerLink="../sign-in">
-            Search Selected School
-          </ion-button>
-        </form>
-        <ion-list id="leaderboard">
         </ion-list>
       </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="welcome-card-title">My Badges</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <div>
-                Badge 1
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                Badge 2
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                Badge 3
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <div>
-                Badge 4
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                Badge 5
-              </div>
-            </ion-col>
-            <ion-col>
-              <div>
-                Badge 6
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
+
     </ion-card>
   </ion-content>

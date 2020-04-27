@@ -35,7 +35,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /***/
   function srcAppConfigJson(module) {
-    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
     /***/
   },
 
@@ -235,9 +235,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var PlaySinglePage = /*#__PURE__*/function () {
-      function PlaySinglePage(activatedRoute, nativeStorage, router) {
+      function PlaySinglePage(activatedRoute, nativeStorage, router, http) {
         var _this = this;
 
         _classCallCheck(this, PlaySinglePage);
@@ -245,60 +251,81 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
         this.router = router;
+        this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
         this.bucket = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").bucket;
+        this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
+        this.checkList = [];
+        this.answer = [{
+          answer: "-"
+        }, {
+          answer: "-"
+        }, {
+          answer: "-"
+        }, {
+          answer: "-"
+        }];
+        this.videos = [];
         this.correctCounter = 0;
-        this.incorrectCounter = 0; // Get cookie
+        this.incorrectCounter = 0;
+        this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
+        this.imgState = 0;
+        this.pictureRef = this.images[this.imgState]; // Get cookie
 
         this.nativeStorage.getItem('cookie').then(function (data) {
-          _this.cookie = data.cookie;
-        }); // Get user
+          _this.cookie = data.cookie; // Get user
 
-        this.user = this.nativeStorage.getItem('user');
-        var DOM = this;
-        var xhttp = new XMLHttpRequest(); // Get videos from DB request response handler
+          _this.nativeStorage.getItem('user').then(function (data) {
+            _this.user = data; // Get URLs to videos
 
-        xhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            var videos = JSON.parse(this.responseText);
-            DOM.videos.push(videos["video1"]);
-            DOM.videos.push(videos["video2"]);
-            DOM.videos.push(videos["video3"]);
-          } else if (this.status != 200) {
-            console.log(this.responseText); // DOM.presentAlert();
-          }
-        };
+            _this.http.get(_this.server + "/getVideo", {}, {}).then(function (data) {
+              var videos = JSON.parse(data.data).videos;
+              videos.forEach(function (item) {
+                _this.videos.push(item.url);
+              }); // Ready to play!!!
 
-        xhttp.open("GET", this.server + "/getVideo", true);
-        xhttp.send();
-        this.prepareProgressBar();
+              _this.play();
+            })["catch"](function (error) {
+              console.log("status", error.status);
+              console.log("error", error.error);
+              console.log("error here", error);
+            });
+          });
+        });
       }
 
       _createClass(PlaySinglePage, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.questionCardEle = document.querySelector('.question-card');
+          this.videoEle = document.querySelector('.video-container');
+        }
+      }, {
         key: "play",
         value: function play() {
-          // let subject = this.activatedRoute.snapshot.paramMap.get("subject");
           var qSetNumber = 18; // Number of question sets
 
           if (this.user.year == 1 && this.subject != "Time") {
             qSetNumber = 6; // For some reason year one have fewer resources on all but Time
           }
 
-          this.checkList = [];
           this.answer = [];
 
-          while (this.answer.length != 4) {
+          while (this.answer.length < 4) {
+            console.log(this.answer.length);
             var page = 4 * Math.floor(Math.random() * qSetNumber);
             var card = page + Math.floor(Math.random() * 6); // 6 questions on each page
 
             var ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + page + "-" + card + ".png";
-            var ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png";
+            var ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png"; // console.log("checklist", this.checkList)
+            // console.log("question", this.question)
+            // console.log("includes", this.checkList.includes(this.question))
 
-            if (!this.checkList.includes(this.question)) {
+            if (!this.checkList.includes(ques)) {
               this.question = ques;
               this.answer.push({
                 question: this.question,
@@ -308,52 +335,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           this.shuffleAnswerOptions(this.answer);
-          console.log(this.answer);
-          console.log(this.question);
+          console.log("answers", this.answer);
+          console.log("ansers", this.question);
         }
-      }, {
-        key: "ngOnInit",
-        value: function ngOnInit() {
-          this.questionCardEle = document.querySelector('.question-card');
-          this.videoEle = document.querySelector('.video-container');
-          this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
-          this.play();
-        }
-      }, {
-        key: "getQuestionCards",
-        value: function getQuestionCards() {
-          var subject = this.activatedRoute.snapshot.paramMap.get("subject");
-          var qSetNumber = 18; // Number of question sets
-
-          console.log("year returns as", typeof this.user.year);
-
-          if (this.user.year == 1 && subject != "Time") {
-            qSetNumber = 6; // For some reason year one have fewer resources on all but time
-          }
-
-          var questionSet = [];
-          var checkList = [];
-
-          while (questionSet.length != 12) {
-            var page = 4 * Math.floor(Math.random() * qSetNumber);
-            var card = page + Math.floor(Math.random() * 6); // 6 questions on each page
-
-            var questRef = this.bucket + "/" + subject + "/" + this.user.year + "/beg/" + "PDF-" + page + "-" + card + ".png";
-            var answRef = this.bucket + "/" + subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + card + ".png";
-
-            if (!checkList.includes(questRef)) {
-              console.log(questRef);
-              checkList.push(questRef);
-              questionSet.push({
-                question: questRef,
-                answer: answRef
-              });
-            }
-          }
-        } // main operating function for the whole process
-
       }, {
         key: "updateProgress",
+        // main operating function for the whole process
         value: function updateProgress(i) {
           // check if the answer is correct
           if (this.answer[i]["question"] == this.question) {
@@ -385,13 +372,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var overlaySection = document.querySelector(".overlay-section");
           overlaySection.style.opacity = "30%";
           endSection.style.visibility = "visible";
-        }
-      }, {
-        key: "prepareProgressBar",
-        value: function prepareProgressBar() {
-          this.imgState = 0;
-          this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
-          this.pictureRef = this.images[this.imgState];
         }
       }, {
         key: "shuffleAnswerOptions",
@@ -465,27 +445,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function checkWin() {
           var _this2 = this;
 
-          if (this.imgState >= 12) {
-            var DOM = this;
-            var xhttp = new XMLHttpRequest();
-
-            xhttp.onreadystatechange = function () {
-              if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-              } else if (this.status != 200) {
-                console.log(this.responseText);
-              }
-            };
-
-            xhttp.open("POST", this.server + "/save-game", true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify({
-              cookie: this.cookie,
-              correct: this.correctCounter,
-              incorrect: this.incorrectCounter
-            }));
+          if (this.imgState >= 8) {
+            this.saveGame();
             this.enableButtons(false);
-            var ele1 = document.querySelector('#balloon-effect');
             var ele2 = document.querySelector('.board');
             var ele3 = document.querySelector('.winning-container');
             var ele4 = document.querySelector('.congrats-label');
@@ -495,7 +457,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.questionCardEle.style.visibility = "hidden";
             this.videoEle.style.visibility = "hidden";
             this.sleep(2000).then(function () {
-              ele1.style.animationPlayState = "running";
               ele2.style.visibility = "hidden";
               ele3.style.visibility = "visible";
               ele4.style.width = "100%";
@@ -508,9 +469,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               return true;
             });
+          } else {
+            return false;
           }
+        } // Saves game to gameHistories in server and updates points locally
 
-          return false;
+      }, {
+        key: "saveGame",
+        value: function saveGame() {
+          var _this3 = this;
+
+          var gamePlayed = {
+            username: this.user.username,
+            correct: this.correctCounter,
+            incorrect: this.incorrectCounter,
+            topic: this.subject
+          };
+          var savedUser = {
+            cookie: this.cookie,
+            username: this.user.username,
+            name: this.user.name,
+            school: this.user.school,
+            year: this.user.year,
+            teacher: this.user.teacher,
+            points: this.user.points + this.correctCounter - this.incorrectCounter
+          };
+          console.log("gamePLayed: ", gamePlayed);
+          console.log("savedUser: ", savedUser);
+          this.http.setDataSerializer('json');
+          this.http.post(this.server + "/saveGame", gamePlayed, {}).then(function (data) {
+            _this3.http.post(_this3.server + "/updateScore", savedUser, {}).then(function (data) {
+              delete savedUser["cookie"];
+
+              _this3.nativeStorage.setItem('user', savedUser).then(function () {}, function (error) {
+                return console.error('Error storing cookie', error);
+              });
+            })["catch"](function (error) {
+              console.log("update score error: ", error.error); // this.presentAlert();
+            });
+          })["catch"](function (error) {
+            console.log("save game error:", error.error); // this.presentAlert();
+          });
         }
       }]);
 
@@ -524,6 +523,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
       }];
     };
 
@@ -535,7 +536,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./play-single.page.scss */
       "./src/app/play-single/play-single.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])], PlaySinglePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], PlaySinglePage);
     /***/
   }
 }]);

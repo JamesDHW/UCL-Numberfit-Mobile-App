@@ -33819,7 +33819,7 @@ module.exports = function(module) {
 /*! exports provided: server, bucket, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
 
 /***/ }),
 
@@ -33898,45 +33898,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
-
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
 
 
 
 
 
 let HomePage = class HomePage {
-    constructor(nativeStorage, router, http) {
+    constructor(nativeStorage, http) {
         this.nativeStorage = nativeStorage;
-        this.router = router;
         this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         this.badges = [];
-        this.games = { data: [2, 3, 4, 5], date: ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51 };
-        this.drawBadges();
+        // this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
-            .then((data) => { this.cookie = data.cookie; });
-        this.http.get(this.server + "/progress?cookie=" + this.cookie, {}, {})
-            .then(data => {
-            this.games = JSON.parse(data.data);
-            this.drawBadges();
-            console.log(data.status);
-            console.log(data.data); // data received by server
-            console.log(data.headers);
-        })
-            .catch(error => {
-            console.log("ERRORS FOUND");
-            console.log(error.status);
-            console.log(error.error); // error message as string
-            console.log(error);
+            .then((data) => {
+            this.cookie = data.cookie;
+            this.http.get(this.server + "/progress?cookie=" + this.cookie, {}, {})
+                .then(data => {
+                this.games = JSON.parse(data.data);
+                this.drawBadges();
+                this.createLineChart();
+            })
+                .catch(error => {
+                console.log("ERRORS FOUND");
+                console.log("status:", error.status);
+                console.log("error:", error.error); // error message as string
+            });
         });
     }
     ;
-    ionViewDidEnter() {
-        this.createLineChart();
-    }
     createLineChart() {
         this.lines = new chart_js__WEBPACK_IMPORTED_MODULE_2__["Chart"](this.lineChart.nativeElement, {
             type: 'line',
@@ -34001,8 +33993,7 @@ let HomePage = class HomePage {
 };
 HomePage.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] }
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('lineChart', { static: false }),
@@ -34015,8 +34006,7 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./parents.page.scss */ "./src/app/parents/parents.page.scss")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
-        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]])
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])
 ], HomePage);
 
 

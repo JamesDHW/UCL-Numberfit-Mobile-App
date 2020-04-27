@@ -1,7 +1,7 @@
 const User        = require('../config/schema').User; // Mongoose model
 const GameHistory = require('../config/schema').GameHistory; // Mongoose model
 
-module.exports.save_game = function (req, res) {
+module.exports.saveGame = function (req, res) {
   const cookie = req.body.cookie
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
@@ -10,6 +10,7 @@ module.exports.save_game = function (req, res) {
       username  : user.username,
       correct   : req.body.correct,
       incorrect : req.body.incorrect,
+      topic     : req.body.topic,
     });
 
     game.save((err) => {

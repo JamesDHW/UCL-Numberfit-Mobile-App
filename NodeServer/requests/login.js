@@ -23,7 +23,7 @@ module.exports.login = function (req, res, next) {
       if(!user.Teacher){
         Pupil.findOne({ username : user.username }, (err, pupil_info) => {
           if(err) throw err;
-          // console.log("Pupil: ", pupil_info);
+          console.log("Pupil: ", pupil_info);
           return res.status(200).json({
             cookie   : user.id,
             username : pupil_info.username,

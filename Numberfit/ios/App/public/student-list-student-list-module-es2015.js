@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: server, bucket, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
 
 /***/ }),
 
@@ -130,38 +130,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
 
 
 
 
 let StudentListPage = class StudentListPage {
-    constructor(nativeStorage, activatedRoute, router) {
+    constructor(nativeStorage, activatedRoute, router, http) {
         this.nativeStorage = nativeStorage;
         this.activatedRoute = activatedRoute;
         this.router = router;
-        // Get server from config file
+        this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });
-        this.requestStudentList();
-    }
-    ngOnInit() {
-        var xhttpDetails = new XMLHttpRequest();
-        let DOM = this;
-        xhttpDetails.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log("GET details request succeeded");
-                DOM.studentList = JSON.parse(this.responseText);
-            }
-            else if (this.status != 200) {
-                console.log("GET request failed with satus " + this.status);
-                DOM.studentList = ["Amy", "Bobbi", "Candy", "David"];
-            }
-        };
-        // Define and send the GET request
-        xhttpDetails.open("GET", this.server + "/studentList?cookie=5e9445193c9c966ce1dcbac6", true);
-        xhttpDetails.send();
+        // this.requestStudentList();
+        this.http.get(this.server + "/studentList?cookie=" + this.cookie, {}, {})
+            .then(data => {
+            this.studentList = JSON.parse(data.data);
+        })
+            .catch(error => {
+            console.log("status", error.status);
+            console.log("error", error.error);
+        });
     }
     onSelect(student) {
         // this.studentID = student;
@@ -191,7 +184,8 @@ let StudentListPage = class StudentListPage {
 StudentListPage.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] }
 ];
 StudentListPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -201,7 +195,8 @@ StudentListPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
         _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])
 ], StudentListPage);
 
 

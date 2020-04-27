@@ -22,7 +22,7 @@ module.exports.progress = function(req, res){
       var corr = [];
       var wron = [];
       var date = [];
-      var out = {};
+      var out  = {};
 
       console.log(history)
 
@@ -44,11 +44,12 @@ module.exports.progress = function(req, res){
         // console.log(item.incorrect)
 
       });
-      out["date"] = date;
-      out["data"] = data;
 
       var data = [];
       date.forEach((item, i) => { data.push(10*(corr[i]/wron[i])+(0.1*i)) });
+
+      out["date"] = date;
+      out["data"] = data;
 
       res.send(JSON.stringify(out));
 

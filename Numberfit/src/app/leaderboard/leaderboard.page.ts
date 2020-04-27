@@ -1,6 +1,6 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit }                  from '@angular/core';
-import { NativeStorage }                      from '@ionic-native/native-storage/ngx';
+import { Component, OnInit } from '@angular/core';
+import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { HTTP }              from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-leaderboard',
@@ -11,32 +11,42 @@ import { NativeStorage }                      from '@ionic-native/native-storage
 export class HomePage implements OnInit {
   server : string = require('../config.json').server;
   cookie : string;
-  selectSchoolGroup : FormGroup;
+  user   : any;
+  users  : Array<Object>;
+  points : number = 0;
 
   constructor(
     private nativeStorage : NativeStorage,
-    private formBuilder   : FormBuilder,
+    private http          : HTTP,
   ) {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
+    // Get user
+    this.nativeStorage.getItem('user')
+    .then((data) => {
+      this.user = data
+      this.points = data.points
+      console.log(this.user)
 
-    // Initilaise school for group
-    this.selectSchoolGroup = formBuilder.group({
-      school: ['', [Validators.required]],
+      // Get top scores from given school
+      this.http.get(this.server+"/leaderboard?school="+this.user.school+"&cookie="+this.cookie,{},{})
+      .then(data => {
+        // Need to do a request which returns {user : [{user1...}]}
+        this.users = JSON.parse(data.data).scores;
+
+      })
+      .catch(error => {
+        console.log("status", error.status);
+        console.log("error", error.error);
+
+      });
     });
+
   }
 
   ngOnInit() {
-    const schoolSelect = document.getElementById('schoolSelect');
-    const myScore = document.getElementById('myScore');
-    const leaderboard = document.getElementById('leaderboard');
 
   }
 
-  searchSchool() {
-    const leaderboard = document.getElementById('leaderboard');
-    leaderboard.innerHTML = '';
-
-  }
 }

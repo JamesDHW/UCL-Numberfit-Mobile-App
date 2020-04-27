@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-title class=\"welcome-card-title\">Register New Account</ion-title>\n    </ion-card-header>\n    <ion-card-content>\n      <form [formGroup]=\"registerFormGroup\" action = \"http://localhost:3000/register\" method = \"GET\">\n        <ion-item style=\"margin-top: 20px;\">\n          <ion-label position=\"floating\">Name</ion-label>\n          <ion-input formControlName=\"name\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input formControlName=\"email\" type=\"email\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Password</ion-label>\n          <ion-input formControlName=\"password1\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Comfirm Password</ion-label>\n          <ion-input formControlName=\"password2\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>Year Group</ion-label>\n          <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\" >\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>School</ion-label>\n          <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school}}>\n              {{school}}\n            </ion-select-option>\n\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-button\n          (click)=\"register()\" [disabled]=\"registerFormGroup.invalid\"\n          expand='block'>\n          Register\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-title class=\"welcome-card-title\">Register New Account</ion-title>\n    </ion-card-header>\n    <ion-card-content>\n      <form [formGroup]=\"registerFormGroup\" action = \"http://localhost:3000/register\" method = \"GET\">\n        <ion-item style=\"margin-top: 20px;\">\n          <ion-label position=\"floating\">Name</ion-label>\n          <ion-input formControlName=\"name\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input formControlName=\"email\" type=\"email\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Password</ion-label>\n          <ion-input formControlName=\"password1\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Comfirm Password</ion-label>\n          <ion-input formControlName=\"password2\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>Year Group</ion-label>\n          <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\" >\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>School</ion-label>\n          <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school.name}}>\n              {{school.name}}\n            </ion-select-option>\n\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-button\n          (click)=\"register()\" [disabled]=\"registerFormGroup.invalid\"\n          expand='block'>\n          Register\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -119,10 +119,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
-/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ts-md5/dist/md5 */ "./node_modules/ts-md5/dist/md5.js");
-/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ts-md5/dist/md5 */ "./node_modules/ts-md5/dist/md5.js");
+/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -130,8 +132,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RegisterPage = class RegisterPage {
-    constructor(nativeStorage, router, formBuilder) {
+    constructor(nativeStorage, http, router, formBuilder) {
         this.nativeStorage = nativeStorage;
+        this.http = http;
         this.router = router;
         // Get server from config file
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
@@ -147,7 +150,15 @@ let RegisterPage = class RegisterPage {
             school: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
         });
         this.yearGroups = [1, 2, 3, 4, 5, 6];
-        this.schoolList = ['Loading...'];
+        this.http.get(this.server + "/getSchools", {}, {})
+            .then(data => {
+            this.schoolList = JSON.parse(data.data).schools;
+            console.log("schools:", this.schoolList);
+        })
+            .catch(error => {
+            console.log("status", error.status);
+            console.log("error", error.error);
+        });
     }
     ngOnInit() {
         // get the schools from the DB
@@ -159,39 +170,63 @@ let RegisterPage = class RegisterPage {
         const password2 = this.registerFormGroup.value.password2;
         const credentials = {
             username: this.registerFormGroup.value.email.toLowerCase(),
-            password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_5__["Md5"].hashStr(password1),
+            password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__["Md5"].hashStr(password1),
             name: this.registerFormGroup.value.name,
             year: this.registerFormGroup.value.year,
             school: this.registerFormGroup.value.school,
             teacher: false,
+            points: 0,
         };
         console.log(credentials);
         if (password1 == password2 && password1.length > 7) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    DOM.cookie = JSON.parse(this.responseText).success;
-                    console.log(DOM.cookie);
-                    DOM.nativeStorage.setItem('cookie', { cookie: DOM.cookie })
-                        .then(() => DOM.router.navigate(['/play']), error => console.error('Error storing item', error));
-                }
-                else if (this.status != 200) {
-                    console.log(this.responseText);
-                }
-            };
-            xhttp.open('POST', this.server + '/register?', true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify(credentials));
+            console.log(credentials);
+            this.http.setDataSerializer('json');
+            this.http.get(this.server + "/test", {}, {})
+                .then(data => {
+                console.log("response: ", data.data);
+            })
+                .catch(error => {
+                console.log("error here", error.error);
+                this.presentAlert();
+            });
+            this.http.post(this.server + "/register", credentials, { 'Content-Type': 'application/json' })
+                .then(data => {
+                var user = JSON.parse(data.data);
+                console.log("user: ", user);
+                console.log("response: ", data);
+                this.nativeStorage.setItem('cookie', { cookie: user.cookie })
+                    .then(() => {
+                    //save info
+                    this.nativeStorage.setItem('user', credentials)
+                        .then(() => {
+                        console.log("got to play");
+                        this.router.navigate(['/play']);
+                    }, error => console.error('Error storing user', error));
+                }, error => console.error('Error storing cookie', error));
+            })
+                .catch(error => {
+                console.log("error here", error.error);
+                this.presentAlert();
+            });
         }
         else {
             // error!!!
             alert("Please ensure your password is at least 8 characters and matches the confirmation field");
         }
     }
+    presentAlert() {
+        const alert = document.createElement('ion-alert');
+        alert.header = 'Error';
+        alert.message = 'Please check your internet connection.';
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
 };
 RegisterPage.ctorParameters = () => [
-    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }
 ];
 RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -200,8 +235,9 @@ RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./register.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./register.page.scss */ "./src/app/register/register.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
 ], RegisterPage);
 

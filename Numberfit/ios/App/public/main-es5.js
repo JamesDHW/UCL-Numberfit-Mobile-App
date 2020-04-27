@@ -812,6 +812,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _signed_out_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./signed-out.guard */
     "./src/app/signed-out.guard.ts");
+    /* harmony import */
+
+
+    var _student_list_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ./student-list.guard */
+    "./src/app/student-list.guard.ts");
 
     var routes = [{
       path: '',
@@ -936,7 +942,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.StudentListPageModule;
         });
       },
-      canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
+      canActivate: [_student_list_guard__WEBPACK_IMPORTED_MODULE_5__["StudentListGuard"]]
     }, {
       path: 'my-account',
       loadChildren: function loadChildren() {
@@ -1051,7 +1057,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           icon: 'list'
         }, {
           title: 'Progress',
-          url: '/parents',
+          url: '/student-list',
           icon: 'analytics'
         }, {
           title: 'My Account',
@@ -1406,6 +1412,101 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     SignedOutGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
     }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], SignedOutGuard);
+    /***/
+  },
+
+  /***/
+  "./src/app/student-list.guard.ts":
+  /*!***************************************!*\
+    !*** ./src/app/student-list.guard.ts ***!
+    \***************************************/
+
+  /*! exports provided: StudentListGuard */
+
+  /***/
+  function srcAppStudentListGuardTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "StudentListGuard", function () {
+      return StudentListGuard;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+
+    var StudentListGuard = /*#__PURE__*/function () {
+      function StudentListGuard(nativeStorage, router) {
+        _classCallCheck(this, StudentListGuard);
+
+        this.nativeStorage = nativeStorage;
+        this.router = router;
+      }
+
+      _createClass(StudentListGuard, [{
+        key: "canActivate",
+        value: function canActivate(next, state) {
+          var _this4 = this;
+
+          // return true;
+          return this.nativeStorage.getItem('user').then(function (data) {
+            // console.log("Signed In Cookie: ", data)
+            if (data.teacher) {
+              // Allow to view student list page
+              return true;
+            } else {
+              _this4.router.navigate(['/parents']);
+
+              return false;
+            }
+          }, function (error) {
+            console.log("err: ", error);
+
+            _this4.router.navigate(['/parents']);
+
+            return false;
+          });
+        }
+      }]);
+
+      return StudentListGuard;
+    }();
+
+    StudentListGuard.ctorParameters = function () {
+      return [{
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }];
+    };
+
+    StudentListGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+      providedIn: 'root'
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])], StudentListGuard);
     /***/
   },
 

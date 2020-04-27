@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Subject Select</ion-card-title>\n    </ion-card-header>\n      <ion-radio-group\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let sub of subjects.availableTopics\">\n      <ion-item>\n        <ion-label>{{sub.Topic}}</ion-label>\n        <ion-radio id={{sub.Topic}} slot=\"end\" (click)=onSelect(sub.Topic)></ion-radio>\n      </ion-item>\n      </ion-radio-group>\n    <ion-button id=\"btn-play\" expand=\"block\" fill=\"clear\">\n      Play Selected Subject\n    </ion-button>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Subject Select</ion-card-title>\n    </ion-card-header>\n      <ion-radio-group\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let sub of subjects\">\n      <ion-item>\n        <ion-label>{{sub.Topic}}</ion-label>\n        <ion-radio id={{sub.Topic}} value={{sub.Topic}} slot=\"end\" (click)=onSelect(sub.Topic)></ion-radio>\n      </ion-item>\n      </ion-radio-group>\n    <ion-button id=\"btn-play\" expand=\"block\" fill=\"clear\">\n      Play Selected Subject\n    </ion-button>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: server, bucket, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
 
 /***/ }),
 
@@ -141,61 +141,88 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
 
 
 
 
 let SubjectSelectPage = class SubjectSelectPage {
-    constructor(router, activatedRoute, nativeStorage) {
+    constructor(router, activatedRoute, nativeStorage, http) {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
-        this.subject = "Addition"; // Default to Addition
-        // Get server from config file
+        this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
+        this.subject = "Addition"; // Default to Addition
+        this.subjects = __webpack_require__(/*! ./default_subjects.json */ "./src/app/subject-select/default_subjects.json").availableTopics;
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });
-        // GET all subjects from Numberfit
-        var xhttpSubjects = new XMLHttpRequest();
-        var xhttpDetails = new XMLHttpRequest();
-        let DOM = this;
-        DOM.subjects = __webpack_require__(/*! ./default_subjects.json */ "./src/app/subject-select/default_subjects.json");
-        // Define the listener function for the GET request
-        xhttpSubjects.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                // Subjects GOT now get details to check year group
-                DOM.subjects = JSON.parse(this.responseText);
-                xhttpDetails.send();
-            }
-            else if (this.status != 200) {
-                console.log("GET subjects request failed with satus " + this.status);
-            }
-        };
-        // Define the listener function for the GET request
-        xhttpDetails.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log("GET details request succeeded");
-                // Remove elements not available to that year
-                // By now availableTopics is an attribute of DOM.subjects
-                console.log(JSON.parse(this.responseText));
-                let repeats = DOM.subjects["availableTopics"].length;
+        // Get user from storage
+        this.nativeStorage.getItem('user')
+            .then((data) => {
+            this.user = data;
+            this.http.get("http://api.numberfit.com:8081/getAvailableTopics", {}, {})
+                .then(data => {
+                this.subjects = JSON.parse(data.data).availableTopics;
+                let repeats = this.subjects.length;
                 let deletes = 0;
                 for (var i = 0; i < repeats; i++) {
-                    if (!DOM.subjects["availableTopics"][i - deletes].availableYears.includes(parseInt(JSON.parse(this.responseText).year))) {
-                        DOM.subjects["availableTopics"].splice(i - deletes, 1);
+                    if (!this.subjects[i - deletes].availableYears.includes(parseInt(this.user["year"]))) {
+                        this.subjects.splice(i - deletes, 1);
                         deletes += 1;
                     }
                 }
-            }
-            else if (this.status != 200) {
-                console.log("GET details request failed with satus " + this.status);
-            }
-        };
-        // Define and send the GET request
-        xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
-        xhttpDetails.open("GET", this.server + "/myDetails?cookie=" + this.cookie, true);
-        xhttpSubjects.send();
+            })
+                .catch(error => {
+                console.log("status", error.status);
+                console.log("error", error.error);
+            });
+        });
+        // // GET all subjects from Numberfit
+        // var xhttpSubjects = new XMLHttpRequest();
+        // var xhttpDetails  = new XMLHttpRequest();
+        // let DOM = this;
+        //
+        //
+        // // Define the listener function for the GET request
+        // xhttpSubjects.onreadystatechange = function() {
+        //   if (this.readyState == 4 && this.status == 200) {
+        //     // Subjects GOT now get details to check year group
+        //     DOM.subjects = JSON.parse(this.responseText)
+        //     xhttpDetails.send();
+        //   } else if(this.status != 200) {
+        //     console.log("GET subjects request failed with satus " + this.status)
+        //   }
+        // };
+        //
+        // // Define the listener function for the GET request
+        // xhttpDetails.onreadystatechange = function() {
+        //   if (this.readyState == 4 && this.status == 200) {
+        //     console.log("GET details request succeeded")
+        //     // Remove elements not available to that year
+        //     // By now availableTopics is an attribute of DOM.subjects
+        //     console.log(JSON.parse(this.responseText));
+        //     let repeats = DOM.subjects["availableTopics"].length;
+        //     let deletes = 0;
+        //     for(var i=0; i<repeats; i++){
+        //       if(!DOM.subjects["availableTopics"][i-deletes].availableYears.includes(
+        //         parseInt(JSON.parse(this.responseText).year))){
+        //           DOM.subjects["availableTopics"].splice(i-deletes, 1)
+        //           deletes += 1;
+        //       }
+        //     }
+        //
+        //   } else if(this.status != 200) {
+        //     console.log("GET details request failed with satus " + this.status)
+        //   }
+        // };
+        //
+        // // Define and send the GET request
+        // xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
+        // xhttpDetails.open("GET", this.server+"/myDetails?cookie=" + this.cookie, true);
+        // xhttpSubjects.send();
     }
     // Function called when radio button clicked
     onSelect(topic) {
@@ -231,7 +258,8 @@ let SubjectSelectPage = class SubjectSelectPage {
 SubjectSelectPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] },
-    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] }
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] }
 ];
 SubjectSelectPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -241,7 +269,8 @@ SubjectSelectPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
         _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-        _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])
+        _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])
 ], SubjectSelectPage);
 
 

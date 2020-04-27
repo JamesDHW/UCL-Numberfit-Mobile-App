@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router }         from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { NativeStorage }  from '@ionic-native/native-storage/ngx';
+import { Router }         from '@angular/router';
+import { HTTP }           from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-play',
@@ -16,7 +17,7 @@ export class HomePage implements OnInit {
 
   constructor(
     private router        : Router,
-    private route         : ActivatedRoute,
+    private http          : HTTP,
     private nativeStorage : NativeStorage,
   ) {
     // Get server from config file
@@ -41,21 +42,21 @@ export class HomePage implements OnInit {
 
   }
 
-  navigate(){
-    const DOM = this;
-    var xhttp = new XMLHttpRequest();
+  testRequests(){
+    const reqs = []
+    this.http.get(this.server+"/test",{},{})
+    .then(data => {
+      this.nativeStorage.setItem('cookie', {cookie: "-"})
+      .then(() => {
+        console.log("Cookie removed!")
+        this.router.navigate(['/sign-in'])
+      }, error => console.error('Error storing item', error));
 
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
+    })
+    .catch(error => {
+      console.log("status", error.status);
+      console.log("error", error.error);
 
-      } else if(this.status != 200) {
-        console.log(this.responseText);
-
-      }
-    };
-    xhttp.open("GET", "http://numberfit-env.eba-hrxr3amd.us-west-2.elasticbeanstalk.com/myDetails?cookie=5e937d5c8f20116a06468da9", true);
-    xhttp.send();
-    // this.router.navigateByUrl('my-account');
+    });
   }
 }

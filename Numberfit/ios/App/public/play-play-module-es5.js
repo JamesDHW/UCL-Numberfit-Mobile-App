@@ -35,7 +35,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /***/
   function srcAppConfigJson(module) {
-    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
     /***/
   },
 
@@ -169,24 +169,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/native-storage/ngx */
+    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! @ionic-native/native-storage/ngx */
-    "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(router, route, nativeStorage) {
+      function HomePage(router, http, nativeStorage) {
         var _this = this;
 
         _classCallCheck(this, HomePage);
 
         this.router = router;
-        this.route = route;
+        this.http = http;
         this.nativeStorage = nativeStorage;
         this.messageFromChild = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // Get server from config file
 
@@ -216,21 +222,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // console.log(this.cookie);
         }
       }, {
-        key: "navigate",
-        value: function navigate() {
-          var DOM = this;
-          var xhttp = new XMLHttpRequest();
+        key: "testRequests",
+        value: function testRequests() {
+          var _this3 = this;
 
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
-            } else if (this.status != 200) {
-              console.log(this.responseText);
-            }
-          };
+          var reqs = [];
+          this.http.get(this.server + "/test", {}, {}).then(function (data) {
+            _this3.nativeStorage.setItem('cookie', {
+              cookie: "-"
+            }).then(function () {
+              console.log("Cookie removed!");
 
-          xhttp.open("GET", "http://numberfit-env.eba-hrxr3amd.us-west-2.elasticbeanstalk.com/myDetails?cookie=5e937d5c8f20116a06468da9", true);
-          xhttp.send(); // this.router.navigateByUrl('my-account');
+              _this3.router.navigate(['/sign-in']);
+            }, function (error) {
+              return console.error('Error storing item', error);
+            });
+          })["catch"](function (error) {
+            console.log("status", error.status);
+            console.log("error", error.error);
+          });
         }
       }]);
 
@@ -239,11 +249,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     HomePage.ctorParameters = function () {
       return [{
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
       }, {
-        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"]
       }];
     };
 
@@ -256,7 +266,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./play.page.scss */
       "./src/app/play/play.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])], HomePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"]])], HomePage);
     /***/
   }
 }]);

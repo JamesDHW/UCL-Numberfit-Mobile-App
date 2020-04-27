@@ -40,6 +40,7 @@ export class SignInPage {
   }
 
   signIn(){
+    // Get credentials from form
     const credentials = {
       'username' : this.signInFormGroup.value.email.toLowerCase(),
       'password' : Md5.hashStr(this.signInFormGroup.value.password)
@@ -48,8 +49,8 @@ export class SignInPage {
     this.http.post(this.server + "/login",credentials,{})
     .then(data => {
       var user = JSON.parse(data.data);
-      // console.log("user: ", user)
-      // console.log("response: ", data)
+      console.log("user: ", user)
+      console.log("response: ", data)
       this.nativeStorage.setItem('cookie', {cookie: user.cookie})
       .then(() => {
         var savedUser = {
@@ -59,7 +60,8 @@ export class SignInPage {
           teacher  : user.teacher,
         }
         if(!user.teacher){
-          savedUser["year"] = user.year
+          savedUser["year"]   = user.year
+          savedUser["points"] = user.points
         }
         //save info
         this.nativeStorage.setItem('user', savedUser)

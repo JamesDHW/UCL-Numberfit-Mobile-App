@@ -36,10 +36,10 @@
 <script>
   function register(){
     let elemments = document.getElementById("myForm").elements;
-    
+
     const password1 = elemments.namedItem("password1").value;
     const password2 = elemments.namedItem("password2").value;
-    
+
     const credentials = {
       username : elemments.namedItem("username").value,
       name     : elemments.namedItem("name").value,
@@ -49,25 +49,23 @@
     };
 
     if (password1==password2 && password1.length>7){
-      httpRequest(credentials);
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        } else if(this.status != 200) {
+          console.log(this.responseText);
+        }
+      };
+
+      xhttp.open('POST', 'http://localhost:3000/register', true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify(credentials));
     } else {
       alert("Please ensure your password is at least 8 characters and matches the confirmation field");
     }
 
   }
-  function httpRequest(credentials){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-      } else if(this.status != 200) {
-        console.log(this.responseText);
-      }
-    };
-
-    xhttp.open('POST', 'http://localhost:3000/register', true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(credentials));
-  }
+  
   function goBack() { window.history.back(); }
 </script>

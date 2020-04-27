@@ -51,8 +51,8 @@
           <ion-select
             formControlName="school" id="schoolSelect"
             multiple="false" cancelText="Cancel" okText="Select">
-            <ion-select-option *ngFor="let school of schoolList" value={{school}}>
-              {{school}}
+            <ion-select-option *ngFor="let school of schoolList" value={{school.name}}>
+              {{school.name}}
             </ion-select-option>
 
           </ion-select>

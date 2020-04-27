@@ -40,7 +40,18 @@ export class RegisterPage implements OnInit {
       school    : ["", [Validators.required]],
     });
     this.yearGroups = [1, 2, 3, 4, 5, 6];
-    this.schoolList = ['Loading...'];
+
+    this.http.get(this.server+"/getSchools",{},{})
+    .then(data => {
+      this.schoolList = JSON.parse(data.data).schools
+      console.log("schools:", this.schoolList)
+
+    })
+    .catch(error => {
+      console.log("status", error.status);
+      console.log("error", error.error);
+
+    });
   }
 
   ngOnInit() {
@@ -61,32 +72,38 @@ export class RegisterPage implements OnInit {
       year     : this.registerFormGroup.value.year,
       school   : this.registerFormGroup.value.school,
       teacher  : false,
+      points   : 0,
     };
 
     console.log(credentials);
 
     if(password1 == password2 && password1.length > 7){
 
-      this.http.post(this.server + "/modifyDetails", credentials, {})
+      console.log(credentials)
+
+      this.http.setDataSerializer('json');
+      this.http.get(this.server + "/test", {}, {})
+      .then(data => {
+        console.log("response: ", data.data)
+
+      })
+      .catch(error => {
+        console.log("error here",error.error)
+        this.presentAlert();
+
+      });
+
+      this.http.post(this.server + "/register", credentials, {'Content-Type': 'application/json'})
       .then(data => {
         var user = JSON.parse(data.data);
-        // console.log("user: ", user)
-        // console.log("response: ", data)
+        console.log("user: ", user)
+        console.log("response: ", data)
         this.nativeStorage.setItem('cookie', {cookie: user.cookie})
         .then(() => {
-          var savedUser = {
-            username : user.username,
-            name     : user.name,
-            school   : user.school,
-            teacher  : user.teacher,
-          }
-          if(!user.teacher){
-            savedUser["year"] = user.year
-          }
           //save info
-          this.nativeStorage.setItem('user', savedUser)
+          this.nativeStorage.setItem('user', credentials)
           .then(() => {
-            // console.log("got to play")
+            console.log("got to play")
             this.router.navigate(['/play'])
           }, error => console.error('Error storing user', error));
         }, error => console.error('Error storing cookie', error));
@@ -97,27 +114,6 @@ export class RegisterPage implements OnInit {
         this.presentAlert();
 
       });
-
-      // var xhttp = new XMLHttpRequest();
-      //
-      // xhttp.onreadystatechange = function() {
-      //   if (this.readyState == 4 && this.status == 200) {
-      //     DOM.cookie = JSON.parse(this.responseText).success
-      //     console.log(DOM.cookie);
-      //     DOM.nativeStorage.setItem('cookie', {cookie: DOM.cookie})
-      //     .then(
-      //       () => DOM.router.navigate(['/play']),
-      //       error => console.error('Error storing item', error)
-      //     );
-      //   } else if(this.status != 200) {
-      //     console.log(this.responseText);
-      //
-      //   }
-      // };
-      //
-      // xhttp.open('POST', this.server+'/register?', true);
-      // xhttp.setRequestHeader("Content-type", "application/json");
-      // xhttp.send(JSON.stringify(credentials));
 
     } else{
       // error!!!

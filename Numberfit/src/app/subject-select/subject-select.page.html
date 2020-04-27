@@ -15,10 +15,10 @@
       <ion-radio-group
       id="radio-group"
       allow-empty-selection=“false”
-      *ngFor="let sub of subjects.availableTopics">
+      *ngFor="let sub of subjects">
       <ion-item>
         <ion-label>{{sub.Topic}}</ion-label>
-        <ion-radio id={{sub.Topic}} slot="end" (click)=onSelect(sub.Topic)></ion-radio>
+        <ion-radio id={{sub.Topic}} value={{sub.Topic}} slot="end" (click)=onSelect(sub.Topic)></ion-radio>
       </ion-item>
       </ion-radio-group>
     <ion-button id="btn-play" expand="block" fill="clear">

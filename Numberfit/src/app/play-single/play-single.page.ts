@@ -12,17 +12,17 @@ export class PlaySinglePage implements OnInit {
 
   server           : string = require('../config.json').server;
   bucket           : string = require('../config.json').bucket;
+  subject          : string = this.activatedRoute.snapshot.paramMap.get("subject");
   cookie           : string;
-  subject          : string;
   user             : any;
   question         : string;
-  checkList        : Array<string>;
-  answer           : Array<Object>;
-  videos           : Array<string>;
+  checkList        : Array<string> = [];
+  answer           : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
+  videos           : Array<string> = [];
   correctCounter   : number = 0;
   incorrectCounter : number = 0;
-  images           : Array<string>;
-  imgState         : number;
+  images           : Array<string> = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];;
+  imgState         : number = 0;
   pictureRef       : string;
   questionCardEle  : HTMLElement;
   videoEle         : HTMLElement;
@@ -36,104 +36,68 @@ export class PlaySinglePage implements OnInit {
     private http           : HTTP,
 
   ) {
+    this.pictureRef = this.images[this.imgState];
     // Get cookie
     this.nativeStorage.getItem('cookie')
-    .then((data) => {this.cookie = data.cookie});
-    // Get user
-    this.user = this.nativeStorage.getItem('user');
+    .then((data) => {
+      this.cookie = data.cookie
+      // Get user
+      this.nativeStorage.getItem('user')
+      .then((data) => {
+        this.user = data
 
-    this.http.get(this.server + "/getVideo",{},{})
-    .then(data => {
-      var videos = JSON.parse(data.data);
-      this.videos.push(videos["video1"])
-      this.videos.push(videos["video2"])
-      this.videos.push(videos["video3"])
+        // Get URLs to videos
+        this.http.get(this.server + "/getVideo",{},{})
+        .then(data => {
+          var videos = JSON.parse(data.data).videos;
+          videos.forEach((item) => {
+            this.videos.push(item.url)
+          })
+          // Ready to play!!!
+          this.play()
 
-    })
-    .catch(error => {
-      console.log("status", error.status);
-      console.log("error", error.error);
+        })
+        .catch(error => {
+          console.log("status", error.status);
+          console.log("error", error.error);
+          console.log("error here", error);
 
+        });
+
+      });
     });
+  }
 
-    // var DOM = this;
-    // var xhttp = new XMLHttpRequest();
-    //
-    // // Get videos from DB request response handler
-    // xhttp.onreadystatechange = function() {
-    //   if (this.readyState == 4 && this.status == 200) {
-    //     var videos = JSON.parse(this.responseText);
-    //     DOM.videos.push(videos["video1"])
-    //     DOM.videos.push(videos["video2"])
-    //     DOM.videos.push(videos["video3"])
-    //   } else if(this.status != 200) {
-    //     console.log(this.responseText);
-    //     // DOM.presentAlert();
-    //   }
-    // };
-    // xhttp.open("GET", this.server + "/getVideo", true);
-    // xhttp.send();
-
-    this.prepareProgressBar();
-
-
+  ngOnInit(){
+    this.questionCardEle = document.querySelector('.question-card');
+    this.videoEle = document.querySelector('.video-container');
   }
 
   play(){
-    // let subject = this.activatedRoute.snapshot.paramMap.get("subject");
     let qSetNumber =  18; // Number of question sets
     if(this.user.year == 1 && this.subject != "Time"){
       qSetNumber = 6; // For some reason year one have fewer resources on all but Time
     }
-    this.checkList = [];
     this.answer = [];
-    while(this.answer.length!=4){
+    while(this.answer.length<4){
+      console.log(this.answer.length)
       let page = 4*Math.floor(Math.random() * qSetNumber);
       let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
       let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
-      let ans = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
-      if(!this.checkList.includes(this.question)){
+      let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      // console.log("checklist", this.checkList)
+      // console.log("question", this.question)
+      // console.log("includes", this.checkList.includes(this.question))
+      if(!this.checkList.includes(ques)){
         this.question = ques
         this.answer.push({question:this.question, answer:ans})
       }
     }
     this.shuffleAnswerOptions(this.answer)
-    console.log(this.answer)
-    console.log(this.question)
+    console.log("answers", this.answer)
+    console.log("ansers", this.question)
   };
 
-  ngOnInit() {
-    this.questionCardEle = <HTMLElement>document.querySelector('.question-card');
-    this.videoEle = document.querySelector('.video-container');
-    this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
-    this.play();
-
-  }
-
-  getQuestionCards(){
-    let subject = this.activatedRoute.snapshot.paramMap.get("subject");
-    let qSetNumber =  18; // Number of question sets
-    console.log("year returns as", typeof this.user.year)
-    if(this.user.year == 1 && subject != "Time"){
-      qSetNumber = 6; // For some reason year one have fewer resources on all but time
-    }
-    var questionSet = [];
-    var checkList = [];
-    while(questionSet.length!=12){
-      let page = 4*Math.floor(Math.random() * qSetNumber);
-      let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
-      let questRef = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
-      let answRef = this.bucket+"/"+subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+card+".png"
-      if(!checkList.includes(questRef)){
-        console.log(questRef)
-        checkList.push(questRef);
-        questionSet.push({
-          question : questRef,
-          answer   : answRef,
-        })
-      }
-    }
-  }
 
   // main operating function for the whole process
   updateProgress(i:number){
@@ -164,15 +128,6 @@ export class PlaySinglePage implements OnInit {
     let overlaySection = <HTMLElement>document.querySelector(".overlay-section");
     overlaySection.style.opacity = "30%";
     endSection.style.visibility = "visible";
-  }
-
-
-  prepareProgressBar(){
-    this.imgState = 0;
-
-    this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
-
-    this.pictureRef = this.images[this.imgState];
   }
 
   shuffleAnswerOptions(array:Array<object>) {
@@ -229,27 +184,11 @@ export class PlaySinglePage implements OnInit {
   }
 
   checkWin(): boolean {
-    if (this.imgState>=12){
+    if (this.imgState>=8){
 
-      var DOM = this;
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          console.log(this.responseText)
-        } else if(this.status != 200) {
-          console.log(this.responseText);
-        }
-      };
-      xhttp.open("POST", this.server+"/save-game", true);
-      xhttp.setRequestHeader("Content-type", "application/json");
-      xhttp.send(JSON.stringify({
-        cookie    : this.cookie,
-        correct   : this.correctCounter,
-        incorrect : this.incorrectCounter,
-      }));
+      this.saveGame()
 
       this.enableButtons(false);
-      let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
       let ele2 = <HTMLElement>document.querySelector('.board');
       let ele3 = <HTMLElement>document.querySelector('.winning-container');
       let ele4 = <HTMLElement>document.querySelector('.congrats-label');
@@ -261,7 +200,6 @@ export class PlaySinglePage implements OnInit {
       this.videoEle.style.visibility = "hidden";
 
       this.sleep(2000).then(() => {
-        ele1.style.animationPlayState = "running";
         ele2.style.visibility = "hidden";
         ele3.style.visibility = "visible";
         ele4.style.width = "100%";
@@ -272,8 +210,49 @@ export class PlaySinglePage implements OnInit {
         this.displayEnd();
         return true;
       })
+    } else{
+      return false;
     }
-    return false;
+  }
+
+  // Saves game to gameHistories in server and updates points locally
+  saveGame(){
+    var gamePlayed = {
+      username  : this.user.username,
+      correct   : this.correctCounter,
+      incorrect : this.incorrectCounter,
+      topic     : this.subject,
+    }
+    var savedUser = {
+      cookie   : this.cookie,
+      username : this.user.username,
+      name     : this.user.name,
+      school   : this.user.school,
+      year     : this.user.year,
+      teacher  : this.user.teacher,
+      points   : this.user.points + this.correctCounter - this.incorrectCounter,
+    }
+    console.log("gamePLayed: ", gamePlayed)
+    console.log("savedUser: ", savedUser)
+    this.http.setDataSerializer('json');
+    this.http.post(this.server + "/saveGame", gamePlayed, {})
+    .then(data => {
+      this.http.post(this.server + "/updateScore", savedUser, {})
+      .then(data => {
+        delete savedUser["cookie"];
+        this.nativeStorage.setItem('user', savedUser)
+        .then(() => { }, error => console.error('Error storing cookie', error));
+      })
+      .catch(error => {
+        console.log("update score error: ",error.error)
+        // this.presentAlert();
+      });
+    })
+    .catch(error => {
+      console.log("save game error:",error.error)
+      // this.presentAlert();
+
+    });
   }
 
 }

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" id='students'>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">Leaderboard</ion-card-title>\n      </ion-card-header>\n      <ion-card-content>\n        <div align=\"center\">\n          <h3 id=\"myScore\">My Score: ... points</h3>\n        </div>\n        <form [formGroup]=\"selectSchoolGroup\">\n          <ion-item>\n            <ion-label>Select a School</ion-label>\n            <ion-select\n              formControlName=\"school\" id=\"schoolSelect\" \n              multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            </ion-select>\n          </ion-item>\n          <ion-button\n            (click)=\"searchSchool()\" [disabled]=\"selectSchoolGroup.invalid\"\n            expand=\"block\" fill=\"clear\" routerLink=\"../sign-in\">\n            Search Selected School\n          </ion-button>\n        </form>\n        <ion-list id=\"leaderboard\">\n        </ion-list>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">My Badges</ion-card-title>\n      </ion-card-header>\n      <ion-card-content>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <div>\n                Badge 1\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 2\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 3\n              </div>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col>\n              <div>\n                Badge 4\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 5\n              </div>\n            </ion-col>\n            <ion-col>\n              <div>\n                Badge 6\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </ion-card-content>\n    </ion-card>\n  </ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" id='students'>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">Leaderboard</ion-card-title>\n      </ion-card-header>\n\n      <ion-card-content>\n        <div align=\"center\">\n          <h3 id=\"myScore\">My Score: {{points}} points</h3>\n        </div>\n        <ion-list *ngFor=\"let user of users; index as i\">\n          <ion-item>\n            <ion-grid>\n              <ion-row>\n                <ion-col size=\"auto\">\n                  <ion-label slot=\"start\">{{index}}</ion-label>\n                </ion-col>\n                <ion-col>\n                  <ion-label>{{user.name}}</ion-label>\n                </ion-col>\n                <ion-col>\n                  <ion-label slot=\"end\">{{user.score}} points</ion-label>\n                </ion-col>\n              </ion-row>\n            </ion-grid>\n          </ion-item>\n        </ion-list>\n      </ion-card-content>\n\n    </ion-card>\n  </ion-content>\n");
 
 /***/ }),
 
@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: server, bucket, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
 
 /***/ }),
 
@@ -96,49 +96,55 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
 
 
 
 
 let HomePage = class HomePage {
-    constructor(nativeStorage, formBuilder) {
+    constructor(nativeStorage, http) {
         this.nativeStorage = nativeStorage;
-        this.formBuilder = formBuilder;
-        // Get server from config file
+        this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
+        this.points = 0;
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });
-        // Initilaise school for group
-        this.selectSchoolGroup = formBuilder.group({
-            school: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+        // Get user
+        this.nativeStorage.getItem('user')
+            .then((data) => {
+            this.user = data;
+            this.points = data.points;
+            console.log(this.user);
+            // Get top scores from given school
+            this.http.get(this.server + "/leaderboard?school=" + this.user.school + "&cookie=" + this.cookie, {}, {})
+                .then(data => {
+                // Need to do a request which returns {user : [{user1...}]}
+                this.users = JSON.parse(data.data).scores;
+            })
+                .catch(error => {
+                console.log("status", error.status);
+                console.log("error", error.error);
+            });
         });
     }
     ngOnInit() {
-        const schoolSelect = document.getElementById('schoolSelect');
-        const myScore = document.getElementById('myScore');
-        const leaderboard = document.getElementById('leaderboard');
-    }
-    searchSchool() {
-        const leaderboard = document.getElementById('leaderboard');
-        leaderboard.innerHTML = '';
     }
 };
 HomePage.ctorParameters = () => [
-    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"] }
 ];
 HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-leaderboard',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./leaderboard.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/leaderboard/leaderboard.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./leaderboard.page.scss */ "./src/app/leaderboard/leaderboard.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
-        _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]])
 ], HomePage);
 
 

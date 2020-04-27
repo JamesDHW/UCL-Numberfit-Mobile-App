@@ -35,7 +35,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /***/
   function srcAppConfigJson(module) {
-    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
     /***/
   },
 
@@ -235,48 +235,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var StudentListPage = /*#__PURE__*/function () {
-      function StudentListPage(nativeStorage, activatedRoute, router) {
+      function StudentListPage(nativeStorage, activatedRoute, router, http) {
         var _this = this;
 
         _classCallCheck(this, StudentListPage);
 
         this.nativeStorage = nativeStorage;
         this.activatedRoute = activatedRoute;
-        this.router = router; // Get server from config file
-
+        this.router = router;
+        this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server; // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
+        }); // this.requestStudentList();
+
+        this.http.get(this.server + "/studentList?cookie=" + this.cookie, {}, {}).then(function (data) {
+          _this.studentList = JSON.parse(data.data);
+        })["catch"](function (error) {
+          console.log("status", error.status);
+          console.log("error", error.error);
         });
-        this.requestStudentList();
       }
 
       _createClass(StudentListPage, [{
-        key: "ngOnInit",
-        value: function ngOnInit() {
-          var xhttpDetails = new XMLHttpRequest();
-          var DOM = this;
-
-          xhttpDetails.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              console.log("GET details request succeeded");
-              DOM.studentList = JSON.parse(this.responseText);
-            } else if (this.status != 200) {
-              console.log("GET request failed with satus " + this.status);
-              DOM.studentList = ["Amy", "Bobbi", "Candy", "David"];
-            }
-          }; // Define and send the GET request
-
-
-          xhttpDetails.open("GET", this.server + "/studentList?cookie=5e9445193c9c966ce1dcbac6", true);
-          xhttpDetails.send();
-        }
-      }, {
         key: "onSelect",
         value: function onSelect(student) {
           // this.studentID = student;
@@ -315,6 +307,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
       }];
     };
 
@@ -326,7 +320,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./student-list.page.scss */
       "./src/app/student-list/student-list.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])], StudentListPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], StudentListPage);
     /***/
   }
 }]);

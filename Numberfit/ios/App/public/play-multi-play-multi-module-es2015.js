@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: server, bucket, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-aitxzvsh.eu-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
 
 /***/ }),
 
@@ -141,8 +141,8 @@ let PlayMultiPage = class PlayMultiPage {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
-        // Get server from config file
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
+        this.bucket = __webpack_require__(/*! ../config.json */ "./src/app/config.json").bucket;
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });

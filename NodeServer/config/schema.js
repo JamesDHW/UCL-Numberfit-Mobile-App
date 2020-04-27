@@ -17,6 +17,8 @@ const Pupils = new Schema({
   name     : String,
   school   : String,
   year     : String,
+  teacher  : String,
+  points   : Number,
 });
 
 // Teacher schema
@@ -27,9 +29,10 @@ const Teachers = new Schema({
 });
 
 const GameHistories = new Schema({
-  played    : Number,
+  username  : String,
   correct   : Number,
   incorrect : Number,
+  topic     : String,
 });
 
 // Game schema

@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart }                from 'chart.js';
 import { NativeStorage }        from '@ionic-native/native-storage/ngx';
-import { Router }               from '@angular/router';
 import { HTTP }                 from '@ionic-native/http/ngx';
 
 
@@ -24,27 +23,31 @@ export class HomePage {
 
   constructor(
     private nativeStorage : NativeStorage,
-    private router        : Router,
     private http          : HTTP,
   ) {
 
     // this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
-    .then((data) => {this.cookie = data.cookie});
+    .then((data) => {
+      this.cookie = data.cookie
 
-    this.http.get(this.server+"/progress?cookie="+this.cookie,{},{})
-    .then(data => {
-      this.games = JSON.parse(data.data)
-      this.drawBadges()
-      this.createLineChart();
+      this.http.get(this.server+"/progress?cookie="+this.cookie,{},{})
+      .then(data => {
+        this.games = JSON.parse(data.data)
+        this.drawBadges()
+        this.createLineChart();
 
-    })
-    .catch(error => {
-      console.log("ERRORS FOUND")
-      console.log("status:", error.status);
-      console.log("error:", error.error); // error message as string
+      })
+      .catch(error => {
+        console.log("ERRORS FOUND")
+        console.log("status:", error.status);
+        console.log("error:", error.error); // error message as string
+      });
+
     });
+
+
 
   };
 

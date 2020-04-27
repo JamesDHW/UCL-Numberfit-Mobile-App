@@ -275,29 +275,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function signIn() {
           var _this = this;
 
+          // Get credentials from form
           var credentials = {
             'username': this.signInFormGroup.value.email.toLowerCase(),
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
           };
           this.http.post(this.server + "/login", credentials, {}).then(function (data) {
-            console.log("data:", data.data); // var user = JSON.parse(data.data);
-            // var user = data.data;
-            // console.log("user: ", user)
-            // console.log("response: ", data)
-            // this.nativeStorage.setItem('cookie', {cookie: user.cookie})
-            // .then(() => {
-            //   this.nativeStorage.setItem('user', {
-            //     username : user.username,
-            //     name     : user.name,
-            //     school   : user.school,
-            //     year     : user.year,
-            //     teacher  : user.teacher,
-            //   })
-            //   .then(() => {
-            //     // console.log("got to play")
-            //     this.router.navigate(['/play'])
-            //   }, error => console.error('Error storing user', error));
-            // }, error => console.error('Error storing cookie', error));
+            var user = JSON.parse(data.data);
+            console.log("user: ", user);
+            console.log("response: ", data);
+
+            _this.nativeStorage.setItem('cookie', {
+              cookie: user.cookie
+            }).then(function () {
+              var savedUser = {
+                username: user.username,
+                name: user.name,
+                school: user.school,
+                teacher: user.teacher
+              };
+
+              if (!user.teacher) {
+                savedUser["year"] = user.year;
+                savedUser["points"] = user.points;
+              } //save info
+
+
+              _this.nativeStorage.setItem('user', savedUser).then(function () {
+                // console.log("got to play")
+                _this.router.navigate(['/play']);
+              }, function (error) {
+                return console.error('Error storing user', error);
+              });
+            }, function (error) {
+              return console.error('Error storing cookie', error);
+            });
           })["catch"](function (error) {
             console.log("error here", error.error);
 

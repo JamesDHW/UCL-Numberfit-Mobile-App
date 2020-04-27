@@ -1,4 +1,3 @@
-const passport = require('passport');
 const User     = require('../config/schema').User;
 const Pupil    = require('../config/schema').Pupil;
 const Teacher  = require('../config/schema').Teacher;

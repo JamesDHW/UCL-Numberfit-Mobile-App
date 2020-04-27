@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Add headers
-app.use(require('./config/headers').headers);
+// app.use(require('./config/headers').headers);
 
 // Putting it all together
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -49,27 +49,42 @@ app.get('/test', function(req, res){
 });
 
 // REQUESTS HERE
+// POST REQUESTS
 // Login request
 app.post('/login', require('./requests/login').login)
 
 // Register request
 app.post('/register', require('./requests/register').register)
 
+// Save game
+app.post('/saveGame', require('./requests/save-game').saveGame)
+
+
+// GET REQUESTS
 // Logout request
 app.get('/logout', function(req, res){
-  // req.logout();
-  // req.session.destroy();
-  console.log("recieved")
+  req.logout();
+  req.session.destroy();
   res.send("OK");
 });
 
 // Get user's details
 app.get('/myDetails', require('./requests/myDetails').myDetails);
 
-app.get('/getVideo', require('./requests/getVideo').getVideo);
+// Get leaderboard from the database
+app.get('/leaderboard', require('./requests/leaderboard').leaderboard);
+
+// Add new School - done via web page
+app.get('/progress', require('./requests/progress').progress)
 
 // Add new School - done via web page
 app.get('/addSchool', require('./requests/addSchool').addSchool)
+
+// Get 3 random video URLs from the database
+app.get('/getTeachers', require('./requests/getTeachers').getTeachers);
+
+// Add new School - done via web page
+app.get('/getSchools', require('./requests/getSchools').getSchools)
 
 // Add new School - done via web page
 app.get('/getVideo', require('./requests/getVideo').getVideo)

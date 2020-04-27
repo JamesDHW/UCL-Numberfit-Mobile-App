@@ -50,7 +50,7 @@ const routes: Routes = [
   {
     path: 'student-list',
     loadChildren: () => import('./student-list/student-list.module').then( m => m.StudentListPageModule),
-    canActivate: [SignedInGuard, StudentListGuard],
+    canActivate: [StudentListGuard],
   },
   {
     path: 'my-account',

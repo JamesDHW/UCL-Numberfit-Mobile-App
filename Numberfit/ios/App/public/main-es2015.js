@@ -705,6 +705,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _signed_in_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./signed-in.guard */ "./src/app/signed-in.guard.ts");
 /* harmony import */ var _signed_out_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./signed-out.guard */ "./src/app/signed-out.guard.ts");
+/* harmony import */ var _student_list_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./student-list.guard */ "./src/app/student-list.guard.ts");
+
 
 
 
@@ -747,7 +749,7 @@ const routes = [
     {
         path: 'student-list',
         loadChildren: () => __webpack_require__.e(/*! import() | student-list-student-list-module */ "student-list-student-list-module").then(__webpack_require__.bind(null, /*! ./student-list/student-list.module */ "./src/app/student-list/student-list.module.ts")).then(m => m.StudentListPageModule),
-        canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
+        canActivate: [_student_list_guard__WEBPACK_IMPORTED_MODULE_5__["StudentListGuard"]],
     },
     {
         path: 'my-account',
@@ -819,7 +821,7 @@ let AppComponent = class AppComponent {
             },
             {
                 title: 'Progress',
-                url: '/parents',
+                url: '/student-list',
                 icon: 'analytics'
             },
             {
@@ -1042,6 +1044,65 @@ SignedOutGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
 ], SignedOutGuard);
+
+
+
+/***/ }),
+
+/***/ "./src/app/student-list.guard.ts":
+/*!***************************************!*\
+  !*** ./src/app/student-list.guard.ts ***!
+  \***************************************/
+/*! exports provided: StudentListGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentListGuard", function() { return StudentListGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+
+let StudentListGuard = class StudentListGuard {
+    constructor(nativeStorage, router) {
+        this.nativeStorage = nativeStorage;
+        this.router = router;
+    }
+    canActivate(next, state) {
+        // return true;
+        return this.nativeStorage.getItem('user')
+            .then((data) => {
+            // console.log("Signed In Cookie: ", data)
+            if (data.teacher) {
+                // Allow to view student list page
+                return true;
+            }
+            else {
+                this.router.navigate(['/parents']);
+                return false;
+            }
+        }, (error) => {
+            console.log("err: ", error);
+            this.router.navigate(['/parents']);
+            return false;
+        });
+    }
+};
+StudentListGuard.ctorParameters = () => [
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
+StudentListGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+], StudentListGuard);
 
 
 
