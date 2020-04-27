@@ -28,7 +28,6 @@ export class PlaySinglePage implements OnInit {
   videoEle         : HTMLElement;
 
 
-
   constructor(
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,

@@ -22,6 +22,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => { console.log('MongoDB connected to ', mongoURI); })
 .catch(err => console.log('Failed to connect: ', err))
 
+app.use(require('cors')())
 
 require('./config/passport')
 app.use(passport.initialize());
