@@ -2,23 +2,25 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:900');
 .card{
   background: rgba(255, 255, 255, 0.62);
-  margin-top: 5%;
-  margin-bottom: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
-  // width: 90%;
-  height: 40%;
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  padding-left: 2%;
+  padding-right: 2%;
+  text-align: center;
+  height: 40vh;
+  width: 90vw;
   overflow: hidden;
-  // padding-bottom: 20%;
-  // opacity: 30%;
 }
 
 .question-card{
-  // position: absolute;
-  height: 200px;
-  width: 300px;
-  // top: 5%;
-  // padding-bottom: 5px;
+  position: absolute;
+  height: 95%;
+  width: 95%;
+  padding-right: 2.5%;
+  margin-top: 2.5%;
+  // margin-bottom: 5%;
   visibility: visible;
 }
 
@@ -39,7 +41,12 @@
 }
 
 .ion-content{
-  --background: url('/assets/progress-singleplayer/background3.png') 100% 100%;
+  --background: url('/assets/progress-singleplayer/background.jpg') no-repeat center center;
+  --overflow: hidden;
+  // height: 100%;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // background-size: cover;
 }
 
 .overlay-section {
@@ -52,6 +59,14 @@
   height: 100%;
 }
 
+.progress-section {
+  // margin-top: 5%;
+  margin-bottom: 1%;
+  height: 10vh;
+  width: 98%;
+  text-align: center;
+}
+
 .choice-section{
   size: "6";
   text-align: center;
@@ -59,8 +74,8 @@
 
 .choice-button{
   // size: large;
-  width: 120px;
-  height: 60px;
+  width: 90%;
+  height: 60%;
   // --ion-tab-bar-color:white;
   // --ion-background-color: rgba(193, 243, 191, 0.74);
   --background: rgba(233, 250, 233, 0.712);
@@ -87,8 +102,10 @@
 }
 
 .choice-row{
-  margin-top: 5%;
-  margin-bottom: 5%;
+  // margin-top: 2%;
+  // margin-bottom: 5%;
+  height: 18vh;
+  text-align: center;
 }
 
 .font{
@@ -157,30 +174,30 @@
   z-index: 1;
 }
 
-.balloon-background-board{
-  position: absolute;
-  width: 100%;
-  height: 69%;
-  margin-top: 50%;
-  overflow: hidden;
-}
+// .balloon-background-board{
+//   position: absolute;
+//   width: 100%;
+//   height: 69%;
+//   margin-top: 50%;
+//   overflow: hidden;
+// }
 
-#balloon-background-effect {
-  position: absolute;
-  width: 100%;
-  animation-duration: 3s;
-  animation-name: balloon-background-animation;
-  animation-iteration-count: infinite;
-  opacity: 80%;
-}
+// #balloon-background-effect {
+//   position: absolute;
+//   width: 100%;
+//   animation-duration: 3s;
+//   animation-name: balloon-background-animation;
+//   animation-iteration-count: infinite;
+//   opacity: 80%;
+// }
 
-@keyframes balloon-background-animation {
-  0%   {padding-left:0px; padding-top:0px;}
-  25%  {padding-right:5px; padding-bottom:10px;}
-  50%  {padding-right:5px; padding-bottom:0px;}
-  75%  {padding-left:5px; padding-bottom:10px;}
-  100% {padding-left:0px; padding-top:0px;}
-}
+// @keyframes balloon-background-animation {
+//   0%   {padding-left:0px; padding-top:0px;}
+//   25%  {padding-right:5px; padding-bottom:10px;}
+//   50%  {padding-right:5px; padding-bottom:0px;}
+//   75%  {padding-left:5px; padding-bottom:10px;}
+//   100% {padding-left:0px; padding-top:0px;}
+// }
 
 
 #star-animation {
@@ -202,15 +219,15 @@
 .done-button-section{
   position: absolute;
   width: 100%;
-  top: 45%;
+  top: 45vh;
   text-align: center;
 }
 
 #video-done-button{
-  height: 50px;
-  width: 300px;
+  height: 7vh;
+  width: 95%;
   text-align: center;
-  --background: url('/assets/progress-singleplayer/button_background.png') 300px 50px; 
+  --background: url('/assets/progress-singleplayer/button_background.png'); 
   --border-color:rgb(111, 182, 111);
   --border-width:5px;
   --border-style: solid;
@@ -226,7 +243,7 @@
 #done-font {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 5vh;
   color: rgb(111, 182, 111);
 }
 
