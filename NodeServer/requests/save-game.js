@@ -5,6 +5,9 @@ module.exports.saveGame = function (req, res) {
   const cookie = req.body.cookie
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
+    if(user==null) {
+      return res.status(400);
+    }
 
     var game = new GameHistory({
       username  : user.username,

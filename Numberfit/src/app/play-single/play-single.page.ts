@@ -217,7 +217,7 @@ export class PlaySinglePage implements OnInit {
   // Saves game to gameHistories in server and updates points locally
   saveGame(){
     var gamePlayed = {
-      username  : this.user.username,
+      cookie    : this.cookie,
       correct   : this.correctCounter,
       incorrect : this.incorrectCounter,
       topic     : this.subject,
