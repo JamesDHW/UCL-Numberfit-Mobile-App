@@ -92,7 +92,7 @@ export class PlayMultiPage implements OnInit {
         this.bottomUserObj.updateStatus(true);
         this.bottomUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
         if(this.checkWin(this.bottom_progress)){
-          this.winningEffect(true);
+          this.winningEffect(false);
           return;
         }
       } else {
@@ -106,8 +106,8 @@ export class PlayMultiPage implements OnInit {
 
   displayEnd(){
     let endSection = <HTMLElement>document.querySelector(".end-section");
-    let overlaySection = <HTMLElement>document.querySelector(".overlay-section");
-    overlaySection.style.opacity = "30%";
+    let overlaySection = <HTMLElement>document.querySelector(".ion-multi-content");
+    overlaySection.style.opacity = "20%";
     endSection.style.visibility = "visible";
   }
 
@@ -140,8 +140,8 @@ export class PlayMultiPage implements OnInit {
 
     //rotate if top user wins
     if(topWin){
-      ele2.style.transform = "rotate(180deg)";
       ele3.style.transform = "rotate(180deg)";
+      ele5.style.transform = "rotate(180deg)";
     }
 
     // star rain appears first
