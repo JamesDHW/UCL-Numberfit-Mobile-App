@@ -1,4 +1,4 @@
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit }      from '@angular/core';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 import { HTTP }                   from '@ionic-native/http/ngx';
@@ -19,6 +19,7 @@ export class PlaySinglePage implements OnInit {
   checkList        : Array<string> = [];
   answer           : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
   videos           : Array<string> = [];
+  video            : string;
   correctCounter   : number = 0;
   incorrectCounter : number = 0;
   images           : Array<string> = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];;
@@ -31,7 +32,6 @@ export class PlaySinglePage implements OnInit {
   constructor(
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,
-    private router         : Router,
     private http           : HTTP,
 
   ) {
@@ -52,6 +52,7 @@ export class PlaySinglePage implements OnInit {
           videos.forEach((item) => {
             this.videos.push(item.url)
           })
+          this.video = videos[0]
           // Ready to play!!!
           this.play()
 
@@ -92,9 +93,7 @@ export class PlaySinglePage implements OnInit {
         this.answer.push({question:this.question, answer:ans})
       }
     }
-    this.shuffleAnswerOptions(this.answer)
-    console.log("answers", this.answer)
-    console.log("ansers", this.question)
+    this.answer.sort(() => Math.random() - 0.5);
   };
 
 
@@ -112,6 +111,7 @@ export class PlaySinglePage implements OnInit {
       this.correctCounter += 1;
       //every 3 questions
       if (this.correctCounter%3==0){
+        this.video = this.videos[(this.correctCounter%3)-1]
         this.switchVideoQuestions(true);
       }
     }
@@ -127,11 +127,6 @@ export class PlaySinglePage implements OnInit {
     let overlaySection = <HTMLElement>document.querySelector(".overlay-section");
     overlaySection.style.opacity = "30%";
     endSection.style.visibility = "visible";
-  }
-
-  shuffleAnswerOptions(array:Array<object>) {
-    array.sort(() => Math.random() - 0.5);
-    return array;
   }
 
   sleep(ms:number) {

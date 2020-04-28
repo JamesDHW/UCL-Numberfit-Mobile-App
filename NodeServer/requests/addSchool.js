@@ -11,7 +11,7 @@ module.exports.addSchool = function (req, res, next) {
 
     school.save((err) => {
       if (err) throw err;
-      res.send("Saved!")
+      return res.redirect('./success.html');
     });
   }
 };

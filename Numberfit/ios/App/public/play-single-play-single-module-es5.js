@@ -243,14 +243,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/@ionic-native/http/ngx/index.js");
 
     var PlaySinglePage = /*#__PURE__*/function () {
-      function PlaySinglePage(activatedRoute, nativeStorage, router, http) {
+      function PlaySinglePage(activatedRoute, nativeStorage, http) {
         var _this = this;
 
         _classCallCheck(this, PlaySinglePage);
 
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
-        this.router = router;
         this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
@@ -286,7 +285,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               var videos = JSON.parse(data.data).videos;
               videos.forEach(function (item) {
                 _this.videos.push(item.url);
-              }); // Ready to play!!!
+              });
+              _this.video = videos[0]; // Ready to play!!!
 
               _this.play();
             })["catch"](function (error) {
@@ -334,9 +334,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
 
-          this.shuffleAnswerOptions(this.answer);
-          console.log("answers", this.answer);
-          console.log("ansers", this.question);
+          this.answer.sort(function () {
+            return Math.random() - 0.5;
+          });
         }
       }, {
         key: "updateProgress",
@@ -356,6 +356,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.correctCounter += 1; //every 3 questions
 
             if (this.correctCounter % 3 == 0) {
+              this.video = this.videos[this.correctCounter % 3 - 1];
               this.switchVideoQuestions(true);
             }
           } else {
@@ -372,14 +373,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var overlaySection = document.querySelector(".overlay-section");
           overlaySection.style.opacity = "30%";
           endSection.style.visibility = "visible";
-        }
-      }, {
-        key: "shuffleAnswerOptions",
-        value: function shuffleAnswerOptions(array) {
-          array.sort(function () {
-            return Math.random() - 0.5;
-          });
-          return array;
         }
       }, {
         key: "sleep",
@@ -480,7 +473,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this3 = this;
 
           var gamePlayed = {
-            username: this.user.username,
+            cookie: this.cookie,
             correct: this.correctCounter,
             incorrect: this.incorrectCounter,
             topic: this.subject
@@ -522,8 +515,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
-      }, {
         type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
       }];
     };
@@ -536,7 +527,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./play-single.page.scss */
       "./src/app/play-single/play-single.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], PlaySinglePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], PlaySinglePage);
     /***/
   }
 }]);

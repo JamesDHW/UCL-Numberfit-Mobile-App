@@ -1,69 +1,119 @@
-import { NativeStorage }         from '@ionic-native/native-storage/ngx';
-import { Router, ActivatedRoute} from '@angular/router';
-import { Component, OnInit }     from '@angular/core';
-import { ElementFinder }         from 'protractor';
+import { Component, OnInit } from '@angular/core';
+import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { ActivatedRoute}     from '@angular/router';
+import { HTTP }              from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-play-multi',
   templateUrl : './play-multi.page.html',
   styleUrls   : ['./play-multi.page.scss'],
 })
-export class PlayMultiPage implements OnInit {
+export class PlayMultiPage {
   server          : string = require('../config.json').server;
   bucket          : string = require('../config.json').bucket;
   cookie          : string;
-  images          : Array<number>;
+  user            : any;
+  subject         : string = this.activatedRoute.snapshot.paramMap.get("subject");
+  images          : Array<number> = [1,2,3,4,5,6,7,8,9,10];
   imgState        : number;
-  top_right       : string;
-  bottom_left     : string;
-  middle_right    : string;
-  middle_left     : string;
-  middle_center   : string;
-  top_progress    : number;
-  bottom_progress : number;
+  top_right       : string; // Something to do with the progress bar
+  bottom_left     : string; // Something to do with the progress bar
+  middle_right    : string; // Something to do with the progress bar
+  middle_left     : string; // Something to do with the progress bar
+  middle_center   : string; // Something to do with the progress bar
+  top_progress    : number = 0;
+  bottom_progress : number = 0;
   topUserObj      : onePlayerWrapper;
   bottomUserObj   : onePlayerWrapper;
   pictureRef      : string;
-  questionArray   : Array<string>;
-  answerOptions   : Array<number>;
   color           : string;
+  videos          : Array<string> = [];
+  video           : string;
+  checkList       : Array<string> = [];
+  question1       : string;
+  answer1         : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
+  question2       : string;
+  answer2         : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
   // questionCardEle: HTMLElement;
   // videoEle: HTMLElement;
 
   constructor(
-    private router         : Router,
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,
+    private http           : HTTP,
   ) {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
 
-    this.prepareQuestions();
     this.prepareProgressBar();
 
-    this.topUserObj = new onePlayerWrapper(this.questionArray);
-    this.bottomUserObj = new onePlayerWrapper(this.questionArray);
+    this.topUserObj = new onePlayerWrapper(this.answer1);
+    this.bottomUserObj = new onePlayerWrapper(this.answer2);
+
+    // Get cookie
+    this.nativeStorage.getItem('cookie')
+    .then((data) => {
+      this.cookie = data.cookie
+      // Get user
+      this.nativeStorage.getItem('user')
+      .then((data) => {
+        this.user = data
+
+        // Get URLs to videos
+        this.http.get(this.server + "/getVideo",{},{})
+        .then(data => {
+          var videos = JSON.parse(data.data).videos;
+          videos.forEach((item) => {
+            this.videos.push(item.url)
+          })
+          this.video = videos[0]
+          // Ready to play!!!
+          this.play(1);
+          this.play(2);
+
+        })
+        .catch(error => {
+          console.log("status", error.status);
+          console.log("error", error.error);
+          console.log("error here", error);
+
+        });
+
+      });
+    });
   }
 
-  ngOnInit() {
-    var subject = this.activatedRoute.snapshot.paramMap.get("subject");
-    console.log(subject);
-
-  }
-
-  prepareQuestions(){
-
-    this.questionArray = ['Question1', 'Question2', 'Question3','Question4', 'Question5']; //read from database
-
-    this.answerOptions = [123,456,789,112]; // read from database
-  }
+  play(player){
+    let qSetNumber =  18; // Number of question sets
+    if(this.user.year == 1 && this.subject != "Time"){
+      qSetNumber = 6; // For some reason year one have fewer resources on all but Time
+    }
+    var answerArray = [];
+    while(answerArray.length<4){
+      let page = 4*Math.floor(Math.random() * qSetNumber);
+      let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
+      let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
+      let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      // console.log("checklist", this.checkList)
+      // console.log("question", this.question)
+      // console.log("includes", this.checkList.includes(this.question))
+      if(!this.checkList.includes(ques)){
+        var question = ques
+        answerArray.push({question:question, answer:ans})
+      }
+    }
+    answerArray.sort(() => Math.random() - 0.5);
+    if(player==1){
+      this.answer1 = answerArray
+      this.question1 = question
+    } else {
+      this.answer2 = answerArray
+      this.question2 = question
+    }
+  };
 
   prepareProgressBar(){
-    this.bottom_progress = 0;
-    this.top_progress = 0;
-    this.images = [1,2,3,4,5,6,7,8,9,10];
-
     this.top_right = 'tiger' + this.images[this.top_progress];
     this.bottom_left = 'lion' + this.images[this.bottom_progress];
     this.middle_right = 'tiger' + this.images[9];
@@ -71,41 +121,41 @@ export class PlayMultiPage implements OnInit {
     this.middle_center = 'middle-center';
   }
 
-  updateProgress(userAnswer:number){
-    if (userAnswer <= 4) {
-      if (userAnswer==this.topUserObj.correctAnswer){
+  updateProgress(i:number){
+
+    if (i < 4) {
+      console.log(this.answer1[i])
+      console.log(this.answer1[i]["question"])
+      if (this.answer1[i]["question"]==this.question1){
         // play video when needed
         this.playAudio(true);
         this.updateProgressTop();
         this.topUserObj.updateStatus(true);
-        this.topUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
         if(this.checkWin(this.top_progress)){
           this.winningEffect(true);
           return;
         }
       } else {
         this.playAudio(false);
-        this.topUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
-        this.topUserObj.updateStatus(false);
       }
+      this.play(1)
+
     }
     else {
-      userAnswer = userAnswer - 4;
-      if (userAnswer==this.bottomUserObj.correctAnswer){
+      if (this.answer2[i-4]["question"]==this.question2){
         // play video when needed
         this.playAudio(true);
         this.updateProgressBottom();
         this.bottomUserObj.updateStatus(true);
-        this.bottomUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
         if(this.checkWin(this.bottom_progress)){
           this.winningEffect(true);
           return;
         }
       } else {
         this.playAudio(false);
-        this.bottomUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
-        this.bottomUserObj.updateStatus(false);
       }
+      this.play(2)
+
     }
 
   }
@@ -138,7 +188,6 @@ export class PlayMultiPage implements OnInit {
     let progressBar = <HTMLElement>document.querySelector('.middle-progress-section');
     let gameSection2 = <HTMLElement>document.querySelector('.game-section2');
 
-    let ele1 = <HTMLElement>document.querySelector('#balloon-effect');
     let ele2 = <HTMLElement>document.querySelector('.board');
     let ele3 = <HTMLElement>document.querySelector('.winning-container');
     let ele4 = <HTMLElement>document.querySelector('.congrats-label');
@@ -157,7 +206,6 @@ export class PlayMultiPage implements OnInit {
       gameSection1.style.visibility = "hidden";
       progressBar.style.visibility = "hidden";
       gameSection2.style.visibility = "hidden";
-      ele1.style.animationPlayState = "running";
       ele2.style.visibility = "hidden";
       ele3.style.visibility = "visible";
       ele4.style.width = "100%";
@@ -205,6 +253,8 @@ export class PlayMultiPage implements OnInit {
 
   }
 
+
+
   checkWin(progress: number): boolean {
     if (progress >= 9) {
       return true;
@@ -217,39 +267,17 @@ export class PlayMultiPage implements OnInit {
 
 class onePlayerWrapper{
 
-  questionCard: string;
-  questionState: number;
-  correctAnswer: number; // button number
-  correctCounter: number;
-  incorrectCounter: number;
+  correctCounter   : number;
+  incorrectCounter : number;
 
-  constructor(questionArray: Array<string>){
-    this.questionState = 0;
-    this.correctCounter = 0;
+  constructor(questionArray: Array<Object>){
+    this.correctCounter   = 0;
     this.incorrectCounter = 0;
-    this.correctAnswer = 1; // button number starts from 1
-    this.questionCard = questionArray[this.questionState];
   }
 
   updateStatus(isCorrect: boolean) {
     if (isCorrect) this.correctCounter += 1;
     else this.incorrectCounter += 1;
   }
-
-  updateQuestionCard(questionArray: Array<string>, answerOptions:Array<number>){
-    this.questionState = ++this.questionState;// % questionArray.length;
-    this.questionCard = questionArray[this.questionState];
-    // assume answerOptions has been read from database
-    var correctAnswerNumber = answerOptions[0];
-    answerOptions = this.shuffleAnswerOptions(answerOptions);
-    this.correctAnswer = answerOptions.indexOf(correctAnswerNumber)+1; // correct answer button
-    console.log("correct answer is: "+this.correctAnswer);
-  }
-
-  shuffleAnswerOptions(array:Array<number>) {
-    array.sort(() => Math.random() - 0.5);
-    return array;
-  }
-
 
 }

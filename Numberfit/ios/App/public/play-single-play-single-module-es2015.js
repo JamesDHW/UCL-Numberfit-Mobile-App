@@ -137,10 +137,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PlaySinglePage = class PlaySinglePage {
-    constructor(activatedRoute, nativeStorage, router, http) {
+    constructor(activatedRoute, nativeStorage, http) {
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
-        this.router = router;
         this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         this.bucket = __webpack_require__(/*! ../config.json */ "./src/app/config.json").bucket;
@@ -168,6 +167,7 @@ let PlaySinglePage = class PlaySinglePage {
                     videos.forEach((item) => {
                         this.videos.push(item.url);
                     });
+                    this.video = videos[0];
                     // Ready to play!!!
                     this.play();
                 })
@@ -204,9 +204,7 @@ let PlaySinglePage = class PlaySinglePage {
                 this.answer.push({ question: this.question, answer: ans });
             }
         }
-        this.shuffleAnswerOptions(this.answer);
-        console.log("answers", this.answer);
-        console.log("ansers", this.question);
+        this.answer.sort(() => Math.random() - 0.5);
     }
     ;
     // main operating function for the whole process
@@ -223,6 +221,7 @@ let PlaySinglePage = class PlaySinglePage {
             this.correctCounter += 1;
             //every 3 questions
             if (this.correctCounter % 3 == 0) {
+                this.video = this.videos[(this.correctCounter % 3) - 1];
                 this.switchVideoQuestions(true);
             }
         }
@@ -237,10 +236,6 @@ let PlaySinglePage = class PlaySinglePage {
         let overlaySection = document.querySelector(".overlay-section");
         overlaySection.style.opacity = "30%";
         endSection.style.visibility = "visible";
-    }
-    shuffleAnswerOptions(array) {
-        array.sort(() => Math.random() - 0.5);
-        return array;
     }
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -316,7 +311,7 @@ let PlaySinglePage = class PlaySinglePage {
     // Saves game to gameHistories in server and updates points locally
     saveGame() {
         var gamePlayed = {
-            username: this.user.username,
+            cookie: this.cookie,
             correct: this.correctCounter,
             incorrect: this.incorrectCounter,
             topic: this.subject,
@@ -355,7 +350,6 @@ let PlaySinglePage = class PlaySinglePage {
 PlaySinglePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] },
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] }
 ];
 PlaySinglePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -366,7 +360,6 @@ PlaySinglePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
         _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
         _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])
 ], PlaySinglePage);
 

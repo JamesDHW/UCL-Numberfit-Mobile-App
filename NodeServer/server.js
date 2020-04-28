@@ -75,11 +75,14 @@ app.get('/myDetails', require('./requests/myDetails').myDetails);
 // Get leaderboard from the database
 app.get('/leaderboard', require('./requests/leaderboard').leaderboard);
 
-// Add new School - done via web page
+// Get progress of given user
 app.get('/progress', require('./requests/progress').progress)
 
 // Add new School - done via web page
 app.get('/addSchool', require('./requests/addSchool').addSchool)
+
+// Add new Video resource - done via web page
+app.get('/addVideo', require('./requests/addVideo').addVideo)
 
 // Get 3 random video URLs from the database
 app.get('/getTeachers', require('./requests/getTeachers').getTeachers);
@@ -87,7 +90,7 @@ app.get('/getTeachers', require('./requests/getTeachers').getTeachers);
 // Add new School - done via web page
 app.get('/getSchools', require('./requests/getSchools').getSchools)
 
-// Add new School - done via web page
+// Get random video urls
 app.get('/getVideo', require('./requests/getVideo').getVideo)
 
 // Listen on PORT

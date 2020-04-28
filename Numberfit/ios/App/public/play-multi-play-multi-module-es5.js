@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n</ion-header>\n\n<ion-content class=\"ion-multi-content\">\n  <section class=\"overlay-section\">\n    <section class=\"winning-container\">\n    <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n    <p id=\"congrats-font\">Congratulations!</p><br>\n    <section class=\"congrats-label\"></section>\n    </section>\n    <section class=\"board\">\n      <section>\n        <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n      </section>\n  <ion-row class=\"game-section1\">\n    <ion-col size=\"10\">\n      <section>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(1)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(2)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(3)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(4)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n      <ion-card class=\"card-rotate\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"/assets/Question-card/{{topUserObj.questionCard}}.png\"/>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n    <ion-col size=\"2\" class=\"top-right-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{top_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  <ion-row class=\"middle-progress-section\">\n    <ion-col size=\"5\" class=\"middle-progress-bar-left\">\n      <img src=\"/assets/progress-multiplayer/{{middle_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"2\" class=\"middle-center\">\n      <img src=\"/assets/progress-multiplayer/{{middle_center}}.png\"/>\n    </ion-col>\n    <ion-col size=\"5\" class=\"middle-progress-bar-right\">\n      <img src=\"/assets/progress-multiplayer/{{middle_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  <!-- <section class=\"section\">\n    <img src=\"/assets/progress-multiplayer/Picture1.png\"/>\n  </section> -->\n  <ion-row class=\"game-section2\">\n    <ion-col size=\"2\" class=\"bottom-left-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{bottom_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"10\" >\n      <ion-card class=\"card\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"/assets/Question-card/{{bottomUserObj.questionCard}}.png\"/>\n        </ion-card-content>\n      </ion-card>\n      <section>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(5)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(6)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(7)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(8)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"/assets/Answers/Answer1.png\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n    </ion-col>\n  </ion-row>\n</section>\n</section>\n  <ion-fab class=\"end-section\" vertical=\"center\" horizontal=\"center\" slot=\"fixed\">\n    <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/1']\">\n      <ion-icon name=\"refresh-outline\"></ion-icon>\n    </ion-fab-button>\n  <ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n      <ion-icon name=\"exit-outline\"></ion-icon>\n  </ion-fab-button>\n  </ion-fab>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n</ion-header>\n\n<ion-content class=\"ion-multi-content\">\n  <section class=\"overlay-section\">\n    <section class=\"winning-container\">\n    <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n    <p id=\"congrats-font\">Congratulations!</p><br>\n    <section class=\"congrats-label\"></section>\n    </section>\n    <section class=\"board\">\n      <section>\n        <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n      </section>\n  <ion-row class=\"game-section1\">\n    <ion-col size=\"10\">\n      <section>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(0)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[0]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(1)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[1]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(2)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[2]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(3)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[3]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n      <ion-card class=\"card-rotate\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"{{question1}}\"/>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n    <ion-col size=\"2\" class=\"top-right-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{top_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  <ion-row class=\"middle-progress-section\">\n    <ion-col size=\"5\" class=\"middle-progress-bar-left\">\n      <img src=\"/assets/progress-multiplayer/{{middle_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"2\" class=\"middle-center\">\n      <img src=\"/assets/progress-multiplayer/{{middle_center}}.png\"/>\n    </ion-col>\n    <ion-col size=\"5\" class=\"middle-progress-bar-right\">\n      <img src=\"/assets/progress-multiplayer/{{middle_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  <!-- <section class=\"section\">\n    <img src=\"/assets/progress-multiplayer/Picture1.png\"/>\n  </section> -->\n  <ion-row class=\"game-section2\">\n    <ion-col size=\"2\" class=\"bottom-left-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{bottom_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"10\" >\n      <ion-card class=\"card\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"{{question2}}\"/>\n        </ion-card-content>\n      </ion-card>\n      <section>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(4)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[0]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(5)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[1]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(6)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[2]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col class=\"choice-section\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(7)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[3]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n    </ion-col>\n  </ion-row>\n</section>\n</section>\n  <ion-fab class=\"end-section\" vertical=\"center\" horizontal=\"center\" slot=\"fixed\">\n    <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/1']\">\n      <ion-icon name=\"refresh-outline\"></ion-icon>\n    </ion-fab-button>\n  <ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n      <ion-icon name=\"exit-outline\"></ion-icon>\n  </ion-fab-button>\n  </ion-fab>\n</ion-content>\n";
     /***/
   },
 
@@ -220,68 +220,146 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var PlayMultiPage = /*#__PURE__*/function () {
       // questionCardEle: HTMLElement;
       // videoEle: HTMLElement;
-      function PlayMultiPage(router, activatedRoute, nativeStorage) {
+      function PlayMultiPage(activatedRoute, nativeStorage, http) {
         var _this = this;
 
         _classCallCheck(this, PlayMultiPage);
 
-        this.router = router;
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
+        this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
         this.bucket = __webpack_require__(
         /*! ../config.json */
-        "./src/app/config.json").bucket; // Get cookie from storage
+        "./src/app/config.json").bucket;
+        this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
+        this.images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        this.top_progress = 0;
+        this.bottom_progress = 0;
+        this.videos = [];
+        this.checkList = [];
+        this.answer1 = [{
+          answer: "-"
+        }, {
+          answer: "-"
+        }, {
+          answer: "-"
+        }, {
+          answer: "-"
+        }];
+        this.answer2 = [{
+          answer: "-"
+        }, {
+          answer: "-"
+        }, {
+          answer: "-"
+        }, {
+          answer: "-"
+        }]; // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
         });
-        this.prepareQuestions();
         this.prepareProgressBar();
-        this.topUserObj = new onePlayerWrapper(this.questionArray);
-        this.bottomUserObj = new onePlayerWrapper(this.questionArray);
+        this.topUserObj = new onePlayerWrapper(this.answer1);
+        this.bottomUserObj = new onePlayerWrapper(this.answer2); // Get cookie
+
+        this.nativeStorage.getItem('cookie').then(function (data) {
+          _this.cookie = data.cookie; // Get user
+
+          _this.nativeStorage.getItem('user').then(function (data) {
+            _this.user = data; // Get URLs to videos
+
+            _this.http.get(_this.server + "/getVideo", {}, {}).then(function (data) {
+              var videos = JSON.parse(data.data).videos;
+              videos.forEach(function (item) {
+                _this.videos.push(item.url);
+              });
+              _this.video = videos[0]; // Ready to play!!!
+
+              _this.play(1);
+
+              _this.play(2);
+            })["catch"](function (error) {
+              console.log("status", error.status);
+              console.log("error", error.error);
+              console.log("error here", error);
+            });
+          });
+        });
       }
 
       _createClass(PlayMultiPage, [{
-        key: "ngOnInit",
-        value: function ngOnInit() {
-          var subject = this.activatedRoute.snapshot.paramMap.get("subject");
-          console.log(subject);
-        }
-      }, {
-        key: "prepareQuestions",
-        value: function prepareQuestions() {
-          this.questionArray = ['Question1', 'Question2', 'Question3', 'Question4', 'Question5']; //read from database
+        key: "play",
+        value: function play(player) {
+          var qSetNumber = 18; // Number of question sets
 
-          this.answerOptions = [123, 456, 789, 112]; // read from database
+          if (this.user.year == 1 && this.subject != "Time") {
+            qSetNumber = 6; // For some reason year one have fewer resources on all but Time
+          }
+
+          var answerArray = [];
+
+          while (answerArray.length < 4) {
+            var page = 4 * Math.floor(Math.random() * qSetNumber);
+            var card = page + Math.floor(Math.random() * 6); // 6 questions on each page
+
+            var ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + page + "-" + card + ".png";
+            var ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png"; // console.log("checklist", this.checkList)
+            // console.log("question", this.question)
+            // console.log("includes", this.checkList.includes(this.question))
+
+            if (!this.checkList.includes(ques)) {
+              var question = ques;
+              answerArray.push({
+                question: question,
+                answer: ans
+              });
+            }
+          }
+
+          answerArray.sort(function () {
+            return Math.random() - 0.5;
+          });
+
+          if (player == 1) {
+            this.answer1 = answerArray;
+            this.question1 = question;
+          } else {
+            this.answer2 = answerArray;
+            this.question2 = question;
+          }
         }
       }, {
         key: "prepareProgressBar",
         value: function prepareProgressBar() {
-          this.bottom_progress = 0;
-          this.top_progress = 0;
-          this.images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
           this.top_right = 'tiger' + this.images[this.top_progress];
           this.bottom_left = 'lion' + this.images[this.bottom_progress];
           this.middle_right = 'tiger' + this.images[9];
@@ -290,14 +368,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "updateProgress",
-        value: function updateProgress(userAnswer) {
-          if (userAnswer <= 4) {
-            if (userAnswer == this.topUserObj.correctAnswer) {
+        value: function updateProgress(i) {
+          if (i < 4) {
+            console.log(this.answer1[i]);
+            console.log(this.answer1[i]["question"]);
+
+            if (this.answer1[i]["question"] == this.question1) {
               // play video when needed
               this.playAudio(true);
               this.updateProgressTop();
               this.topUserObj.updateStatus(true);
-              this.topUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
 
               if (this.checkWin(this.top_progress)) {
                 this.winningEffect(true);
@@ -305,18 +385,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             } else {
               this.playAudio(false);
-              this.topUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
-              this.topUserObj.updateStatus(false);
             }
-          } else {
-            userAnswer = userAnswer - 4;
 
-            if (userAnswer == this.bottomUserObj.correctAnswer) {
+            this.play(1);
+          } else {
+            if (this.answer2[i - 4]["question"] == this.question2) {
               // play video when needed
               this.playAudio(true);
               this.updateProgressBottom();
               this.bottomUserObj.updateStatus(true);
-              this.bottomUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
 
               if (this.checkWin(this.bottom_progress)) {
                 this.winningEffect(true);
@@ -324,9 +401,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             } else {
               this.playAudio(false);
-              this.bottomUserObj.updateQuestionCard(this.questionArray, this.answerOptions);
-              this.bottomUserObj.updateStatus(false);
             }
+
+            this.play(2);
           }
         }
       }, {
@@ -366,7 +443,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var gameSection1 = document.querySelector('.game-section1');
           var progressBar = document.querySelector('.middle-progress-section');
           var gameSection2 = document.querySelector('.game-section2');
-          var ele1 = document.querySelector('#balloon-effect');
           var ele2 = document.querySelector('.board');
           var ele3 = document.querySelector('.winning-container');
           var ele4 = document.querySelector('.congrats-label');
@@ -383,7 +459,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             gameSection1.style.visibility = "hidden";
             progressBar.style.visibility = "hidden";
             gameSection2.style.visibility = "hidden";
-            ele1.style.animationPlayState = "running";
             ele2.style.visibility = "hidden";
             ele3.style.visibility = "visible";
             ele4.style.width = "100%";
@@ -451,15 +526,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     PlayMultiPage.ctorParameters = function () {
       return [{
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"]
       }, {
-        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"]
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
       }];
     };
 
-    PlayMultiPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+    PlayMultiPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-play-multi',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./play-multi.page.html */
@@ -467,45 +542,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./play-multi.page.scss */
       "./src/app/play-multi/play-multi.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"]])], PlayMultiPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], PlayMultiPage);
 
     var onePlayerWrapper = /*#__PURE__*/function () {
       function onePlayerWrapper(questionArray) {
         _classCallCheck(this, onePlayerWrapper);
 
-        this.questionState = 0;
         this.correctCounter = 0;
         this.incorrectCounter = 0;
-        this.correctAnswer = 1; // button number starts from 1
-
-        this.questionCard = questionArray[this.questionState];
       }
 
       _createClass(onePlayerWrapper, [{
         key: "updateStatus",
         value: function updateStatus(isCorrect) {
           if (isCorrect) this.correctCounter += 1;else this.incorrectCounter += 1;
-        }
-      }, {
-        key: "updateQuestionCard",
-        value: function updateQuestionCard(questionArray, answerOptions) {
-          this.questionState = ++this.questionState; // % questionArray.length;
-
-          this.questionCard = questionArray[this.questionState]; // assume answerOptions has been read from database
-
-          var correctAnswerNumber = answerOptions[0];
-          answerOptions = this.shuffleAnswerOptions(answerOptions);
-          this.correctAnswer = answerOptions.indexOf(correctAnswerNumber) + 1; // correct answer button
-
-          console.log("correct answer is: " + this.correctAnswer);
-        }
-      }, {
-        key: "shuffleAnswerOptions",
-        value: function shuffleAnswerOptions(array) {
-          array.sort(function () {
-            return Math.random() - 0.5;
-          });
-          return array;
         }
       }]);
 

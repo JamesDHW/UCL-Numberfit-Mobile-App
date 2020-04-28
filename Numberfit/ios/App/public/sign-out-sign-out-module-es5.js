@@ -205,8 +205,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function signOut() {
           var _this = this;
 
-          console.log("send to", this.server + "/test");
-          this.http.get(this.server + "/test", {}, {}).then(function (data) {
+          console.log("send to", this.server + "/logout?session=" + this.cookie);
+          this.http.get(this.server + "/logout", {}, {}).then(function (data) {
             _this.nativeStorage.setItem('cookie', {
               cookie: "-"
             }).then(function () {

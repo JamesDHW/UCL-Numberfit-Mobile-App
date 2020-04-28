@@ -115,8 +115,8 @@ let HomePage = class HomePage {
         this.cookie = this.nativeStorage.getItem('cookie');
     }
     signOut() {
-        console.log("send to", this.server + "/test");
-        this.http.get(this.server + "/test", {}, {})
+        console.log("send to", this.server + "/logout?session=" + this.cookie);
+        this.http.get(this.server + "/logout", {}, {})
             .then(data => {
             this.nativeStorage.setItem('cookie', { cookie: "-" })
                 .then(() => {

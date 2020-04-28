@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Subject Select</ion-card-title>\n    </ion-card-header>\n      <ion-radio-group\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let sub of subjects\">\n      <ion-item>\n        <ion-label>{{sub.Topic}}</ion-label>\n        <ion-radio id={{sub.Topic}} value={{sub.Topic}} slot=\"end\" (click)=onSelect(sub.Topic)></ion-radio>\n      </ion-item>\n      </ion-radio-group>\n    <ion-button id=\"btn-play\" expand=\"block\" fill=\"clear\">\n      Play Selected Subject\n    </ion-button>\n  </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Subject Select</ion-card-title>\n    </ion-card-header>\n      <ion-list *ngFor=\"let sub of subjects\">\n        <ion-item>\n          <ion-label (click)=\"navigate(sub.Topic)\">{{sub.Topic}}</ion-label>\n        </ion-item>\n      </ion-list>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -273,7 +273,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.subjects = __webpack_require__(
         /*! ./default_subjects.json */
-        "./src/app/subject-select/default_subjects.json").availableTopics; // Get cookie from storage
+        "./src/app/subject-select/default_subjects.json").availableTopics;
+        this.gamemode = this.activatedRoute.snapshot.paramMap.get("gamemode"); // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
@@ -298,82 +299,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log("status", error.status);
             console.log("error", error.error);
           });
-        }); // // GET all subjects from Numberfit
-        // var xhttpSubjects = new XMLHttpRequest();
-        // var xhttpDetails  = new XMLHttpRequest();
-        // let DOM = this;
-        //
-        //
-        // // Define the listener function for the GET request
-        // xhttpSubjects.onreadystatechange = function() {
-        //   if (this.readyState == 4 && this.status == 200) {
-        //     // Subjects GOT now get details to check year group
-        //     DOM.subjects = JSON.parse(this.responseText)
-        //     xhttpDetails.send();
-        //   } else if(this.status != 200) {
-        //     console.log("GET subjects request failed with satus " + this.status)
-        //   }
-        // };
-        //
-        // // Define the listener function for the GET request
-        // xhttpDetails.onreadystatechange = function() {
-        //   if (this.readyState == 4 && this.status == 200) {
-        //     console.log("GET details request succeeded")
-        //     // Remove elements not available to that year
-        //     // By now availableTopics is an attribute of DOM.subjects
-        //     console.log(JSON.parse(this.responseText));
-        //     let repeats = DOM.subjects["availableTopics"].length;
-        //     let deletes = 0;
-        //     for(var i=0; i<repeats; i++){
-        //       if(!DOM.subjects["availableTopics"][i-deletes].availableYears.includes(
-        //         parseInt(JSON.parse(this.responseText).year))){
-        //           DOM.subjects["availableTopics"].splice(i-deletes, 1)
-        //           deletes += 1;
-        //       }
-        //     }
-        //
-        //   } else if(this.status != 200) {
-        //     console.log("GET details request failed with satus " + this.status)
-        //   }
-        // };
-        //
-        // // Define and send the GET request
-        // xhttpSubjects.open("GET", "http://api.numberfit.com:8081/getAvailableTopics", true);
-        // xhttpDetails.open("GET", this.server+"/myDetails?cookie=" + this.cookie, true);
-        // xhttpSubjects.send();
-      } // Function called when radio button clicked
-
+        });
+      }
 
       _createClass(SubjectSelectPage, [{
-        key: "onSelect",
-        value: function onSelect(topic) {
-          // TODO:
-          // Deselct current one on click - stopped working when I
-          // changed it to programmatically fill the list.
-          var radio = document.getElementById(topic);
-          this.subject = topic;
+        key: "navigate",
+        value: function navigate(topic) {
+          var gamemode = this.activatedRoute.snapshot.paramMap.get("gamemode");
+
+          if (Number(gamemode) === 0) {
+            this.router.navigate(['/play-single', topic]);
+          } else {
+            this.router.navigate(['/play-multi', topic]);
+          }
         }
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var gamemode = this.activatedRoute.snapshot.paramMap.get("gamemode");
-          var DOM = this; // Set the title according to the gamemode
-
-          if (Number(gamemode) === 0) {
+          // Set the title according to the gamemode
+          if (Number(this.gamemode) === 0) {
             document.getElementById("title").textContent = "Single Player";
           } else {
             document.getElementById("title").textContent = "Head-to-Head";
-          } // Add eventListener for form submission
-
-
-          document.getElementById("btn-play").addEventListener("click", function () {
-            // Navigate to the respective page
-            if (Number(gamemode) === 0) {
-              DOM.router.navigate(['/play-single', DOM.subject]);
-            } else {
-              DOM.router.navigate(['/play-multi', DOM.subject]);
-            }
-          });
+          }
         }
       }]);
 

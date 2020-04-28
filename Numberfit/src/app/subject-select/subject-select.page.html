@@ -12,17 +12,10 @@
     <ion-card-header>
       <ion-card-title id="title" class="welcome-card-title">Subject Select</ion-card-title>
     </ion-card-header>
-      <ion-radio-group
-      id="radio-group"
-      allow-empty-selection=“false”
-      *ngFor="let sub of subjects">
-      <ion-item>
-        <ion-label>{{sub.Topic}}</ion-label>
-        <ion-radio id={{sub.Topic}} value={{sub.Topic}} slot="end" (click)=onSelect(sub.Topic)></ion-radio>
-      </ion-item>
-      </ion-radio-group>
-    <ion-button id="btn-play" expand="block" fill="clear">
-      Play Selected Subject
-    </ion-button>
+      <ion-list *ngFor="let sub of subjects">
+        <ion-item>
+          <ion-label (click)="navigate(sub.Topic)">{{sub.Topic}}</ion-label>
+        </ion-item>
+      </ion-list>
   </ion-card>
 </ion-content>

@@ -39,7 +39,7 @@ module.exports.register = function (req, res) {
           console.log("reg teach")
           teacher.save((err) => {
             if (err) throw err;
-            require('./login').login(req, res);
+            return res.redirect('./success.html');
           });
         } else {
           console.log("reg pup")

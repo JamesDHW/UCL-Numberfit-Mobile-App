@@ -49,7 +49,7 @@ const Videos = new Schema({
 const User    = mongoose.model('users', Users, 'users')
 const Pupil   = mongoose.model('pupils', Pupils, 'pupils')
 const Teacher = mongoose.model('teachers', Teachers, 'teachers')
-const GameHistory = mongoose.model('GameHistories', GameHistories, 'GameHistories')
+const GameHistory = mongoose.model('gamehistories', GameHistories, 'gamehistories')
 const School  = mongoose.model('schools', Schools, 'schools')
 const Video  = mongoose.model('videos', Videos, 'videos')
 
