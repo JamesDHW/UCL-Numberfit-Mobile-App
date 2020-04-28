@@ -34302,8 +34302,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
-        this.badges = []; // this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
-        // Get cookie from storage
+        this.badges = []; // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
@@ -34314,6 +34313,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _this.drawBadges();
 
             _this.createLineChart();
+
+            console.log("returned - ", data.data);
           })["catch"](function (error) {
             console.log("ERRORS FOUND");
             console.log("status:", error.status);
@@ -34354,28 +34355,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var key = _Object$keys[_i];
 
             if (this.games[key] > 50 && key != "data" && key != "date") {
-              console.log(key);
               this.badges.push({
                 topic: key,
                 rank: "Master",
                 image: "../../assets/badges/master.png"
               });
             } else if (this.games[key] > 35 && key != "data" && key != "date") {
-              console.log(key);
               this.badges.push({
                 topic: key,
                 rank: "Expert",
                 image: "../../assets/badges/expert.png"
               });
             } else if (this.games[key] > 20 && key != "data" && key != "date") {
-              console.log(key);
               this.badges.push({
                 topic: key,
                 rank: "Advanced",
                 image: "../../assets/badges/advanced.png"
               });
             } else if (this.games[key] > 5 && key != "data" && key != "date") {
-              console.log(key);
               this.badges.push({
                 topic: key,
                 rank: "Novice",
@@ -34383,8 +34380,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               });
             }
           }
-
-          console.log(this.badges);
         }
       }]);
 

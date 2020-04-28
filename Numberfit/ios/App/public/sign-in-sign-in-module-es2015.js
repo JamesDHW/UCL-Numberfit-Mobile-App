@@ -158,7 +158,6 @@ let SignInPage = class SignInPage {
             .then(data => {
             var user = JSON.parse(data.data);
             console.log("user: ", user);
-            console.log("response: ", data);
             this.nativeStorage.setItem('cookie', { cookie: user.cookie })
                 .then(() => {
                 var savedUser = {
@@ -183,21 +182,6 @@ let SignInPage = class SignInPage {
             console.log("error here", error.error);
             this.presentAlert();
         });
-        // var DOM = this;
-        // var xhttp = new XMLHttpRequest();
-        // console.log(this.server)
-        // // Login request response handler
-        // xhttp.onreadystatechange = function() {
-        //   if (this.readyState == 4 && this.status == 200) {
-        //
-        //   } else if(this.status != 200) {
-        //     console.log("error occured:",this.responseText);
-        //     DOM.presentAlert();
-        //   }
-        // };
-        // xhttp.open("POST", this.server + "/login", true);
-        // xhttp.setRequestHeader("Content-type", "application/json");
-        // xhttp.send(JSON.stringify(credentials));
     }
     presentAlert() {
         const alert = document.createElement('ion-alert');

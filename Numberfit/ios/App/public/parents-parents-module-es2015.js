@@ -33910,7 +33910,6 @@ let HomePage = class HomePage {
         this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         this.badges = [];
-        // this.games = {data : [2,3,4,5], date : ["jan", "feb", "march", "april"], Addition: 6, Subtraction: 51};
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => {
@@ -33920,6 +33919,7 @@ let HomePage = class HomePage {
                 this.games = JSON.parse(data.data);
                 this.drawBadges();
                 this.createLineChart();
+                console.log("returned - ", data.data);
             })
                 .catch(error => {
                 console.log("ERRORS FOUND");
@@ -33956,7 +33956,6 @@ let HomePage = class HomePage {
     drawBadges() {
         for (var key of Object.keys(this.games)) {
             if (this.games[key] > 50 && key != "data" && key != "date") {
-                console.log(key);
                 this.badges.push({
                     topic: key,
                     rank: "Master",
@@ -33964,7 +33963,6 @@ let HomePage = class HomePage {
                 });
             }
             else if (this.games[key] > 35 && key != "data" && key != "date") {
-                console.log(key);
                 this.badges.push({
                     topic: key,
                     rank: "Expert",
@@ -33972,7 +33970,6 @@ let HomePage = class HomePage {
                 });
             }
             else if (this.games[key] > 20 && key != "data" && key != "date") {
-                console.log(key);
                 this.badges.push({
                     topic: key,
                     rank: "Advanced",
@@ -33980,7 +33977,6 @@ let HomePage = class HomePage {
                 });
             }
             else if (this.games[key] > 5 && key != "data" && key != "date") {
-                console.log(key);
                 this.badges.push({
                     topic: key,
                     rank: "Novice",
@@ -33988,7 +33984,6 @@ let HomePage = class HomePage {
                 });
             }
         }
-        console.log(this.badges);
     }
 };
 HomePage.ctorParameters = () => [

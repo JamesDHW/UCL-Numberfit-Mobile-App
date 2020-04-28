@@ -6,10 +6,10 @@ module.exports.updateScore = function(req, res){
   User.findOne({_id : userIn.cookie}, (err, user) => {
     if(err) throw err;
     delete userIn["cookie"]
-    Pupil.findOneAndUpdate({ username : user.username },userIn, (err, details) => {
+    Pupil.findOneAndUpdate({ username : user.username },{$inc: {points: req.body.points}}, (err, details) => {
       if(err) throw err;
       // console.log("Pupil: ", details);
-      return res.status(200)
+      res.send("done")
 
     })
   })

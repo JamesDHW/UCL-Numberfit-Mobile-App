@@ -23,6 +23,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 .catch(err => console.log('Failed to connect: ', err))
 
 app.use(require('cors')())
+mongoose.set('useFindAndModify', false);
 
 require('./config/passport')
 app.use(passport.initialize());
@@ -59,6 +60,9 @@ app.post('/register', require('./requests/register').register)
 
 // Save game
 app.post('/saveGame', require('./requests/save-game').saveGame)
+
+// Update user score (absolute points value)
+app.post('/updateScore', require('./requests/updateScore').updateScore)
 
 
 // GET REQUESTS

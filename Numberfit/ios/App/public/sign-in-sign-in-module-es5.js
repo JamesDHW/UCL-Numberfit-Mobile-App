@@ -283,7 +283,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.http.post(this.server + "/login", credentials, {}).then(function (data) {
             var user = JSON.parse(data.data);
             console.log("user: ", user);
-            console.log("response: ", data);
 
             _this.nativeStorage.setItem('cookie', {
               cookie: user.cookie
@@ -314,21 +313,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log("error here", error.error);
 
             _this.presentAlert();
-          }); // var DOM = this;
-          // var xhttp = new XMLHttpRequest();
-          // console.log(this.server)
-          // // Login request response handler
-          // xhttp.onreadystatechange = function() {
-          //   if (this.readyState == 4 && this.status == 200) {
-          //
-          //   } else if(this.status != 200) {
-          //     console.log("error occured:",this.responseText);
-          //     DOM.presentAlert();
-          //   }
-          // };
-          // xhttp.open("POST", this.server + "/login", true);
-          // xhttp.setRequestHeader("Content-type", "application/json");
-          // xhttp.send(JSON.stringify(credentials));
+          });
         }
       }, {
         key: "presentAlert",

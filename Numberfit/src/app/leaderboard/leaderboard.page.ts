@@ -34,7 +34,6 @@ export class HomePage implements OnInit {
       .then(data => {
         // Need to do a request which returns {user : [{user1...}]}
         this.users = JSON.parse(data.data).scores;
-
       })
       .catch(error => {
         console.log("status", error.status);

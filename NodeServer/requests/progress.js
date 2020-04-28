@@ -9,12 +9,14 @@ module.exports.progress = function(req, res){
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
 
-    if(req.query.topic == "-"){
+    if(req.query.topic == "-" || !req.query.topic){
       // This will be the initial query
       var query = {username : user.username}
     } else {
       var query = {username : user.username, topic : req.query.topic }
     }
+
+    console.log(query)
 
     GameHistory.find(query, (err, history) => {
       if(err) throw err;
@@ -24,11 +26,18 @@ module.exports.progress = function(req, res){
       var date = [];
       var out  = {};
 
-      console.log(history)
+      // console.log(history)
 
       history.forEach((item, i) => {
 
-        out[item.topic] = out[item.topic] + 1;
+        if(!out[item.topic]){
+          out[item.topic] = 1;
+        } else {
+          out[item.topic] = out[item.topic] + 1;
+        }
+
+
+
         if(i+1 < LIMIT){
           if(date.includes(item._id.getTimestamp().toString().slice(4,15))){
             corr[date.indexOf(item._id.getTimestamp().toString().slice(4,15))] += item.correct;

@@ -4,7 +4,7 @@ const Pupil    = require('../config/schema').Pupil;
 const Teacher  = require('../config/schema').Teacher;
 
 module.exports.login = function (req, res, next) {
-  passport.authenticate('local', function(err, user, info){
+  passport.authenticate('local', function(err, user){
     if(err){
       console.log("error: ", err)
       return res.status(400).json({ errors : err });

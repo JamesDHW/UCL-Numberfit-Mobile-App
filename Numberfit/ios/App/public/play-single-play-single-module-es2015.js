@@ -215,10 +215,10 @@ let PlaySinglePage = class PlaySinglePage {
             this.checkList.push(this.question);
             this.playAudio(true);
             this.updateProgressBar();
+            this.correctCounter += 1;
             if (this.checkWin()) {
                 return;
             }
-            this.correctCounter += 1;
             //every 3 questions
             if (this.correctCounter % 3 == 0) {
                 this.video = this.videos[(this.correctCounter % 3) - 1];
@@ -318,15 +318,10 @@ let PlaySinglePage = class PlaySinglePage {
         };
         var savedUser = {
             cookie: this.cookie,
-            username: this.user.username,
-            name: this.user.name,
-            school: this.user.school,
-            year: this.user.year,
-            teacher: this.user.teacher,
             points: this.user.points + this.correctCounter - this.incorrectCounter,
         };
         console.log("gamePLayed: ", gamePlayed);
-        console.log("savedUser: ", savedUser);
+        console.log("savedUser: ", savedUser.points);
         this.http.setDataSerializer('json');
         this.http.post(this.server + "/saveGame", gamePlayed, {})
             .then(data => {

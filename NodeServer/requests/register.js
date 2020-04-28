@@ -12,9 +12,7 @@ module.exports.register = function (req, res) {
         password : req.body.password,
         teacher  : req.body.teacher,
       });
-      console.log("what do we think this is?", req.body.teacher)
       if(req.body.teacher == true) {
-        console.log("reg teach")
         var teacher = new Teacher({
           username : req.body.username,
           name     : req.body.name,
@@ -36,15 +34,12 @@ module.exports.register = function (req, res) {
         if (err) throw err;
 
         if(req.body.teacher == true) {
-          console.log("reg teach")
           teacher.save((err) => {
             if (err) throw err;
             return res.redirect('./success.html');
           });
         } else {
-          console.log("reg pup")
           pupil.save((err) => {
-            console.log("reg pup")
             if (err) throw err;
             require('./login').login(req, res);
           });

@@ -7,11 +7,11 @@ module.exports.myDetails = function(req, res){
   console.log(cookie)
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
-    console.log("User: ", user);
+    // console.log("User: ", user);
     if(!user.Teacher){
       Pupil.findOne({ username : user.username }, (err, details) => {
         if(err) throw err;
-        console.log("Pupil: ", details);
+        // console.log("Pupil: ", details);
         return res.status(200).json({
           username : details.username,
           name     : details.name,
@@ -24,7 +24,7 @@ module.exports.myDetails = function(req, res){
     } else {
       Teacher.findOne({ username : user.username }, (err, details) => {
         if(err) throw err;
-        console.log("Teacher: ", details);
+        // console.log("Teacher: ", details);
         return res.status(200).json({
           username : details.username,
           name     : details.name,

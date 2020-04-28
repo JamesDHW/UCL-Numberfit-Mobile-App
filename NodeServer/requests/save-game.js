@@ -18,7 +18,7 @@ module.exports.saveGame = function (req, res) {
 
     game.save((err) => {
       if (err) throw err;
-      res.send("Saved!")
+      res.status(200)
     });
   });
 };
