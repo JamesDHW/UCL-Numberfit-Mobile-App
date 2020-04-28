@@ -2,7 +2,6 @@
 </ion-header>
 
 <ion-content class="ion-multi-content">
-  <section class="overlay-section">
     <section class="winning-container">
     <img id="center-star" src="/assets/Winning-decoration/big_star.gif"/>
     <p id="congrats-font">Congratulations!</p><br>
@@ -12,17 +11,18 @@
       <section>
         <img id="star-animation" src="/assets/Winning-decoration/star_animation.gif"/>
       </section>
-  <ion-row class="game-section1">
+  <section class="game-section1">
+  <ion-row>
     <ion-col size="10">
-      <section>
+      <section class="choice-section">
         <ion-row class="choice-row">
-          <ion-col class="choice-section">
+          <ion-col class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress(0)">
               <!-- <span class="font">5</span> -->
               <img id="answer-card" src="{{answer1[0]['answer']}}"/>
             </ion-button>
           </ion-col>
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress(1)">
               <!-- <span class="font">8</span> -->
               <img id="answer-card" src="{{answer1[1]['answer']}}"/>
@@ -30,13 +30,13 @@
           </ion-col>
         </ion-row>
         <ion-row class="choice-row">
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress(2)">
               <!-- <span class="font">10</span> -->
               <img id="answer-card" src="{{answer1[2]['answer']}}"/>
             </ion-button>
           </ion-col>
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button-rotate" (click)="updateProgress(3)">
               <!-- <span class="font">6</span> -->
               <img id="answer-card" src="{{answer1[3]['answer']}}"/>
@@ -44,7 +44,7 @@
           </ion-col>
         </ion-row>
       </section>
-      <ion-card class="card-rotate">
+      <ion-card size="10" class="card-rotate">
         <ion-card-content>
           <img class="question-card" src="{{question1}}"/>
         </ion-card-content>
@@ -54,7 +54,9 @@
       <img src="/assets/progress-multiplayer/{{top_right}}.png"/>
     </ion-col>
   </ion-row>
-  <ion-row class="middle-progress-section">
+  </section>
+  <section class="middle-progress-section">
+    <ion-row>
     <ion-col size="5" class="middle-progress-bar-left">
       <img src="/assets/progress-multiplayer/{{middle_left}}.png"/>
     </ion-col>
@@ -65,28 +67,30 @@
       <img src="/assets/progress-multiplayer/{{middle_right}}.png"/>
     </ion-col>
   </ion-row>
+  </section>
   <!-- <section class="section">
     <img src="/assets/progress-multiplayer/Picture1.png"/>
   </section> -->
-  <ion-row class="game-section2">
+  <section class="game-section2">
+  <ion-row>
     <ion-col size="2" class="bottom-left-progress-bar">
       <img src="/assets/progress-multiplayer/{{bottom_left}}.png"/>
     </ion-col>
-    <ion-col size="10" >
+    <ion-col size="10">
       <ion-card class="card">
         <ion-card-content>
           <img class="question-card" src="{{question2}}"/>
         </ion-card-content>
       </ion-card>
-      <section>
+      <section class="choice-section-bottom">
         <ion-row class="choice-row">
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(4)">
               <!-- <span class="font">5</span> -->
               <img id="answer-card" src="{{answer2[0]['answer']}}"/>
             </ion-button>
           </ion-col>
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(5)">
               <!-- <span class="font">8</span> -->
               <img id="answer-card" src="{{answer2[1]['answer']}}"/>
@@ -94,13 +98,13 @@
           </ion-col>
         </ion-row>
         <ion-row class="choice-row">
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(6)">
               <!-- <span class="font">10</span> -->
               <img id="answer-card" src="{{answer2[2]['answer']}}"/>
             </ion-button>
           </ion-col>
-          <ion-col class="choice-section">
+          <ion-col size= "6" class="choice-col">
             <ion-button shape="round" fill="outline" class="choice-button" (click)="updateProgress(7)">
               <!-- <span class="font">6</span> -->
               <img id="answer-card" src="{{answer2[3]['answer']}}"/>
@@ -112,12 +116,12 @@
   </ion-row>
 </section>
 </section>
-  <ion-fab class="end-section" vertical="center" horizontal="center" slot="fixed">
-    <ion-fab-button id="replay-button" [routerLink]="['/subject-select/1']">
-      <ion-icon name="refresh-outline"></ion-icon>
-    </ion-fab-button>
-  <ion-fab-button id="exit-button" [routerLink]="['/play']">
-      <ion-icon name="exit-outline"></ion-icon>
-  </ion-fab-button>
-  </ion-fab>
 </ion-content>
+<ion-fab class="end-section" vertical="center" horizontal="center" slot="fixed">
+  <ion-fab-button id="replay-button" [routerLink]="['/subject-select/1']">
+    <ion-icon name="refresh-outline"></ion-icon>
+  </ion-fab-button>
+<ion-fab-button id="exit-button" [routerLink]="['/play']">
+    <ion-icon name="exit-outline"></ion-icon>
+</ion-fab-button>
+</ion-fab>

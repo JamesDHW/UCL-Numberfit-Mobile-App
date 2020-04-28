@@ -1,15 +1,32 @@
 @import url(https://fonts.googleapis.com/css?family=Bevan);
 
 .ion-multi-content{
-    --background: url('/assets/progress-multiplayer/background.jpg') 100% 100%;
+    --background: url('/assets/progress-multiplayer/background.jpg') no-repeat center;
+    background-size: cover;
+    --overflow: hidden;
   }
 
 //   .row-structure{
 //     --ion-grid-height: 90%;
 //   }
 
-ion-row {
-    height: 45%;
+// .ion-row {
+//     height: 45%;
+// }
+
+.game-section1 {
+  height: 47vh;
+  width: 100vw;
+}
+
+.game-section2 {
+  margin-top: 2vh;
+  height: 48vh;
+  width: 100vw;
+}
+
+.choice-row {
+  height: 9vh;
 }
 
 .overlay-section {
@@ -18,35 +35,56 @@ ion-row {
 
 .card{
     background: rgba(255, 255, 255, 0.62);
-    width: 92%;
-    height: 150px;
+    width: 98%;
+    height: 24vh;
     text-align: center;
+    right: 5vw;
+    margin-top: 0;
 }
 
 .question-card{
-    height: 130px;
+  height: 95%;
+  width: 95%;
+  // padding-right: 2.5%;
+  // margin-top: 2.5%;
     // visibility: visible;
 }
 
 .middle-progress-section{
-    height: 7%;
+    height: 6vh;
+    margin-top: -3%;
+    // overflow: hidden;
+    width: 100vw;
+    // text-align: center;
     // margin-left: 3%;
     // margin-right: 3%;
 }
 
 .middle-progress-bar-left{
-    margin-top: 1%;
+    margin-bottom: 0vh;
 }
 
 .middle-progress-bar-right{
-    margin-bottom: 2%;
+    margin-bottom: 2vh;
     transform: rotate(180deg)
 }
 
-.choice-section{
-    size: "6";
+.choice-col{
     text-align: center;
   }
+
+.choice-section {
+  height: 16vh;
+  width: 83vw;
+  text-align: center;
+}
+
+.choice-section-bottom {
+  text-align: center;
+  height: 16vh;
+  width: 83vw;
+  margin-top: -4%;
+}
 
 .choice-button{
     // size: large;
@@ -64,25 +102,16 @@ ion-row {
     }
   }
 
-.font{
-    font-family: "Bevan";
-    font-size: 20px;
-    color: rgb(247, 226, 38);
-    text-align: center;
-    // width: 260px;
-    text-shadow: 1px 1px 1px #000, 3px 3px 5px #000;  
-    display: inline-block;
-    -ms-transform: rotate(25deg);
-    -webkit-transform: rotate(10deg);
-}
 
 .bottom-left-progress-bar{
-    margin-top: 5px;
-    // margin-left: 3px;
+    height: 45vh;
+    width: 17vw;
+    // top: 2vh;
 }
 
 .top-right-progress-bar{
-    margin-bottom: 5px;
+    height: 45vh;
+    width: 17vw;
     transform: rotate(180deg);
 }
 
@@ -104,8 +133,8 @@ ion-row {
 
 .card-rotate{
     background: rgba(255, 255, 255, 0.62);
-    width: 92%;
-    height: 150px;
+    width: 98%;
+    height: 24vh;
     text-align: center;
     transform: rotate(180deg);
 }
@@ -114,6 +143,7 @@ ion-row {
     animation-duration: 6s;
     animation-name: example;
     animation-iteration-count: infinite;
+    // margin-bottom: 16vh;
 }
 @keyframes example {
     0%   {transform: rotate(0deg);}
@@ -121,120 +151,96 @@ ion-row {
 }
 
 #replay-button {
-    --background: rgba(39, 201, 139, 0.897);
-    margin-bottom: 20%;
-  }
+  --background: rgba(39, 201, 139, 0.904);
+  margin-bottom: 20%;
+}
   
-  #exit-button {
-    --background: rgba(190, 41, 15, 0.897);
-  }
+#exit-button {
+  --background: rgba(190, 41, 15, 0.925);
+}
   
-  .end-section {
-    visibility: hidden;
-  }
+.end-section {
+  visibility: hidden;
+}
 
-  .winning-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow:hidden;
-    visibility: hidden;
-  }
-  
-  #balloon-effect{ 
-    position: absolute;
-    width: 100%;
-    bottom: -100%;
-    transition: ease-in-out;
-    animation-name: balloon-animation;
-    animation-duration: 5s;
-    animation-play-state: paused;
-    z-index: 2;
-  }
-  
-  @keyframes balloon-animation {
-    0%   {bottom:-100%;}
-    100% {bottom:100%;}
-  }
-  
-  .congrats-label  {
-    position: absolute;
-    width: 0%;
-    height: 60px;
-    top: 60%;
-    background: rgb(184, 54, 54);
-    transition: width 0.5s;
-    box-shadow: 3px 3px 5px #000;
-    transition-timing-function: linear;
-  }
-  
-  // .congrats-label:hover {
-  //   width: 100%;
-  // }
-  
-  #congrats-font {
-    position: absolute;
-    top: 60%;
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-family: "Bevan";
-    text-shadow: 3px 3px 5px #000;
-    font-size: 30px;
-    font-weight: 400;
-    z-index: 1;
-  }
-  
-  .balloon-background-board{
-    position: absolute;
-    width: 100%;
-    height: 69%;
-    margin-top: 50%;
-    overflow: hidden;
-  }
-  
-  #balloon-background-effect {
-    position: absolute;
-    width: 100%;
-    animation-duration: 3s;
-    animation-name: balloon-background-animation;
-    animation-iteration-count: infinite;
-    opacity: 80%;
-  }
-  
-  @keyframes balloon-background-animation {
-    0%   {padding-left:0px; padding-top:0px;}
-    25%  {padding-right:5px; padding-bottom:10px;}
-    50%  {padding-right:5px; padding-bottom:0px;}
-    75%  {padding-left:5px; padding-bottom:10px;}
-    100% {padding-left:0px; padding-top:0px;}
-  }
-  
-  .board {
-    visibility: visible;
-    overflow: hidden;
-    height: 100%;
-  }
-  
-  #star-animation {
-    position: absolute;
-    height: 100%;
-    visibility: hidden;
-  }
-  
-  #center-star {
-    position: absolute;
-    // margin-left: 20px;
-    margin-right: 10px;
-    width: 100%;
-    top: 5%;
-    text-align: center;
-    z-index: 3;
-  }
-  
-  .done-button-section{
-    position: absolute;
-    width: 100%;
-    top: 45%;
-    text-align: center;
-  }
+.winning-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow:hidden;
+  visibility: hidden;
+}
+
+#balloon-effect{ 
+  position: absolute;
+  width: 100%;
+  bottom: -100%;
+  transition: ease-in-out;
+  animation-name: balloon-animation;
+  animation-duration: 5s;
+  animation-play-state: paused;
+  z-index: 2;
+}
+
+@keyframes balloon-animation {
+  0%   {bottom:-100%;}
+  100% {bottom:100%;}
+}
+
+.congrats-label  {
+  position: absolute;
+  width: 0%;
+  height: 60px;
+  top: 60%;
+  background: rgb(184, 54, 54);
+  transition: width 0.5s;
+  box-shadow: 3px 3px 5px #000;
+  transition-timing-function: linear;
+}
+
+// .congrats-label:hover {
+//   width: 100%;
+// }
+
+#congrats-font {
+  position: absolute;
+  top: 60%;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: "Bevan";
+  text-shadow: 3px 3px 5px #000;
+  font-size: 30px;
+  font-weight: 400;
+  z-index: 1;
+}
+
+
+.board {
+  visibility: visible;
+  overflow: hidden;
+  height: 100%;
+}
+
+#star-animation {
+  position: absolute;
+  height: 100%;
+  visibility: hidden;
+}
+
+#center-star {
+  position: absolute;
+  // margin-left: 20px;
+  margin-right: 10px;
+  width: 100%;
+  top: 5%;
+  text-align: center;
+  z-index: 3;
+}
+
+.done-button-section{
+  position: absolute;
+  width: 100%;
+  top: 45%;
+  text-align: center;
+}
