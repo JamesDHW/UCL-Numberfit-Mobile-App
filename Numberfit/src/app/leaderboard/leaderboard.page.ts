@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
     this.nativeStorage.getItem('user')
     .then((data) => {
       this.user = data
-      this.points = data.points
+      // this.points = data.points
       console.log(this.user)
 
       // Get top scores from given school

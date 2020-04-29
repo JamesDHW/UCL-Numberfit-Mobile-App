@@ -28,7 +28,7 @@ export class HomePage {
   signOut(){
 
     console.log("send to", this.server+"/logout?session="+this.cookie)
-    this.http.get(this.server+"/logout",{},{})
+    this.http.get(this.server+"/logout?session="+this.cookie,{},{})
     .then(data => {
       this.nativeStorage.setItem('cookie', {cookie: "-"})
       .then(() => {
@@ -41,6 +41,13 @@ export class HomePage {
       console.log("status", error.status);
       console.log("error", error.error);
 
+      const alert = document.createElement('ion-alert');
+      alert.header = 'Sign Out';
+      alert.message = 'Could not Sign Out!.';
+      alert.buttons = ['OK'];
+
+      document.body.appendChild(alert);
+      alert.present();
     });
 
   };

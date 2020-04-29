@@ -175,6 +175,7 @@ let RegisterPage = class RegisterPage {
             year: this.registerFormGroup.value.year,
             school: this.registerFormGroup.value.school,
             teacher: false,
+            mTeacher: "-",
             points: 0,
         };
         console.log(credentials);
@@ -192,15 +193,14 @@ let RegisterPage = class RegisterPage {
             this.http.post(this.server + "/register", credentials, { 'Content-Type': 'application/json' })
                 .then(data => {
                 var user = JSON.parse(data.data);
-                console.log("user: ", user);
-                console.log("response: ", data);
+                // console.log("user: ", user)
+                // console.log("response: ", data)
                 this.nativeStorage.setItem('cookie', { cookie: user.cookie })
                     .then(() => {
                     //save info
                     this.nativeStorage.setItem('user', credentials)
                         .then(() => {
-                        console.log("got to play");
-                        this.router.navigate(['/play']);
+                        this.router.navigate(['/my-account']);
                     }, error => console.error('Error storing user', error));
                 }, error => console.error('Error storing cookie', error));
             })

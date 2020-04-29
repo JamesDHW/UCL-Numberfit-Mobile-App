@@ -22,7 +22,7 @@
     <!-- <ion-card-content> -->
       <img class="question-card" src="{{question}}"/>
       <!-- <div  style="width:100%; height:100%;" > -->
-      <iframe class="video-container" src="https://www.youtube.com/embed/AkMSuJ9yGbA?autoplay=1&rel=0" allow='autoplay'></iframe>
+      <iframe class="video-container" [src]="video"></iframe>
     <!-- </ion-card-content> -->
   </ion-card>
   <section class="progress-section">
@@ -30,7 +30,7 @@
   </section>
   <section class="done-button-section">
   <ion-button shape="round" id="video-done-button" (click)="switchVideoQuestions(false)">
-    <span id="done-font">Go!</span>
+    <span id="done-font">Next Question</span>
   </ion-button>
 </section>
   <section>
@@ -65,7 +65,7 @@
   </section>
 </section>
 </section>
-<ion-fab class="end-section" vertical="center" horizontal="center" slot="fixed">
+<ion-fab class="end-section" vertical="bottom" horizontal="center" slot="fixed">
   <ion-fab-button id="replay-button" [routerLink]="['/subject-select/0']">
     <ion-icon name="refresh-outline"></ion-icon>
   </ion-fab-button>

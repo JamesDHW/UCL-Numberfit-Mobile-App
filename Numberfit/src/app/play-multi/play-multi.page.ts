@@ -59,6 +59,7 @@ export class PlayMultiPage {
       this.nativeStorage.getItem('user')
       .then((data) => {
         this.user = data
+        if(!this.user["points"]){this.user["points"] = 300}
 
         // Get URLs to videos
         this.http.get(this.server + "/getVideo",{},{})
@@ -89,12 +90,17 @@ export class PlayMultiPage {
     if(this.user.year == 1 && this.subject != "Time"){
       qSetNumber = 6; // For some reason year one have fewer resources on all but Time
     }
+    var diff;
+    if(this.user.points > 250){diff="adv"} else
+    if(this.user.points < 100){diff="int"} else{
+      diff="beg"
+    }
     var answerArray = [];
     while(answerArray.length<4){
       let page = 4*Math.floor(Math.random() * qSetNumber);
       let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
-      let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
-      let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/"+diff+"/"+"PDF-"+page+"-"+card+".png"
+      let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/"+diff+"/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
       // console.log("checklist", this.checkList)
       // console.log("question", this.question)
       // console.log("includes", this.checkList.includes(this.question))

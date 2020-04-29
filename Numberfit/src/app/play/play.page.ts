@@ -37,26 +37,24 @@ export class HomePage implements OnInit {
     divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0]));
     divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1]));
 
-    // this.cookie = this.route.snapshot.paramMap.get('cookie');
-    // console.log(this.cookie);
 
   }
-
-  testRequests(){
-    const reqs = []
-    this.http.get(this.server+"/test",{},{})
-    .then(data => {
-      this.nativeStorage.setItem('cookie', {cookie: "-"})
-      .then(() => {
-        console.log("Cookie removed!")
-        this.router.navigate(['/sign-in'])
-      }, error => console.error('Error storing item', error));
-
-    })
-    .catch(error => {
-      console.log("status", error.status);
-      console.log("error", error.error);
-
-    });
-  }
+  //
+  // testRequests(){
+  //   const reqs = []
+  //   this.http.get(this.server+"/test",{},{})
+  //   .then(data => {
+  //     this.nativeStorage.setItem('cookie', {cookie: "-"})
+  //     .then(() => {
+  //       console.log("Cookie removed!")
+  //       this.router.navigate(['/sign-in'])
+  //     }, error => console.error('Error storing item', error));
+  //
+  //   })
+  //   .catch(error => {
+  //     console.log("status", error.status);
+  //     console.log("error", error.error);
+  //
+  //   });
+  // }
 }

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" fullscreen>\n<ion-card>\n  <ion-card-header>\n    <ion-title class=\"welcome-card-title\">My Account</ion-title>\n  </ion-card-header>\n  <ion-card-content>\n    <form [formGroup]=\"modifyDetailsFormGroup\">\n    <ion-item style=\"margin-top: 20px;\">\n      <ion-label>Name</ion-label>\n      <ion-input value={{name}} readonly style=\"text-align: right;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input value={{email}} readonly type=\"email\" style=\"text-align: right;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Year Group</ion-label>\n      <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>School</ion-label>\n      <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school}}>\n              {{school}}\n            </ion-select-option>\n          </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Change Password</ion-label>\n      <ion-input formControlName=\"password1\" type='password'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Comfirm Password</ion-label>\n      <ion-input formControlName=\"password2\" type='password'></ion-input>\n    </ion-item>\n    <br>\n    <ion-button\n          (click)=\"modifyDetails()\"\n          expand='block'>\n          Confirm Changes\n    </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" fullscreen>\n<ion-card>\n  <ion-card-header>\n    <ion-title class=\"welcome-card-title\">My Account</ion-title>\n  </ion-card-header>\n  <ion-card-content>\n    <form [formGroup]=\"modifyDetailsFormGroup\">\n    <ion-item style=\"margin-top: 20px;\">\n      <ion-label>Name: </ion-label>\n      <ion-input value={{userObj.name}} readonly style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Email: </ion-label>\n      <ion-input value={{userObj.username}} readonly type=\"email\" style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>School: </ion-label>\n      <ion-input value={{userObj.school}} readonly style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Year Group</ion-label>\n      <ion-select\n      formControlName=\"year\" multiple=\"false\"\n      cancelText=\"Cancel\" okText=\"Select\">\n        <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n          {{year}}\n        </ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Teacher</ion-label>\n      <ion-select\n      formControlName=\"teacher\" id=\"schoolSelect\"\n      multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n      <ion-select-option *ngFor=\"let name of teacherNames;let username of teacherUsernames;\" value={{usernames}}>\n        {{name}}\n      </ion-select-option>\n    </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Change Password</ion-label>\n      <ion-input formControlName=\"password1\" type='password'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Comfirm Password</ion-label>\n      <ion-input formControlName=\"password2\" type='password'></ion-input>\n    </ion-item>\n    <br>\n    <ion-button\n     [disabled]=\"modifyDetailsFormGroup.invalid\"\n      (click)=\"modifyDetails()\"\n      expand='block'>\n      Confirm Changes\n    </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -139,104 +139,85 @@ let MyAccountPage = class MyAccountPage {
         this.route = route;
         this.formBuilder = formBuilder;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
-        this.name = "Loading..";
-        this.email = "Loading..";
+        this.user = { username: "-", name: "-", school: "-", year: "-", teacher: "-" };
+        this.teacherNames = [];
+        this.teacherUsernames = [];
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });
         // Get user from storage
         this.nativeStorage.getItem('user')
-            .then((data) => { this.userObj = data; });
-        this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
-        this.schoolList = ['UCL', 'LSE', 'Imperial'];
+            .then((data) => {
+            this.user = data;
+            this.http.get(this.server + "/getTeachers?school=" + this.user.school, {}, {})
+                .then(data => {
+                let teachers = JSON.parse(data.data).teachers;
+                console.log(data.data);
+                teachers.forEach((teacher) => {
+                    this.teacherNames.push(teacher.name);
+                    this.teacherUsernames.push(teacher.username);
+                });
+                console.log(this.teacherNames, this.teacherUsernames);
+            })
+                .catch(error => {
+                console.log("status", error.status);
+                console.log("error", error.error);
+            });
+        });
+        this.yearGroups = ['1', '2', '3', '4', '5', '6'];
         this.modifyDetailsFormGroup = formBuilder.group({
-            // name: ["", [Validators.required]],
-            // email: ["", [Validators.required, Validators.email]],
             password1: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
             password2: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
             year: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
-            school: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+            teacher: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
         });
     }
-    // getUserDetails(){
-    //   var xhttpDetails = new XMLHttpRequest();
-    //   let DOM = this;
-    //
-    //   xhttpDetails.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //       console.log("GET details request succeeded");
-    //       DOM.userObj = JSON.parse(this.responseText);
-    //       DOM.changeToLoadedData();
-    //     } else if(this.status != 200) {
-    //       console.log("GET request failed with status " + this.status);
-    //     }
-    //   };
-    //
-    //   // Define and send the GET request
-    //   xhttpDetails.open("GET", this.server+"/myDetails?cookie="+this.cookie, true);
-    //   xhttpDetails.send();
-    // }
     modifyDetails() {
         const password1 = this.modifyDetailsFormGroup.value.password1;
         const password2 = this.modifyDetailsFormGroup.value.password2;
         const credentials = {
-            // username : this.modifyDetailsFormGroup.value.email.toLowerCase(),
-            password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__["Md5"].hashStr(password1),
-            // name     : this.modifyDetailsFormGroup.value.name,
+            username: this.user.username,
+            name: this.user.name,
+            school: this.user.school,
             year: this.modifyDetailsFormGroup.value.year,
-            school: this.modifyDetailsFormGroup.value.school
+            teacher: this.user.teacher,
+            mTeacher: this.modifyDetailsFormGroup.value.teacher,
+            points: this.user.points,
+            cookie: this.cookie,
+            password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__["Md5"].hashStr(password1),
         };
         if (password1 == password2 && password1.length > 7) {
+            console.log(credentials);
             this.http.post(this.server + "/modifyDetails", credentials, {})
                 .then(data => {
-                // var user = JSON.parse(data.data);
-                // var user = data.data;
-                // console.log("user: ", user)
-                // console.log("response: ", data)
-                // this.nativeStorage.setItem('cookie', {cookie: user.cookie})
-                // .then(() => {
-                //   this.nativeStorage.setItem('user', {
-                //     username : user.username,
-                //     name     : user.name,
-                //     school   : user.school,
-                //     year     : user.year,
-                //     teacher  : user.teacher,
-                //   })
-                //   .then(() => {
-                //     // console.log("got to play")
-                //     this.router.navigate(['/play'])
-                //   }, error => console.error('Error storing user', error));
-                // }, error => console.error('Error storing cookie', error));
+                this.nativeStorage.setItem('user', {
+                    username: this.user.username,
+                    name: this.user.name,
+                    school: this.user.school,
+                    year: this.modifyDetailsFormGroup.value.year,
+                    mTeacher: this.modifyDetailsFormGroup.value.teacher,
+                    teacher: this.user.teacher,
+                    points: this.user.points,
+                })
+                    .then(() => {
+                    // console.log("got to play")
+                    this.router.navigate(['/play']);
+                }, error => this.presentAlert());
             })
                 .catch(error => {
                 console.log("error here", error.error);
                 this.presentAlert();
             });
-            // var xhttp = new XMLHttpRequest();
-            //
-            // xhttp.onreadystatechange = function() {
-            //   if (this.readyState == 4 && this.status == 200) {
-            //     const cookie = JSON.parse(this.responseText);
-            //     console.log(cookie);
-            //   } else if(this.status != 200) {
-            //     console.log(this.responseText);
-            //
-            //   }
-            // };
-            // console.log(credentials);
-            // xhttp.open('POST', this.server+'/modifyDetails', true);
-            // xhttp.setRequestHeader("Content-type", "application/json");
-            // xhttp.send(JSON.stringify(credentials));
         }
         else {
             // error!!!
-            alert("Please ensure your password is at least 8 characters and matches the confirmation field");
+            const alert = document.createElement('ion-alert');
+            alert.header = 'Password';
+            alert.message = 'Input a more secure password.';
+            alert.buttons = ['OK'];
+            document.body.appendChild(alert);
+            alert.present();
         }
-    }
-    changeToLoadedData() {
-        this.modifyDetailsFormGroup.reset({ school: this.userObj.school, year: "Year " + this.userObj.year });
-        this.name = this.userObj.name;
-        this.email = this.userObj.username;
     }
     ngOnInit() {
         // this.cookie = this.route.snapshot.paramMap.get('cookie');
@@ -247,7 +228,7 @@ let MyAccountPage = class MyAccountPage {
     }
     presentAlert() {
         const alert = document.createElement('ion-alert');
-        alert.header = 'Error';
+        alert.header = 'Connection Error';
         alert.message = 'Please check your internet connection.';
         alert.buttons = ['OK'];
         document.body.appendChild(alert);

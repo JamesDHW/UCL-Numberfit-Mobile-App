@@ -4,6 +4,23 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+  <script type="text/javascript">
+  function getSchools() {
+    let schoolList = document.getElementById("schoolList")
+    var xhttpSchools = new XMLHttpRequest();
+    xhttpSchools.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+        let schools = JSON.parse(this.responseText).schools;
+        schools.forEach((school)=>{
+          schoolList.innerHTML += "<option value='"+school.name+"'>"+school.name+"</option>"
+        })
+      }
+    }
+    xhttpSchools.open('GET', 'http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com/getSchools', true);
+    xhttpSchools.send();
+  }
+  window.onload = getSchools;
+</script>
 </head>
 
 <body>
@@ -18,12 +35,8 @@
         <input type="email" placeholder="email" name="username">
         <input type="password" placeholder="password" name="password1">
         <input type="password" placeholder="confirm password" name="password2">
-        <select name="school">
+        <select name="school" id="schoolList">
             <option value="" disabled selected hidden>Select A School</option>
-            <option value="Numberfit">Numberfit</option>
-            <option value="School1">School1</option>
-            <option value="School2">School2</option>
-            <option value="School3">School3</option>
           </select>
         <button onclick="register()" type="submit">Create an account</button>
       </form>
@@ -36,6 +49,7 @@
 </body>
 
 <script>
+
   function register(){
     let elemments = document.getElementById("myForm").elements;
 

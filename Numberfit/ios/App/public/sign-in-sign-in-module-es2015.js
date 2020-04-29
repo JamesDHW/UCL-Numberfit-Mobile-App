@@ -157,7 +157,7 @@ let SignInPage = class SignInPage {
         this.http.post(this.server + "/login", credentials, {})
             .then(data => {
             var user = JSON.parse(data.data);
-            console.log("user: ", user);
+            // console.log("user: ", user)
             this.nativeStorage.setItem('cookie', { cookie: user.cookie })
                 .then(() => {
                 var savedUser = {
@@ -169,6 +169,7 @@ let SignInPage = class SignInPage {
                 if (!user.teacher) {
                     savedUser["year"] = user.year;
                     savedUser["points"] = user.points;
+                    savedUser["mTeacher"] = user.mTeacher;
                 }
                 //save info
                 this.nativeStorage.setItem('user', savedUser)

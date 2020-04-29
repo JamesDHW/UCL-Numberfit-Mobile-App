@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-title><img class="header-image" src="/assets/NumberfitLogo.png"/></ion-title>
   </ion-toolbar>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css"/>
 </ion-header>
 
 <ion-content  class="ion-content">
@@ -12,17 +13,13 @@
     <ion-card-header>
       <ion-card-title id="title" class="welcome-card-title">Student List</ion-card-title>
     </ion-card-header>
-      <ion-radio-group
+      <ion-list
       id="radio-group"
       allow-empty-selection=“false”
       *ngFor="let student of studentList">
-      <ion-item>
-        <ion-label>{{student}}</ion-label>
-        <ion-radio id={{student}} slot="end" (click)=onSelect(student)></ion-radio>
-      </ion-item>
-      </ion-radio-group>
-    <ion-button id="btn-play" expand="block" fill="clear">
-      Check Student Progress
-    </ion-button>
+        <ion-item>
+          <ion-label (click)="navigate(student.username)">{{student.name}}</ion-label>
+        </ion-item>
+      </ion-list>
   </ion-card>
 </ion-content>

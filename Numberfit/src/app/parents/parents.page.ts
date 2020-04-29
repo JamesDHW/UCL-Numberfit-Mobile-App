@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, ViewChild } from '@angular/core';
 import { Chart }                from 'chart.js';
 import { NativeStorage }        from '@ionic-native/native-storage/ngx';
@@ -19,30 +20,51 @@ export class HomePage {
   bars       : any;
   colorArray : any;
   games      : any;
+  user       : any;
   badges     : any = [];
 
   constructor(
-    private nativeStorage : NativeStorage,
-    private http          : HTTP,
+    private activatedRoute : ActivatedRoute,
+    private nativeStorage  : NativeStorage,
+    private http           : HTTP,
   ) {
 
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {
       this.cookie = data.cookie
+      // Get cookie from storage
+      this.nativeStorage.getItem('user')
+      .then((data) => {
+        this.user = data
+        // Get progress of user
+        var send = {
+          cookie   : this.cookie,
+          username : this.activatedRoute.snapshot.paramMap.get("user")
+        }
 
-      this.http.get(this.server+"/progress?cookie="+this.cookie,{},{})
-      .then(data => {
-        this.games = JSON.parse(data.data)
-        this.drawBadges()
-        this.createLineChart();
-        console.log("returned - ", data.data)
+        this.http.post(this.server+"/progress",send, {'Content-Type': 'application/json'})
+        .then(data => {
+          this.games = JSON.parse(data.data)
+          this.drawBadges()
+          this.createLineChart();
+          console.log("returned - ", data.data)
 
-      })
-      .catch(error => {
-        console.log("ERRORS FOUND")
-        console.log("status:", error.status);
-        console.log("error:", error.error); // error message as string
+        })
+        .catch(error => {
+          console.log("ERRORS FOUND")
+          console.log("status:", error.status);
+          console.log("error:", error.error); // error message as string
+
+          const alert = document.createElement('ion-alert');
+          alert.header = 'Error';
+          alert.message = 'Could not find user records!.';
+          alert.buttons = ['OK'];
+
+          document.body.appendChild(alert);
+          alert.present();
+        });
+
       });
 
     });
@@ -79,6 +101,9 @@ export class HomePage {
 
 
   drawBadges(){
+    if(this.games.length==0){
+      document.getElementById("badges").innerHTML += "<label>No Badges Earned - Yet!</label>"
+    }
     for(var key of Object.keys(this.games)){
       if(this.games[key] > 50 && key != "data" && key != "date"){
         this.badges.push({

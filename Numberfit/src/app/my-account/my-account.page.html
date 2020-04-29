@@ -15,32 +15,36 @@
   <ion-card-content>
     <form [formGroup]="modifyDetailsFormGroup">
     <ion-item style="margin-top: 20px;">
-      <ion-label>Name</ion-label>
-      <ion-input value={{name}} readonly style="text-align: right;"></ion-input>
+      <ion-label>Name: </ion-label>
+      <ion-input value={{userObj.name}} readonly style="text-align: center;"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-input value={{email}} readonly type="email" style="text-align: right;"></ion-input>
+      <ion-label>Email: </ion-label>
+      <ion-input value={{userObj.username}} readonly type="email" style="text-align: center;"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>School: </ion-label>
+      <ion-input value={{userObj.school}} readonly style="text-align: center;"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Year Group</ion-label>
       <ion-select
-            formControlName="year" multiple="false"
-            cancelText="Cancel" okText="Select">
-            <ion-select-option *ngFor="let year of yearGroups" value={{year}}>
-              {{year}}
-            </ion-select-option>
-          </ion-select>
+      formControlName="year" multiple="false"
+      cancelText="Cancel" okText="Select">
+        <ion-select-option *ngFor="let year of yearGroups" value={{year}}>
+          {{year}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>School</ion-label>
+      <ion-label>Teacher</ion-label>
       <ion-select
-            formControlName="school" id="schoolSelect"
-            multiple="false" cancelText="Cancel" okText="Select">
-            <ion-select-option *ngFor="let school of schoolList" value={{school}}>
-              {{school}}
-            </ion-select-option>
-          </ion-select>
+      formControlName="teacher" id="schoolSelect"
+      multiple="false" cancelText="Cancel" okText="Select">
+      <ion-select-option *ngFor="let name of teacherNames;let username of teacherUsernames;" value={{usernames}}>
+        {{name}}
+      </ion-select-option>
+    </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Change Password</ion-label>
@@ -52,9 +56,10 @@
     </ion-item>
     <br>
     <ion-button
-          (click)="modifyDetails()"
-          expand='block'>
-          Confirm Changes
+     [disabled]="modifyDetailsFormGroup.invalid"
+      (click)="modifyDetails()"
+      expand='block'>
+      Confirm Changes
     </ion-button>
     </form>
   </ion-card-content>

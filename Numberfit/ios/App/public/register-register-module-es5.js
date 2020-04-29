@@ -300,6 +300,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             year: this.registerFormGroup.value.year,
             school: this.registerFormGroup.value.school,
             teacher: false,
+            mTeacher: "-",
             points: 0
           };
           console.log(credentials);
@@ -317,18 +318,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.http.post(this.server + "/register", credentials, {
               'Content-Type': 'application/json'
             }).then(function (data) {
-              var user = JSON.parse(data.data);
-              console.log("user: ", user);
-              console.log("response: ", data);
+              var user = JSON.parse(data.data); // console.log("user: ", user)
+              // console.log("response: ", data)
 
               _this2.nativeStorage.setItem('cookie', {
                 cookie: user.cookie
               }).then(function () {
                 //save info
                 _this2.nativeStorage.setItem('user', credentials).then(function () {
-                  console.log("got to play");
-
-                  _this2.router.navigate(['/play']);
+                  _this2.router.navigate(['/my-account']);
                 }, function (error) {
                   return console.error('Error storing user', error);
                 });

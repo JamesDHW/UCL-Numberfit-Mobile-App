@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button>Quit</ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <section class=\"overlay-section\">\n  <section class=\"winning-container\">\n  <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n  <p id=\"congrats-font\">Good job!</p><br>\n  <section class=\"congrats-label\"></section>\n  </section>\n  <section class=\"board\">\n  <section>\n    <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n  </section>\n  <ion-card class=\"card\">\n    <!-- <ion-card-content> -->\n      <img class=\"question-card\" src=\"{{question}}\"/>\n      <!-- <div  style=\"width:100%; height:100%;\" > -->\n      <iframe class=\"video-container\" src=\"https://www.youtube.com/embed/AkMSuJ9yGbA?autoplay=1&rel=0\" allow='autoplay'></iframe>\n    <!-- </ion-card-content> -->\n  </ion-card>\n  <section class=\"progress-section\">\n    <img src=\"/assets/progress-singleplayer/{{pictureRef}}.png\"/>\n  </section>\n  <section class=\"done-button-section\">\n  <ion-button shape=\"round\" id=\"video-done-button\" (click)=\"switchVideoQuestions(false)\">\n    <span id=\"done-font\">Go!</span>\n  </ion-button>\n</section>\n  <section>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(0)\">\n          <!-- <span class=\"font\">{{ans1}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[0]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(1)\">\n          <!-- <span class=\"font\">{{answerOptions[1]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[1]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(2)\">\n          <!-- <span class=\"font\">{{answerOptions[2]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[2]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(3)\">\n          <!-- <span class=\"font\">{{answerOptions[3]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[3]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </section>\n</section>\n</section>\n<ion-fab class=\"end-section\" vertical=\"center\" horizontal=\"center\" slot=\"fixed\">\n  <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/0']\">\n    <ion-icon name=\"refresh-outline\"></ion-icon>\n  </ion-fab-button>\n<ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button>Quit</ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <section class=\"overlay-section\">\n  <section class=\"winning-container\">\n  <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n  <p id=\"congrats-font\">Good job!</p><br>\n  <section class=\"congrats-label\"></section>\n  </section>\n  <section class=\"board\">\n  <section>\n    <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n  </section>\n  <ion-card class=\"card\">\n    <!-- <ion-card-content> -->\n      <img class=\"question-card\" src=\"{{question}}\"/>\n      <!-- <div  style=\"width:100%; height:100%;\" > -->\n      <iframe class=\"video-container\" [src]=\"video\"></iframe>\n    <!-- </ion-card-content> -->\n  </ion-card>\n  <section class=\"progress-section\">\n    <img src=\"/assets/progress-singleplayer/{{pictureRef}}.png\"/>\n  </section>\n  <section class=\"done-button-section\">\n  <ion-button shape=\"round\" id=\"video-done-button\" (click)=\"switchVideoQuestions(false)\">\n    <span id=\"done-font\">Next Question</span>\n  </ion-button>\n</section>\n  <section>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(0)\">\n          <!-- <span class=\"font\">{{ans1}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[0]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(1)\">\n          <!-- <span class=\"font\">{{answerOptions[1]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[1]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(2)\">\n          <!-- <span class=\"font\">{{answerOptions[2]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[2]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(3)\">\n          <!-- <span class=\"font\">{{answerOptions[3]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[3]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </section>\n</section>\n</section>\n<ion-fab class=\"end-section\" vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n  <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/0']\">\n    <ion-icon name=\"refresh-outline\"></ion-icon>\n  </ion-fab-button>\n<ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n</ion-content>\n";
     /***/
   },
 
@@ -159,7 +159,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _play_single_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./play-single.page */
-    "./src/app/play-single/play-single.page.ts");
+    "./src/app/play-single/play-single.page.ts"); // import { SafePipe } from "./play-single.page"
+
 
     var PlaySinglePageModule = function PlaySinglePageModule() {
       _classCallCheck(this, PlaySinglePageModule);
@@ -220,30 +221,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/platform-browser */
+    "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
     /* harmony import */
 
 
-    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
 
     var PlaySinglePage = /*#__PURE__*/function () {
-      function PlaySinglePage(activatedRoute, nativeStorage, http) {
+      function PlaySinglePage(activatedRoute, nativeStorage, http, sanitizer) {
         var _this = this;
 
         _classCallCheck(this, PlaySinglePage);
@@ -251,6 +258,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
         this.http = http;
+        this.sanitizer = sanitizer;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
@@ -269,6 +277,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           answer: "-"
         }];
         this.videos = [];
+        this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/eQQUzYiB4OI?start=4');
         this.correctCounter = 0;
         this.incorrectCounter = 0;
         this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
@@ -285,8 +294,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               var videos = JSON.parse(data.data).videos;
               videos.forEach(function (item) {
                 _this.videos.push(item.url);
+
+                console.log(item);
+                console.log("url", item.url);
               });
-              _this.video = videos[0]; // Ready to play!!!
+              _this.video = _this.sanitizer.bypassSecurityTrustResourceUrl(videos[0]); // Ready to play!!!
 
               _this.play();
             })["catch"](function (error) {
@@ -300,6 +312,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _createClass(PlaySinglePage, [{
         key: "ngOnInit",
+        // goodURL(){
+        //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.video);
+        // }
         value: function ngOnInit() {
           this.questionCardEle = document.querySelector('.question-card');
           this.videoEle = document.querySelector('.video-container');
@@ -316,7 +331,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.answer = [];
 
           while (this.answer.length < 4) {
-            console.log(this.answer.length);
             var page = 4 * Math.floor(Math.random() * qSetNumber);
             var card = page + Math.floor(Math.random() * 6); // 6 questions on each page
 
@@ -356,7 +370,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
             if (this.correctCounter % 3 == 0) {
-              this.video = this.videos[this.correctCounter % 3 - 1];
+              this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[this.correctCounter % 3]); // console.log("safe vid",this.video)
+              // console.log("vid url",this.videos[(this.correctCounter%3)])
+              // console.log("vids",this.videos)
+              // console.log("index",(this.correctCounter%3)-1)
+
               this.switchVideoQuestions(true);
             }
           } else {
@@ -480,6 +498,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
           var savedUser = {
             cookie: this.cookie,
+            username: this.user.username,
+            name: this.user.name,
+            school: this.user.school,
+            year: this.user.year,
+            mTeacher: this.user.mTeacher,
+            teacher: this.user.teacher,
             points: this.user.points + this.correctCounter - this.incorrectCounter
           };
           console.log("gamePLayed: ", gamePlayed);
@@ -506,15 +530,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     PlaySinglePage.ctorParameters = function () {
       return [{
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
       }, {
-        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"]
       }, {
-        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
+      }, {
+        type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]
       }];
     };
 
-    PlaySinglePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    PlaySinglePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
       selector: 'app-play-single',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./play-single.page.html */
@@ -522,7 +548,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./play-single.page.scss */
       "./src/app/play-single/play-single.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], PlaySinglePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])], PlaySinglePage);
     /***/
   }
 }]);

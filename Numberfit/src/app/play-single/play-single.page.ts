@@ -1,7 +1,8 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit }      from '@angular/core';
-import { NativeStorage }          from '@ionic-native/native-storage/ngx';
-import { HTTP }                   from '@ionic-native/http/ngx';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute }        from '@angular/router';
+import { Component, OnInit }     from '@angular/core';
+import { NativeStorage }         from '@ionic-native/native-storage/ngx';
+import { HTTP }                  from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-play-single',
@@ -19,7 +20,7 @@ export class PlaySinglePage implements OnInit {
   checkList        : Array<string> = [];
   answer           : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
   videos           : Array<string> = [];
-  video            : string;
+  video            : SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/eQQUzYiB4OI?start=4');
   correctCounter   : number = 0;
   incorrectCounter : number = 0;
   images           : Array<string> = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];;
@@ -33,6 +34,7 @@ export class PlaySinglePage implements OnInit {
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,
     private http           : HTTP,
+    private sanitizer      : DomSanitizer
 
   ) {
     this.pictureRef = this.images[this.imgState];
@@ -44,6 +46,8 @@ export class PlaySinglePage implements OnInit {
       this.nativeStorage.getItem('user')
       .then((data) => {
         this.user = data
+        if(!this.user["year"]){this.user["year"] = 6}
+        if(!this.user["points"]){this.user["points"] = 300}
 
         // Get URLs to videos
         this.http.get(this.server + "/getVideo",{},{})
@@ -51,8 +55,10 @@ export class PlaySinglePage implements OnInit {
           var videos = JSON.parse(data.data).videos;
           videos.forEach((item) => {
             this.videos.push(item.url)
+            console.log(item)
+            console.log("url",item.url)
           })
-          this.video = videos[0]
+          this.video = this.sanitizer.bypassSecurityTrustResourceUrl(videos[0]);
           // Ready to play!!!
           this.play()
 
@@ -68,6 +74,10 @@ export class PlaySinglePage implements OnInit {
     });
   }
 
+  // goodURL(){
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.video);
+  // }
+
   ngOnInit(){
     this.questionCardEle = document.querySelector('.question-card');
     this.videoEle = document.querySelector('.video-container');
@@ -78,13 +88,17 @@ export class PlaySinglePage implements OnInit {
     if(this.user.year == 1 && this.subject != "Time"){
       qSetNumber = 6; // For some reason year one have fewer resources on all but Time
     }
+    var diff;
+    if(this.user.points > 250){diff="adv"} else
+    if(this.user.points < 100){diff="int"} else{
+      diff="beg"
+    }
     this.answer = [];
     while(this.answer.length<4){
-      console.log(this.answer.length)
       let page = 4*Math.floor(Math.random() * qSetNumber);
       let card = page+Math.floor(Math.random() * 6); // 6 questions on each page
-      let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+page+"-"+card+".png"
-      let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/beg/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
+      let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/"+diff+"/"+"PDF-"+page+"-"+card+".png"
+      let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/"+diff+"/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
       // console.log("checklist", this.checkList)
       // console.log("question", this.question)
       // console.log("includes", this.checkList.includes(this.question))
@@ -111,7 +125,11 @@ export class PlaySinglePage implements OnInit {
       }
       //every 3 questions
       if (this.correctCounter%3==0){
-        this.video = this.videos[(this.correctCounter%3)-1]
+        this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter%3)])
+        // console.log("safe vid",this.video)
+        // console.log("vid url",this.videos[(this.correctCounter%3)])
+        // console.log("vids",this.videos)
+        // console.log("index",(this.correctCounter%3)-1)
         this.switchVideoQuestions(true);
       }
     }
@@ -219,6 +237,12 @@ export class PlaySinglePage implements OnInit {
     }
     var savedUser = {
       cookie   : this.cookie,
+      username : this.user.username,
+      name     : this.user.name,
+      school   : this.user.school,
+      year     : this.user.year,
+      mTeacher : this.user.mTeacher,
+      teacher  : this.user.teacher,
       points   : this.user.points + this.correctCounter - this.incorrectCounter,
     }
     console.log("gamePLayed: ", gamePlayed)

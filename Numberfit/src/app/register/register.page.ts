@@ -72,6 +72,7 @@ export class RegisterPage implements OnInit {
       year     : this.registerFormGroup.value.year,
       school   : this.registerFormGroup.value.school,
       teacher  : false,
+      mTeacher : "-",
       points   : 0,
     };
 
@@ -96,15 +97,15 @@ export class RegisterPage implements OnInit {
       this.http.post(this.server + "/register", credentials, {'Content-Type': 'application/json'})
       .then(data => {
         var user = JSON.parse(data.data);
-        console.log("user: ", user)
-        console.log("response: ", data)
+        // console.log("user: ", user)
+        // console.log("response: ", data)
         this.nativeStorage.setItem('cookie', {cookie: user.cookie})
         .then(() => {
           //save info
+          delete credentials["password"]
           this.nativeStorage.setItem('user', credentials)
           .then(() => {
-            console.log("got to play")
-            this.router.navigate(['/play'])
+            this.router.navigate(['/my-account'])
           }, error => console.error('Error storing user', error));
         }, error => console.error('Error storing cookie', error));
 
@@ -117,7 +118,13 @@ export class RegisterPage implements OnInit {
 
     } else{
       // error!!!
-      alert("Please ensure your password is at least 8 characters and matches the confirmation field");
+      const alert = document.createElement('ion-alert');
+      alert.header = 'Password';
+      alert.message = 'Input a more secure password.';
+      alert.buttons = ['OK'];
+
+      document.body.appendChild(alert);
+      alert.present();
     }
   }
 

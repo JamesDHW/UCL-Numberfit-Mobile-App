@@ -281,8 +281,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
           };
           this.http.post(this.server + "/login", credentials, {}).then(function (data) {
-            var user = JSON.parse(data.data);
-            console.log("user: ", user);
+            var user = JSON.parse(data.data); // console.log("user: ", user)
 
             _this.nativeStorage.setItem('cookie', {
               cookie: user.cookie
@@ -297,6 +296,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (!user.teacher) {
                 savedUser["year"] = user.year;
                 savedUser["points"] = user.points;
+                savedUser["mTeacher"] = user.mTeacher;
               } //save info
 
 

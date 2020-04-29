@@ -39,6 +39,7 @@ export class SubjectSelectPage implements OnInit {
         let repeats = this.subjects.length;
         let deletes = 0;
         for(var i=0; i<repeats; i++){
+          if(!this.user["year"]){this.user["year"] = 6}
           if(!this.subjects[i-deletes].availableYears.includes(
             parseInt(this.user["year"]))){
               this.subjects.splice(i-deletes, 1)

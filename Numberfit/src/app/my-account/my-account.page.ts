@@ -14,13 +14,13 @@ export class MyAccountPage implements OnInit {
 
   server     : string = require('../config.json').server;
   cookie     : string;
-  userObj    : any;
+  user       : any = {username:"-",name:"-",school:"-",year:"-",teacher:"-"};
   modifyDetailsFormGroup: FormGroup;
+  teacherNames = [];
+  teacherUsernames = [];
   // formBuilder: FormBuilder;
   yearGroups : Array<string>;
   schoolList : Array<string>;
-  name       : string = "Loading..";
-  email      : string = "Loading..";
 
   constructor(
     private nativeStorage : NativeStorage,
@@ -34,38 +34,34 @@ export class MyAccountPage implements OnInit {
     .then((data) => {this.cookie = data.cookie});
     // Get user from storage
     this.nativeStorage.getItem('user')
-    .then((data) => {this.userObj = data});
+    .then((data) => {
+      this.user = data
 
-    this.yearGroups = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'];
-    this.schoolList = ['UCL', 'LSE', 'Imperial'];
+      this.http.get(this.server+"/getTeachers?school="+this.user.school,{},{})
+      .then(data => {
+        let teachers = JSON.parse(data.data).teachers
+        console.log(data.data)
+        teachers.forEach((teacher) => {
+          this.teacherNames.push(teacher.name)
+          this.teacherUsernames.push(teacher.username)
+        })
+        console.log(this.teacherNames, this.teacherUsernames)
+      })
+      .catch(error => {
+        console.log("status", error.status);
+        console.log("error", error.error);
+
+      });
+    });
+
+    this.yearGroups = ['1', '2', '3', '4', '5', '6'];
     this.modifyDetailsFormGroup = formBuilder.group({
-      // name: ["", [Validators.required]],
-      // email: ["", [Validators.required, Validators.email]],
       password1 : ["", [Validators.required]],
       password2 : ["", [Validators.required]],
       year      : ["", [Validators.required]],
-      school    : ["", [Validators.required]],
+      teacher   : ["", [Validators.required]],
     });
   }
-
-  // getUserDetails(){
-  //   var xhttpDetails = new XMLHttpRequest();
-  //   let DOM = this;
-  //
-  //   xhttpDetails.onreadystatechange = function() {
-  //     if (this.readyState == 4 && this.status == 200) {
-  //       console.log("GET details request succeeded");
-  //       DOM.userObj = JSON.parse(this.responseText);
-  //       DOM.changeToLoadedData();
-  //     } else if(this.status != 200) {
-  //       console.log("GET request failed with status " + this.status);
-  //     }
-  //   };
-  //
-  //   // Define and send the GET request
-  //   xhttpDetails.open("GET", this.server+"/myDetails?cookie="+this.cookie, true);
-  //   xhttpDetails.send();
-  // }
 
   modifyDetails(){
 
@@ -73,35 +69,36 @@ export class MyAccountPage implements OnInit {
     const password2 = this.modifyDetailsFormGroup.value.password2;
 
     const credentials = {
-      // username : this.modifyDetailsFormGroup.value.email.toLowerCase(),
-      password : Md5.hashStr(password1),
-      // name     : this.modifyDetailsFormGroup.value.name,
+      username : this.user.username,
+      name     : this.user.name,
+      school   : this.user.school,
       year     : this.modifyDetailsFormGroup.value.year,
-      school   : this.modifyDetailsFormGroup.value.school
+      teacher  : this.user.teacher,
+      mTeacher : this.modifyDetailsFormGroup.value.teacher,
+      points   : this.user.points,
+      cookie   : this.cookie,
+      password : Md5.hashStr(password1),
     };
 
     if(password1==password2 && password1.length > 7){
 
+      console.log(credentials)
+
       this.http.post(this.server + "/modifyDetails", credentials, {})
       .then(data => {
-        // var user = JSON.parse(data.data);
-        // var user = data.data;
-        // console.log("user: ", user)
-        // console.log("response: ", data)
-        // this.nativeStorage.setItem('cookie', {cookie: user.cookie})
-        // .then(() => {
-        //   this.nativeStorage.setItem('user', {
-        //     username : user.username,
-        //     name     : user.name,
-        //     school   : user.school,
-        //     year     : user.year,
-        //     teacher  : user.teacher,
-        //   })
-        //   .then(() => {
-        //     // console.log("got to play")
-        //     this.router.navigate(['/play'])
-        //   }, error => console.error('Error storing user', error));
-        // }, error => console.error('Error storing cookie', error));
+        this.nativeStorage.setItem('user', {
+          username : this.user.username,
+          name     : this.user.name,
+          school   : this.user.school,
+          year     : this.modifyDetailsFormGroup.value.year,
+          mTeacher : this.modifyDetailsFormGroup.value.teacher,
+          teacher  : this.user.teacher,
+          points   : this.user.points,
+        })
+        .then(() => {
+          // console.log("got to play")
+          this.router.navigate(['/play'])
+        }, error => this.presentAlert());
 
       })
       .catch(error => {
@@ -110,33 +107,17 @@ export class MyAccountPage implements OnInit {
 
       });
 
-      // var xhttp = new XMLHttpRequest();
-      //
-      // xhttp.onreadystatechange = function() {
-      //   if (this.readyState == 4 && this.status == 200) {
-      //     const cookie = JSON.parse(this.responseText);
-      //     console.log(cookie);
-      //   } else if(this.status != 200) {
-      //     console.log(this.responseText);
-      //
-      //   }
-      // };
-      // console.log(credentials);
-      // xhttp.open('POST', this.server+'/modifyDetails', true);
-      // xhttp.setRequestHeader("Content-type", "application/json");
-      // xhttp.send(JSON.stringify(credentials));
-
     } else{
       // error!!!
-      alert("Please ensure your password is at least 8 characters and matches the confirmation field");
+      const alert = document.createElement('ion-alert');
+      alert.header = 'Password';
+      alert.message = 'Input a more secure password.';
+      alert.buttons = ['OK'];
+
+      document.body.appendChild(alert);
+      alert.present();
     }
 
-  }
-
-  changeToLoadedData(){
-    this.modifyDetailsFormGroup.reset({school: this.userObj.school, year: "Year " + this.userObj.year});
-    this.name  = this.userObj.name;
-    this.email = this.userObj.username;
   }
 
   ngOnInit() {
@@ -149,7 +130,7 @@ export class MyAccountPage implements OnInit {
 
   presentAlert() {
     const alert = document.createElement('ion-alert');
-    alert.header = 'Error';
+    alert.header = 'Connection Error';
     alert.message = 'Please check your internet connection.';
     alert.buttons = ['OK'];
 

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Student List</ion-card-title>\n    </ion-card-header>\n      <ion-radio-group\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let student of studentList\">\n      <ion-item>\n        <ion-label>{{student}}</ion-label>\n        <ion-radio id={{student}} slot=\"end\" (click)=onSelect(student)></ion-radio>\n      </ion-item>\n      </ion-radio-group>\n    <ion-button id=\"btn-play\" expand=\"block\" fill=\"clear\">\n      Check Student Progress\n    </ion-button>\n  </ion-card>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content  class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title id=\"title\" class=\"welcome-card-title\">Student List</ion-card-title>\n    </ion-card-header>\n      <ion-list\n      id=\"radio-group\"\n      allow-empty-selection=“false”\n      *ngFor=\"let student of studentList\">\n        <ion-item>\n          <ion-label (click)=\"navigate(student.username)\">{{student.name}}</ion-label>\n        </ion-item>\n      </ion-list>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -147,39 +147,21 @@ let StudentListPage = class StudentListPage {
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });
         // this.requestStudentList();
-        this.http.get(this.server + "/studentList?cookie=" + this.cookie, {}, {})
+        this.http.get(this.server + "/getStudents?cookie=" + this.cookie, {}, {})
             .then(data => {
-            this.studentList = JSON.parse(data.data);
+            this.studentList = JSON.parse(data.data).students;
         })
             .catch(error => {
             console.log("status", error.status);
             console.log("error", error.error);
         });
     }
-    onSelect(student) {
+    navigate(student) {
         // this.studentID = student;
         console.log(student);
-        let DOM = this;
         // DOM.router.navigate(['/leaderboard', DOM.studentID]);
     }
     ;
-    requestStudentList() {
-        var DOM = this;
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                const cookie = JSON.parse(this.responseText).success;
-                console.log(cookie);
-                DOM.router.navigate(['/leaderboard']);
-            }
-            else if (this.status != 200) {
-                console.log(this.responseText);
-            }
-        };
-        xhttp.open("POST", this.server + "/myDetails", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send();
-    }
 };
 StudentListPage.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },

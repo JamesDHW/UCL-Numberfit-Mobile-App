@@ -19,8 +19,9 @@ module.exports.login = function (req, res, next) {
         console.log("error: ", err)
         return res.status(400).json({ errors : err });
       }
+      console.log(user)
       // user.id (cookie) is passed back on success along with user details
-      if(!user.Teacher){
+      if(!user.teacher){
         Pupil.findOne({ username : user.username }, (err, pupil_info) => {
           if(err) throw err;
           console.log("Pupil: ", pupil_info);
@@ -30,6 +31,7 @@ module.exports.login = function (req, res, next) {
             name     : pupil_info.name,
             school   : pupil_info.school,
             year     : pupil_info.year,
+            mTeacher : pupil_info.teacher,
             teacher  : false,
           });
 

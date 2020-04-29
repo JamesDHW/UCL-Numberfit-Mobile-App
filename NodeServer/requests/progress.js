@@ -1,22 +1,26 @@
 const GameHistory  = require('../config/schema').GameHistory;
 const User = require('../config/schema').User;
+const Pupil = require('../config/schema').Pupil;
 var LIMIT = 20; // Limit the number of datapoints which come back
 
 module.exports.progress = function(req, res){
 
-  const cookie = req.query.cookie
-  // console.log('cookie' + cookie)
+  const cookie = req.body.cookie
+  // if(req.body.topic == "-" || !req.body.topic){
+  //   // This will be the initial query
+  //   var query = {username : user.username}
+  // } else {
+  //   var query = {username : user.username, topic : req.body.topic }
+  // }
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
-
-    if(req.query.topic == "-" || !req.query.topic){
-      // This will be the initial query
-      var query = {username : user.username}
-    } else {
-      var query = {username : user.username, topic : req.query.topic }
+    if(user.teacher){
+      var query = {username : req.body.username};
+    } else{
+      var query = {username : user.username};
     }
 
-    console.log(query)
+    // console.log(query)
 
     GameHistory.find(query, (err, history) => {
       if(err) throw err;
@@ -35,8 +39,6 @@ module.exports.progress = function(req, res){
         } else {
           out[item.topic] = out[item.topic] + 1;
         }
-
-
 
         if(i+1 < LIMIT){
           if(date.includes(item._id.getTimestamp().toString().slice(4,15))){

@@ -16,19 +16,19 @@ export class StudentListPage {
   studentID   : number;
 
   constructor(
-    private nativeStorage : NativeStorage,
-    public activatedRoute : ActivatedRoute,
-    public router         : Router,
-    private http          : HTTP,
+    private nativeStorage  : NativeStorage,
+    private activatedRoute : ActivatedRoute,
+    private router         : Router,
+    private http           : HTTP,
   ) {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
     // this.requestStudentList();
 
-    this.http.get(this.server+"/studentList?cookie="+this.cookie,{},{})
+    this.http.get(this.server+"/getStudents?cookie="+this.cookie,{},{})
     .then(data => {
-      this.studentList = JSON.parse(data.data);
+      this.studentList = JSON.parse(data.data).students;
 
     })
     .catch(error => {
@@ -38,31 +38,10 @@ export class StudentListPage {
     });
   }
 
-  onSelect(student: string){
+  navigate(student: string){
     // this.studentID = student;
     console.log(student);
-    let DOM = this;
     // DOM.router.navigate(['/leaderboard', DOM.studentID]);
   };
 
-  requestStudentList(){
-
-    var DOM = this;
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        const cookie = JSON.parse(this.responseText).success
-        console.log(cookie);
-        DOM.router.navigate(['/leaderboard'])
-      } else if(this.status != 200) {
-        console.log(this.responseText);
-
-      }
-    };
-
-    xhttp.open("POST", this.server+"/myDetails", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
-  }
 }

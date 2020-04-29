@@ -64,6 +64,11 @@ app.post('/saveGame', require('./requests/save-game').saveGame)
 // Update user score (absolute points value)
 app.post('/updateScore', require('./requests/updateScore').updateScore)
 
+// Update user score (absolute points value)
+app.post('/modifyDetails', require('./requests/modifyDetails').modifyDetails)
+
+// Get progress of given user
+app.post('/progress', require('./requests/progress').progress)
 
 // GET REQUESTS
 // Logout request
@@ -79,9 +84,6 @@ app.get('/myDetails', require('./requests/myDetails').myDetails);
 // Get leaderboard from the database
 app.get('/leaderboard', require('./requests/leaderboard').leaderboard);
 
-// Get progress of given user
-app.get('/progress', require('./requests/progress').progress)
-
 // Add new School - done via web page
 app.get('/addSchool', require('./requests/addSchool').addSchool)
 
@@ -90,6 +92,9 @@ app.get('/addVideo', require('./requests/addVideo').addVideo)
 
 // Get 3 random video URLs from the database
 app.get('/getTeachers', require('./requests/getTeachers').getTeachers);
+
+// Get 3 random video URLs from the database
+app.get('/getStudents', require('./requests/getStudents').getStudents);
 
 // Add new School - done via web page
 app.get('/getSchools', require('./requests/getSchools').getSchools)
