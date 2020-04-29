@@ -22,6 +22,7 @@ export class PlaySinglePage implements OnInit {
   answer: Array<object>;
   checkList: Array<string>;
   subject: any;
+  videoURL: string;
 
 
   constructor(
@@ -30,7 +31,7 @@ export class PlaySinglePage implements OnInit {
   ) {
 
     this.prepareProgressBar();
-
+    this.getVideo();
 
   }
 
@@ -80,6 +81,7 @@ export class PlaySinglePage implements OnInit {
       //every 3 questions
       if (this.correctCounter%3==0){
         this.switchVideoQuestions(true);
+        this.getVideo();
       }
     }
     else {
@@ -103,6 +105,24 @@ export class PlaySinglePage implements OnInit {
     this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
 
     this.pictureRef = this.images[this.imgState];
+  }
+
+  getVideo(){
+    var DOM = this;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+      if (this.readyState == 4 && this.status == 200) {
+        DOM.videoURL = this.responseText;
+        console.log(this.responseText);
+      } else {
+        console.log(this.responseText);
+      }
+    };
+
+    xhttp.open("GET", "http://localhost:3000/getVideo?", false);
+    xhttp.send();
+
   }
 
   shuffleAnswerOptions(array:Array<object>) {
