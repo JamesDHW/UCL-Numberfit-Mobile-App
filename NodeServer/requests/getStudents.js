@@ -1,7 +1,7 @@
 const Pupil  = require('../config/schema').Pupil; // Mongoose model
 const User  = require('../config/schema').User; // Mongoose model
 
-module.exports.getStudents = function (req, res, next) {
+module.exports.getStudents = function (req, res) {
 
   User.findOne({_id:req.query.cookie}, null, {}, (err, user) => {
     if(err){ throw err }

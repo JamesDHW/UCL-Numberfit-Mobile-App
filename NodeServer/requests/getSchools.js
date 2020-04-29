@@ -1,6 +1,6 @@
 const School  = require('../config/schema').School; // Mongoose model
 
-module.exports.getSchools = function (req, res, next) {
+module.exports.getSchools = function (req, res) {
 
   School.find({}, null, {}, (err, docs) => {
     if(err){ throw err }

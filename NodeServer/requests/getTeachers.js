@@ -1,6 +1,6 @@
 const Teacher  = require('../config/schema').Teacher; // Mongoose model
 
-module.exports.getTeachers = function (req, res, next) {
+module.exports.getTeachers = function (req, res) {
 
   Teacher.find({school : req.query.school}, null, {}, (err, docs) => {
     if(err){ throw err }

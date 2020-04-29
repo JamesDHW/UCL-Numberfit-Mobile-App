@@ -1,6 +1,6 @@
 const Video  = require('../config/schema').Video; // Mongoose model
 
-module.exports.getVideo = function (req, res, next) {
+module.exports.getVideo = function (req, res) {
   // Get the count of all users
   Video.count().exec(function (err, count) {
 
