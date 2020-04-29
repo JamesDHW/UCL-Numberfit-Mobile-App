@@ -34,14 +34,17 @@ export class StudentListPage {
     .catch(error => {
       console.log("status", error.status);
       console.log("error", error.error);
-
+      this.presentAlert("Connection","Error in retrieving pupil list.")
     });
   }
 
-  navigate(student: string){
-    // this.studentID = student;
-    console.log(student);
-    // DOM.router.navigate(['/leaderboard', DOM.studentID]);
-  };
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
+  }
 
 }

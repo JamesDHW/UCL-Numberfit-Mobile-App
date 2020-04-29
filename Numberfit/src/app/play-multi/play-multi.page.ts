@@ -269,6 +269,15 @@ export class PlayMultiPage {
     }
   }
 
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
+  }
+
 }
 
 class onePlayerWrapper{

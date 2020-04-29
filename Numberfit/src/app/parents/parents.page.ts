@@ -69,8 +69,6 @@ export class HomePage {
 
     });
 
-
-
   };
 
  createLineChart() {
@@ -86,7 +84,6 @@ export class HomePage {
       },
     ]
     },
-
     options: {
       scales: {
         yAxes: [{
@@ -98,7 +95,6 @@ export class HomePage {
     }
   });
  }
-
 
   drawBadges(){
     if(this.games.length==0){
@@ -131,6 +127,15 @@ export class HomePage {
         })
       }
     }
+  }
+
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
   }
 
 }

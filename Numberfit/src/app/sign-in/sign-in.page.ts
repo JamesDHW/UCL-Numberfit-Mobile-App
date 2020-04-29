@@ -74,19 +74,21 @@ export class SignInPage {
     })
     .catch(error => {
       console.log("error here", error.error)
-      this.presentAlert();
-
+      if(error.error.errors == "No user found"){
+        this.presentAlert("Credentials","Invalid credentials.")
+      } else{
+        this.presentAlert("Connection","Error logging in to Numberfit.");
+      }
     });
 
   }
 
-  presentAlert() {
+  presentAlert(header, msg) {
     const alert = document.createElement('ion-alert');
-    alert.header = 'Error';
-    alert.message = 'Please check your internet connection.';
+    alert.header = header;
+    alert.message = msg;
     alert.buttons = ['OK'];
-
     document.body.appendChild(alert);
-    return alert.present();
+    alert.present();
   }
 }

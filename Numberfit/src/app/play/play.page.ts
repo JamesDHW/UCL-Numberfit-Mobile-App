@@ -30,31 +30,19 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(){
-
     // Navigate to subject-select page and pass gamemode information base on which div pressed
     var divSingle = document.getElementById("play-single");
     var divMulti = document.getElementById("play-multi");
     divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0]));
     divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1]));
-
-
   }
-  //
-  // testRequests(){
-  //   const reqs = []
-  //   this.http.get(this.server+"/test",{},{})
-  //   .then(data => {
-  //     this.nativeStorage.setItem('cookie', {cookie: "-"})
-  //     .then(() => {
-  //       console.log("Cookie removed!")
-  //       this.router.navigate(['/sign-in'])
-  //     }, error => console.error('Error storing item', error));
-  //
-  //   })
-  //   .catch(error => {
-  //     console.log("status", error.status);
-  //     console.log("error", error.error);
-  //
-  //   });
-  // }
+
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
+  }
 }

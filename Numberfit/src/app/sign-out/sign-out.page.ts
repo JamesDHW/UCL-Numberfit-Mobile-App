@@ -40,16 +40,18 @@ export class HomePage {
     .catch(error => {
       console.log("status", error.status);
       console.log("error", error.error);
-
-      const alert = document.createElement('ion-alert');
-      alert.header = 'Sign Out';
-      alert.message = 'Could not Sign Out!.';
-      alert.buttons = ['OK'];
-
-      document.body.appendChild(alert);
-      alert.present();
+      this.presentAlert("Connection","Failed to sign out.")
     });
 
   };
+
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
+  }
 
 }

@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NativeStorage }     from '@ionic-native/native-storage/ngx';
 import { Router }            from '@angular/router';
 import { HTTP }              from '@ionic-native/http/ngx';
@@ -11,7 +11,7 @@ import { Md5 }               from 'ts-md5/dist/md5';
   styleUrls   : ['./register.page.scss'],
 })
 
-export class RegisterPage implements OnInit {
+export class RegisterPage {
 
   registerFormGroup : FormGroup;
   server     : string;
@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
     private nativeStorage : NativeStorage,
     private http          : HTTP,
     private router        : Router,
-    formBuilder: FormBuilder
+    formBuilder           : FormBuilder
   ) {
     // Get server from config file
     this.server = require('../config.json').server;
@@ -50,17 +50,12 @@ export class RegisterPage implements OnInit {
     .catch(error => {
       console.log("status", error.status);
       console.log("error", error.error);
+      this.presentAlert("Connection","Error retrieving available schools.");
 
     });
   }
 
-  ngOnInit() {
-    // get the schools from the DB
-    let schoolSelect = document.getElementById("schoolSelect");
-  }
-
   register(){
-    const DOM = this;
 
     const password1 = this.registerFormGroup.value.password1;
     const password2 = this.registerFormGroup.value.password2;
@@ -82,18 +77,7 @@ export class RegisterPage implements OnInit {
 
       console.log(credentials)
 
-      this.http.setDataSerializer('json');
-      this.http.get(this.server + "/test", {}, {})
-      .then(data => {
-        console.log("response: ", data.data)
-
-      })
-      .catch(error => {
-        console.log("error here",error.error)
-        this.presentAlert();
-
-      });
-
+      // this.http.setDataSerializer('json');
       this.http.post(this.server + "/register", credentials, {'Content-Type': 'application/json'})
       .then(data => {
         var user = JSON.parse(data.data);
@@ -112,30 +96,23 @@ export class RegisterPage implements OnInit {
       })
       .catch(error => {
         console.log("error here",error.error)
-        this.presentAlert();
+        this.presentAlert("Connection","Error registering account.");
 
       });
 
     } else{
       // error!!!
-      const alert = document.createElement('ion-alert');
-      alert.header = 'Password';
-      alert.message = 'Input a more secure password.';
-      alert.buttons = ['OK'];
-
-      document.body.appendChild(alert);
-      alert.present();
+      this.presentAlert("Password","Please choose a more secure password.");
     }
   }
 
-  presentAlert() {
+  presentAlert(header, msg) {
     const alert = document.createElement('ion-alert');
-    alert.header = 'Error';
-    alert.message = 'Please check your internet connection.';
+    alert.header = header;
+    alert.message = msg;
     alert.buttons = ['OK'];
-
     document.body.appendChild(alert);
-    return alert.present();
+    alert.present();
   }
 
 }

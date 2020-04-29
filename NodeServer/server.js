@@ -46,37 +46,29 @@ app.use(passport.session({
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/test', function(req, res){
-  res.send('Test Success');
-});
-
 // REQUESTS HERE
 // POST REQUESTS
 // Login request
-app.post('/login', require('./requests/login').login)
+app.post('/login', require('./requests/login').login);
 
 // Register request
-app.post('/register', require('./requests/register').register)
+app.post('/register', require('./requests/register').register);
 
 // Save game
-app.post('/saveGame', require('./requests/save-game').saveGame)
+app.post('/saveGame', require('./requests/save-game').saveGame);
 
 // Update user score (absolute points value)
-app.post('/updateScore', require('./requests/updateScore').updateScore)
+app.post('/updateScore', require('./requests/updateScore').updateScore);
 
 // Update user score (absolute points value)
-app.post('/modifyDetails', require('./requests/modifyDetails').modifyDetails)
+app.post('/modifyDetails', require('./requests/modifyDetails').modifyDetails);
 
 // Get progress of given user
-app.post('/progress', require('./requests/progress').progress)
+app.post('/progress', require('./requests/progress').progress);
 
 // GET REQUESTS
 // Logout request
-app.get('/logout', function(req, res){
-  req.logout();
-  req.session.destroy();
-  res.send("OK");
-});
+app.get('/logout', require('./requests/logout').logout);
 
 // Get user's details
 app.get('/myDetails', require('./requests/myDetails').myDetails);
@@ -85,10 +77,10 @@ app.get('/myDetails', require('./requests/myDetails').myDetails);
 app.get('/leaderboard', require('./requests/leaderboard').leaderboard);
 
 // Add new School - done via web page
-app.get('/addSchool', require('./requests/addSchool').addSchool)
+app.get('/addSchool', require('./requests/addSchool').addSchool);
 
 // Add new Video resource - done via web page
-app.get('/addVideo', require('./requests/addVideo').addVideo)
+app.get('/addVideo', require('./requests/addVideo').addVideo);
 
 // Get 3 random video URLs from the database
 app.get('/getTeachers', require('./requests/getTeachers').getTeachers);
@@ -97,10 +89,10 @@ app.get('/getTeachers', require('./requests/getTeachers').getTeachers);
 app.get('/getStudents', require('./requests/getStudents').getStudents);
 
 // Add new School - done via web page
-app.get('/getSchools', require('./requests/getSchools').getSchools)
+app.get('/getSchools', require('./requests/getSchools').getSchools);
 
 // Get random video urls
-app.get('/getVideo', require('./requests/getVideo').getVideo)
+app.get('/getVideo', require('./requests/getVideo').getVideo);
 
 // Listen on PORT
 app.listen(PORT, () => {

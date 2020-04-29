@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators, ControlContainer } from '@angular/forms';
-import { Component, OnInit }      from '@angular/core';
+import { Component }              from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 import { HTTP }                   from '@ionic-native/http/ngx';
@@ -10,17 +10,17 @@ import { Md5 }                    from 'ts-md5/dist/md5';
   templateUrl : './my-account.page.html',
   styleUrls   : ['./my-account.page.scss'],
 })
-export class MyAccountPage implements OnInit {
+export class MyAccountPage {
 
-  server     : string = require('../config.json').server;
-  cookie     : string;
-  user       : any = {username:"-",name:"-",school:"-",year:"-",teacher:"-"};
+  server           : string = require('../config.json').server;
+  cookie           : string;
+  user             : any = {username:"-",name:"-",school:"-",year:"-",teacher:"-"};
   modifyDetailsFormGroup: FormGroup;
-  teacherNames = [];
-  teacherUsernames = [];
   // formBuilder: FormBuilder;
-  yearGroups : Array<string>;
-  schoolList : Array<string>;
+  yearGroups       : Array<string>;
+  schoolList       : Array<string>;
+  teacherNames     = [];
+  teacherUsernames = [];
 
   constructor(
     private nativeStorage : NativeStorage,
@@ -98,44 +98,26 @@ export class MyAccountPage implements OnInit {
         .then(() => {
           // console.log("got to play")
           this.router.navigate(['/play'])
-        }, error => this.presentAlert());
-
+        }, () => this.presentAlert("Internal Storage","Error updating details internally."));
       })
       .catch(error => {
         console.log("error here",error.error)
-        this.presentAlert();
-
+        this.presentAlert("Connection","Error updating details to the internet.");
       });
-
     } else{
       // error!!!
-      const alert = document.createElement('ion-alert');
-      alert.header = 'Password';
-      alert.message = 'Input a more secure password.';
-      alert.buttons = ['OK'];
-
-      document.body.appendChild(alert);
-      alert.present();
+      this.presentAlert("Password","Please choose a more secure password.");
     }
 
   }
 
-  ngOnInit() {
-    // this.cookie = this.route.snapshot.paramMap.get('cookie');
-    // console.log(this.cookie);
-    // this.getUserDetails();
-    // this.modifyDetailsFormGroup.reset({name: this.userObj.name});
-    // this.modifyDetailsFormGroup.get('name').setValue(this.userObj.name);
-  }
-
-  presentAlert() {
+  presentAlert(header, msg) {
     const alert = document.createElement('ion-alert');
-    alert.header = 'Connection Error';
-    alert.message = 'Please check your internet connection.';
+    alert.header = header;
+    alert.message = msg;
     alert.buttons = ['OK'];
-
     document.body.appendChild(alert);
-    return alert.present();
+    alert.present();
   }
 
 }

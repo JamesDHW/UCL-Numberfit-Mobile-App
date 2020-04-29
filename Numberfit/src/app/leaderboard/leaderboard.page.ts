@@ -8,7 +8,7 @@ import { HTTP }              from '@ionic-native/http/ngx';
   styleUrls   : ['leaderboard.page.scss'],
 })
 
-export class HomePage implements OnInit {
+export class HomePage {
   server : string = require('../config.json').server;
   cookie : string;
   user   : any;
@@ -38,14 +38,20 @@ export class HomePage implements OnInit {
       .catch(error => {
         console.log("status", error.status);
         console.log("error", error.error);
+        this.presentAlert("Connection","Error retrieving leaderboard.")
 
       });
     });
 
   }
 
-  ngOnInit() {
-
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
   }
 
 }

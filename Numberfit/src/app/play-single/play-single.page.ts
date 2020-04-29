@@ -268,4 +268,13 @@ export class PlaySinglePage implements OnInit {
     });
   }
 
+  presentAlert(header, msg) {
+    const alert = document.createElement('ion-alert');
+    alert.header = header;
+    alert.message = msg;
+    alert.buttons = ['OK'];
+    document.body.appendChild(alert);
+    alert.present();
+  }
+
 }
