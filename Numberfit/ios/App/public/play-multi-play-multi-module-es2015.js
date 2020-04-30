@@ -151,8 +151,10 @@ let PlayMultiPage = class PlayMultiPage {
         this.bottom_progress = 0;
         this.videos = [];
         this.checkList = [];
-        this.answer1 = [{ answer: "-" }, { answer: "-" }, { answer: "-" }, { answer: "-" }];
-        this.answer2 = [{ answer: "-" }, { answer: "-" }, { answer: "-" }, { answer: "-" }];
+        this.question1 = "../../assets/question.png";
+        this.answer1 = [{ answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }];
+        this.question2 = "../../assets/question.png";
+        this.answer2 = [{ answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }];
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
             .then((data) => { this.cookie = data.cookie; });

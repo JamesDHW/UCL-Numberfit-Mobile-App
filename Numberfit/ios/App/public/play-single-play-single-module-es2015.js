@@ -148,8 +148,9 @@ let PlaySinglePage = class PlaySinglePage {
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         this.bucket = __webpack_require__(/*! ../config.json */ "./src/app/config.json").bucket;
         this.subject = this.activatedRoute.snapshot.paramMap.get("subject");
+        this.question = "../../assets/question.png";
         this.checkList = [];
-        this.answer = [{ answer: "-" }, { answer: "-" }, { answer: "-" }, { answer: "-" }];
+        this.answer = [{ answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }];
         this.videos = [];
         this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/eQQUzYiB4OI?start=4');
         this.correctCounter = 0;
@@ -246,11 +247,11 @@ let PlaySinglePage = class PlaySinglePage {
             }
             //every 3 questions
             if (this.correctCounter % 3 == 0) {
-                this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter % 3)]);
+                this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter / 3 - 1)]);
                 // console.log("safe vid",this.video)
-                // console.log("vid url",this.videos[(this.correctCounter%3)])
+                // console.log("vid url",this.videos[(this.correctCounter/3-1)])
                 // console.log("vids",this.videos)
-                // console.log("index",(this.correctCounter%3)-1)
+                // console.log("index",(this.correctCounter/3)-1)
                 this.switchVideoQuestions(true);
             }
         }

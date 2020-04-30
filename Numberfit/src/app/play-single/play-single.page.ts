@@ -16,9 +16,9 @@ export class PlaySinglePage implements OnInit {
   subject          : string = this.activatedRoute.snapshot.paramMap.get("subject");
   cookie           : string;
   user             : any;
-  question         : string;
+  question         : string = "../../assets/question.png";
   checkList        : Array<string> = [];
-  answer           : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
+  answer           : Array<Object> = [{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"}];
   videos           : Array<string> = [];
   video            : SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/eQQUzYiB4OI?start=4');
   correctCounter   : number = 0;
@@ -125,11 +125,11 @@ export class PlaySinglePage implements OnInit {
       }
       //every 3 questions
       if (this.correctCounter%3==0){
-        this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter%3)])
+        this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter/3-1)])
         // console.log("safe vid",this.video)
-        // console.log("vid url",this.videos[(this.correctCounter%3)])
+        // console.log("vid url",this.videos[(this.correctCounter/3-1)])
         // console.log("vids",this.videos)
-        // console.log("index",(this.correctCounter%3)-1)
+        // console.log("index",(this.correctCounter/3)-1)
         this.switchVideoQuestions(true);
       }
     }

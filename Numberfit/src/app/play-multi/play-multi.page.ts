@@ -30,10 +30,10 @@ export class PlayMultiPage {
   videos          : Array<string> = [];
   video           : string;
   checkList       : Array<string> = [];
-  question1       : string;
-  answer1         : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
-  question2       : string;
-  answer2         : Array<Object> = [{answer:"-"},{answer:"-"},{answer:"-"},{answer:"-"}];
+  question1       : string = "../../assets/question.png";
+  answer1         : Array<Object> = [{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"}];
+  question2       : string = "../../assets/question.png";
+  answer2         : Array<Object> = [{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"}];
   // questionCardEle: HTMLElement;
   // videoEle: HTMLElement;
 

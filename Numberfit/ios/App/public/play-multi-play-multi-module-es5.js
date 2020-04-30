@@ -265,23 +265,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.bottom_progress = 0;
         this.videos = [];
         this.checkList = [];
+        this.question1 = "../../assets/question.png";
         this.answer1 = [{
-          answer: "-"
+          answer: "../../assets/answer.png"
         }, {
-          answer: "-"
+          answer: "../../assets/answer.png"
         }, {
-          answer: "-"
+          answer: "../../assets/answer.png"
         }, {
-          answer: "-"
+          answer: "../../assets/answer.png"
         }];
+        this.question2 = "../../assets/question.png";
         this.answer2 = [{
-          answer: "-"
+          answer: "../../assets/answer.png"
         }, {
-          answer: "-"
+          answer: "../../assets/answer.png"
         }, {
-          answer: "-"
+          answer: "../../assets/answer.png"
         }, {
-          answer: "-"
+          answer: "../../assets/answer.png"
         }]; // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
