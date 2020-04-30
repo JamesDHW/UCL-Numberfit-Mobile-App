@@ -848,7 +848,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]]
     }, {
-      path: 'parents',
+      path: 'parents/:user',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | parents-parents-module */
@@ -1479,14 +1479,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               // Allow to view student list page
               return true;
             } else {
-              _this4.router.navigate(['/parents']);
+              _this4.router.navigate(['/parents', "none"]);
 
               return false;
             }
           }, function (error) {
             console.log("err: ", error);
 
-            _this4.router.navigate(['/parents']);
+            _this4.router.navigate(['/parents', "none"]);
 
             return false;
           });

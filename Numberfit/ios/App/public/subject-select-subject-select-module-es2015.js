@@ -170,6 +170,9 @@ let SubjectSelectPage = class SubjectSelectPage {
                 let repeats = this.subjects.length;
                 let deletes = 0;
                 for (var i = 0; i < repeats; i++) {
+                    if (!this.user["year"]) {
+                        this.user["year"] = 6;
+                    }
                     if (!this.subjects[i - deletes].availableYears.includes(parseInt(this.user["year"]))) {
                         this.subjects.splice(i - deletes, 1);
                         deletes += 1;
@@ -179,6 +182,7 @@ let SubjectSelectPage = class SubjectSelectPage {
                 .catch(error => {
                 console.log("status", error.status);
                 console.log("error", error.error);
+                this.presentAlert("Connection", "Error in retrieving available topics.");
             });
         });
     }
@@ -199,6 +203,14 @@ let SubjectSelectPage = class SubjectSelectPage {
         else {
             document.getElementById("title").textContent = "Head-to-Head";
         }
+    }
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
     }
 };
 SubjectSelectPage.ctorParameters = () => [

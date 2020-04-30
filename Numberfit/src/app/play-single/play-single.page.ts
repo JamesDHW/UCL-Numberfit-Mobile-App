@@ -54,9 +54,9 @@ export class PlaySinglePage implements OnInit {
         .then(data => {
           var videos = JSON.parse(data.data).videos;
           videos.forEach((item) => {
-            this.videos.push(item.url)
-            console.log(item)
-            console.log("url",item.url)
+            this.videos.push(item.url+"?rel=0")
+            // console.log(item)
+            // console.log("url",item.url+"?rel=0")
           })
           this.video = this.sanitizer.bypassSecurityTrustResourceUrl(videos[0]);
           // Ready to play!!!
@@ -198,7 +198,10 @@ export class PlaySinglePage implements OnInit {
   checkWin(): boolean {
     if (this.imgState>=8){
 
-      this.saveGame()
+      if(!this.user.teacher){
+        console.log("Saving Game!")
+        this.saveGame()
+      }
 
       this.enableButtons(false);
       let ele2 = <HTMLElement>document.querySelector('.board');
@@ -211,13 +214,11 @@ export class PlaySinglePage implements OnInit {
       this.questionCardEle.style.visibility = "hidden";
       this.videoEle.style.visibility = "hidden";
 
-      this.sleep(2000).then(() => {
-        ele2.style.visibility = "hidden";
-        ele3.style.visibility = "visible";
-        ele4.style.width = "100%";
-      })
+      ele2.style.visibility = "hidden";
+      ele3.style.visibility = "visible";
+      ele4.style.width = "100%";
       // redirect to play page after congrats
-      this.sleep(8000).then(() => {
+      this.sleep(5000).then(() => {
         ele5.style.visibility = "hidden";
         this.displayEnd();
         return true;
@@ -245,10 +246,10 @@ export class PlaySinglePage implements OnInit {
       teacher  : this.user.teacher,
       points   : this.user.points + this.correctCounter - this.incorrectCounter,
     }
-    console.log("gamePLayed: ", gamePlayed)
-    console.log("savedUser: ", savedUser.points)
+    // console.log("gamePLayed: ", gamePlayed)
+    // console.log("savedUser: ", savedUser.points)
     this.http.setDataSerializer('json');
-    this.http.post(this.server + "/saveGame", gamePlayed, {})
+    this.http.post(this.server + "/saveGame", gamePlayed, {'Content-Type': 'application/json'})
     .then(data => {
       this.http.post(this.server + "/updateScore", savedUser, {})
       .then(data => {

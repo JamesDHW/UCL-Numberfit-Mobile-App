@@ -25,12 +25,12 @@ export class StudentListGuard implements CanActivate {
           // Allow to view student list page
           return true;
         } else{
-          this.router.navigate(['/parents']);
+          this.router.navigate(['/parents',"none"]);
           return false;
         }
       }, (error) => {
         console.log("err: ", error)
-        this.router.navigate(['/parents']);
+        this.router.navigate(['/parents',"none"]);
         return false;
       }
       );

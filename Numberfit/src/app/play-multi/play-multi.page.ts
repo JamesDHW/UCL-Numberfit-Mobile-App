@@ -60,6 +60,7 @@ export class PlayMultiPage {
       .then((data) => {
         this.user = data
         if(!this.user["points"]){this.user["points"] = 300}
+        if(!this.user["year"]){this.user["year"] = 6}
 
         // Get URLs to videos
         this.http.get(this.server + "/getVideo",{},{})
@@ -194,6 +195,8 @@ export class PlayMultiPage {
     let progressBar = <HTMLElement>document.querySelector('.middle-progress-section');
     let gameSection2 = <HTMLElement>document.querySelector('.game-section2');
 
+    document.getElementById("exit-fab1").style.visibility = "hidden"
+    document.getElementById("exit-fab2").style.visibility = "hidden"
     let ele2 = <HTMLElement>document.querySelector('.board');
     let ele3 = <HTMLElement>document.querySelector('.winning-container');
     let ele4 = <HTMLElement>document.querySelector('.congrats-label');
@@ -207,17 +210,14 @@ export class PlayMultiPage {
 
     // star rain appears first
     ele5.style.visibility = "visible";
-
-    this.sleep(2000).then(() => {
-      gameSection1.style.visibility = "hidden";
-      progressBar.style.visibility = "hidden";
-      gameSection2.style.visibility = "hidden";
-      ele2.style.visibility = "hidden";
-      ele3.style.visibility = "visible";
-      ele4.style.width = "100%";
-    })
+    progressBar.style.visibility = "hidden";
+    gameSection1.style.visibility = "hidden";
+    gameSection2.style.visibility = "hidden";
+    ele2.style.visibility = "hidden";
+    ele3.style.visibility = "visible";
+    ele4.style.width = "100%";
     // redirect to play page after congrats
-    this.sleep(8000).then(() => {
+    this.sleep(5000).then(() => {
       ele5.style.visibility = "hidden";
       this.displayEnd();
     })

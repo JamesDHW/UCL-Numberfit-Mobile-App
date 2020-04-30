@@ -46,7 +46,8 @@ export class SignInPage {
       'password' : Md5.hashStr(this.signInFormGroup.value.password)
     }
 
-    this.http.post(this.server + "/login",credentials,{})
+    this.http.setDataSerializer('json');
+    this.http.post(this.server + "/login",credentials, {'Content-Type': 'application/json'})
     .then(data => {
       var user = JSON.parse(data.data);
       // console.log("user: ", user)

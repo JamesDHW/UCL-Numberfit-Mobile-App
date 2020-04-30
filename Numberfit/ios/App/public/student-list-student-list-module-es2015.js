@@ -127,9 +127,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentListPage", function() { return StudentListPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
 
 
@@ -137,47 +137,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let StudentListPage = class StudentListPage {
-    constructor(nativeStorage, activatedRoute, router, http) {
+    constructor(nativeStorage, router, http) {
         this.nativeStorage = nativeStorage;
-        this.activatedRoute = activatedRoute;
         this.router = router;
         this.http = http;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         // Get cookie from storage
         this.nativeStorage.getItem('cookie')
-            .then((data) => { this.cookie = data.cookie; });
-        // this.requestStudentList();
-        this.http.get(this.server + "/getStudents?cookie=" + this.cookie, {}, {})
-            .then(data => {
-            this.studentList = JSON.parse(data.data).students;
-        })
-            .catch(error => {
-            console.log("status", error.status);
-            console.log("error", error.error);
+            .then((data) => {
+            this.cookie = data.cookie;
+            this.http.get(this.server + "/getStudents?cookie=" + this.cookie, {}, {})
+                .then(data => {
+                this.studentList = JSON.parse(data.data).students;
+                if (this.studentList.length == 0) {
+                    this.presentAlert("Empty List", "No students to show.");
+                }
+            })
+                .catch(error => {
+                console.log("status", error.status);
+                console.log("error", error.error);
+                this.router.navigate(['/play']);
+                this.presentAlert("Connection", "Error in retrieving pupil list.");
+            });
         });
     }
     navigate(student) {
-        // this.studentID = student;
-        console.log(student);
-        // DOM.router.navigate(['/leaderboard', DOM.studentID]);
+        this.router.navigate(['/parents', student]);
     }
-    ;
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
+    }
 };
 StudentListPage.ctorParameters = () => [
-    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] }
 ];
 StudentListPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-student-list',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./student-list.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/student-list/student-list.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./student-list.page.scss */ "./src/app/student-list/student-list.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
         _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])
 ], StudentListPage);
 

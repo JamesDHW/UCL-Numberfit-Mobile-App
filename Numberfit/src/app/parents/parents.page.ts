@@ -21,6 +21,7 @@ export class HomePage {
   colorArray : any;
   games      : any;
   user       : any;
+  title      : string = "loading";
   badges     : any = [];
 
   constructor(
@@ -43,12 +44,26 @@ export class HomePage {
           username : this.activatedRoute.snapshot.paramMap.get("user")
         }
 
-        this.http.post(this.server+"/progress",send, {'Content-Type': 'application/json'})
+        if(this.user.teacher){
+          this.title = ""
+        } else {
+          this.title = this.user.name
+        }
+
+        // Test display data
+        // this.games = {"Division" : 10, "Multiplication" : 25, "Addition": 60,
+        // data : [10,5,35,20,50,60,70,75,90,85],
+        // date : ["25 March","26 March","27 March","28 March","29 March","30 March","31 March","1 April","2 April","3 April"]}
+        //
+        //   this.drawBadges()
+        //   this.createLineChart();
+
+        this.http.post(this.server+"/progress",send, {})
         .then(data => {
           this.games = JSON.parse(data.data)
           this.drawBadges()
           this.createLineChart();
-          console.log("returned - ", data.data)
+          // console.log("returned - ", data.data)
 
         })
         .catch(error => {
@@ -97,9 +112,6 @@ export class HomePage {
  }
 
   drawBadges(){
-    if(this.games.length==0){
-      document.getElementById("badges").innerHTML += "<label>No Badges Earned - Yet!</label>"
-    }
     for(var key of Object.keys(this.games)){
       if(this.games[key] > 50 && key != "data" && key != "date"){
         this.badges.push({
@@ -126,6 +138,12 @@ export class HomePage {
           image : "../../assets/badges/novice.png"
         })
       }
+    }
+    if(this.badges.length==0){
+      this.badges.push({
+        topic : "",
+        rank  : "No Badges - Yet!",
+        image : "../../assets/icon/trophy.svg"})
     }
   }
 

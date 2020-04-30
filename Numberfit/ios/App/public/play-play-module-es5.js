@@ -220,6 +220,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return _this2.router.navigate(['/subject-select', 1]);
           });
         }
+      }, {
+        key: "presentAlert",
+        value: function presentAlert(header, msg) {
+          var alert = document.createElement('ion-alert');
+          alert.header = header;
+          alert.message = msg;
+          alert.buttons = ['OK'];
+          document.body.appendChild(alert);
+          alert.present();
+        }
       }]);
 
       return HomePage;

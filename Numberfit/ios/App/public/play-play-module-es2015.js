@@ -124,6 +124,14 @@ let HomePage = class HomePage {
         divSingle.addEventListener('click', () => this.router.navigate(['/subject-select', 0]));
         divMulti.addEventListener('click', () => this.router.navigate(['/subject-select', 1]));
     }
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
+    }
 };
 HomePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },

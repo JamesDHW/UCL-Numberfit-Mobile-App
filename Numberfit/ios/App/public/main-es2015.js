@@ -724,7 +724,7 @@ const routes = [
         loadChildren: () => __webpack_require__.e(/*! import() | leaderboard-leaderboard-module */ "leaderboard-leaderboard-module").then(__webpack_require__.bind(null, /*! ./leaderboard/leaderboard.module */ "./src/app/leaderboard/leaderboard.module.ts")).then(m => m.HomePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
     },
-    { path: 'parents',
+    { path: 'parents/:user',
         loadChildren: () => __webpack_require__.e(/*! import() | parents-parents-module */ "parents-parents-module").then(__webpack_require__.bind(null, /*! ./parents/parents.module */ "./src/app/parents/parents.module.ts")).then(m => m.HomePageModule),
         canActivate: [_signed_in_guard__WEBPACK_IMPORTED_MODULE_3__["SignedInGuard"]],
     },
@@ -1082,12 +1082,12 @@ let StudentListGuard = class StudentListGuard {
                 return true;
             }
             else {
-                this.router.navigate(['/parents']);
+                this.router.navigate(['/parents', "none"]);
                 return false;
             }
         }, (error) => {
             console.log("err: ", error);
-            this.router.navigate(['/parents']);
+            this.router.navigate(['/parents', "none"]);
             return false;
         });
     }

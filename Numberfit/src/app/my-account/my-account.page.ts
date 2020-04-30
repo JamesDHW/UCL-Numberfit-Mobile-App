@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators, ControlContainer } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component }              from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
@@ -15,19 +15,18 @@ export class MyAccountPage {
   server           : string = require('../config.json').server;
   cookie           : string;
   user             : any = {username:"-",name:"-",school:"-",year:"-",teacher:"-"};
-  modifyDetailsFormGroup: FormGroup;
-  // formBuilder: FormBuilder;
   yearGroups       : Array<string>;
   schoolList       : Array<string>;
   teacherNames     = [];
   teacherUsernames = [];
+  modifyDetailsFormGroup: FormGroup;
 
   constructor(
     private nativeStorage : NativeStorage,
     private router        : Router,
     private http          : HTTP,
     private route         : ActivatedRoute,
-    private formBuilder   : FormBuilder,
+    formBuilder           : FormBuilder,
   ) {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
@@ -36,6 +35,10 @@ export class MyAccountPage {
     this.nativeStorage.getItem('user')
     .then((data) => {
       this.user = data
+      if(this.user.teacher){;
+        document.getElementById("modForm").style.display = "none";
+        console.log("teach")
+      }
 
       this.http.get(this.server+"/getTeachers?school="+this.user.school,{},{})
       .then(data => {
@@ -82,9 +85,9 @@ export class MyAccountPage {
 
     if(password1==password2 && password1.length > 7){
 
-      console.log(credentials)
-
-      this.http.post(this.server + "/modifyDetails", credentials, {})
+      // console.log(credentials)
+      this.http.setDataSerializer('json');
+      this.http.post(this.server + "/modifyDetails", credentials, {'Content-Type': 'application/json'})
       .then(data => {
         this.nativeStorage.setItem('user', {
           username : this.user.username,

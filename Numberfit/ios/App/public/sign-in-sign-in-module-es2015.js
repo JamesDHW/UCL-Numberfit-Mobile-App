@@ -154,7 +154,8 @@ let SignInPage = class SignInPage {
             'username': this.signInFormGroup.value.email.toLowerCase(),
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
         };
-        this.http.post(this.server + "/login", credentials, {})
+        this.http.setDataSerializer('json');
+        this.http.post(this.server + "/login", credentials, { 'Content-Type': 'application/json' })
             .then(data => {
             var user = JSON.parse(data.data);
             // console.log("user: ", user)
@@ -181,16 +182,21 @@ let SignInPage = class SignInPage {
         })
             .catch(error => {
             console.log("error here", error.error);
-            this.presentAlert();
+            if (error.error.errors == "No user found") {
+                this.presentAlert("Credentials", "Invalid credentials.");
+            }
+            else {
+                this.presentAlert("Connection", "Error logging in to Numberfit.");
+            }
         });
     }
-    presentAlert() {
+    presentAlert(header, msg) {
         const alert = document.createElement('ion-alert');
-        alert.header = 'Error';
-        alert.message = 'Please check your internet connection.';
+        alert.header = header;
+        alert.message = msg;
         alert.buttons = ['OK'];
         document.body.appendChild(alert);
-        return alert.present();
+        alert.present();
     }
 };
 SignInPage.ctorParameters = () => [

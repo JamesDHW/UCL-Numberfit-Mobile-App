@@ -165,14 +165,20 @@ let PlaySinglePage = class PlaySinglePage {
             this.nativeStorage.getItem('user')
                 .then((data) => {
                 this.user = data;
+                if (!this.user["year"]) {
+                    this.user["year"] = 6;
+                }
+                if (!this.user["points"]) {
+                    this.user["points"] = 300;
+                }
                 // Get URLs to videos
                 this.http.get(this.server + "/getVideo", {}, {})
                     .then(data => {
                     var videos = JSON.parse(data.data).videos;
                     videos.forEach((item) => {
-                        this.videos.push(item.url);
-                        console.log(item);
-                        console.log("url", item.url);
+                        this.videos.push(item.url + "?rel=0");
+                        // console.log(item)
+                        // console.log("url",item.url+"?rel=0")
                     });
                     this.video = this.sanitizer.bypassSecurityTrustResourceUrl(videos[0]);
                     // Ready to play!!!
@@ -199,12 +205,22 @@ let PlaySinglePage = class PlaySinglePage {
         if (this.user.year == 1 && this.subject != "Time") {
             qSetNumber = 6; // For some reason year one have fewer resources on all but Time
         }
+        var diff;
+        if (this.user.points > 250) {
+            diff = "adv";
+        }
+        else if (this.user.points < 100) {
+            diff = "int";
+        }
+        else {
+            diff = "beg";
+        }
         this.answer = [];
         while (this.answer.length < 4) {
             let page = 4 * Math.floor(Math.random() * qSetNumber);
             let card = page + Math.floor(Math.random() * 6); // 6 questions on each page
-            let ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + page + "-" + card + ".png";
-            let ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png";
+            let ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + page + "-" + card + ".png";
+            let ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png";
             // console.log("checklist", this.checkList)
             // console.log("question", this.question)
             // console.log("includes", this.checkList.includes(this.question))
@@ -295,7 +311,10 @@ let PlaySinglePage = class PlaySinglePage {
     }
     checkWin() {
         if (this.imgState >= 8) {
-            this.saveGame();
+            if (!this.user.teacher) {
+                console.log("Saving Game!");
+                this.saveGame();
+            }
             this.enableButtons(false);
             let ele2 = document.querySelector('.board');
             let ele3 = document.querySelector('.winning-container');
@@ -305,13 +324,11 @@ let PlaySinglePage = class PlaySinglePage {
             ele5.style.visibility = "visible";
             this.questionCardEle.style.visibility = "hidden";
             this.videoEle.style.visibility = "hidden";
-            this.sleep(2000).then(() => {
-                ele2.style.visibility = "hidden";
-                ele3.style.visibility = "visible";
-                ele4.style.width = "100%";
-            });
+            ele2.style.visibility = "hidden";
+            ele3.style.visibility = "visible";
+            ele4.style.width = "100%";
             // redirect to play page after congrats
-            this.sleep(8000).then(() => {
+            this.sleep(5000).then(() => {
                 ele5.style.visibility = "hidden";
                 this.displayEnd();
                 return true;
@@ -339,10 +356,10 @@ let PlaySinglePage = class PlaySinglePage {
             teacher: this.user.teacher,
             points: this.user.points + this.correctCounter - this.incorrectCounter,
         };
-        console.log("gamePLayed: ", gamePlayed);
-        console.log("savedUser: ", savedUser.points);
+        // console.log("gamePLayed: ", gamePlayed)
+        // console.log("savedUser: ", savedUser.points)
         this.http.setDataSerializer('json');
-        this.http.post(this.server + "/saveGame", gamePlayed, {})
+        this.http.post(this.server + "/saveGame", gamePlayed, { 'Content-Type': 'application/json' })
             .then(data => {
             this.http.post(this.server + "/updateScore", savedUser, {})
                 .then(data => {
@@ -359,6 +376,14 @@ let PlaySinglePage = class PlaySinglePage {
             console.log("save game error:", error.error);
             // this.presentAlert();
         });
+    }
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
     }
 };
 PlaySinglePage.ctorParameters = () => [

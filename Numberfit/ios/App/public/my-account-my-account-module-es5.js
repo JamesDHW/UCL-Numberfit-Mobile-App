@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" fullscreen>\n<ion-card>\n  <ion-card-header>\n    <ion-title class=\"welcome-card-title\">My Account</ion-title>\n  </ion-card-header>\n  <ion-card-content>\n    <form [formGroup]=\"modifyDetailsFormGroup\">\n    <ion-item style=\"margin-top: 20px;\">\n      <ion-label>Name: </ion-label>\n      <ion-input value={{userObj.name}} readonly style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Email: </ion-label>\n      <ion-input value={{userObj.username}} readonly type=\"email\" style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>School: </ion-label>\n      <ion-input value={{userObj.school}} readonly style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Year Group</ion-label>\n      <ion-select\n      formControlName=\"year\" multiple=\"false\"\n      cancelText=\"Cancel\" okText=\"Select\">\n        <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n          {{year}}\n        </ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Teacher</ion-label>\n      <ion-select\n      formControlName=\"teacher\" id=\"schoolSelect\"\n      multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n      <ion-select-option *ngFor=\"let name of teacherNames;let username of teacherUsernames;\" value={{usernames}}>\n        {{name}}\n      </ion-select-option>\n    </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Change Password</ion-label>\n      <ion-input formControlName=\"password1\" type='password'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Comfirm Password</ion-label>\n      <ion-input formControlName=\"password2\" type='password'></ion-input>\n    </ion-item>\n    <br>\n    <ion-button\n     [disabled]=\"modifyDetailsFormGroup.invalid\"\n      (click)=\"modifyDetails()\"\n      expand='block'>\n      Confirm Changes\n    </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">My Account</ion-card-title>\n      </ion-card-header>\n      <ion-item style=\"margin-top: 20px;\">\n        <ion-label>Name: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.name}}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Email: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.username}}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>School: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.school}}</ion-label>\n      </ion-item>\n      <form [formGroup]=\"modifyDetailsFormGroup\" id=\"modForm\">\n\n      <ion-item>\n        <ion-label>Year Group</ion-label>\n        <ion-select\n        formControlName=\"year\" multiple=\"false\"\n        cancelText=\"Cancel\" okText=\"Select\">\n          <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n            {{year}}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Teacher</ion-label>\n        <ion-select\n        formControlName=\"teacher\" id=\"schoolSelect\"\n        multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n        <ion-select-option *ngFor=\"let name of teacherNames;let username of teacherUsernames;\" value={{usernames}}>\n          {{name}}\n        </ion-select-option>\n      </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Change Password</ion-label>\n        <ion-input formControlName=\"password1\" type='password'></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Comfirm Password</ion-label>\n        <ion-input formControlName=\"password2\" type='password'></ion-input>\n      </ion-item>\n      <br>\n      <ion-button \n        (click)=\"modifyDetails()\"\n        expand='block' fill=\"clear\">\n        Confirm Changes\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -254,7 +254,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.router = router;
         this.http = http;
         this.route = route;
-        this.formBuilder = formBuilder;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
@@ -274,6 +273,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.nativeStorage.getItem('user').then(function (data) {
           _this.user = data;
+
+          if (_this.user.teacher) {
+            ;
+            document.getElementById("modForm").style.display = "none";
+            console.log("teach");
+          }
 
           _this.http.get(_this.server + "/getTeachers?school=" + _this.user.school, {}, {}).then(function (data) {
             var teachers = JSON.parse(data.data).teachers;
@@ -318,8 +323,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
 
           if (password1 == password2 && password1.length > 7) {
-            console.log(credentials);
-            this.http.post(this.server + "/modifyDetails", credentials, {}).then(function (data) {
+            // console.log(credentials)
+            this.http.setDataSerializer('json');
+            this.http.post(this.server + "/modifyDetails", credentials, {
+              'Content-Type': 'application/json'
+            }).then(function (data) {
               _this2.nativeStorage.setItem('user', {
                 username: _this2.user.username,
                 name: _this2.user.name,
@@ -331,41 +339,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }).then(function () {
                 // console.log("got to play")
                 _this2.router.navigate(['/play']);
-              }, function (error) {
-                return _this2.presentAlert();
+              }, function () {
+                return _this2.presentAlert("Internal Storage", "Error updating details internally.");
               });
             })["catch"](function (error) {
               console.log("error here", error.error);
 
-              _this2.presentAlert();
+              _this2.presentAlert("Connection", "Error updating details to the internet.");
             });
           } else {
             // error!!!
-            var alert = document.createElement('ion-alert');
-            alert.header = 'Password';
-            alert.message = 'Input a more secure password.';
-            alert.buttons = ['OK'];
-            document.body.appendChild(alert);
-            alert.present();
+            this.presentAlert("Password", "Please choose a more secure password.");
           }
         }
       }, {
-        key: "ngOnInit",
-        value: function ngOnInit() {// this.cookie = this.route.snapshot.paramMap.get('cookie');
-          // console.log(this.cookie);
-          // this.getUserDetails();
-          // this.modifyDetailsFormGroup.reset({name: this.userObj.name});
-          // this.modifyDetailsFormGroup.get('name').setValue(this.userObj.name);
-        }
-      }, {
         key: "presentAlert",
-        value: function presentAlert() {
+        value: function presentAlert(header, msg) {
           var alert = document.createElement('ion-alert');
-          alert.header = 'Connection Error';
-          alert.message = 'Please check your internet connection.';
+          alert.header = header;
+          alert.message = msg;
           alert.buttons = ['OK'];
           document.body.appendChild(alert);
-          return alert.present();
+          alert.present();
         }
       }]);
 

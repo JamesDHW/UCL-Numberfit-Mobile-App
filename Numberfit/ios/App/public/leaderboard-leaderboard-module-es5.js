@@ -175,18 +175,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(nativeStorage, http) {
+      function HomePage(nativeStorage, http, router) {
         var _this = this;
 
         _classCallCheck(this, HomePage);
 
         this.nativeStorage = nativeStorage;
         this.http = http;
+        this.router = router;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
@@ -197,8 +204,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }); // Get user
 
         this.nativeStorage.getItem('user').then(function (data) {
-          _this.user = data;
-          _this.points = data.points;
+          _this.user = data; // this.points = data.points
+
           console.log(_this.user); // Get top scores from given school
 
           _this.http.get(_this.server + "/leaderboard?school=" + _this.user.school + "&cookie=" + _this.cookie, {}, {}).then(function (data) {
@@ -207,13 +214,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           })["catch"](function (error) {
             console.log("status", error.status);
             console.log("error", error.error);
+
+            _this.router.navigate(['/play']);
+
+            _this.presentAlert("Connection", "Error retrieving leaderboard.");
           });
         });
       }
 
       _createClass(HomePage, [{
-        key: "ngOnInit",
-        value: function ngOnInit() {}
+        key: "presentAlert",
+        value: function presentAlert(header, msg) {
+          var alert = document.createElement('ion-alert');
+          alert.header = header;
+          alert.message = msg;
+          alert.buttons = ['OK'];
+          document.body.appendChild(alert);
+          alert.present();
+        }
       }]);
 
       return HomePage;
@@ -223,7 +241,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return [{
         type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"]
       }, {
-        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }];
     };
 
@@ -235,7 +255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./leaderboard.page.scss */
       "./src/app/leaderboard/leaderboard.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]])], HomePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])], HomePage);
     /***/
   }
 }]);

@@ -98,15 +98,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
-/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
 
 
 
 
 let HomePage = class HomePage {
-    constructor(nativeStorage, http) {
+    constructor(nativeStorage, http, router) {
         this.nativeStorage = nativeStorage;
         this.http = http;
+        this.router = router;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         this.points = 0;
         // Get cookie from storage
@@ -116,7 +119,7 @@ let HomePage = class HomePage {
         this.nativeStorage.getItem('user')
             .then((data) => {
             this.user = data;
-            this.points = data.points;
+            // this.points = data.points
             console.log(this.user);
             // Get top scores from given school
             this.http.get(this.server + "/leaderboard?school=" + this.user.school + "&cookie=" + this.cookie, {}, {})
@@ -127,15 +130,24 @@ let HomePage = class HomePage {
                 .catch(error => {
                 console.log("status", error.status);
                 console.log("error", error.error);
+                this.router.navigate(['/play']);
+                this.presentAlert("Connection", "Error retrieving leaderboard.");
             });
         });
     }
-    ngOnInit() {
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
     }
 };
 HomePage.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"] },
-    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"] }
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
 ];
 HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -144,7 +156,8 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./leaderboard.page.scss */ "./src/app/leaderboard/leaderboard.page.scss")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"],
-        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]])
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
 ], HomePage);
 
 

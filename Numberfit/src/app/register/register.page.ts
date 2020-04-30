@@ -77,7 +77,7 @@ export class RegisterPage {
 
       console.log(credentials)
 
-      // this.http.setDataSerializer('json');
+      this.http.setDataSerializer('json');
       this.http.post(this.server + "/register", credentials, {'Content-Type': 'application/json'})
       .then(data => {
         var user = JSON.parse(data.data);

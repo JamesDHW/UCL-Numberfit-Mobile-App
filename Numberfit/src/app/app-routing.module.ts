@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate: [SignedInGuard],
    },
 
-  { path: 'parents',
+  { path: 'parents/:user',
     loadChildren: () => import('./parents/parents.module').then(m => m.HomePageModule),
     canActivate: [SignedInGuard],
    },

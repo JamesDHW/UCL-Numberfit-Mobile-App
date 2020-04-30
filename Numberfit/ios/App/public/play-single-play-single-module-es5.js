@@ -288,15 +288,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _this.cookie = data.cookie; // Get user
 
           _this.nativeStorage.getItem('user').then(function (data) {
-            _this.user = data; // Get URLs to videos
+            _this.user = data;
+
+            if (!_this.user["year"]) {
+              _this.user["year"] = 6;
+            }
+
+            if (!_this.user["points"]) {
+              _this.user["points"] = 300;
+            } // Get URLs to videos
+
 
             _this.http.get(_this.server + "/getVideo", {}, {}).then(function (data) {
               var videos = JSON.parse(data.data).videos;
               videos.forEach(function (item) {
-                _this.videos.push(item.url);
+                _this.videos.push(item.url + "?rel=0"); // console.log(item)
+                // console.log("url",item.url+"?rel=0")
 
-                console.log(item);
-                console.log("url", item.url);
               });
               _this.video = _this.sanitizer.bypassSecurityTrustResourceUrl(videos[0]); // Ready to play!!!
 
@@ -328,14 +336,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             qSetNumber = 6; // For some reason year one have fewer resources on all but Time
           }
 
+          var diff;
+
+          if (this.user.points > 250) {
+            diff = "adv";
+          } else if (this.user.points < 100) {
+            diff = "int";
+          } else {
+            diff = "beg";
+          }
+
           this.answer = [];
 
           while (this.answer.length < 4) {
             var page = 4 * Math.floor(Math.random() * qSetNumber);
             var card = page + Math.floor(Math.random() * 6); // 6 questions on each page
 
-            var ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + page + "-" + card + ".png";
-            var ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png"; // console.log("checklist", this.checkList)
+            var ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + page + "-" + card + ".png";
+            var ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png"; // console.log("checklist", this.checkList)
             // console.log("question", this.question)
             // console.log("includes", this.checkList.includes(this.question))
 
@@ -457,7 +475,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this2 = this;
 
           if (this.imgState >= 8) {
-            this.saveGame();
+            if (!this.user.teacher) {
+              console.log("Saving Game!");
+              this.saveGame();
+            }
+
             this.enableButtons(false);
             var ele2 = document.querySelector('.board');
             var ele3 = document.querySelector('.winning-container');
@@ -467,13 +489,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             ele5.style.visibility = "visible";
             this.questionCardEle.style.visibility = "hidden";
             this.videoEle.style.visibility = "hidden";
-            this.sleep(2000).then(function () {
-              ele2.style.visibility = "hidden";
-              ele3.style.visibility = "visible";
-              ele4.style.width = "100%";
-            }); // redirect to play page after congrats
+            ele2.style.visibility = "hidden";
+            ele3.style.visibility = "visible";
+            ele4.style.width = "100%"; // redirect to play page after congrats
 
-            this.sleep(8000).then(function () {
+            this.sleep(5000).then(function () {
               ele5.style.visibility = "hidden";
 
               _this2.displayEnd();
@@ -505,11 +525,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             mTeacher: this.user.mTeacher,
             teacher: this.user.teacher,
             points: this.user.points + this.correctCounter - this.incorrectCounter
-          };
-          console.log("gamePLayed: ", gamePlayed);
-          console.log("savedUser: ", savedUser.points);
+          }; // console.log("gamePLayed: ", gamePlayed)
+          // console.log("savedUser: ", savedUser.points)
+
           this.http.setDataSerializer('json');
-          this.http.post(this.server + "/saveGame", gamePlayed, {}).then(function (data) {
+          this.http.post(this.server + "/saveGame", gamePlayed, {
+            'Content-Type': 'application/json'
+          }).then(function (data) {
             _this3.http.post(_this3.server + "/updateScore", savedUser, {}).then(function (data) {
               delete savedUser["cookie"];
 
@@ -522,6 +544,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           })["catch"](function (error) {
             console.log("save game error:", error.error); // this.presentAlert();
           });
+        }
+      }, {
+        key: "presentAlert",
+        value: function presentAlert(header, msg) {
+          var alert = document.createElement('ion-alert');
+          alert.header = header;
+          alert.message = msg;
+          alert.buttons = ['OK'];
+          document.body.appendChild(alert);
+          alert.present();
         }
       }]);
 

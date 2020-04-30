@@ -1,6 +1,6 @@
-import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit }      from '@angular/core';
+import { Component }      from '@angular/core';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
+import { Router }                 from '@angular/router';
 import { HTTP }                   from '@ionic-native/http/ngx';
 
 @Component({
@@ -17,25 +17,33 @@ export class StudentListPage {
 
   constructor(
     private nativeStorage  : NativeStorage,
-    private activatedRoute : ActivatedRoute,
     private router         : Router,
     private http           : HTTP,
   ) {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
-    .then((data) => {this.cookie = data.cookie});
-    // this.requestStudentList();
+    .then((data) => {
+      this.cookie = data.cookie
+      this.http.get(this.server+"/getStudents?cookie="+this.cookie,{},{})
+      .then(data => {
+        this.studentList = JSON.parse(data.data).students;
+        if(this.studentList.length==0){
+          this.presentAlert("Empty List","No students to show.")
+        }
 
-    this.http.get(this.server+"/getStudents?cookie="+this.cookie,{},{})
-    .then(data => {
-      this.studentList = JSON.parse(data.data).students;
-
-    })
-    .catch(error => {
-      console.log("status", error.status);
-      console.log("error", error.error);
-      this.presentAlert("Connection","Error in retrieving pupil list.")
+      })
+      .catch(error => {
+        console.log("status", error.status);
+        console.log("error", error.error);
+        this.router.navigate(['/play']);
+        this.presentAlert("Connection","Error in retrieving pupil list.")
+      });
     });
+
+  }
+
+  navigate(student){
+    this.router.navigate(['/parents', student]);
   }
 
   presentAlert(header, msg) {

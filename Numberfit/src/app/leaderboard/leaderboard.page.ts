@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { Router }            from '@angular/router';
 import { HTTP }              from '@ionic-native/http/ngx';
 
 @Component({
@@ -18,6 +19,7 @@ export class HomePage {
   constructor(
     private nativeStorage : NativeStorage,
     private http          : HTTP,
+    private router        : Router,
   ) {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
@@ -38,6 +40,7 @@ export class HomePage {
       .catch(error => {
         console.log("status", error.status);
         console.log("error", error.error);
+        this.router.navigate(['/play']);
         this.presentAlert("Connection","Error retrieving leaderboard.")
 
       });

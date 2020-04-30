@@ -22,12 +22,14 @@ export class HomePage {
     private http          : HTTP,
   ) {
     // Get cookie from storage
-    this.cookie = this.nativeStorage.getItem('cookie');
+    this.nativeStorage.getItem('cookie').then((data) => {
+      this.cookie = data.cookie
+    });
   }
 
   signOut(){
 
-    console.log("send to", this.server+"/logout?session="+this.cookie)
+    // console.log("send to", this.server+"/logout?session="+this.cookie)
     this.http.get(this.server+"/logout?session="+this.cookie,{},{})
     .then(data => {
       this.nativeStorage.setItem('cookie', {cookie: "-"})

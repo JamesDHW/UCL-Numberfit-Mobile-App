@@ -34085,7 +34085,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">Student Name: </ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <div style=\"margin-left: 25%; margin-right: 25%\" *ngFor=\"let badge of badges\">\n    <img style=\"width: 50% !important\" src=\"{{badge.image}}\">\n    <br>\n    <h3>{{badge.topic}}</h3>\n    <h4>{{badge.rank}}</h4>\n  </div>\n</ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">{{title}}</ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <ion-item id=\"badges\" *ngFor=\"let badge of badges\">\n    <img slot=\"start\" style=\"width: 25% !important; margin: 3px\" src=\"{{badge.image}}\">\n    <label>{{badge.topic}} - {{badge.rank}}</label>\n  </ion-item>\n</ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -34265,60 +34265,96 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var chart_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! chart.js */
     "./node_modules/chart.js/dist/Chart.js");
     /* harmony import */
 
 
-    var chart_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
+    var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
     /* harmony import */
 
 
-    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
     /* harmony import */
 
 
-    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(nativeStorage, http) {
+      function HomePage(activatedRoute, nativeStorage, http) {
         var _this = this;
 
         _classCallCheck(this, HomePage);
 
+        this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
         this.http = http;
         this.server = __webpack_require__(
         /*! ../config.json */
         "./src/app/config.json").server;
+        this.title = "loading";
         this.badges = []; // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
-          _this.cookie = data.cookie;
+          _this.cookie = data.cookie; // Get cookie from storage
 
-          _this.http.get(_this.server + "/progress?cookie=" + _this.cookie, {}, {}).then(function (data) {
-            _this.games = JSON.parse(data.data);
+          _this.nativeStorage.getItem('user').then(function (data) {
+            _this.user = data; // Get progress of user
 
-            _this.drawBadges();
+            var send = {
+              cookie: _this.cookie,
+              username: _this.activatedRoute.snapshot.paramMap.get("user")
+            };
 
-            _this.createLineChart();
+            if (_this.user.teacher) {
+              _this.title = "";
+            } else {
+              _this.title = _this.user.name;
+            } // Test display data
+            // this.games = {"Division" : 10, "Multiplication" : 25, "Addition": 60,
+            // data : [10,5,35,20,50,60,70,75,90,85],
+            // date : ["25 March","26 March","27 March","28 March","29 March","30 March","31 March","1 April","2 April","3 April"]}
+            //
+            //   this.drawBadges()
+            //   this.createLineChart();
 
-            console.log("returned - ", data.data);
-          })["catch"](function (error) {
-            console.log("ERRORS FOUND");
-            console.log("status:", error.status);
-            console.log("error:", error.error); // error message as string
+
+            _this.http.post(_this.server + "/progress", send, {}).then(function (data) {
+              _this.games = JSON.parse(data.data);
+
+              _this.drawBadges();
+
+              _this.createLineChart(); // console.log("returned - ", data.data)
+
+            })["catch"](function (error) {
+              console.log("ERRORS FOUND");
+              console.log("status:", error.status);
+              console.log("error:", error.error); // error message as string
+
+              var alert = document.createElement('ion-alert');
+              alert.header = 'Error';
+              alert.message = 'Could not find user records!.';
+              alert.buttons = ['OK'];
+              document.body.appendChild(alert);
+              alert.present();
+            });
           });
         });
       }
@@ -34326,7 +34362,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(HomePage, [{
         key: "createLineChart",
         value: function createLineChart() {
-          this.lines = new chart_js__WEBPACK_IMPORTED_MODULE_2__["Chart"](this.lineChart.nativeElement, {
+          this.lines = new chart_js__WEBPACK_IMPORTED_MODULE_3__["Chart"](this.lineChart.nativeElement, {
             type: 'line',
             data: {
               labels: this.games["date"],
@@ -34380,6 +34416,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               });
             }
           }
+
+          if (this.badges.length == 0) {
+            this.badges.push({
+              topic: "",
+              rank: "No Badges - Yet!",
+              image: "../../assets/icon/trophy.svg"
+            });
+          }
+        }
+      }, {
+        key: "presentAlert",
+        value: function presentAlert(header, msg) {
+          var alert = document.createElement('ion-alert');
+          alert.header = header;
+          alert.message = msg;
+          alert.buttons = ['OK'];
+          document.body.appendChild(alert);
+          alert.present();
         }
       }]);
 
@@ -34388,16 +34442,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     HomePage.ctorParameters = function () {
       return [{
-        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]
       }, {
-        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
       }];
     };
 
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('lineChart', {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('lineChart', {
       "static": false
     }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)], HomePage.prototype, "lineChart", void 0);
-    HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'app-parents',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./parents.page.html */
@@ -34405,7 +34461,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./parents.page.scss */
       "./src/app/parents/parents.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])], HomePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]])], HomePage);
     /***/
   }
 }]);

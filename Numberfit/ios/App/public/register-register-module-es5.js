@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-title class=\"welcome-card-title\">Register New Account</ion-title>\n    </ion-card-header>\n    <ion-card-content>\n      <form [formGroup]=\"registerFormGroup\" action = \"http://localhost:3000/register\" method = \"GET\">\n        <ion-item style=\"margin-top: 20px;\">\n          <ion-label position=\"floating\">Name</ion-label>\n          <ion-input formControlName=\"name\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input formControlName=\"email\" type=\"email\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Password</ion-label>\n          <ion-input formControlName=\"password1\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Comfirm Password</ion-label>\n          <ion-input formControlName=\"password2\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>Year Group</ion-label>\n          <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\" >\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>School</ion-label>\n          <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school.name}}>\n              {{school.name}}\n            </ion-select-option>\n\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-button\n          (click)=\"register()\" [disabled]=\"registerFormGroup.invalid\"\n          expand='block'>\n          Register\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <meta charset=\"UTF-8\">\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">Register New Account</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <form [formGroup]=\"registerFormGroup\" action = \"http://localhost:3000/register\" method = \"GET\">\n        <ion-item style=\"margin-top: 20px;\">\n          <ion-label position=\"floating\">Name</ion-label>\n          <ion-input formControlName=\"name\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input formControlName=\"email\" type=\"email\"></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Password</ion-label>\n          <ion-input formControlName=\"password1\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label position=\"floating\">Comfirm Password</ion-label>\n          <ion-input formControlName=\"password2\" type='password'></ion-input>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>Year Group</ion-label>\n          <ion-select\n            formControlName=\"year\" multiple=\"false\"\n            cancelText=\"Cancel\" okText=\"Select\" >\n            <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n              {{year}}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-item>\n          <ion-label>School</ion-label>\n          <ion-select\n            formControlName=\"school\" id=\"schoolSelect\"\n            multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n            <ion-select-option *ngFor=\"let school of schoolList\" value={{school.name}}>\n              {{school.name}}\n            </ion-select-option>\n\n          </ion-select>\n        </ion-item>\n        <br>\n        <ion-button\n          (click)=\"register()\" [disabled]=\"registerFormGroup.invalid\"\n          expand='block'>\n          Register\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -276,21 +276,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         })["catch"](function (error) {
           console.log("status", error.status);
           console.log("error", error.error);
+
+          _this.presentAlert("Connection", "Error retrieving available schools.");
         });
       }
 
       _createClass(RegisterPage, [{
-        key: "ngOnInit",
-        value: function ngOnInit() {
-          // get the schools from the DB
-          var schoolSelect = document.getElementById("schoolSelect");
-        }
-      }, {
         key: "register",
         value: function register() {
           var _this2 = this;
 
-          var DOM = this;
           var password1 = this.registerFormGroup.value.password1;
           var password2 = this.registerFormGroup.value.password2;
           var credentials = {
@@ -308,13 +303,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (password1 == password2 && password1.length > 7) {
             console.log(credentials);
             this.http.setDataSerializer('json');
-            this.http.get(this.server + "/test", {}, {}).then(function (data) {
-              console.log("response: ", data.data);
-            })["catch"](function (error) {
-              console.log("error here", error.error);
-
-              _this2.presentAlert();
-            });
             this.http.post(this.server + "/register", credentials, {
               'Content-Type': 'application/json'
             }).then(function (data) {
@@ -325,6 +313,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 cookie: user.cookie
               }).then(function () {
                 //save info
+                delete credentials["password"];
+
                 _this2.nativeStorage.setItem('user', credentials).then(function () {
                   _this2.router.navigate(['/my-account']);
                 }, function (error) {
@@ -336,22 +326,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             })["catch"](function (error) {
               console.log("error here", error.error);
 
-              _this2.presentAlert();
+              _this2.presentAlert("Connection", "Error registering account.");
             });
           } else {
             // error!!!
-            alert("Please ensure your password is at least 8 characters and matches the confirmation field");
+            this.presentAlert("Password", "Please choose a more secure password.");
           }
         }
       }, {
         key: "presentAlert",
-        value: function presentAlert() {
+        value: function presentAlert(header, msg) {
           var alert = document.createElement('ion-alert');
-          alert.header = 'Error';
-          alert.message = 'Please check your internet connection.';
+          alert.header = header;
+          alert.message = msg;
           alert.buttons = ['OK'];
           document.body.appendChild(alert);
-          return alert.present();
+          alert.present();
         }
       }]);
 

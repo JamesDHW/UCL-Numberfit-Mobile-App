@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" fullscreen>\n<ion-card>\n  <ion-card-header>\n    <ion-title class=\"welcome-card-title\">My Account</ion-title>\n  </ion-card-header>\n  <ion-card-content>\n    <form [formGroup]=\"modifyDetailsFormGroup\">\n    <ion-item style=\"margin-top: 20px;\">\n      <ion-label>Name: </ion-label>\n      <ion-input value={{userObj.name}} readonly style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Email: </ion-label>\n      <ion-input value={{userObj.username}} readonly type=\"email\" style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>School: </ion-label>\n      <ion-input value={{userObj.school}} readonly style=\"text-align: center;\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Year Group</ion-label>\n      <ion-select\n      formControlName=\"year\" multiple=\"false\"\n      cancelText=\"Cancel\" okText=\"Select\">\n        <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n          {{year}}\n        </ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Teacher</ion-label>\n      <ion-select\n      formControlName=\"teacher\" id=\"schoolSelect\"\n      multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n      <ion-select-option *ngFor=\"let name of teacherNames;let username of teacherUsernames;\" value={{usernames}}>\n        {{name}}\n      </ion-select-option>\n    </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Change Password</ion-label>\n      <ion-input formControlName=\"password1\" type='password'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Comfirm Password</ion-label>\n      <ion-input formControlName=\"password2\" type='password'></ion-input>\n    </ion-item>\n    <br>\n    <ion-button\n     [disabled]=\"modifyDetailsFormGroup.invalid\"\n      (click)=\"modifyDetails()\"\n      expand='block'>\n      Confirm Changes\n    </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">My Account</ion-card-title>\n      </ion-card-header>\n      <ion-item style=\"margin-top: 20px;\">\n        <ion-label>Name: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.name}}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Email: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.username}}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>School: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.school}}</ion-label>\n      </ion-item>\n      <form [formGroup]=\"modifyDetailsFormGroup\" id=\"modForm\">\n\n      <ion-item>\n        <ion-label>Year Group</ion-label>\n        <ion-select\n        formControlName=\"year\" multiple=\"false\"\n        cancelText=\"Cancel\" okText=\"Select\">\n          <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n            {{year}}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Teacher</ion-label>\n        <ion-select\n        formControlName=\"teacher\" id=\"schoolSelect\"\n        multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n        <ion-select-option *ngFor=\"let name of teacherNames;let username of teacherUsernames;\" value={{usernames}}>\n          {{name}}\n        </ion-select-option>\n      </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Change Password</ion-label>\n        <ion-input formControlName=\"password1\" type='password'></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Comfirm Password</ion-label>\n        <ion-input formControlName=\"password2\" type='password'></ion-input>\n      </ion-item>\n      <br>\n      <ion-button \n        (click)=\"modifyDetails()\"\n        expand='block' fill=\"clear\">\n        Confirm Changes\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -137,7 +137,6 @@ let MyAccountPage = class MyAccountPage {
         this.router = router;
         this.http = http;
         this.route = route;
-        this.formBuilder = formBuilder;
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         this.user = { username: "-", name: "-", school: "-", year: "-", teacher: "-" };
         this.teacherNames = [];
@@ -149,6 +148,11 @@ let MyAccountPage = class MyAccountPage {
         this.nativeStorage.getItem('user')
             .then((data) => {
             this.user = data;
+            if (this.user.teacher) {
+                ;
+                document.getElementById("modForm").style.display = "none";
+                console.log("teach");
+            }
             this.http.get(this.server + "/getTeachers?school=" + this.user.school, {}, {})
                 .then(data => {
                 let teachers = JSON.parse(data.data).teachers;
@@ -187,8 +191,9 @@ let MyAccountPage = class MyAccountPage {
             password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__["Md5"].hashStr(password1),
         };
         if (password1 == password2 && password1.length > 7) {
-            console.log(credentials);
-            this.http.post(this.server + "/modifyDetails", credentials, {})
+            // console.log(credentials)
+            this.http.setDataSerializer('json');
+            this.http.post(this.server + "/modifyDetails", credentials, { 'Content-Type': 'application/json' })
                 .then(data => {
                 this.nativeStorage.setItem('user', {
                     username: this.user.username,
@@ -202,37 +207,25 @@ let MyAccountPage = class MyAccountPage {
                     .then(() => {
                     // console.log("got to play")
                     this.router.navigate(['/play']);
-                }, error => this.presentAlert());
+                }, () => this.presentAlert("Internal Storage", "Error updating details internally."));
             })
                 .catch(error => {
                 console.log("error here", error.error);
-                this.presentAlert();
+                this.presentAlert("Connection", "Error updating details to the internet.");
             });
         }
         else {
             // error!!!
-            const alert = document.createElement('ion-alert');
-            alert.header = 'Password';
-            alert.message = 'Input a more secure password.';
-            alert.buttons = ['OK'];
-            document.body.appendChild(alert);
-            alert.present();
+            this.presentAlert("Password", "Please choose a more secure password.");
         }
     }
-    ngOnInit() {
-        // this.cookie = this.route.snapshot.paramMap.get('cookie');
-        // console.log(this.cookie);
-        // this.getUserDetails();
-        // this.modifyDetailsFormGroup.reset({name: this.userObj.name});
-        // this.modifyDetailsFormGroup.get('name').setValue(this.userObj.name);
-    }
-    presentAlert() {
+    presentAlert(header, msg) {
         const alert = document.createElement('ion-alert');
-        alert.header = 'Connection Error';
-        alert.message = 'Please check your internet connection.';
+        alert.header = header;
+        alert.message = msg;
         alert.buttons = ['OK'];
         document.body.appendChild(alert);
-        return alert.present();
+        alert.present();
     }
 };
 MyAccountPage.ctorParameters = () => [

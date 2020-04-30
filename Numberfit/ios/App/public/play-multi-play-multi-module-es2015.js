@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n</ion-header>\n\n<ion-content class=\"ion-multi-content\">\n    <section class=\"winning-container\">\n    <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n    <p id=\"congrats-font\">Congratulations!</p><br>\n    <section class=\"congrats-label\"></section>\n    </section>\n    <section class=\"board\">\n      <section>\n        <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n      </section>\n  <section class=\"game-section1\">\n  <ion-row>\n    <ion-col size=\"10\">\n      <section class=\"choice-section\">\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(0)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[0]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(1)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[1]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(2)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[2]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(3)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[3]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n      <ion-card size=\"10\" class=\"card-rotate\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"{{question1}}\"/>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n    <ion-col size=\"2\" class=\"top-right-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{top_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  </section>\n  <section class=\"middle-progress-section\">\n    <ion-row>\n    <ion-col size=\"5\" class=\"middle-progress-bar-left\">\n      <img src=\"/assets/progress-multiplayer/{{middle_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"2\" class=\"middle-center\">\n      <img src=\"/assets/progress-multiplayer/{{middle_center}}.png\"/>\n    </ion-col>\n    <ion-col size=\"5\" class=\"middle-progress-bar-right\">\n      <img src=\"/assets/progress-multiplayer/{{middle_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  </section>\n  <!-- <section class=\"section\">\n    <img src=\"/assets/progress-multiplayer/Picture1.png\"/>\n  </section> -->\n  <section class=\"game-section2\">\n  <ion-row>\n    <ion-col size=\"2\" class=\"bottom-left-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{bottom_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"10\">\n      <ion-card class=\"card\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"{{question2}}\"/>\n        </ion-card-content>\n      </ion-card>\n      <section class=\"choice-section-bottom\">\n        <ion-row class=\"choice-row\">\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(4)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[0]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(5)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[1]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(6)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[2]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(7)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[3]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n    </ion-col>\n  </ion-row>\n</section>\n</section>\n</ion-content>\n<ion-fab class=\"end-section\" vertical=\"center\" horizontal=\"center\" slot=\"fixed\">\n  <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/1']\">\n    <ion-icon name=\"refresh-outline\"></ion-icon>\n  </ion-fab-button>\n<ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n</ion-header>\n\n<ion-content class=\"ion-multi-content\" style=\"background-color: #7b9e36;\">\n    <section class=\"winning-container\">\n    <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n    <p id=\"congrats-font\">Congratulations!</p><br>\n    <section class=\"congrats-label\"></section>\n    </section>\n    <section class=\"board\">\n      <section>\n        <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n      </section>\n  <section class=\"game-section1\">\n  <ion-row>\n    <ion-col size=\"10\">\n      <section class=\"choice-section\">\n        <ion-row class=\"choice-row\">\n          <ion-col class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(0)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[0]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(1)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[1]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(2)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[2]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button-rotate\" (click)=\"updateProgress(3)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"{{answer1[3]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n      <ion-card size=\"10\" class=\"card-rotate\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"{{question1}}\"/>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n    <ion-col size=\"2\" class=\"top-right-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{top_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  </section>\n  <section class=\"middle-progress-section\">\n    <ion-row>\n    <ion-col size=\"5\" class=\"middle-progress-bar-left\">\n      <img src=\"/assets/progress-multiplayer/{{middle_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"2\" class=\"middle-center\">\n      <img src=\"/assets/progress-multiplayer/{{middle_center}}.png\"/>\n    </ion-col>\n    <ion-col size=\"5\" class=\"middle-progress-bar-right\">\n      <img src=\"/assets/progress-multiplayer/{{middle_right}}.png\"/>\n    </ion-col>\n  </ion-row>\n  </section>\n  <!-- <section class=\"section\">\n    <img src=\"/assets/progress-multiplayer/Picture1.png\"/>\n  </section> -->\n  <section class=\"game-section2\">\n  <ion-row>\n    <ion-col size=\"2\" class=\"bottom-left-progress-bar\">\n      <img src=\"/assets/progress-multiplayer/{{bottom_left}}.png\"/>\n    </ion-col>\n    <ion-col size=\"10\">\n      <ion-card class=\"card\">\n        <ion-card-content>\n          <img class=\"question-card\" src=\"{{question2}}\"/>\n        </ion-card-content>\n      </ion-card>\n      <section class=\"choice-section-bottom\">\n        <ion-row class=\"choice-row\">\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(4)\">\n              <!-- <span class=\"font\">5</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[0]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(5)\">\n              <!-- <span class=\"font\">8</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[1]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n        <ion-row class=\"choice-row\">\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(6)\">\n              <!-- <span class=\"font\">10</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[2]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n          <ion-col size= \"6\" class=\"choice-col\">\n            <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(7)\">\n              <!-- <span class=\"font\">6</span> -->\n              <img id=\"answer-card\" src=\"{{answer2[3]['answer']}}\"/>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </section>\n    </ion-col>\n  </ion-row>\n</section>\n</section>\n</ion-content>\n<ion-fab class=\"end-section\" vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n  <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/1']\">\n    <ion-icon name=\"refresh-outline\"></ion-icon>\n  </ion-fab-button>\n<ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n  <ion-fab-button id=\"exit-fab1\" [routerLink]=\"['/play']\" style=\"margin: 10px; --background: rgba(190, 41, 15, 0.925);\">\n      <ion-icon name=\"exit-outline\"></ion-icon>\n  </ion-fab-button>\n</ion-fab>\n<ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n<ion-fab-button id=\"exit-fab2\" [routerLink]=\"['/play']\" style=\"margin: 10px; --background: rgba(190, 41, 15, 0.925);\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n");
 
 /***/ }),
 
@@ -167,6 +167,12 @@ let PlayMultiPage = class PlayMultiPage {
             this.nativeStorage.getItem('user')
                 .then((data) => {
                 this.user = data;
+                if (!this.user["points"]) {
+                    this.user["points"] = 300;
+                }
+                if (!this.user["year"]) {
+                    this.user["year"] = 6;
+                }
                 // Get URLs to videos
                 this.http.get(this.server + "/getVideo", {}, {})
                     .then(data => {
@@ -192,12 +198,22 @@ let PlayMultiPage = class PlayMultiPage {
         if (this.user.year == 1 && this.subject != "Time") {
             qSetNumber = 6; // For some reason year one have fewer resources on all but Time
         }
+        var diff;
+        if (this.user.points > 250) {
+            diff = "adv";
+        }
+        else if (this.user.points < 100) {
+            diff = "int";
+        }
+        else {
+            diff = "beg";
+        }
         var answerArray = [];
         while (answerArray.length < 4) {
             let page = 4 * Math.floor(Math.random() * qSetNumber);
             let card = page + Math.floor(Math.random() * 6); // 6 questions on each page
-            let ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + page + "-" + card + ".png";
-            let ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/beg/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png";
+            let ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + page + "-" + card + ".png";
+            let ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png";
             // console.log("checklist", this.checkList)
             // console.log("question", this.question)
             // console.log("includes", this.checkList.includes(this.question))
@@ -284,6 +300,8 @@ let PlayMultiPage = class PlayMultiPage {
         let gameSection1 = document.querySelector('.game-section1');
         let progressBar = document.querySelector('.middle-progress-section');
         let gameSection2 = document.querySelector('.game-section2');
+        document.getElementById("exit-fab1").style.visibility = "hidden";
+        document.getElementById("exit-fab2").style.visibility = "hidden";
         let ele2 = document.querySelector('.board');
         let ele3 = document.querySelector('.winning-container');
         let ele4 = document.querySelector('.congrats-label');
@@ -295,16 +313,14 @@ let PlayMultiPage = class PlayMultiPage {
         }
         // star rain appears first
         ele5.style.visibility = "visible";
-        this.sleep(2000).then(() => {
-            gameSection1.style.visibility = "hidden";
-            progressBar.style.visibility = "hidden";
-            gameSection2.style.visibility = "hidden";
-            ele2.style.visibility = "hidden";
-            ele3.style.visibility = "visible";
-            ele4.style.width = "100%";
-        });
+        progressBar.style.visibility = "hidden";
+        gameSection1.style.visibility = "hidden";
+        gameSection2.style.visibility = "hidden";
+        ele2.style.visibility = "hidden";
+        ele3.style.visibility = "visible";
+        ele4.style.width = "100%";
         // redirect to play page after congrats
-        this.sleep(8000).then(() => {
+        this.sleep(5000).then(() => {
             ele5.style.visibility = "hidden";
             this.displayEnd();
         });
@@ -349,6 +365,14 @@ let PlayMultiPage = class PlayMultiPage {
         else {
             return false;
         }
+    }
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
     }
 };
 PlayMultiPage.ctorParameters = () => [

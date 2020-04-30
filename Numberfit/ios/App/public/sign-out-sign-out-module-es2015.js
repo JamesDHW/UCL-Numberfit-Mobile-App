@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <section class=\"center\">\n        <h2>Are You Sure You Want to Sign Out?</h2>\n        <ion-button\n        (click)=\"signOut()\" style=\"margin: 10%;\" expand=\"block\" fill=\"clear\"\n        size=\"medium\" color=\"danger\" routerLink=\"../sign-in\">\n          Sign Out\n        </ion-button>\n      </section>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">Sign Out?</ion-card-title>\n      </ion-card-header>\n      <section class=\"center\">\n        <h2>Are You Sure You Want to Sign Out?</h2>\n        <ion-button\n        (click)=\"signOut()\" style=\"margin: 10%;\" fill=\"solid\"\n        size=\"medium\" color=\"danger\" routerLink=\"../sign-in\">\n          Sign Out\n        </ion-button>\n      </section>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -112,11 +112,13 @@ let HomePage = class HomePage {
         // server : string = "http://localhost:3000";
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         // Get cookie from storage
-        this.cookie = this.nativeStorage.getItem('cookie');
+        this.nativeStorage.getItem('cookie').then((data) => {
+            this.cookie = data.cookie;
+        });
     }
     signOut() {
-        console.log("send to", this.server + "/logout?session=" + this.cookie);
-        this.http.get(this.server + "/logout", {}, {})
+        // console.log("send to", this.server+"/logout?session="+this.cookie)
+        this.http.get(this.server + "/logout?session=" + this.cookie, {}, {})
             .then(data => {
             this.nativeStorage.setItem('cookie', { cookie: "-" })
                 .then(() => {
@@ -127,9 +129,18 @@ let HomePage = class HomePage {
             .catch(error => {
             console.log("status", error.status);
             console.log("error", error.error);
+            this.presentAlert("Connection", "Failed to sign out.");
         });
     }
     ;
+    presentAlert(header, msg) {
+        const alert = document.createElement('ion-alert');
+        alert.header = header;
+        alert.message = msg;
+        alert.buttons = ['OK'];
+        document.body.appendChild(alert);
+        alert.present();
+    }
 };
 HomePage.ctorParameters = () => [
     { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_1__["NativeStorage"] },

@@ -280,7 +280,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'username': this.signInFormGroup.value.email.toLowerCase(),
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
           };
-          this.http.post(this.server + "/login", credentials, {}).then(function (data) {
+          this.http.setDataSerializer('json');
+          this.http.post(this.server + "/login", credentials, {
+            'Content-Type': 'application/json'
+          }).then(function (data) {
             var user = JSON.parse(data.data); // console.log("user: ", user)
 
             _this.nativeStorage.setItem('cookie', {
@@ -312,18 +315,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           })["catch"](function (error) {
             console.log("error here", error.error);
 
-            _this.presentAlert();
+            if (error.error.errors == "No user found") {
+              _this.presentAlert("Credentials", "Invalid credentials.");
+            } else {
+              _this.presentAlert("Connection", "Error logging in to Numberfit.");
+            }
           });
         }
       }, {
         key: "presentAlert",
-        value: function presentAlert() {
+        value: function presentAlert(header, msg) {
           var alert = document.createElement('ion-alert');
-          alert.header = 'Error';
-          alert.message = 'Please check your internet connection.';
+          alert.header = header;
+          alert.message = msg;
           alert.buttons = ['OK'];
           document.body.appendChild(alert);
-          return alert.present();
+          alert.present();
         }
       }]);
 

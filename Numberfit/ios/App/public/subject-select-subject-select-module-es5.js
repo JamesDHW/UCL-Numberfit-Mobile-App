@@ -289,6 +289,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var deletes = 0;
 
             for (var i = 0; i < repeats; i++) {
+              if (!_this.user["year"]) {
+                _this.user["year"] = 6;
+              }
+
               if (!_this.subjects[i - deletes].availableYears.includes(parseInt(_this.user["year"]))) {
                 _this.subjects.splice(i - deletes, 1);
 
@@ -298,6 +302,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           })["catch"](function (error) {
             console.log("status", error.status);
             console.log("error", error.error);
+
+            _this.presentAlert("Connection", "Error in retrieving available topics.");
           });
         });
       }
@@ -322,6 +328,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             document.getElementById("title").textContent = "Head-to-Head";
           }
+        }
+      }, {
+        key: "presentAlert",
+        value: function presentAlert(header, msg) {
+          var alert = document.createElement('ion-alert');
+          alert.header = header;
+          alert.message = msg;
+          alert.buttons = ['OK'];
+          document.body.appendChild(alert);
+          alert.present();
         }
       }]);
 
