@@ -33945,7 +33945,7 @@ let HomePage = class HomePage {
                     this.games = JSON.parse(data.data);
                     this.drawBadges();
                     this.createLineChart();
-                    // console.log("returned - ", data.data)
+                    console.log("returned - ", data.data);
                 })
                     .catch(error => {
                     console.log("ERRORS FOUND");
@@ -33988,21 +33988,21 @@ let HomePage = class HomePage {
     }
     drawBadges() {
         for (var key of Object.keys(this.games)) {
-            if (this.games[key] > 50 && key != "data" && key != "date") {
+            if (this.games[key] > 125 && key != "data" && key != "date") {
                 this.badges.push({
                     topic: key,
                     rank: "Master",
                     image: "../../assets/badges/master.png"
                 });
             }
-            else if (this.games[key] > 35 && key != "data" && key != "date") {
+            else if (this.games[key] > 75 && key != "data" && key != "date") {
                 this.badges.push({
                     topic: key,
                     rank: "Expert",
                     image: "../../assets/badges/expert.png"
                 });
             }
-            else if (this.games[key] > 20 && key != "data" && key != "date") {
+            else if (this.games[key] > 35 && key != "data" && key != "date") {
                 this.badges.push({
                     topic: key,
                     rank: "Advanced",

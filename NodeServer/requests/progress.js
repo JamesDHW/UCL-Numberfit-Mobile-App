@@ -30,7 +30,7 @@ module.exports.progress = function(req, res){
       var date = [];
       var out  = {};
 
-      // console.log(history)
+      console.log(history)
 
       history.forEach((item, i) => {
 

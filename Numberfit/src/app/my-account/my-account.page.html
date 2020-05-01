@@ -16,15 +16,15 @@
       </ion-card-header>
       <ion-item style="margin-top: 20px;">
         <ion-label style="width: auto !important">Name: </ion-label>
-        <ion-label style="text-align: left;">{{user.name}}</ion-label>
+        <ion-input value={{user.name}} readonly style="text-align: left;"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Email: </ion-label>
-        <ion-label style="text-align: left;">{{user.username}}</ion-label>
+        <ion-input value={{user.username}} readonly style="text-align: left;"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>School: </ion-label>
-        <ion-label style="text-align: left;">{{user.school}}</ion-label>
+        <ion-input value={{user.school}} readonly style="text-align: left;"></ion-input>
       </ion-item>
       <form [formGroup]="modifyDetailsFormGroup" id="modForm">
 
@@ -32,7 +32,7 @@
         <ion-label>Year Group</ion-label>
         <ion-select
         formControlName="year" multiple="false"
-        cancelText="Cancel" okText="Select">
+        cancelText="Cancel" okText="Select" placeholder="{{user.year}}">
           <ion-select-option *ngFor="let year of yearGroups" value={{year}}>
             {{year}}
           </ion-select-option>
@@ -42,9 +42,9 @@
         <ion-label>Teacher</ion-label>
         <ion-select
         formControlName="teacher" id="schoolSelect"
-        multiple="false" cancelText="Cancel" okText="Select">
-        <ion-select-option *ngFor="let name of teacherNames;let username of teacherUsernames;" value={{usernames}}>
-          {{name}}
+        multiple="false" cancelText="Cancel" okText="Select" placeholder="{{teachDef}}">
+        <ion-select-option *ngFor="let teacher of teachers;" value={{teacher.username}}>
+          {{teacher.name}}
         </ion-select-option>
       </ion-select>
       </ion-item>

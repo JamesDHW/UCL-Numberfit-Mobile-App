@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">My Account</ion-card-title>\n      </ion-card-header>\n      <ion-item style=\"margin-top: 20px;\">\n        <ion-label style=\"width: auto !important\">Name: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.name}}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Email: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.username}}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>School: </ion-label>\n        <ion-label style=\"text-align: left;\">{{user.school}}</ion-label>\n      </ion-item>\n      <form [formGroup]=\"modifyDetailsFormGroup\" id=\"modForm\">\n\n      <ion-item>\n        <ion-label>Year Group</ion-label>\n        <ion-select\n        formControlName=\"year\" multiple=\"false\"\n        cancelText=\"Cancel\" okText=\"Select\">\n          <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n            {{year}}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Teacher</ion-label>\n        <ion-select\n        formControlName=\"teacher\" id=\"schoolSelect\"\n        multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\">\n        <ion-select-option *ngFor=\"let name of teacherNames;let username of teacherUsernames;\" value={{usernames}}>\n          {{name}}\n        </ion-select-option>\n      </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Change Password</ion-label>\n        <ion-input formControlName=\"password1\" type='password'></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Comfirm Password</ion-label>\n        <ion-input formControlName=\"password2\" type='password'></ion-input>\n      </ion-item>\n      <br>\n      <ion-button\n        (click)=\"modifyDetails()\"\n        expand='block' fill=\"clear\">\n        Confirm Changes\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n  <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css\"/>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-content>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">My Account</ion-card-title>\n      </ion-card-header>\n      <ion-item style=\"margin-top: 20px;\">\n        <ion-label style=\"width: auto !important\">Name: </ion-label>\n        <ion-input value={{user.name}} readonly style=\"text-align: left;\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label>Email: </ion-label>\n        <ion-input value={{user.username}} readonly style=\"text-align: left;\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label>School: </ion-label>\n        <ion-input value={{user.school}} readonly style=\"text-align: left;\"></ion-input>\n      </ion-item>\n      <form [formGroup]=\"modifyDetailsFormGroup\" id=\"modForm\">\n\n      <ion-item>\n        <ion-label>Year Group</ion-label>\n        <ion-select\n        formControlName=\"year\" multiple=\"false\"\n        cancelText=\"Cancel\" okText=\"Select\" placeholder=\"{{user.year}}\">\n          <ion-select-option *ngFor=\"let year of yearGroups\" value={{year}}>\n            {{year}}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Teacher</ion-label>\n        <ion-select\n        formControlName=\"teacher\" id=\"schoolSelect\"\n        multiple=\"false\" cancelText=\"Cancel\" okText=\"Select\" placeholder=\"{{teachDef}}\">\n        <ion-select-option *ngFor=\"let teacher of teachers;\" value={{teacher.username}}>\n          {{teacher.name}}\n        </ion-select-option>\n      </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Change Password</ion-label>\n        <ion-input formControlName=\"password1\" type='password'></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Comfirm Password</ion-label>\n        <ion-input formControlName=\"password2\" type='password'></ion-input>\n      </ion-item>\n      <br>\n      <ion-button\n        (click)=\"modifyDetails()\"\n        expand='block' fill=\"clear\">\n        Confirm Changes\n      </ion-button>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -264,8 +264,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           year: "-",
           teacher: "-"
         };
-        this.teacherNames = [];
-        this.teacherUsernames = []; // Get cookie from storage
+        this.teachers = [];
+        this.teachDef = "Select."; // Get cookie from storage
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
@@ -277,18 +277,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (_this.user.teacher) {
             ;
             document.getElementById("modForm").style.display = "none";
-            console.log("teach");
           }
 
           _this.http.get(_this.server + "/getTeachers?school=" + _this.user.school, {}, {}).then(function (data) {
-            var teachers = JSON.parse(data.data).teachers;
-            console.log(data.data);
-            teachers.forEach(function (teacher) {
-              _this.teacherNames.push(teacher.name);
+            _this.teachers = JSON.parse(data.data).teachers;
 
-              _this.teacherUsernames.push(teacher.username);
+            _this.teachers.forEach(function (teacher) {
+              if (teacher.username == _this.user.mTeacher) {
+                _this.teachDef = teacher.name;
+              }
             });
-            console.log(_this.teacherNames, _this.teacherUsernames);
           })["catch"](function (error) {
             console.log("status", error.status);
             console.log("error", error.error);
@@ -310,35 +308,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var password1 = this.modifyDetailsFormGroup.value.password1;
           var password2 = this.modifyDetailsFormGroup.value.password2;
+          console.log("teacher", this.modifyDetailsFormGroup.value);
           var credentials = {
-            username: this.user.username,
-            name: this.user.name,
-            school: this.user.school,
             year: this.modifyDetailsFormGroup.value.year,
-            teacher: this.user.teacher,
             mTeacher: this.modifyDetailsFormGroup.value.teacher,
-            points: this.user.points,
             cookie: this.cookie,
             password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_6__["Md5"].hashStr(password1)
           };
 
-          if (password1 == password2 && password1.length > 7) {
+          if (password1 == password2 && password1.length > 7 || password1.length == 0 && password2.length == 0) {
             // console.log(credentials)
             this.http.setDataSerializer('json');
             this.http.post(this.server + "/modifyDetails", credentials, {
               'Content-Type': 'application/json'
             }).then(function (data) {
+              var year;
+              var mTeacher;
+
+              if (!_this2.modifyDetailsFormGroup.value.year) {
+                year = _this2.user.year;
+              } else {
+                year = _this2.modifyDetailsFormGroup.value.year;
+              }
+
+              if (!_this2.modifyDetailsFormGroup.value.teacher) {
+                mTeacher = _this2.user.mTeacher;
+              } else {
+                mTeacher = _this2.modifyDetailsFormGroup.value.teacher;
+              }
+
               _this2.nativeStorage.setItem('user', {
                 username: _this2.user.username,
                 name: _this2.user.name,
                 school: _this2.user.school,
-                year: _this2.modifyDetailsFormGroup.value.year,
-                mTeacher: _this2.modifyDetailsFormGroup.value.teacher,
+                year: year,
+                mTeacher: mTeacher,
                 teacher: _this2.user.teacher,
                 points: _this2.user.points
               }).then(function () {
                 // console.log("got to play")
                 _this2.router.navigate(['/play']);
+
+                _this2.presentAlert("Success!", "");
               }, function () {
                 return _this2.presentAlert("Internal Storage", "Error updating details internally.");
               });

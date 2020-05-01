@@ -89,8 +89,8 @@ export class PlaySinglePage implements OnInit {
       qSetNumber = 6; // For some reason year one have fewer resources on all but Time
     }
     var diff;
-    if(this.user.points > 250){diff="adv"} else
-    if(this.user.points < 100){diff="int"} else{
+    if(this.user.points > 750){diff="adv";} else
+    if(this.user.points > 300){diff="int"} else{
       diff="beg"
     }
     this.answer = [];
@@ -126,16 +126,20 @@ export class PlaySinglePage implements OnInit {
       //every 3 questions
       if (this.correctCounter%3==0){
         this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter/3-1)])
-        // console.log("safe vid",this.video)
-        // console.log("vid url",this.videos[(this.correctCounter/3-1)])
-        // console.log("vids",this.videos)
-        // console.log("index",(this.correctCounter/3)-1)
+        console.log("vid url",this.videos[(this.correctCounter/3-1)])
         this.switchVideoQuestions(true);
+      } else{
+        this.enableButtons(false)
+        const DOM = this;
+        setTimeout(function(){ DOM.enableButtons(true); }, 750);
       }
     }
     else {
       this.playAudio(false);
       this.incorrectCounter += 1;
+      this.enableButtons(false)
+      const DOM = this;
+      setTimeout(function(){ DOM.enableButtons(true); }, 750);
     }
     this.play()
   }
@@ -236,35 +240,38 @@ export class PlaySinglePage implements OnInit {
       incorrect : this.incorrectCounter,
       topic     : this.subject,
     }
+    var pointsTot = this.correctCounter - this.incorrectCounter
     var savedUser = {
       cookie   : this.cookie,
-      username : this.user.username,
-      name     : this.user.name,
-      school   : this.user.school,
-      year     : this.user.year,
-      mTeacher : this.user.mTeacher,
-      teacher  : this.user.teacher,
-      points   : this.user.points + this.correctCounter - this.incorrectCounter,
+      points   : pointsTot,
     }
+    pointsTot += this.user.points
     // console.log("gamePLayed: ", gamePlayed)
     // console.log("savedUser: ", savedUser.points)
     this.http.setDataSerializer('json');
     this.http.post(this.server + "/saveGame", gamePlayed, {'Content-Type': 'application/json'})
     .then(data => {
-      this.http.post(this.server + "/updateScore", savedUser, {})
+      this.http.post(this.server + "/updateScore", savedUser, {'Content-Type': 'application/json'})
       .then(data => {
-        delete savedUser["cookie"];
-        this.nativeStorage.setItem('user', savedUser)
+        this.nativeStorage.setItem('user', {
+          username : this.user.username,
+          name     : this.user.name,
+          school   : this.user.school,
+          year     : this.user.year,
+          mTeacher : this.user.mTeacher,
+          teacher  : this.user.teacher,
+          points   : pointsTot,
+        })
         .then(() => { }, error => console.error('Error storing cookie', error));
       })
       .catch(error => {
         console.log("update score error: ",error.error)
-        // this.presentAlert();
+        this.presentAlert("Connection","Error updating score.");
       });
     })
     .catch(error => {
       console.log("save game error:",error.error)
-      // this.presentAlert();
+      this.presentAlert("Connection","Error saving game.");
 
     });
   }

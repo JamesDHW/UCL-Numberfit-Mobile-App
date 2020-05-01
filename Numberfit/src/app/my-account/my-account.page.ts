@@ -17,8 +17,8 @@ export class MyAccountPage {
   user             : any = {username:"-",name:"-",school:"-",year:"-",teacher:"-"};
   yearGroups       : Array<string>;
   schoolList       : Array<string>;
-  teacherNames     = [];
-  teacherUsernames = [];
+  teachers         = [];
+  teachDef         = "Select."
   modifyDetailsFormGroup: FormGroup;
 
   constructor(
@@ -37,18 +37,16 @@ export class MyAccountPage {
       this.user = data
       if(this.user.teacher){;
         document.getElementById("modForm").style.display = "none";
-        console.log("teach")
       }
 
       this.http.get(this.server+"/getTeachers?school="+this.user.school,{},{})
       .then(data => {
-        let teachers = JSON.parse(data.data).teachers
-        console.log(data.data)
-        teachers.forEach((teacher) => {
-          this.teacherNames.push(teacher.name)
-          this.teacherUsernames.push(teacher.username)
+        this.teachers = JSON.parse(data.data).teachers
+        this.teachers.forEach(teacher => {
+          if(teacher.username == this.user.mTeacher){
+            this.teachDef = teacher.name
+          }
         })
-        console.log(this.teacherNames, this.teacherUsernames)
       })
       .catch(error => {
         console.log("status", error.status);
@@ -71,36 +69,45 @@ export class MyAccountPage {
     const password1 = this.modifyDetailsFormGroup.value.password1;
     const password2 = this.modifyDetailsFormGroup.value.password2;
 
+    console.log("teacher",this.modifyDetailsFormGroup.value)
     const credentials = {
-      username : this.user.username,
-      name     : this.user.name,
-      school   : this.user.school,
       year     : this.modifyDetailsFormGroup.value.year,
-      teacher  : this.user.teacher,
       mTeacher : this.modifyDetailsFormGroup.value.teacher,
-      points   : this.user.points,
       cookie   : this.cookie,
       password : Md5.hashStr(password1),
     };
 
-    if(password1==password2 && password1.length > 7){
+    if((password1==password2 && password1.length > 7) || (password1.length==0 && password2.length==0)){
 
       // console.log(credentials)
       this.http.setDataSerializer('json');
       this.http.post(this.server + "/modifyDetails", credentials, {'Content-Type': 'application/json'})
       .then(data => {
+        var year;
+        var mTeacher;
+        if(!this.modifyDetailsFormGroup.value.year){
+          year = this.user.year
+        }else{
+          year = this.modifyDetailsFormGroup.value.year
+        }
+        if(!this.modifyDetailsFormGroup.value.teacher){
+          mTeacher = this.user.mTeacher
+        }else{
+          mTeacher = this.modifyDetailsFormGroup.value.teacher
+        }
         this.nativeStorage.setItem('user', {
           username : this.user.username,
           name     : this.user.name,
           school   : this.user.school,
-          year     : this.modifyDetailsFormGroup.value.year,
-          mTeacher : this.modifyDetailsFormGroup.value.teacher,
+          year     : year,
+          mTeacher : mTeacher,
           teacher  : this.user.teacher,
           points   : this.user.points,
         })
         .then(() => {
           // console.log("got to play")
           this.router.navigate(['/play'])
+          this.presentAlert("Success!","")
         }, () => this.presentAlert("Internal Storage","Error updating details internally."));
       })
       .catch(error => {

@@ -339,9 +339,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var diff;
 
-          if (this.user.points > 250) {
+          if (this.user.points > 750) {
             diff = "adv";
-          } else if (this.user.points < 100) {
+          } else if (this.user.points > 300) {
             diff = "int";
           } else {
             diff = "beg";
@@ -389,16 +389,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
             if (this.correctCounter % 3 == 0) {
-              this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[this.correctCounter / 3 - 1]); // console.log("safe vid",this.video)
-              // console.log("vid url",this.videos[(this.correctCounter/3-1)])
-              // console.log("vids",this.videos)
-              // console.log("index",(this.correctCounter/3)-1)
-
+              this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[this.correctCounter / 3 - 1]);
+              console.log("vid url", this.videos[this.correctCounter / 3 - 1]);
               this.switchVideoQuestions(true);
+            } else {
+              this.enableButtons(false);
+              var DOM = this;
+              setTimeout(function () {
+                DOM.enableButtons(true);
+              }, 750);
             }
           } else {
             this.playAudio(false);
             this.incorrectCounter += 1;
+            this.enableButtons(false);
+
+            var _DOM = this;
+
+            setTimeout(function () {
+              _DOM.enableButtons(true);
+            }, 750);
           }
 
           this.play();
@@ -517,33 +527,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             incorrect: this.incorrectCounter,
             topic: this.subject
           };
+          var pointsTot = this.correctCounter - this.incorrectCounter;
           var savedUser = {
             cookie: this.cookie,
-            username: this.user.username,
-            name: this.user.name,
-            school: this.user.school,
-            year: this.user.year,
-            mTeacher: this.user.mTeacher,
-            teacher: this.user.teacher,
-            points: this.user.points + this.correctCounter - this.incorrectCounter
-          }; // console.log("gamePLayed: ", gamePlayed)
+            points: pointsTot
+          };
+          pointsTot += this.user.points; // console.log("gamePLayed: ", gamePlayed)
           // console.log("savedUser: ", savedUser.points)
 
           this.http.setDataSerializer('json');
           this.http.post(this.server + "/saveGame", gamePlayed, {
             'Content-Type': 'application/json'
           }).then(function (data) {
-            _this3.http.post(_this3.server + "/updateScore", savedUser, {}).then(function (data) {
-              delete savedUser["cookie"];
-
-              _this3.nativeStorage.setItem('user', savedUser).then(function () {}, function (error) {
+            _this3.http.post(_this3.server + "/updateScore", savedUser, {
+              'Content-Type': 'application/json'
+            }).then(function (data) {
+              _this3.nativeStorage.setItem('user', {
+                username: _this3.user.username,
+                name: _this3.user.name,
+                school: _this3.user.school,
+                year: _this3.user.year,
+                mTeacher: _this3.user.mTeacher,
+                teacher: _this3.user.teacher,
+                points: pointsTot
+              }).then(function () {}, function (error) {
                 return console.error('Error storing cookie', error);
               });
             })["catch"](function (error) {
-              console.log("update score error: ", error.error); // this.presentAlert();
+              console.log("update score error: ", error.error);
+
+              _this3.presentAlert("Connection", "Error updating score.");
             });
           })["catch"](function (error) {
-            console.log("save game error:", error.error); // this.presentAlert();
+            console.log("save game error:", error.error);
+
+            _this3.presentAlert("Connection", "Error saving game.");
           });
         }
       }, {

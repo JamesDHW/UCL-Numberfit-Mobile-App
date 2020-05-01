@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Create and use Express session
-app.use(require('express-session')({
+app.use(session({
   secret: 'tifrebmuN',
   resave: false,
   saveUninitialized: false,

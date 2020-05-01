@@ -5,7 +5,7 @@ module.exports.saveGame = function (req, res) {
   const cookie = req.body.cookie
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
-    if(user==null) {
+    if(!user) {
       return res.status(400);
     }
 
@@ -18,7 +18,7 @@ module.exports.saveGame = function (req, res) {
 
     game.save((err) => {
       if (err) throw err;
-      res.status(200)
+      res.send("done")
     });
   });
 };

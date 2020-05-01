@@ -28,8 +28,8 @@ export class HomePage {
     this.nativeStorage.getItem('user')
     .then((data) => {
       this.user = data
-      // this.points = data.points
-      console.log(this.user)
+      this.points = data.points
+      // console.log(this.user)
 
       // Get top scores from given school
       this.http.get(this.server+"/leaderboard?school="+this.user.school+"&cookie="+this.cookie,{},{})

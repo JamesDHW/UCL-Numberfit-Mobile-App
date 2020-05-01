@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" id='students'>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">Leaderboard</ion-card-title>\n      </ion-card-header>\n\n      <ion-card-content>\n        <!-- <div align=\"center\">\n          <h3 id=\"myScore\">My Score: {{points}} points</h3>\n        </div> -->\n        <ion-list *ngFor=\"let user of users; index as i\">\n          <ion-item>\n            <ion-label slot=\"start\">{{i+1}}</ion-label>\n            <ion-label>{{user.name}}</ion-label>\n            <ion-label slot=\"end\">{{user.score}} points</ion-label>\n          </ion-item>\n        </ion-list>\n      </ion-card-content>\n\n    </ion-card>\n  </ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\" id='students'>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title class=\"welcome-card-title\">Leaderboard</ion-card-title>\n      </ion-card-header>\n\n      <ion-card-content>\n        <div align=\"center\">\n          <h3 id=\"myScore\">My Score: {{points}} points</h3>\n        </div>\n        <ion-list *ngFor=\"let user of users; index as i\">\n          <ion-item>\n            <ion-label slot=\"start\">{{i+1}}</ion-label>\n            <ion-input value={{user.name}} readonly style=\"text-align: left;\"></ion-input>\n            <ion-label slot=\"end\" style=\"text-align: left;\">{{user.score}}</ion-label>\n          </ion-item>\n        </ion-list>\n      </ion-card-content>\n\n    </ion-card>\n  </ion-content>\n";
     /***/
   },
 
@@ -204,9 +204,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }); // Get user
 
         this.nativeStorage.getItem('user').then(function (data) {
-          _this.user = data; // this.points = data.points
-
-          console.log(_this.user); // Get top scores from given school
+          _this.user = data;
+          _this.points = data.points; // console.log(this.user)
+          // Get top scores from given school
 
           _this.http.get(_this.server + "/leaderboard?school=" + _this.user.school + "&cookie=" + _this.cookie, {}, {}).then(function (data) {
             // Need to do a request which returns {user : [{user1...}]}
