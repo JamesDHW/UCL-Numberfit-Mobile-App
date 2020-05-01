@@ -33775,7 +33775,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">{{title}}</ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <ion-item id=\"badges\" *ngFor=\"let badge of badges\">\n    <img slot=\"start\" style=\"width: 25% !important; margin: 3px\" src=\"{{badge.image}}\">\n    <label>{{badge.topic}} - {{badge.rank}}</label>\n  </ion-item>\n</ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n\n<ion-card class=\"welcome-card\">\n  <ion-card-header>\n    <ion-card-title class=\"welcome-card-title\">{{title}}</ion-card-title>\n  </ion-card-header>\n\n  <ion-card-header>\n    <ion-card-title>Student Progress</ion-card-title>\n  </ion-card-header>\n  <ion-card-content>\n    <canvas #lineChart></canvas>\n  </ion-card-content>\n\n</ion-card>\n\n<ion-card>\n  <ion-card-header>\n    <ion-card-title>Badges</ion-card-title>\n  </ion-card-header>\n  <ion-item id=\"badges\" *ngFor=\"let badge of badges\">\n    <img slot=\"start\" style=\"width: 20% !important; margin: 10px\" src=\"{{badge.image}}\">\n    <label>{{badge.topic}} - {{badge.rank}}</label>\n  </ion-item>\n</ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -33988,21 +33988,21 @@ let HomePage = class HomePage {
     }
     drawBadges() {
         for (var key of Object.keys(this.games)) {
-            if (this.games[key] > 125 && key != "data" && key != "date") {
+            if (this.games[key] > 50 && key != "data" && key != "date") {
                 this.badges.push({
                     topic: key,
                     rank: "Master",
                     image: "../../assets/badges/master.png"
                 });
             }
-            else if (this.games[key] > 75 && key != "data" && key != "date") {
+            else if (this.games[key] > 30 && key != "data" && key != "date") {
                 this.badges.push({
                     topic: key,
                     rank: "Expert",
                     image: "../../assets/badges/expert.png"
                 });
             }
-            else if (this.games[key] > 35 && key != "data" && key != "date") {
+            else if (this.games[key] > 15 && key != "data" && key != "date") {
                 this.badges.push({
                     topic: key,
                     rank: "Advanced",

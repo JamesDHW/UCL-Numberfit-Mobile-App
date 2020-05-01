@@ -20,7 +20,7 @@ export class PlaySinglePage implements OnInit {
   checkList        : Array<string> = [];
   answer           : Array<Object> = [{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"},{answer:"../../assets/answer.png"}];
   videos           : Array<string> = [];
-  video            : SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/eQQUzYiB4OI?start=4');
+  video            : SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/PuIjnd76cN8');
   correctCounter   : number = 0;
   incorrectCounter : number = 0;
   images           : Array<string> = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];;
@@ -47,7 +47,7 @@ export class PlaySinglePage implements OnInit {
       .then((data) => {
         this.user = data
         if(!this.user["year"]){this.user["year"] = 6}
-        if(!this.user["points"]){this.user["points"] = 300}
+        if(!this.user["points"] && this.user["points"]!=0){this.user["points"] = 300}
 
         // Get URLs to videos
         this.http.get(this.server + "/getVideo",{},{})
@@ -74,10 +74,6 @@ export class PlaySinglePage implements OnInit {
     });
   }
 
-  // goodURL(){
-  //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.video);
-  // }
-
   ngOnInit(){
     this.questionCardEle = document.querySelector('.question-card');
     this.videoEle = document.querySelector('.video-container');
@@ -100,7 +96,7 @@ export class PlaySinglePage implements OnInit {
       let ques = this.bucket+"/"+this.subject+"/"+this.user.year+"/"+diff+"/"+"PDF-"+page+"-"+card+".png"
       let ans  = this.bucket+"/"+this.subject+"/"+this.user.year+"/"+diff+"/"+"PDF-"+(page+2)+"-"+(card+2)+".png"
       // console.log("checklist", this.checkList)
-      // console.log("question", this.question)
+      console.log("question", this.question)
       // console.log("includes", this.checkList.includes(this.question))
       if(!this.checkList.includes(ques)){
         this.question = ques
@@ -175,18 +171,19 @@ export class PlaySinglePage implements OnInit {
     }
   }
 
-  enableVideoOrQuestions(toVideo: boolean) {
+
+  // Why is this here - why not have the above function in this one?
+  switchVideoQuestions(toVideo: boolean){
+
     if (toVideo){
       this.questionCardEle.style.visibility = "hidden";
       this.videoEle.style.visibility = "visible";
     } else {
       this.questionCardEle.style.visibility = "visible";
       this.videoEle.style.visibility = "hidden";
+      this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/PuIjnd76cN8');
     }
-  }
 
-  switchVideoQuestions(toVideo: boolean){
-    this.enableVideoOrQuestions(toVideo);
     this.enableButtons(!toVideo);
     let backToGameButton = <HTMLElement>document.querySelector("#video-done-button");
     backToGameButton.style.visibility = toVideo? "visible":"hidden";

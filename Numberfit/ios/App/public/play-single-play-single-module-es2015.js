@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button>Quit</ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <section class=\"overlay-section\">\n  <section class=\"winning-container\">\n  <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n  <p id=\"congrats-font\">Good job!</p><br>\n  <section class=\"congrats-label\"></section>\n  </section>\n  <section class=\"board\">\n  <section>\n    <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n  </section>\n  <ion-card class=\"card\">\n    <!-- <ion-card-content> -->\n      <img class=\"question-card\" src=\"{{question}}\"/>\n      <!-- <div  style=\"width:100%; height:100%;\" > -->\n      <iframe class=\"video-container\" [src]=\"video\"></iframe>\n    <!-- </ion-card-content> -->\n  </ion-card>\n  <section class=\"progress-section\">\n    <img src=\"/assets/progress-singleplayer/{{pictureRef}}.png\"/>\n  </section>\n  <section class=\"done-button-section\">\n  <ion-button shape=\"round\" id=\"video-done-button\" (click)=\"switchVideoQuestions(false)\">\n    <span id=\"done-font\">Next Question</span>\n  </ion-button>\n</section>\n  <section>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(0)\">\n          <!-- <span class=\"font\">{{ans1}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[0]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(1)\">\n          <!-- <span class=\"font\">{{answerOptions[1]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[1]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(2)\">\n          <!-- <span class=\"font\">{{answerOptions[2]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[2]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(3)\">\n          <!-- <span class=\"font\">{{answerOptions[3]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[3]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </section>\n</section>\n</section>\n<ion-fab class=\"end-section\" vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n  <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/0']\">\n    <ion-icon name=\"refresh-outline\"></ion-icon>\n  </ion-fab-button>\n<ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button>Quit</ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <section class=\"overlay-section\">\n  <section class=\"winning-container\">\n  <img id=\"center-star\" src=\"/assets/Winning-decoration/big_star.gif\"/>\n  <p id=\"congrats-font\">Good job!</p><br>\n  <section class=\"congrats-label\"></section>\n  </section>\n  <section class=\"board\">\n  <section>\n    <img id=\"star-animation\" src=\"/assets/Winning-decoration/star_animation.gif\"/>\n  </section>\n  <ion-card class=\"card\">\n    <!-- <ion-card-content> -->\n      <img class=\"question-card\" src=\"{{question}}\"/>\n      <!-- <div  style=\"width:100%; height:100%;\" > -->\n      <iframe class=\"video-container\" [src]=\"video\"></iframe>\n    <!-- </ion-card-content> -->\n  </ion-card>\n  <section class=\"progress-section\">\n    <img src=\"/assets/progress-singleplayer/{{pictureRef}}.png\"/>\n  </section>\n  <section class=\"done-button-section\">\n  <ion-button shape=\"round\" id=\"video-done-button\" (click)=\"switchVideoQuestions(false)\">\n    <span id=\"done-font\">Continue</span>\n  </ion-button>\n</section>\n  <section>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(0)\">\n          <!-- <span class=\"font\">{{ans1}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[0]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(1)\">\n          <!-- <span class=\"font\">{{answerOptions[1]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[1]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"choice-row\">\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(2)\">\n          <!-- <span class=\"font\">{{answerOptions[2]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[2]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n      <ion-col class=\"choice-section\">\n        <ion-button shape=\"round\" fill=\"outline\" class=\"choice-button\" (click)=\"updateProgress(3)\">\n          <!-- <span class=\"font\">{{answerOptions[3]}}</span> -->\n          <img id=\"answer-card\" src=\"{{answer[3]['answer']}}\"/>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </section>\n</section>\n</section>\n<ion-fab class=\"end-section\" vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n  <ion-fab-button id=\"replay-button\" [routerLink]=\"['/subject-select/0']\">\n    <ion-icon name=\"refresh-outline\"></ion-icon>\n  </ion-fab-button>\n<ion-fab-button id=\"exit-button\" [routerLink]=\"['/play']\">\n    <ion-icon name=\"exit-outline\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n</ion-content>\n");
 
 /***/ }),
 
@@ -152,7 +152,7 @@ let PlaySinglePage = class PlaySinglePage {
         this.checkList = [];
         this.answer = [{ answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }, { answer: "../../assets/answer.png" }];
         this.videos = [];
-        this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/eQQUzYiB4OI?start=4');
+        this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/PuIjnd76cN8');
         this.correctCounter = 0;
         this.incorrectCounter = 0;
         this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
@@ -169,7 +169,7 @@ let PlaySinglePage = class PlaySinglePage {
                 if (!this.user["year"]) {
                     this.user["year"] = 6;
                 }
-                if (!this.user["points"]) {
+                if (!this.user["points"] && this.user["points"] != 0) {
                     this.user["points"] = 300;
                 }
                 // Get URLs to videos
@@ -194,9 +194,6 @@ let PlaySinglePage = class PlaySinglePage {
         });
     }
     ;
-    // goodURL(){
-    //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.video);
-    // }
     ngOnInit() {
         this.questionCardEle = document.querySelector('.question-card');
         this.videoEle = document.querySelector('.video-container');
@@ -223,7 +220,7 @@ let PlaySinglePage = class PlaySinglePage {
             let ques = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + page + "-" + card + ".png";
             let ans = this.bucket + "/" + this.subject + "/" + this.user.year + "/" + diff + "/" + "PDF-" + (page + 2) + "-" + (card + 2) + ".png";
             // console.log("checklist", this.checkList)
-            // console.log("question", this.question)
+            console.log("question", this.question);
             // console.log("includes", this.checkList.includes(this.question))
             if (!this.checkList.includes(ques)) {
                 this.question = ques;
@@ -294,7 +291,8 @@ let PlaySinglePage = class PlaySinglePage {
             button.disabled = !enable;
         }
     }
-    enableVideoOrQuestions(toVideo) {
+    // Why is this here - why not have the above function in this one?
+    switchVideoQuestions(toVideo) {
         if (toVideo) {
             this.questionCardEle.style.visibility = "hidden";
             this.videoEle.style.visibility = "visible";
@@ -302,10 +300,8 @@ let PlaySinglePage = class PlaySinglePage {
         else {
             this.questionCardEle.style.visibility = "visible";
             this.videoEle.style.visibility = "hidden";
+            this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/PuIjnd76cN8');
         }
-    }
-    switchVideoQuestions(toVideo) {
-        this.enableVideoOrQuestions(toVideo);
         this.enableButtons(!toVideo);
         let backToGameButton = document.querySelector("#video-done-button");
         backToGameButton.style.visibility = toVideo ? "visible" : "hidden";

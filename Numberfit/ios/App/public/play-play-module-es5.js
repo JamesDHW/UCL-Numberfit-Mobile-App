@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">Play</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div id=\"play-single\">\n        <img class=\"icon\" src=\"/assets/icon/person-icon.svg\"/>\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Single Player\n        </ion-button>\n      </div>\n\n      <div id=\"play-multi\">\n        <img class=\"icon\" src=\"/assets/icon/people-icon.svg\" />\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Head-to-Head\n        </ion-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n\n  <!-- routerLink=\"../leaderboard\"\n  routerDirection=\"forward\" -->\n\n  <!-- <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">My Acheivements</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <img class=\"icon\" style=\"width: 20%\" src=\"/assets/icon/trophy.svg\" alt=\"\"/>\n      <br><p> Get Playing to Earn Acheivements...</p>\n    </ion-card-content>\n  </ion-card>\n    <ion-card class=\"welcome-card\">\n      <ion-card-content>\n        <ion-button\n        expand=\"block\"\n        fill=\"clear\"\n        (click)=\"navigate()\">\n          My Account\n        </ion-button>\n      </ion-card-content>\n    </ion-card> -->\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title><img class=\"header-image\" src=\"/assets/NumberfitLogo.png\"/></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-content\">\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">Play</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div id=\"play-single\">\n        <img class=\"icon\" src=\"/assets/icon/person-icon.svg\"/>\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Single Player\n        </ion-button>\n      </div>\n\n      <div id=\"play-multi\">\n        <img class=\"icon\" src=\"/assets/icon/people-icon.svg\" />\n        <br>\n        <ion-button expand=\"block\" fill=\"clear\">\n          Head-to-Head\n        </ion-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card class=\"welcome-card\">\n    <ion-card-header>\n      <ion-card-title class=\"welcome-card-title\">Numberfit Rank</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <img class=\"icon\" style=\"width: 35%\" src=\"{{rankImage}}\" alt=\"\"/>\n      <ion-card-title class=\"welcome-card-title\">{{rank}}</ion-card-title>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
     /***/
   },
 
@@ -194,6 +194,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.router = router;
         this.http = http;
         this.nativeStorage = nativeStorage;
+        this.rank = "Loading";
+        this.rankImage = "./assets/icon/trophy.svg";
         this.messageFromChild = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // Get server from config file
 
         this.server = __webpack_require__(
@@ -202,7 +204,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.nativeStorage.getItem('cookie').then(function (data) {
           _this.cookie = data.cookie;
-        }); // this.messageFromChild.emit('Message from child');
+        });
+        this.nativeStorage.getItem('user').then(function (data) {
+          _this.user = data;
+
+          if (_this.user.points > 150) {
+            _this.rank = "Math-Master";
+            _this.rankImage = "./assets/score/master.png";
+          } else if (_this.user.points > 75) {
+            _this.rank = "Math-Wiz";
+            _this.rankImage = "./assets/score/expert.png";
+          } else if (_this.user.points > 30) {
+            _this.rank = "Math-Hero";
+            _this.rankImage = "./assets/score/advanced.png";
+          } else {
+            _this.rank = "Number-Novice";
+            _this.rankImage = "./assets/score/novice.png";
+          }
+
+          if (_this.user.teacher) {
+            _this.rank = "Teacher";
+            _this.rankImage = "./assets/score/graduate.png";
+          }
+        });
       }
 
       _createClass(HomePage, [{

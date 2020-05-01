@@ -11,8 +11,11 @@ import { HTTP }           from '@ionic-native/http/ngx';
 })
 export class HomePage implements OnInit {
 
-  server : string;
-  cookie : string;
+  server    : string;
+  cookie    : string;
+  user;
+  rank      : string = "Loading";
+  rankImage : string = "./assets/icon/trophy.svg";
   @Output() messageFromChild = new EventEmitter();
 
   constructor(
@@ -25,7 +28,30 @@ export class HomePage implements OnInit {
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});
-    // this.messageFromChild.emit('Message from child');
+
+    this.nativeStorage.getItem('user')
+    .then((data) => {
+      this.user = data
+      if(this.user.points > 150){
+        this.rank = "Math-Master"
+        this.rankImage = "./assets/score/master.png"
+      } else if(this.user.points > 75){
+          this.rank = "Math-Wiz"
+          this.rankImage = "./assets/score/expert.png"
+      }else if(this.user.points > 30){
+          this.rank = "Math-Hero"
+          this.rankImage = "./assets/score/advanced.png"
+      }else{
+          this.rank = "Number-Novice"
+          this.rankImage = "./assets/score/novice.png"
+      }
+      if(this.user.teacher){
+        this.rank = "Teacher"
+        this.rankImage = "./assets/score/graduate.png"
+      }
+
+    })
+
 
   }
 
