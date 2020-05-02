@@ -2,7 +2,7 @@
 // DOWNLOADS PDF RESOURCES TO FILE SYSTEM
 // Should take 15 mins - in case of error, delay time can be increased
 var delay = 5000; // Change for longer or shorter between download PDF requests
-
+var TOPIC = "-" // CHANGE VARIABLE TO GET ONLY A SPECIFIC TOPIC
 
 const fs      = require("fs");
 const request = require('request');
@@ -55,7 +55,7 @@ request.get(
         for(let j=0; j<availableTopics[i].availableYears.length; j++){    // ~6
           for(let k=0; k<difficulties.length; k++){                       // =3
             // Add combination to resources list (of lists)
-            if(availableTopics[i].Topic=="Addition"){
+            if(availableTopics[i].Topic==TOPIC || TOPIC=="-"){
               resources.push([availableTopics[i].Topic,availableTopics[i].availableYears[j],difficulties[k]]);
             }
             // Create file if doesn't exist

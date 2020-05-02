@@ -291,7 +291,6 @@ let PlaySinglePage = class PlaySinglePage {
             button.disabled = !enable;
         }
     }
-    // Why is this here - why not have the above function in this one?
     switchVideoQuestions(toVideo) {
         if (toVideo) {
             this.questionCardEle.style.visibility = "hidden";

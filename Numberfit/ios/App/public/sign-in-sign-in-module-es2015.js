@@ -154,6 +154,7 @@ let SignInPage = class SignInPage {
             'username': this.signInFormGroup.value.email.toLowerCase(),
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_4__["Md5"].hashStr(this.signInFormGroup.value.password)
         };
+        console.log(credentials);
         this.http.setDataSerializer('json');
         this.http.post(this.server + "/login", credentials, { 'Content-Type': 'application/json' })
             .then(data => {

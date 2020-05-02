@@ -449,8 +449,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var button = choiceButtons[i];
             button.disabled = !enable;
           }
-        } // Why is this here - why not have the above function in this one?
-
+        }
       }, {
         key: "switchVideoQuestions",
         value: function switchVideoQuestions(toVideo) {

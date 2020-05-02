@@ -171,8 +171,6 @@ export class PlaySinglePage implements OnInit {
     }
   }
 
-
-  // Why is this here - why not have the above function in this one?
   switchVideoQuestions(toVideo: boolean){
 
     if (toVideo){

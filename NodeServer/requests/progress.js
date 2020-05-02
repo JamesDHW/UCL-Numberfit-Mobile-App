@@ -30,9 +30,10 @@ module.exports.progress = function(req, res){
       var date = [];
       var out  = {};
 
-      console.log(history)
+      // console.log(history)
 
       history.forEach((item, i) => {
+        console.log("time",item._id.getTimestamp().toString().slice(4,15))
 
         if(!out[item.topic]){
           out[item.topic] = 1;
@@ -40,7 +41,7 @@ module.exports.progress = function(req, res){
           out[item.topic] = out[item.topic] + 1;
         }
 
-        if(i+1 < LIMIT){
+        if(date.length < LIMIT){
           if(date.includes(item._id.getTimestamp().toString().slice(4,15))){
             corr[date.indexOf(item._id.getTimestamp().toString().slice(4,15))] += item.correct;
             wron[date.indexOf(item._id.getTimestamp().toString().slice(4,15))] += item.incorrect;

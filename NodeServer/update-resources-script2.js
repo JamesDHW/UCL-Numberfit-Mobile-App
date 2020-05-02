@@ -4,7 +4,9 @@ const glob         = require('glob');
 var   PDFImage     = require("pdf-image").PDFImage;
 var   getPageCount = require('docx-pdf-pagecount');
 
-glob(__dirname + '/resources/*/*/*/PDF.pdf', {}, (err, generatedFiles)=>{
+var TOPIC = "*"; // CHANGE TO SPECIFY TOPIC REQUIRED TO CONVERT
+
+glob(__dirname + '/resources/'+TOPIC+'/*/*/PDF.pdf', {}, (err, generatedFiles)=>{
   if (err) throw err;
   generatedFiles.forEach(function(filepath, index){
     console.log(filepath)

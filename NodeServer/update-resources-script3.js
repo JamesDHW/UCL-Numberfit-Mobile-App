@@ -2,8 +2,9 @@
 // CROPS ALL PNG RESOURCES
 const glob = require('glob');
 var   Jimp = require('jimp');
+var TOPIC = "*";  // CHANGE TO SPECIFY TOPIC REQUIRED TO CONVERT
 
-glob(__dirname + '/resources/*/*/*/*.png', {}, (err, generatedFiles)=>{
+glob(__dirname + '/resources/'+TOPIC+'/*/*/*.png', {}, (err, generatedFiles)=>{
   if (err) throw err;
   generatedFiles.forEach(function(filepath, index){
     Jimp.read(filepath, (err, image) => {
