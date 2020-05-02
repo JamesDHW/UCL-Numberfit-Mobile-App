@@ -187,7 +187,6 @@ export class PlaySinglePage implements OnInit {
     backToGameButton.style.visibility = toVideo? "visible":"hidden";
   }
 
-
   // the progress bar move one step forward with correct answer
   updateProgressBar(){
     this.imgState = ++this.imgState; //% this.images.length;
