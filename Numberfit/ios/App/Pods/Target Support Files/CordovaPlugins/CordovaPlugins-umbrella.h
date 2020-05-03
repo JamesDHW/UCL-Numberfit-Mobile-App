@@ -27,6 +27,7 @@
 #import "CDVFile.h"
 #import "CDVLocalFilesystem.h"
 #import "NativeStorage.h"
+#import "CDVOrientation.h"
 
 FOUNDATION_EXPORT double CordovaPluginsVersionNumber;
 FOUNDATION_EXPORT const unsigned char CordovaPluginsVersionString[];

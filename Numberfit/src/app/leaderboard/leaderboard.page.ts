@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { NativeStorage }     from '@ionic-native/native-storage/ngx';
 import { Router }            from '@angular/router';
 import { HTTP }              from '@ionic-native/http/ngx';
@@ -17,10 +18,13 @@ export class HomePage {
   points : number = 0;
 
   constructor(
-    private nativeStorage : NativeStorage,
-    private http          : HTTP,
-    private router        : Router,
+    private screenOrientation : ScreenOrientation,
+    private nativeStorage     : NativeStorage,
+    private http              : HTTP,
+    private router            : Router,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});

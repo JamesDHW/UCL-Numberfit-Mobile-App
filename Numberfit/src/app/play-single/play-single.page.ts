@@ -1,6 +1,7 @@
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute }        from '@angular/router';
 import { Component, OnInit }     from '@angular/core';
+import { ScreenOrientation }     from '@ionic-native/screen-orientation/ngx';
+import { ActivatedRoute }        from '@angular/router';
 import { NativeStorage }         from '@ionic-native/native-storage/ngx';
 import { HTTP }                  from '@ionic-native/http/ngx';
 
@@ -31,12 +32,15 @@ export class PlaySinglePage implements OnInit {
 
 
   constructor(
-    private activatedRoute : ActivatedRoute,
-    private nativeStorage  : NativeStorage,
-    private http           : HTTP,
-    private sanitizer      : DomSanitizer
-
+    private screenOrientation : ScreenOrientation,
+    private activatedRoute    : ActivatedRoute,
+    private nativeStorage     : NativeStorage,
+    private http              : HTTP,
+    private sanitizer         : DomSanitizer,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
     this.pictureRef = this.images[this.imgState];
     // Get cookie
     this.nativeStorage.getItem('cookie')

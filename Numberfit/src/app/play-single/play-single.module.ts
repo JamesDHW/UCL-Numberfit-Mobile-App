@@ -8,8 +8,6 @@ import { PlaySinglePageRoutingModule } from './play-single-routing.module';
 
 import { PlaySinglePage } from './play-single.page';
 
-// import { SafePipe } from "./play-single.page"
-
 @NgModule({
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { NativeStorage }     from '@ionic-native/native-storage/ngx';
 import { ActivatedRoute}     from '@angular/router';
 import { HTTP }              from '@ionic-native/http/ngx';
@@ -41,7 +42,11 @@ export class PlayMultiPage {
     private activatedRoute : ActivatedRoute,
     private nativeStorage  : NativeStorage,
     private http           : HTTP,
+    private screenOrientation: ScreenOrientation,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});

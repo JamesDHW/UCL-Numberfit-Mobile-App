@@ -1,8 +1,9 @@
-import { Router, ActivatedRoute } from '@angular/router';
-import { Component, ViewChild } from '@angular/core';
-import { Chart }                from 'chart.js';
-import { NativeStorage }        from '@ionic-native/native-storage/ngx';
-import { HTTP }                 from '@ionic-native/http/ngx';
+import { Component, ViewChild }   from '@angular/core';
+import { ScreenOrientation }      from '@ionic-native/screen-orientation/ngx';
+import { ActivatedRoute }         from '@angular/router';
+import { NativeStorage }          from '@ionic-native/native-storage/ngx';
+import { Chart }                  from 'chart.js';
+import { HTTP }                   from '@ionic-native/http/ngx';
 
 
 @Component({
@@ -25,10 +26,13 @@ export class HomePage {
   badges     : any = [];
 
   constructor(
-    private activatedRoute : ActivatedRoute,
-    private nativeStorage  : NativeStorage,
-    private http           : HTTP,
+    private screenOrientation : ScreenOrientation,
+    private activatedRoute    : ActivatedRoute,
+    private nativeStorage     : NativeStorage,
+    private http              : HTTP,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')

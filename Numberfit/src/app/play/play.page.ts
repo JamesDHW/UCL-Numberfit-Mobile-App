@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { ActivatedRoute } from '@angular/router';
 import { NativeStorage }  from '@ionic-native/native-storage/ngx';
 import { Router }         from '@angular/router';
@@ -19,10 +20,14 @@ export class HomePage implements OnInit {
   @Output() messageFromChild = new EventEmitter();
 
   constructor(
-    private router        : Router,
-    private http          : HTTP,
-    private nativeStorage : NativeStorage,
+    private screenOrientation : ScreenOrientation,
+    private router            : Router,
+    private http              : HTTP,
+    private nativeStorage     : NativeStorage,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
     // Get server from config file
     this.server = require('../config.json').server;
     // Get cookie from storage

@@ -31,11 +31,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     !*** ./src/app/config.json ***!
     \*****************************/
 
-  /*! exports provided: server, bucket, default */
+  /*! exports provided: server, bucket, use_int_cards_above_points, use_adv_cards_above_points, master_above_games_played, expert_above_games_played, advanced_above_games_played, novice_above_games_played, nf_rank1_above, nf_rank2_above, nf_rank3_above, nf_rank1_title, nf_rank2_title, nf_rank3_title, nf_rank4_title, default */
 
   /***/
   function srcAppConfigJson(module) {
-    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+    module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\",\"use_int_cards_above_points\":150,\"use_adv_cards_above_points\":300,\"master_above_games_played\":50,\"expert_above_games_played\":30,\"advanced_above_games_played\":15,\"novice_above_games_played\":5,\"nf_rank1_above\":250,\"nf_rank2_above\":150,\"nf_rank3_above\":50,\"nf_rank1_title\":\"Number-Master\",\"nf_rank2_title\":\"Math-Wiz\",\"nf_rank3_title\":\"Math-Hero\",\"nf_rank4_title\":\"Number-Novice\"}");
     /***/
   },
 
@@ -159,8 +159,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _play_single_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./play-single.page */
-    "./src/app/play-single/play-single.page.ts"); // import { SafePipe } from "./play-single.page"
-
+    "./src/app/play-single/play-single.page.ts");
 
     var PlaySinglePageModule = function PlaySinglePageModule() {
       _classCallCheck(this, PlaySinglePageModule);
@@ -227,34 +226,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/fesm2015/router.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/screen-orientation/ngx */
+    "./node_modules/@ionic-native/screen-orientation/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/native-storage/ngx */
     "./node_modules/@ionic-native/native-storage/ngx/index.js");
     /* harmony import */
 
 
-    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
 
     var PlaySinglePage = /*#__PURE__*/function () {
-      function PlaySinglePage(activatedRoute, nativeStorage, http, sanitizer) {
+      function PlaySinglePage(screenOrientation, activatedRoute, nativeStorage, http, sanitizer) {
         var _this = this;
 
         _classCallCheck(this, PlaySinglePage);
 
+        this.screenOrientation = screenOrientation;
         this.activatedRoute = activatedRoute;
         this.nativeStorage = nativeStorage;
         this.http = http;
@@ -282,7 +288,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.correctCounter = 0;
         this.incorrectCounter = 0;
         this.images = ['Picture1', 'Picture2', 'Picture3', 'Picture4', 'Picture5', 'Picture6', 'Picture7', 'Picture8', 'Picture9'];
-        this.imgState = 0;
+        this.imgState = 0; // lock screen portrait
+
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
         this.pictureRef = this.images[this.imgState]; // Get cookie
 
         this.nativeStorage.getItem('cookie').then(function (data) {
@@ -336,9 +344,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var diff;
 
-          if (this.user.points > 750) {
+          if (this.user.points > __webpack_require__(
+          /*! ../config.json */
+          "./src/app/config.json").use_adv_cards_above_points) {
             diff = "adv";
-          } else if (this.user.points > 300) {
+          } else if (this.user.points > __webpack_require__(
+          /*! ../config.json */
+          "./src/app/config.json").use_int_cards_above_points) {
             diff = "int";
           } else {
             diff = "beg";
@@ -575,17 +587,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     PlaySinglePage.ctorParameters = function () {
       return [{
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        type: _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_3__["ScreenOrientation"]
       }, {
-        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
       }, {
-        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
+        type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__["HTTP"]
       }, {
         type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]
       }];
     };
 
-    PlaySinglePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+    PlaySinglePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'app-play-single',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./play-single.page.html */
@@ -593,7 +607,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./play-single.page.scss */
       "./src/app/play-single/play-single.page.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_4__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])], PlaySinglePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_3__["ScreenOrientation"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__["HTTP"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])], PlaySinglePage);
     /***/
   }
 }]);

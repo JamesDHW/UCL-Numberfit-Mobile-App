@@ -1,5 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit }      from '@angular/core';
+import { ScreenOrientation }      from '@ionic-native/screen-orientation/ngx';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
 import { HTTP }                   from '@ionic-native/http/ngx';
 
@@ -19,12 +20,15 @@ export class SubjectSelectPage implements OnInit {
   gamemode = this.activatedRoute.snapshot.paramMap.get("gamemode");
 
   constructor(
-    private router         : Router,
-    private activatedRoute : ActivatedRoute,
-    private nativeStorage  : NativeStorage,
-    private http           : HTTP,
+    private screenOrientation : ScreenOrientation,
+    private activatedRoute    : ActivatedRoute,
+    private nativeStorage     : NativeStorage,
+    private router            : Router,
+    private http              : HTTP,
 
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});

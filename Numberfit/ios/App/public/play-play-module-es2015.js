@@ -17,10 +17,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************!*\
   !*** ./src/app/config.json ***!
   \*****************************/
-/*! exports provided: server, bucket, default */
+/*! exports provided: server, bucket, use_int_cards_above_points, use_adv_cards_above_points, master_above_games_played, expert_above_games_played, advanced_above_games_played, novice_above_games_played, nf_rank1_above, nf_rank2_above, nf_rank3_above, nf_rank1_title, nf_rank2_title, nf_rank3_title, nf_rank4_title, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\"}");
+module.exports = JSON.parse("{\"server\":\"http://primaryapp-env.eba-rer8nine.us-west-2.elasticbeanstalk.com\",\"bucket\":\"https://primary-app-resources.s3.eu-west-2.amazonaws.com\",\"use_int_cards_above_points\":150,\"use_adv_cards_above_points\":300,\"master_above_games_played\":50,\"expert_above_games_played\":30,\"advanced_above_games_played\":15,\"novice_above_games_played\":5,\"nf_rank1_above\":250,\"nf_rank2_above\":150,\"nf_rank3_above\":50,\"nf_rank1_title\":\"Number-Master\",\"nf_rank2_title\":\"Math-Wiz\",\"nf_rank3_title\":\"Math-Hero\",\"nf_rank4_title\":\"Number-Novice\"}");
 
 /***/ }),
 
@@ -96,22 +96,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/screen-orientation/ngx */ "./node_modules/@ionic-native/screen-orientation/ngx/index.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
 
 
 
 
 
 let HomePage = class HomePage {
-    constructor(router, http, nativeStorage) {
+    constructor(screenOrientation, router, http, nativeStorage) {
+        this.screenOrientation = screenOrientation;
         this.router = router;
         this.http = http;
         this.nativeStorage = nativeStorage;
         this.rank = "Loading";
         this.rankImage = "./assets/icon/trophy.svg";
         this.messageFromChild = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        // lock screen portrait
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
         // Get server from config file
         this.server = __webpack_require__(/*! ../config.json */ "./src/app/config.json").server;
         // Get cookie from storage
@@ -120,20 +125,20 @@ let HomePage = class HomePage {
         this.nativeStorage.getItem('user')
             .then((data) => {
             this.user = data;
-            if (this.user.points > 150) {
-                this.rank = "Math-Master";
+            if (this.user.points > __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank1_above) {
+                this.rank = __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank1_title;
                 this.rankImage = "./assets/score/master.png";
             }
-            else if (this.user.points > 75) {
-                this.rank = "Math-Wiz";
+            else if (this.user.points > __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank2_above) {
+                this.rank = __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank2_title;
                 this.rankImage = "./assets/score/expert.png";
             }
-            else if (this.user.points > 30) {
-                this.rank = "Math-Hero";
+            else if (this.user.points > __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank3_above) {
+                this.rank = __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank3_title;
                 this.rankImage = "./assets/score/advanced.png";
             }
             else {
-                this.rank = "Number-Novice";
+                this.rank = __webpack_require__(/*! ../config.json */ "./src/app/config.json").nf_rank4_title;
                 this.rankImage = "./assets/score/novice.png";
             }
             if (this.user.teacher) {
@@ -159,9 +164,10 @@ let HomePage = class HomePage {
     }
 };
 HomePage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] },
-    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"] }
+    { type: _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_2__["ScreenOrientation"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
@@ -173,9 +179,10 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./play.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/play/play.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./play.page.scss */ "./src/app/play/play.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"],
-        _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_2__["ScreenOrientation"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
+        _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])
 ], HomePage);
 
 

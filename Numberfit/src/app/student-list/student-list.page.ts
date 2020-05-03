@@ -1,7 +1,8 @@
-import { Component }      from '@angular/core';
-import { NativeStorage }          from '@ionic-native/native-storage/ngx';
-import { Router }                 from '@angular/router';
-import { HTTP }                   from '@ionic-native/http/ngx';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { Component }         from '@angular/core';
+import { Router }            from '@angular/router';
+import { HTTP }              from '@ionic-native/http/ngx';
 
 @Component({
   selector    : 'app-student-list',
@@ -16,10 +17,13 @@ export class StudentListPage {
   studentID   : number;
 
   constructor(
-    private nativeStorage  : NativeStorage,
-    private router         : Router,
-    private http           : HTTP,
+    private screenOrientation : ScreenOrientation,
+    private nativeStorage     : NativeStorage,
+    private router            : Router,
+    private http              : HTTP,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {

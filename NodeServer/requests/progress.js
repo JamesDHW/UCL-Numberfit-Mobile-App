@@ -32,9 +32,10 @@ module.exports.progress = function(req, res){
 
       // console.log(history)
 
-      history.forEach((item, i) => {
-        console.log("time",item._id.getTimestamp().toString().slice(4,15))
+      history.forEach((item) => {
+        // console.log("time",item._id.getTimestamp().toString().slice(4,15))
 
+        // If topic played isn't in output add to output else add 1 to the number of games played of that topic
         if(!out[item.topic]){
           out[item.topic] = 1;
         } else {

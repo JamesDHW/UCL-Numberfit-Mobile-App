@@ -1,7 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component }              from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ScreenOrientation }      from '@ionic-native/screen-orientation/ngx';
 import { NativeStorage }          from '@ionic-native/native-storage/ngx';
+import { Component }              from '@angular/core';
 import { HTTP }                   from '@ionic-native/http/ngx';
 import { Md5 }                    from 'ts-md5/dist/md5';
 
@@ -22,12 +23,15 @@ export class MyAccountPage {
   modifyDetailsFormGroup: FormGroup;
 
   constructor(
-    private nativeStorage : NativeStorage,
-    private router        : Router,
-    private http          : HTTP,
-    private route         : ActivatedRoute,
-    formBuilder           : FormBuilder,
+    private screenOrientation : ScreenOrientation,
+    private nativeStorage     : NativeStorage,
+    private router            : Router,
+    private http              : HTTP,
+    private route             : ActivatedRoute,
+    formBuilder               : FormBuilder,
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     // Get cookie from storage
     this.nativeStorage.getItem('cookie')
     .then((data) => {this.cookie = data.cookie});

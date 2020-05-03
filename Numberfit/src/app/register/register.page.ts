@@ -1,6 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { NativeStorage }     from '@ionic-native/native-storage/ngx';
+import { Component }         from '@angular/core';
 import { Router }            from '@angular/router';
 import { HTTP }              from '@ionic-native/http/ngx';
 import { Md5 }               from 'ts-md5/dist/md5';
@@ -20,11 +21,14 @@ export class RegisterPage {
   schoolList : Array<string>;
 
   constructor(
-    private nativeStorage : NativeStorage,
-    private http          : HTTP,
-    private router        : Router,
-    formBuilder           : FormBuilder
+    private screenOrientation : ScreenOrientation,
+    private nativeStorage     : NativeStorage,
+    private http              : HTTP,
+    private router            : Router,
+    formBuilder               : FormBuilder
   ) {
+    // lock screen portrait
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     // Get server from config file
     this.server = require('../config.json').server;
     // Get cookie from storage
