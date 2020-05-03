@@ -59,7 +59,7 @@ module.exports.progress = function(req, res){
       });
 
       var data = [];
-      date.forEach((item, i) => { data.push(10*(corr[i]/wron[i])+(0.1*i)) });
+      date.forEach((item, i) => { data.push(10*(corr[i]/wron[i])) });
 
       out["date"] = date;
       out["data"] = data;

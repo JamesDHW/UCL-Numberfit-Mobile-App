@@ -9,7 +9,7 @@ module.exports.getVideo = function (req, res) {
 
     // Again query all videos but only fetch one offset by our random #
     Video.find({}, null, {skip : random, limit : 3}, (err, docs) => {
-      console.log(docs)
+      // console.log(docs)
       return res.status(200).json({ videos : docs });
 
     })

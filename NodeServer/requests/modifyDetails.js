@@ -14,8 +14,8 @@ module.exports.modifyDetails = function(req, res){
   if(!req.body.year){ delete pupil["year"]}
   if(!req.body.mTeacher){ delete pupil["teacher"]}
 
-  console.log("user",user)
-  console.log("pupil",pupil)
+  // console.log("user",user)
+  // console.log("pupil",pupil)
 
   User.findOneAndUpdate({_id : cookie}, {$set:user},{new : true}, (err, details) => {
     if(err) throw err;

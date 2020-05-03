@@ -24,21 +24,21 @@ module.exports.leaderboard = function(req, res){
 
   User.findOne({_id:cookie},{},{}, (err, user) => {
     if(err) throw err;
-    console.log(user)
+    // console.log(user)
     if(user.teacher){
-      console.log(user.username)
+      // console.log(user.username)
       Teacher.findOne({username : user.username}, {}, {}, (err, details) => {
         if(err) throw err;
-        console.log(details)
+        // console.log(details)
         if(!details){return res.status(400).json({ errors : err });}
-        console.log(details)
+        // console.log(details)
         return getLeaderboard(res, details.school);
       })
     } else {
       Pupil.findOne({username : user.username}, {}, {}, (err, details) => {
         if(err) throw err;
         if(!details){return res.status(400).json({ errors : err });}
-        console.log(details)
+        // console.log(details)
         return getLeaderboard(res, details.school);
       })
     }

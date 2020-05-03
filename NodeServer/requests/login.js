@@ -7,25 +7,25 @@ module.exports.login = function (req, res, next) {
   // console.log(req.body.username, req.body.password)
   passport.authenticate('local', function(err, user){
     if(err){
-      console.log("error: ", err)
+      // console.log("error: ", err)
       return res.status(400).json({ errors : err });
     }
     if(!user){
-      console.log("error: ", err)
+      // console.log("error: ", err)
       return res.status(400).json({ errors : "No user found" });
     }
     // console.log(user)
     req.login(user, function(err){
       if(err){
-        console.log("error: ", err)
+        // console.log("error: ", err)
         return res.status(400).json({ errors : err });
       }
-      console.log(user)
+      // console.log(user)
       // user.id (cookie) is passed back on success along with user details
       if(!user.teacher){
         Pupil.findOne({ username : user.username }, (err, pupil_info) => {
           if(err) throw err;
-          console.log("Pupil: ", pupil_info);
+          // console.log("Pupil: ", pupil_info);
           return res.status(200).json({
             cookie   : user.id,
             username : pupil_info.username,

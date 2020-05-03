@@ -4,7 +4,7 @@ const Teacher  = require('../config/schema').Teacher;
 
 module.exports.myDetails = function(req, res){
   const cookie = req.query.cookie
-  console.log(cookie)
+  // console.log(cookie)
   User.findOne({_id : cookie}, (err, user) => {
     if(err) throw err;
     // console.log("User: ", user);
