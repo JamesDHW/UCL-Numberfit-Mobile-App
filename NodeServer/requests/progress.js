@@ -60,8 +60,8 @@ module.exports.progress = function(req, res){
 
       });
 
-      console.log(corr)
-      console.log(wron)
+      // console.log(corr)
+      // console.log(wron)
 
       var data = [];
       date.forEach((item, i) => { data.push(150*10**(-(wron[i]/(corr[i]+1)))) }); // +1 to avoid %0 --> this should probably be exp
