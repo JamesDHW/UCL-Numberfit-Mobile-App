@@ -306,6 +306,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.http.post(this.server + "/register", credentials, {
               'Content-Type': 'application/json'
             }).then(function (data) {
+              if (data.data == 'User already exists.') {
+                _this2.presentAlert("Registration", "This user already exists.");
+
+                return;
+              }
+
               var user = JSON.parse(data.data); // console.log("user: ", user)
               // console.log("response: ", data)
 

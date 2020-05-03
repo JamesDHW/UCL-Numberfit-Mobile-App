@@ -32,17 +32,17 @@ export class HomePage implements OnInit {
     this.nativeStorage.getItem('user')
     .then((data) => {
       this.user = data
-      if(this.user.points > 150){
-        this.rank = "Math-Master"
+      if(this.user.points > require('../config.json').nf_rank1_above){
+        this.rank = require('../config.json').nf_rank1_title
         this.rankImage = "./assets/score/master.png"
-      } else if(this.user.points > 75){
-          this.rank = "Math-Wiz"
+      } else if(this.user.points > require('../config.json').nf_rank2_above){
+          this.rank = require('../config.json').nf_rank2_title
           this.rankImage = "./assets/score/expert.png"
-      }else if(this.user.points > 30){
-          this.rank = "Math-Hero"
+      }else if(this.user.points > require('../config.json').nf_rank3_above){
+          this.rank = require('../config.json').nf_rank3_title
           this.rankImage = "./assets/score/advanced.png"
       }else{
-          this.rank = "Number-Novice"
+          this.rank = require('../config.json').nf_rank4_title
           this.rankImage = "./assets/score/novice.png"
       }
       if(this.user.teacher){

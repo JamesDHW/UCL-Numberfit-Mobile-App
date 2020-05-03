@@ -33,6 +33,7 @@ module.exports.login = function (req, res, next) {
             school   : pupil_info.school,
             year     : pupil_info.year,
             mTeacher : pupil_info.teacher,
+            points   : pupil_info.points,
             teacher  : false,
           });
 

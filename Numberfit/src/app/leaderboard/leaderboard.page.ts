@@ -29,13 +29,17 @@ export class HomePage {
     .then((data) => {
       this.user = data
       this.points = data.points
-      // console.log(this.user)
+
+      if(this.user.teacher){
+        document.getElementById("myScore").style.visibility = "hidden"
+      }
 
       // Get top scores from given school
       this.http.get(this.server+"/leaderboard?school="+this.user.school+"&cookie="+this.cookie,{},{})
       .then(data => {
         // Need to do a request which returns {user : [{user1...}]}
         this.users = JSON.parse(data.data).scores;
+
       })
       .catch(error => {
         console.log("status", error.status);

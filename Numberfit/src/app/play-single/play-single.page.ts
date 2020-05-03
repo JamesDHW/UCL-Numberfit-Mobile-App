@@ -85,8 +85,8 @@ export class PlaySinglePage implements OnInit {
       qSetNumber = 6; // For some reason year one have fewer resources on all but Time
     }
     var diff;
-    if(this.user.points > 750){diff="adv";} else
-    if(this.user.points > 300){diff="int"} else{
+    if(this.user.points > require('../config.json').use_adv_cards_above_points){diff="adv";} else
+    if(this.user.points > require('../config.json').use_int_cards_above_points){diff="int"} else{
       diff="beg"
     }
     this.answer = [];

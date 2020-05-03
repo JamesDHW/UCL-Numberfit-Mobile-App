@@ -80,6 +80,10 @@ export class RegisterPage {
       this.http.setDataSerializer('json');
       this.http.post(this.server + "/register", credentials, {'Content-Type': 'application/json'})
       .then(data => {
+        if(data.data == 'User already exists.'){
+          this.presentAlert("Registration","This user already exists.")
+          return
+        }
         var user = JSON.parse(data.data);
         // console.log("user: ", user)
         // console.log("response: ", data)

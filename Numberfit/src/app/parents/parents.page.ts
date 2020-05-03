@@ -113,25 +113,25 @@ export class HomePage {
 
   drawBadges(){
     for(var key of Object.keys(this.games)){
-      if(this.games[key] > 50 && key != "data" && key != "date"){
+      if(this.games[key] > require('../config.json').master_above_games_played && key != "data" && key != "date"){
         this.badges.push({
           topic : key,
           rank  : "Master",
           image : "../../assets/badges/master.png"
         })
-      } else if(this.games[key] > 30 && key != "data" && key != "date"){
+      } else if(this.games[key] > require('../config.json').expert_above_games_played && key != "data" && key != "date"){
         this.badges.push({
           topic : key,
           rank  : "Expert",
           image : "../../assets/badges/expert.png"
         })
-      } else if(this.games[key] > 15 && key != "data" && key != "date"){
+      } else if(this.games[key] > require('../config.json').advanced_above_games_played && key != "data" && key != "date"){
         this.badges.push({
           topic : key,
           rank  : "Advanced",
           image : "../../assets/badges/advanced.png"
         })
-      } else if(this.games[key] > 5 && key != "data" && key != "date"){
+      } else if(this.games[key] > require('../config.json').novice_above_games_played && key != "data" && key != "date"){
         this.badges.push({
           topic : key,
           rank  : "Novice",

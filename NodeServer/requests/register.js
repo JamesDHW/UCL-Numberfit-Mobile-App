@@ -19,7 +19,6 @@ module.exports.register = function (req, res) {
           school   : req.body.school,
         });
       } else {
-        console.log("reg pup")
         var pupil = new Pupil({
           username : req.body.username,
           name     : req.body.name,
