@@ -44,9 +44,11 @@ module.exports.progress = function(req, res){
 
         if(date.length < LIMIT){
           if(date.includes(item._id.getTimestamp().toString().slice(4,15))){
+            // console.log("already there")
             corr[date.indexOf(item._id.getTimestamp().toString().slice(4,15))] += item.correct;
             wron[date.indexOf(item._id.getTimestamp().toString().slice(4,15))] += item.incorrect;
           } else{
+            // console.log("new one")
             date.push(item._id.getTimestamp().toString().slice(4,15))
             corr.push(item.correct)
             wron.push(item.incorrect)
@@ -58,8 +60,11 @@ module.exports.progress = function(req, res){
 
       });
 
+      console.log(corr)
+      console.log(wron)
+
       var data = [];
-      date.forEach((item, i) => { data.push(10*(corr[i]/wron[i])) });
+      date.forEach((item, i) => { data.push(150*10**(-(wron[i]/(corr[i]+1)))) }); // +1 to avoid %0 --> this should probably be exp
 
       out["date"] = date;
       out["data"] = data;
