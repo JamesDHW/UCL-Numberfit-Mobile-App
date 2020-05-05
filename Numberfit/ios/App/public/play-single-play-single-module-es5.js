@@ -397,11 +397,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             } //every 3 questions
 
 
-            if (this.correctCounter % 3 == 0) {
-              this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[this.correctCounter / 3 - 1]);
-              console.log("vid url", this.videos[this.correctCounter / 3 - 1]);
+            if (this.correctCounter % 1 == 0 && this.imgState < 8) {
+              var vidUrl = Math.floor(Math.random() * 2);
+              this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[vidUrl]);
+              console.log("vid url", this.videos[vidUrl]);
               this.switchVideoQuestions(true);
-            } else {
+            } else if (this.imgState < 8) {
               this.enableButtons(false);
               var DOM = this;
               setTimeout(function () {

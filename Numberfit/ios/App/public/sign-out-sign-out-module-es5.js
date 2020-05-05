@@ -225,7 +225,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }).then(function () {
               console.log("Cookie removed!");
 
-              _this2.router.navigate(['/sign-in']);
+              _this2.router.navigate(['/sign-in'], {
+                replaceUrl: true
+              });
             }, function (error) {
               return console.error('Error storing item', error);
             });

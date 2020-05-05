@@ -39,7 +39,7 @@ export class HomePage {
       this.nativeStorage.setItem('cookie', {cookie: "-"})
       .then(() => {
         console.log("Cookie removed!")
-        this.router.navigate(['/sign-in'])
+        this.router.navigate(['/sign-in'], { replaceUrl: true })
       }, error => console.error('Error storing item', error));
 
     })

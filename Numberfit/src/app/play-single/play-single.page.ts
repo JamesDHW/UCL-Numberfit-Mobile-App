@@ -123,12 +123,15 @@ export class PlaySinglePage implements OnInit {
       if(this.checkWin()){
         return;
       }
-      //every 3 questions
-      if (this.correctCounter%3==0){
-        this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[(this.correctCounter/3-1)])
-        console.log("vid url",this.videos[(this.correctCounter/3-1)])
+      // =============================================================================
+      // CHANGE TO VIDEO QUESTION HERE, ADJUST BY ADJUSTING THE MODULUS OF THE COUNTER
+      // =============================================================================
+      if (this.correctCounter%1==0 && this.imgState<8){
+        const vidUrl = Math.floor(Math.random() * 2)
+        this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[vidUrl])
+        console.log("vid url",this.videos[vidUrl])
         this.switchVideoQuestions(true);
-      } else{
+      } else if(this.imgState<8){
         this.enableButtons(false)
         const DOM = this;
         setTimeout(function(){ DOM.enableButtons(true); }, 750);
