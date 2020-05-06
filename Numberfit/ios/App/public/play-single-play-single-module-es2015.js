@@ -246,7 +246,9 @@ let PlaySinglePage = class PlaySinglePage {
             if (this.checkWin()) {
                 return;
             }
-            //every 3 questions
+            // =============================================================================
+            // CHANGE TO VIDEO QUESTION HERE, ADJUST BY ADJUSTING THE MODULUS OF THE COUNTER
+            // =============================================================================
             if (this.correctCounter % 1 == 0 && this.imgState < 8) {
                 const vidUrl = Math.floor(Math.random() * 2);
                 this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.videos[vidUrl]);

@@ -47,7 +47,8 @@ export class SignInPage {
       'username' : this.signInFormGroup.value.email.toLowerCase(),
       'password' : Md5.hashStr(this.signInFormGroup.value.password)
     }
-    console.log(credentials)
+    console.log("credentials", credentials)
+    console.log("password", this.signInFormGroup.value.password)
 
     this.http.setDataSerializer('json');
     this.http.post(this.server + "/login",credentials, {'Content-Type': 'application/json'})
@@ -78,7 +79,7 @@ export class SignInPage {
     })
     .catch(error => {
       console.log("error here", error.error)
-      if(error.error.errors == "No user found"){
+      if(error.error["errors"] == "No user found"){
         this.presentAlert("Credentials","Invalid credentials.")
       } else{
         this.presentAlert("Connection","Error logging in to Numberfit.");

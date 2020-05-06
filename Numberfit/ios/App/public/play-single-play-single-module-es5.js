@@ -394,7 +394,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (this.checkWin()) {
               return;
-            } //every 3 questions
+            } // =============================================================================
+            // CHANGE TO VIDEO QUESTION HERE, ADJUST BY ADJUSTING THE MODULUS OF THE COUNTER
+            // =============================================================================
 
 
             if (this.correctCounter % 1 == 0 && this.imgState < 8) {

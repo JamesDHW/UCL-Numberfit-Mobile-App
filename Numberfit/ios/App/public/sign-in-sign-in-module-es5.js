@@ -282,7 +282,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'username': this.signInFormGroup.value.email.toLowerCase(),
             'password': ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7__["Md5"].hashStr(this.signInFormGroup.value.password)
           };
-          console.log(credentials);
+          console.log("credentials", credentials);
+          console.log("password", this.signInFormGroup.value.password);
           this.http.setDataSerializer('json');
           this.http.post(this.server + "/login", credentials, {
             'Content-Type': 'application/json'
@@ -318,7 +319,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           })["catch"](function (error) {
             console.log("error here", error.error);
 
-            if (error.error.errors == "No user found") {
+            if (error.error["errors"] == "No user found") {
               _this.presentAlert("Credentials", "Invalid credentials.");
             } else {
               _this.presentAlert("Connection", "Error logging in to Numberfit.");

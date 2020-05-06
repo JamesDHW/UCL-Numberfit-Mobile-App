@@ -182,13 +182,15 @@ let MyAccountPage = class MyAccountPage {
     modifyDetails() {
         const password1 = this.modifyDetailsFormGroup.value.password1;
         const password2 = this.modifyDetailsFormGroup.value.password2;
-        console.log("teacher", this.modifyDetailsFormGroup.value);
         const credentials = {
             year: this.modifyDetailsFormGroup.value.year,
             mTeacher: this.modifyDetailsFormGroup.value.teacher,
             cookie: this.cookie,
             password: ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7__["Md5"].hashStr(password1),
         };
+        if (!password1) {
+            delete credentials["password"];
+        }
         if ((password1 == password2 && password1.length > 7) || (password1.length == 0 && password2.length == 0)) {
             // console.log(credentials)
             this.http.setDataSerializer('json');
