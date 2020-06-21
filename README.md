@@ -1,3 +1,5 @@
-# COMP0067 Design Coursework - Numberfit
+# Numberfit
+## Engaging Primary School Pupils with Maths and Exercise
+### A cross-platform mobile app developped with Ionic and Angular
 
-Ionic fun Quiz for School Children.
+https://youtu.be/ebyKD1Ff8Cg
